@@ -13,4 +13,7 @@
 
     <color name="wheel_line_border">#C7C7C7</color>
 
+    <color name="uikit_tab_pressed">#e5e4e9</color>
+
+
 </resources>
