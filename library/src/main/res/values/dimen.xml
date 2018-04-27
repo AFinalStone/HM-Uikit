@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textFontSize_9">9dp</dimen>
+    <dimen name="textFontSize_10">10dp</dimen>
+    <dimen name="textFontSize_11">11dp</dimen>
+    <dimen name="textFontSize_12">12dp</dimen>
+    <dimen name="textFontSize_13">13dp</dimen>
+    <dimen name="textFontSize_14">14dp</dimen>
+    <dimen name="textFontSize_15">15dp</dimen>
+    <dimen name="textFontSize_16">16dp</dimen>
+    <dimen name="textFontSize_17">17dp</dimen>
+    <dimen name="textFontSize_18">18dp</dimen>
+    <dimen name="textFontSize_19">19dp</dimen>
+    <dimen name="textFontSize_20">20dp</dimen>
+    <dimen name="textFontSize_21">21dp</dimen>
+    <dimen name="textFontSize_22">22dp</dimen>
+    <dimen name="textFontSize_23">23dp</dimen>
+    <dimen name="textFontSize_24">24dp</dimen>
+    <dimen name="textFontSize_25">25dp</dimen>
+    <dimen name="textFontSize_26">26dp</dimen>
+    <dimen name="textFontSize_27">27dp</dimen>
+    <dimen name="textFontSize_28">28dp</dimen>
+    <dimen name="textFontSize_29">29dp</dimen>
+    <dimen name="textFontSize_30">30dp</dimen>
+    <dimen name="textFontSize_32">32dp</dimen>
+    <dimen name="textFontSize_36">36dp</dimen>
+</resources>

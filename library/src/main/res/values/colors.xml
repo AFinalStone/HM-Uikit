@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--水波纹颜色-->
+    <color name="whiteRipple">#FFD7D7D7</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="iosAlertDialog_line">#c6c6c6</color>
+    <color name="iosActionSheet_blue">#037BFF</color>
+    <color name="iosActionSheet_red">#FD4A2E</color>
+    <color name="iosActionSheet_gray">#8F8F8F</color>
+
+    <color name="wheel_line_border">#C7C7C7</color>
+
+</resources>
