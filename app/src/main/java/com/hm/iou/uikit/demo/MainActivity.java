@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
 
@@ -44,5 +45,8 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        PullDownRefreshImageView pullDownRefreshImageView = findViewById(R.id.pd_iv);
+
     }
 }

@@ -26,4 +26,10 @@
         android:text="显示AlertDialog"
         />
 
+    <com.hm.iou.uikit.PullDownRefreshImageView
+        android:id="@+id/pd_iv"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        />
+
 </LinearLayout>
