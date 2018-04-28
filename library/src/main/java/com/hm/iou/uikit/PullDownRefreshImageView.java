@@ -8,8 +8,8 @@ import android.util.AttributeSet;
 
 /**
  * Created by hjy on 18/4/28.<br>
+ * 下拉刷新时显示动画
  */
-
 public class PullDownRefreshImageView extends AppCompatImageView {
 
     public PullDownRefreshImageView(Context context) {
