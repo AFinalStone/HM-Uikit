@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
@@ -47,6 +49,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         PullDownRefreshImageView pullDownRefreshImageView = findViewById(R.id.pd_iv);
+
+        HMTopBarView topBarView = findViewById(R.id.topbar);
+        topBarView.setOnBackClickListener(new HMTopBarView.OnTopBarBackClickListener() {
+            @Override
+            public void onClickBack() {
+                finish();
+            }
+        });
+        topBarView.setOnMenuClickListener(new HMTopBarView.OnTopBarMenuClickListener() {
+            @Override
+            public void onClickTextMenu() {
+                Toast.makeText(MainActivity.this, "click text", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onClickImageMenu() {
+                Toast.makeText(MainActivity.this, "click image", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }

@@ -32,4 +32,16 @@
         android:layout_height="40dip"
         />
 
+    <com.hm.iou.uikit.HMTopBarView
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:titleText="我的标题"
+        app:rightText="更多"
+        app:rightIcon="@mipmap/uikit_ic_menu_back_black"
+        >
+
+    </com.hm.iou.uikit.HMTopBarView>
+
 </LinearLayout>

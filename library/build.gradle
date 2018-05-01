@@ -38,5 +38,9 @@ dependencies {
     //下拉刷新
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
+    compile 'com.kcrason:dynamicpagerindicator:1.0.3'
+    //轮播图组件
+    compile 'com.youth.banner:banner:1.4.10'
 }
 apply from: './maven_local.gradle'

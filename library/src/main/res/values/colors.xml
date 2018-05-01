@@ -13,7 +13,11 @@
 
     <color name="wheel_line_border">#C7C7C7</color>
 
-    <color name="uikit_tab_pressed">#e5e4e9</color>
 
+    <!-- 导航栏中间title的颜色值 -->
+    <color name="uikit_title_center_text">#ff000000</color>
+    <color name="uikit_title_right_text">#ff111111</color>
+    <!-- 导航栏背景色 -->
+    <color name="uikit_title_bg_color">#ffffff</color>
 
 </resources>
