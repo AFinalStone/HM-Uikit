@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hm.iou.uikit.demo.MainActivity">
+
+
+    <com.hm.iou.uikit.tabbar.BottomTabBar
+        android:id="@+id/bottom_tab_bar"
+        app:tab_bar_background="#FFFFFF"
+        app:tab_divider_background="#FF0000"
+        app:tab_font_size="14px"
+        app:tab_img_font_padding="0dip"
+        app:tab_img_height="70px"
+        app:tab_img_width="70px"
+        app:tab_isshow_divider="true"
+        app:tab_padding_bottom="5px"
+        app:tab_padding_top="5px"
+        app:tab_selected_color="#000000"
+        app:tab_unselected_color="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

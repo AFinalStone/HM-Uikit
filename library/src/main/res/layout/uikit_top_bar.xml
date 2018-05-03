@@ -35,7 +35,7 @@
             android:maxWidth="220dip"
             android:text=""
             android:textColor="@color/uikit_title_center_text"
-            android:textSize="@dimen/textFontSize_20"
+            android:textSize="@dimen/textFontSize_18"
             tools:text="标题" />
 
 
@@ -77,6 +77,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_alignParentBottom="true"
-        android:background="#F7F7F7" />
+        android:background="#ECECEC" />
 
 </RelativeLayout>

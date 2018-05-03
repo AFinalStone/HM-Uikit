@@ -14,10 +14,15 @@
     <color name="wheel_line_border">#C7C7C7</color>
 
 
+    <!-- 背景颜色 -->
+    <color name="uikit_main_bg_color" >#fff2f2f2</color>
+    <!-- 导航栏背景色-->
+    <color name="uikit_title_bg_color_main">#ffffdd4a</color>
+    <!-- 导航栏背景色 -->
+    <color name="uikit_title_bg_color">#ffffffff</color>
+
     <!-- 导航栏中间title的颜色值 -->
     <color name="uikit_title_center_text">#ff000000</color>
     <color name="uikit_title_right_text">#ff111111</color>
-    <!-- 导航栏背景色 -->
-    <color name="uikit_title_bg_color">#ffffff</color>
 
 </resources>

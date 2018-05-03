@@ -35,7 +35,7 @@
     <com.hm.iou.uikit.HMTopBarView
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dip"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:titleText="我的标题"
         app:rightText="更多"
@@ -43,5 +43,24 @@
         >
 
     </com.hm.iou.uikit.HMTopBarView>
+
+    <Button
+        android:id="@+id/btn_tab"
+        android:text="TabBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_actionsheet"
+        android:text="ActionSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <com.hm.iou.uikit.HMLoadingView
+        android:id="@+id/hmloadingview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
