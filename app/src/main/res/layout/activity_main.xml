@@ -35,7 +35,7 @@
     <com.hm.iou.uikit.HMTopBarView
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="48dip"
+        android:layout_height="@dimen/uikit_topbar_height"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:titleText="我的标题"
         app:rightText="更多"

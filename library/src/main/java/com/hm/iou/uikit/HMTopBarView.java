@@ -3,8 +3,10 @@ package com.hm.iou.uikit;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -139,6 +141,16 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
             mIvRight.setImageDrawable(mRightIconDrawable);
         } else {
             mIvRight.setVisibility(View.GONE);
+        }
+
+        // <= 6.0的系统，不能改变状态栏字体的颜色，我们这里统一设置成灰色
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            if (mBgDrawable instanceof ColorDrawable) {
+                ColorDrawable colorDrawable = (ColorDrawable) mBgDrawable;
+                if(colorDrawable.getColor() == Color.WHITE) {
+                    mViewStatusBarPlaceHolder.setBackgroundColor(0xffa0a0a0);
+                }
+            }
         }
 
         mIvBack.setOnClickListener(this);
