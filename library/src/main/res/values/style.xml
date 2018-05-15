@@ -52,5 +52,17 @@
         <item name="android:windowEnterAnimation">@anim/uikit_actionsheet_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/uikit_actionsheet_dialog_out</item>
     </style>
+    <!--横线条的分割线-->
+    <style name="UikitViewDividerHorizontalStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@drawable/uikit_comm_divider_gray</item>
+    </style>
+    <!--竖线条的分割线-->
+    <style name="UikitViewDividerVerticalStyle">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/uikit_comm_divider_gray</item>
+    </style>
 
 </resources>

@@ -26,5 +26,6 @@
     <dimen name="textFontSize_36">36dp</dimen>
 
     <dimen name="uikit_topbar_height">72dip</dimen>
+    <dimen name="uikit_status_bar_height">24dp</dimen>
 
 </resources>
