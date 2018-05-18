@@ -27,5 +27,6 @@
 
     <dimen name="uikit_topbar_height">72dip</dimen>
     <dimen name="uikit_status_bar_height">24dp</dimen>
+    <dimen name="uikit_shape_common_btn_corners_radius">5dp</dimen>
 
 </resources>

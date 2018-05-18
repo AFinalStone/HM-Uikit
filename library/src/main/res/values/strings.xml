@@ -5,4 +5,11 @@
     <string name="uikit_load_failed">加载失败，点击重试</string>
     <string name="uikit_load_end">这是我的底线</string>
 
+    <string name="uikit_edit_text_get_check_code_hint">点击获取6位验证码</string>
+    <string name="uikit_btn_get_check_code">获取</string>
+    <string name="uikit_edit_text_input_password_hint">输入6-16位密码</string>
+    <string name="uikit_edit_text_input_phone_digits_limit">0123456789</string>
+    <string name="uikit_edit_text_input_money_digits_limit">0123456789</string>
+    <string name="uikit_edit_text_input_phone_hint">请使用11位手机号</string>
+
 </resources>
