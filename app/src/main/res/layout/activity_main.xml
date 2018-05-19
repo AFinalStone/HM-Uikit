@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <com.hm.iou.uikit.HMPasswordEditText
+        android:id="@+id/input_password2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:hint="密码输入框"
+        android:inputType="textPassword"
+        android:textAlignment="viewStart"
+        app:disableIconAlpha="true"
+        app:hoverShowsPw="true" />
+
     <Button
         android:id="@+id/btn_loading_dialog"
         android:layout_width="match_parent"
@@ -57,5 +68,6 @@
         android:id="@+id/hmloadingview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
 </LinearLayout>

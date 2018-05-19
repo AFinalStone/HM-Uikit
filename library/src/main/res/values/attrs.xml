@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="HmPasswordEditText">
-        <attr name="passwordTextHint" format="string|reference" />
-        <attr name="passwordTextColor" format="color|reference" />
-        <attr name="passwordText" format="string|reference" />
-        <attr name="passwordTextSize" format="dimension|reference" />
-        <attr name="passwordInputType" format="enum">
-            <enum name="textPassword" value="1" />
-            <enum name="textVisiblePassword" value="2" />
-            <enum name="numberPassword" value="3" />
-        </attr>
-        <attr name="leftIcon" format="reference" />
-        <attr name="rightOpenIcon" format="reference" />
-        <attr name="rightCloseIcon" format="reference" />
+    <declare-styleable name="HMPasswordEditText">
+        <attr name="iconShow" format="integer" />
+        <attr name="iconHide" format="integer" />
+        <attr name="hoverShowsPw" format="boolean" />
+        <attr name="nonMonospaceFont" format="boolean" />
+        <attr name="disableIconAlpha" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="HmTopBar">
