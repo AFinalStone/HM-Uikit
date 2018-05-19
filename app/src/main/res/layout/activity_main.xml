@@ -16,51 +16,46 @@
         android:id="@+id/btn_loading_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="显示LoadingDialog"
-        />
+        android:text="显示LoadingDialog" />
 
     <Button
         android:id="@+id/btn_alert_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="显示AlertDialog"
-        />
+        android:text="显示AlertDialog" />
 
     <com.hm.iou.uikit.PullDownRefreshImageView
         android:id="@+id/pd_iv"
         android:layout_width="40dip"
-        android:layout_height="40dip"
-        />
+        android:layout_height="40dip" />
 
     <com.hm.iou.uikit.HMTopBarView
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/uikit_topbar_height"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:titleText="我的标题"
-        app:rightText="更多"
+        app:bottomDividerIsShow="false"
         app:rightIcon="@mipmap/uikit_ic_menu_back_black"
-        >
+        app:rightText="更多"
+        app:titleText="我的标题">
 
     </com.hm.iou.uikit.HMTopBarView>
 
     <Button
         android:id="@+id/btn_tab"
-        android:text="TabBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="TabBar" />
 
     <Button
         android:id="@+id/btn_actionsheet"
-        android:text="ActionSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="ActionSheet" />
 
 
     <com.hm.iou.uikit.HMLoadingView
         android:id="@+id/hmloadingview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

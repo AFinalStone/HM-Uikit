@@ -74,7 +74,6 @@
     <style name="UikitTextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/uikit_color_common_selector</item>
         <item name="android:textSize">@dimen/textFontSize_14</item>
     </style>
 
@@ -89,6 +88,17 @@
         <item name="android:background">@drawable/uikit_shape_common_btn_selector</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/textFontSize_16</item>
+    </style>
+
+    <!--通用的底部Button-->
+    <style name="UikitButton.Bottom">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">35dp</item>
+        <item name="android:layout_marginRight">35dp</item>
+        <item name="android:textColor">@color/uikit_color_bottom_btn_selector</item>
+        <item name="android:textSize">@dimen/textFontSize_18</item>
     </style>
 
     <!--底部的Linearlayout-->
@@ -106,9 +116,9 @@
     <!--短信验证码输入框-->
     <style name="UikitEditText.SMSCheckCode">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">40dp</item>
         <item name="android:hint">@string/uikit_edit_text_get_check_code_hint</item>
-        <item name="android:maxLength">11</item>
         <item name="android:singleLine">true</item>
         <item name="android:background">@null</item>
     </style>
@@ -116,7 +126,9 @@
     <!--获取短信验证码的按钮-->
     <style name="UikitButton.SMSCheckCode">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">29dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">29dp</item>
+        <item name="android:textColor">#ffa3a3a3</item>
         <item name="android:layout_marginLeft">12dp</item>
         <item name="android:background">@drawable/uikit_btn_get_code_selector</item>
         <item name="android:paddingLeft">8dp</item>
@@ -127,7 +139,8 @@
     <!--密码输入框-->
     <style name="UikitEditText.Password">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">40dp</item>
         <item name="android:inputType">textPassword</item>
         <item name="android:hint">@string/uikit_edit_text_input_password_hint</item>
         <item name="android:maxLength">16</item>
@@ -136,11 +149,12 @@
     </style>
 
     <!--手机号码输入框-->
-    <style name="UikitEditText.InputPhone">
+    <style name="UikitEditText.InputMobile">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="android:digits">@string/uikit_edit_text_input_phone_digits_limit</item>
-        <item name="android:hint">@string/uikit_edit_text_input_money_digits_limit</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:digits">@string/uikit_edit_text_input_mobile_digits_limit</item>
+        <item name="android:hint">@string/uikit_edit_text_input_mobile_hint</item>
         <item name="android:maxLength">11</item>
         <item name="android:inputType">numberSigned</item>
         <item name="android:singleLine">true</item>

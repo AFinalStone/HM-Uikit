@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply from: './maven_local.gradle'
 
 android {
     compileSdkVersion 26
@@ -43,4 +44,3 @@ dependencies {
     //轮播图组件
     compile 'com.youth.banner:banner:1.4.10'
 }
-apply from: './maven_local.gradle'

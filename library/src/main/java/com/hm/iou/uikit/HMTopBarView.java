@@ -1,5 +1,6 @@
 package com.hm.iou.uikit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -7,9 +8,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +46,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         void onClickImageMenu();
     }
 
+    private Context mContext;
     private String mTitleTextStr;
     private int mTitleTextSize;
     private int mTitleTextColor;
@@ -52,6 +56,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     private ColorStateList mRightTextColor;
     private Drawable mBgDrawable;
     private Drawable mRightIconDrawable;
+    private boolean mBottomDividerIsShow;
 
     private TextView mTvTitle;
     private ImageView mIvBack;
@@ -74,6 +79,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
 
     public HMTopBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HmTopBar);
 
         mTitleTextStr = ta.getString(R.styleable.HmTopBar_titleText);
@@ -86,12 +92,13 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mRightTextSize = ta.getDimensionPixelSize(R.styleable.HmTopBar_rightTextSize,
                 (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics())));
         mRightTextColor = ta.getColorStateList(R.styleable.HmTopBar_rightTextColor);
+        mBottomDividerIsShow = ta.getBoolean(R.styleable.HmTopBar_bottomDividerIsShow, true);
         if (mRightTextColor == null) {
             mRightTextColor = ContextCompat.getColorStateList(context, R.color.uikit_title_right_text);
         }
 
         mBgDrawable = ta.getDrawable(R.styleable.HmTopBar_titleBackground);
-        if(mBgDrawable == null) {
+        if (mBgDrawable == null) {
             mBgDrawable = new ColorDrawable(context.getResources().getColor(R.color.uikit_title_bg_color));
         }
         mRightIconDrawable = ta.getDrawable(R.styleable.HmTopBar_rightIcon);
@@ -132,8 +139,11 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
         mTvRight.setTextColor(mRightTextColor);
 
-        if(mBgDrawable != null) {
+        if (mBgDrawable != null) {
             layout.setBackground(mBgDrawable);
+        }
+        if (!mBottomDividerIsShow) {
+            mViewDivider.setVisibility(GONE);
         }
 
         if (mRightIconDrawable != null) {
@@ -147,7 +157,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             if (mBgDrawable instanceof ColorDrawable) {
                 ColorDrawable colorDrawable = (ColorDrawable) mBgDrawable;
-                if(colorDrawable.getColor() == Color.WHITE) {
+                if (colorDrawable.getColor() == Color.WHITE) {
                     mViewStatusBarPlaceHolder.setBackgroundColor(0xffa0a0a0);
                 }
             }
@@ -290,6 +300,11 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         if (v == mIvBack) {
             if (mBackListener != null) {
                 mBackListener.onClickBack();
+            } else {
+                if (mContext instanceof Activity) {
+                    Log.e("点击事件", "可以设置点击事件");
+                    ((Activity) mContext).onBackPressed();
+                }
             }
         } else if (v == mTvRight) {
             if (mMenuListener != null) {
