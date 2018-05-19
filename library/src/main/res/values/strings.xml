@@ -12,4 +12,7 @@
     <string name="uikit_edit_text_input_money_digits_limit">0123456789</string>
     <string name="uikit_edit_text_input_mobile_hint">请使用11位手机号</string>
 
+    <!--自定义密码框-->
+    <string name="input_pay_pwd">请输入交易密码</string>
+    <string name="retrieve_password">忘记密码？</string>
 </resources>
