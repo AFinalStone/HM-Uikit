@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/selector_gird_item"
+        android:background="@drawable/uikit_keyboard_selector_gird_item"
         android:gravity="center"
         android:includeFontPadding="false"
         android:textColor="#333333"
