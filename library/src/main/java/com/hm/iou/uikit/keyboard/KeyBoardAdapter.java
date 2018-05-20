@@ -22,21 +22,21 @@ public class KeyBoardAdapter extends BaseAdapter {
 
 
     private Context mContext;
-    private ArrayList<Map<String, String>> valueList;
+    private ArrayList<Map<String, String>> mListValue;
 
-    public KeyBoardAdapter(Context mContext, ArrayList<Map<String, String>> valueList) {
+    public KeyBoardAdapter(Context mContext, ArrayList<Map<String, String>> mListValue) {
         this.mContext = mContext;
-        this.valueList = valueList;
+        this.mListValue = mListValue;
     }
 
     @Override
     public int getCount() {
-        return valueList.size();
+        return mListValue.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return valueList.get(position);
+        return mListValue.get(position);
     }
 
     @Override
@@ -50,8 +50,8 @@ public class KeyBoardAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.layout_virtual_keyboard_adapter, null);
             viewHolder = new ViewHolder();
-            viewHolder.btnKey = convertView.findViewById(R.id.btn_keys);
-            viewHolder.imgDelete = convertView.findViewById(R.id.imgDelete);
+            viewHolder.tvKeys = convertView.findViewById(R.id.tv_keys);
+            viewHolder.rlDelete = convertView.findViewById(R.id.rl_delete);
 
             convertView.setTag(viewHolder);
         } else {
@@ -59,20 +59,20 @@ public class KeyBoardAdapter extends BaseAdapter {
         }
 
         if (position == 9) {
-            viewHolder.imgDelete.setVisibility(View.INVISIBLE);
-            viewHolder.btnKey.setVisibility(View.VISIBLE);
-            viewHolder.btnKey.setText(valueList.get(position).get("name"));
-            viewHolder.btnKey.setBackgroundColor(Color.parseColor("#e0e0e0"));
+            viewHolder.rlDelete.setVisibility(View.INVISIBLE);
+            viewHolder.tvKeys.setVisibility(View.VISIBLE);
+            viewHolder.tvKeys.setText(mListValue.get(position).get("name"));
+            viewHolder.tvKeys.setBackgroundColor(Color.parseColor("#e0e0e0"));
         } else if (position == 11) {
-            viewHolder.btnKey.setBackgroundResource(R.mipmap.uikit_icon_keyboard_delete);
-            viewHolder.imgDelete.setVisibility(View.VISIBLE);
-            viewHolder.btnKey.setVisibility(View.INVISIBLE);
+            viewHolder.tvKeys.setBackgroundResource(R.mipmap.uikit_icon_keyboard_delete);
+            viewHolder.rlDelete.setVisibility(View.VISIBLE);
+            viewHolder.tvKeys.setVisibility(View.INVISIBLE);
 
         } else {
-            viewHolder.imgDelete.setVisibility(View.INVISIBLE);
-            viewHolder.btnKey.setVisibility(View.VISIBLE);
+            viewHolder.rlDelete.setVisibility(View.INVISIBLE);
+            viewHolder.tvKeys.setVisibility(View.VISIBLE);
 
-            viewHolder.btnKey.setText(valueList.get(position).get("name"));
+            viewHolder.tvKeys.setText(mListValue.get(position).get("name"));
         }
 
         return convertView;
@@ -82,7 +82,7 @@ public class KeyBoardAdapter extends BaseAdapter {
      * 存放控件
      */
     public final class ViewHolder {
-        public TextView btnKey;
-        public RelativeLayout imgDelete;
+        public TextView tvKeys;
+        public RelativeLayout rlDelete;
     }
 }

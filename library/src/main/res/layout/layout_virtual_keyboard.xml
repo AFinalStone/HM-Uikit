@@ -5,20 +5,19 @@
 
     <!-- 输入键盘 -->
     <GridView
-        android:layout_alignParentTop="true"
-        android:id="@+id/gv_keybord"
+        android:id="@+id/gv_keyBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:background="#bdbdbd"
         android:horizontalSpacing="1px"
         android:numColumns="3"
         android:verticalSpacing="1px" />
 
     <View
-        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_above="@id/gv_keybord"
+        android:layout_above="@id/gv_keyBoard"
         android:background="#bdbdbd" />
 
 

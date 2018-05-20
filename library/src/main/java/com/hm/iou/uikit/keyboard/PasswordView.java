@@ -25,15 +25,16 @@ import java.util.Map;
 public class PasswordView extends RelativeLayout {
 
     Context mContext;
-    private VirtualKeyboardView virtualKeyboardView;
-    private TextView[] tvList;      //用数组保存6个TextView，为什么用数组？
-    private ImageView[] imgList;      //用数组保存6个TextView，为什么用数组？
-    private GridView gridView;
-    private TextView titleText;
-    private TextView tv_reset_pwd;
-    private ArrayList<Map<String, String>> valueList;
-    private int currentIndex = -1;    //用于记录当前输入密码格位置
-    private ImageView img_view;
+    private VirtualKeyboardView mVirtualKeyboardView;
+    private TextView[] mTvList;      //用数组保存6个TextView，
+    private ImageView[] mIvList;      //用数组保存6个ImageView
+    private GridView mGridView;
+    private TextView mTvTitle;
+    private TextView mTvForgetPsd;
+    private ArrayList<Map<String, String>> mListValue;
+    private int mCurrentIndex = -1;    //用于记录当前输入密码格位置
+    private ImageView mIvClose;
+    private OnPasswordViewListener mOnPasswordViewListener;
 
     public PasswordView(Context context) {
         this(context, null);
@@ -45,11 +46,11 @@ public class PasswordView extends RelativeLayout {
 
         View view = View.inflate(context, R.layout.layout_virtual_keyboard_password, null);
 
-        virtualKeyboardView = (VirtualKeyboardView) view.findViewById(R.id.virtualKeyboardView);
-        img_view = (ImageView) view.findViewById(R.id.img_view);
-        titleText = (TextView) view.findViewById(R.id.titleText);
-        tv_reset_pwd = (TextView) view.findViewById(R.id.tv_reset_pwd);
-        gridView = virtualKeyboardView.getGridView();
+        mVirtualKeyboardView = view.findViewById(R.id.virtualKeyboardView);
+        mIvClose = view.findViewById(R.id.iv_close);
+        mTvTitle = view.findViewById(R.id.tv_title);
+        mTvForgetPsd = view.findViewById(R.id.tv_forgetPsd);
+        mGridView = mVirtualKeyboardView.getGridView();
 
         initValueList();
 
@@ -63,40 +64,42 @@ public class PasswordView extends RelativeLayout {
     private void initView(View view) {
 
 
-        tvList = new TextView[6];
+        mTvList = new TextView[6];
 
-        imgList = new ImageView[6];
+        mIvList = new ImageView[6];
 
-        tvList[0] = (TextView) view.findViewById(R.id.tv_pass1);
-        tvList[1] = (TextView) view.findViewById(R.id.tv_pass2);
-        tvList[2] = (TextView) view.findViewById(R.id.tv_pass3);
-        tvList[3] = (TextView) view.findViewById(R.id.tv_pass4);
-        tvList[4] = (TextView) view.findViewById(R.id.tv_pass5);
-        tvList[5] = (TextView) view.findViewById(R.id.tv_pass6);
-
-
-        imgList[0] = (ImageView) view.findViewById(R.id.img_pass1);
-        imgList[1] = (ImageView) view.findViewById(R.id.img_pass2);
-        imgList[2] = (ImageView) view.findViewById(R.id.img_pass3);
-        imgList[3] = (ImageView) view.findViewById(R.id.img_pass4);
-        imgList[4] = (ImageView) view.findViewById(R.id.img_pass5);
-        imgList[5] = (ImageView) view.findViewById(R.id.img_pass6);
+        mTvList[0] = view.findViewById(R.id.tv_psd1);
+        mTvList[1] = view.findViewById(R.id.tv_psd2);
+        mTvList[2] = view.findViewById(R.id.tv_psd3);
+        mTvList[3] = view.findViewById(R.id.tv_psd4);
+        mTvList[4] = view.findViewById(R.id.tv_psd5);
+        mTvList[5] = view.findViewById(R.id.tv_psd6);
 
 
-        tv_reset_pwd.setOnClickListener(new OnClickListener() {
+        mIvList[0] = view.findViewById(R.id.iv_psd1);
+        mIvList[1] = view.findViewById(R.id.iv_psd2);
+        mIvList[2] = view.findViewById(R.id.iv_psd3);
+        mIvList[3] = view.findViewById(R.id.iv_psd4);
+        mIvList[4] = view.findViewById(R.id.iv_psd5);
+        mIvList[5] = view.findViewById(R.id.iv_psd6);
+
+
+        mTvForgetPsd.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //payPwdEditText.clearText();
+                if (mOnPasswordViewListener != null) {
+                    mOnPasswordViewListener.onForgetPsdClick();
+                }
             }
         });
 
-        img_view.setOnClickListener(new OnClickListener() {
+        mIvClose.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //currentBean = null;
-                //KeyBordUtil.popSoftKeyboard(payPwdEditText);
                 PasswordView.this.setVisibility(GONE);
+                if (mOnPasswordViewListener != null) {
+                    mOnPasswordViewListener.onCloseClick();
+                }
             }
         });
 
@@ -105,7 +108,7 @@ public class PasswordView extends RelativeLayout {
     // 这里，我们没有使用默认的数字键盘，因为第10个数字不显示.而是空白
     private void initValueList() {
 
-        valueList = new ArrayList<>();
+        mListValue = new ArrayList<>();
 
         // 初始化按钮上应该显示的数字
         for (int i = 1; i < 13; i++) {
@@ -119,47 +122,45 @@ public class PasswordView extends RelativeLayout {
             } else if (i == 12) {
                 map.put("name", "");
             }
-            valueList.add(map);
+            mListValue.add(map);
         }
     }
 
+
     private void setupView() {
 
-        // 这里、重新为数字键盘gridView设置了Adapter
-        KeyBoardAdapter keyBoardAdapter = new KeyBoardAdapter(mContext, valueList);
-        gridView.setAdapter(keyBoardAdapter);
+        // 这里、重新为数字键盘mGridView设置了Adapter
+        KeyBoardAdapter keyBoardAdapter = new KeyBoardAdapter(mContext, mListValue);
+        mGridView.setAdapter(keyBoardAdapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position < 11 && position != 9) {    //点击0~9按钮
-                    if (currentIndex >= -1 && currentIndex < 5) {      //判断输入位置————要小心数组越界
+                    if (mCurrentIndex >= -1 && mCurrentIndex < 5) {      //判断输入位置————要小心数组越界
 
-                        ++currentIndex;
-                        tvList[currentIndex].setText(valueList.get(position).get("name"));
-                        tvList[currentIndex].setVisibility(View.INVISIBLE);
-                        imgList[currentIndex].setVisibility(View.VISIBLE);
+                        ++mCurrentIndex;
+                        mTvList[mCurrentIndex].setText(mListValue.get(position).get("name"));
+                        mTvList[mCurrentIndex].setVisibility(View.INVISIBLE);
+                        mIvList[mCurrentIndex].setVisibility(View.VISIBLE);
                     }
                 } else {
                     if (position == 11) {      //点击退格键
-                        if (currentIndex - 1 >= -1) {      //判断是否删除完毕————要小心数组越界
+                        if (mCurrentIndex - 1 >= -1) {      //判断是否删除完毕————要小心数组越界
 
-                            tvList[currentIndex].setText("");
+                            mTvList[mCurrentIndex].setText("");
 
-                            tvList[currentIndex].setVisibility(View.VISIBLE);
-                            imgList[currentIndex].setVisibility(View.INVISIBLE);
+                            mTvList[mCurrentIndex].setVisibility(View.VISIBLE);
+                            mIvList[mCurrentIndex].setVisibility(View.INVISIBLE);
 
-                            currentIndex--;
+                            mCurrentIndex--;
                         }
                     }
                 }
             }
         });
-    }
 
-    //设置监听方法，在第6位输入完成后触发
-    public void setOnPasswordInputListener(final OnPasswordInputListener passwordInputFinish) {
-        tvList[5].addTextChangedListener(new TextWatcher() {
+        mTvList[5].addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -178,25 +179,30 @@ public class PasswordView extends RelativeLayout {
                     String strPsd = "";     //每次触发都要先将strPassword置空，再重新获取，避免由于输入删除再输入造成混乱
 
                     for (int i = 0; i < 6; i++) {
-                        strPsd += tvList[i].getText().toString().trim();
+                        strPsd += mTvList[i].getText().toString().trim();
                     }
 
                     //校验支付密码
-                    passwordInputFinish.onPasswordInputFinish(strPsd);    //接口中要实现的方法，完成密码输入完成后的响应逻辑
+                    if (mOnPasswordViewListener != null) {
+                        mOnPasswordViewListener.onPasswordInputFinish(strPsd);    //接口中要实现的方法，完成密码输入完成后的响应逻辑
+                    }
                 }
             }
         });
     }
 
+    public void setOnPasswordViewListener(OnPasswordViewListener onPasswordViewListener) {
+        this.mOnPasswordViewListener = onPasswordViewListener;
+    }
 
     public VirtualKeyboardView getVirtualKeyboardView() {
 
-        return virtualKeyboardView;
+        return mVirtualKeyboardView;
     }
 
     public void setTitleText(CharSequence text) {
-        if (titleText != null) {
-            titleText.setText(text);
+        if (mTvTitle != null) {
+            mTvTitle.setText(text);
         }
     }
 
@@ -204,16 +210,31 @@ public class PasswordView extends RelativeLayout {
     public void setVisibility(int visibility) {
         if (visibility == GONE) {
             for (int i = 5; i >= 0; i--) {
-                tvList[i].setText("");
-                tvList[i].setVisibility(View.VISIBLE);
-                imgList[i].setVisibility(View.INVISIBLE);
+                mTvList[i].setText("");
+                mTvList[i].setVisibility(View.VISIBLE);
+                mIvList[i].setVisibility(View.INVISIBLE);
             }
-            currentIndex = -1;
+            mCurrentIndex = -1;
         }
         super.setVisibility(visibility);
     }
 
-    public interface OnPasswordInputListener {
-        public void onPasswordInputFinish(String passWord);
+    public interface OnPasswordViewListener {
+        /**
+         * 6位数字的密码输入完毕
+         *
+         * @param passWord
+         */
+        void onPasswordInputFinish(String passWord);
+
+        /**
+         * 找回密码回调事件
+         */
+        void onForgetPsdClick();
+
+        /**
+         * 关闭控件回调事件
+         */
+        void onCloseClick();
     }
 }

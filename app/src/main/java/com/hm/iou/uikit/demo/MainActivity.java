@@ -79,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, TabActivity.class));
             }
         });
+        findViewById(R.id.btn_password).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PasswordActivity.class));
+            }
+        });
 
         findViewById(R.id.btn_actionsheet).setOnClickListener(new View.OnClickListener() {
             @Override

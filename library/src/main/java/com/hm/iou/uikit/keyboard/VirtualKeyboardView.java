@@ -19,29 +19,29 @@ import java.util.Map;
  */
 public class VirtualKeyboardView extends RelativeLayout {
 
-    Context context;
+    Context mContext;
 
     //因为就6个输入框不会变了，用数组内存申请固定空间，比List省空间（自己认为）
-    private GridView gridView;    //用GrideView布局键盘，其实并不是真正的键盘，只是模拟键盘的功能
+    private GridView mGvKeyBoard;    //用GrideView布局键盘，其实并不是真正的键盘，只是模拟键盘的功能
 
-    private ArrayList<Map<String, String>> valueList;    //有人可能有疑问，为何这里不用数组了？
+    private ArrayList<Map<String, String>> mListValue;    //有人可能有疑问，为何这里不用数组了？
     //因为要用Adapter中适配，用数组不能往adapter中填充
 
 
-    public VirtualKeyboardView(Context context) {
-        this(context, null);
+    public VirtualKeyboardView(Context mContext) {
+        this(mContext, null);
     }
 
-    public VirtualKeyboardView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    public VirtualKeyboardView(Context mContext, AttributeSet attrs) {
+        super(mContext, attrs);
 
-        this.context = context;
+        this.mContext = mContext;
 
-        View view = View.inflate(context, R.layout.layout_virtual_keyboard, null);
-        valueList = new ArrayList<>();
+        View view = View.inflate(mContext, R.layout.layout_virtual_keyboard, null);
+        mListValue = new ArrayList<>();
 
 
-        gridView = (GridView) view.findViewById(R.id.gv_keybord);
+        mGvKeyBoard = view.findViewById(R.id.gv_keyBoard);
 
         initValueList();
 
@@ -52,7 +52,7 @@ public class VirtualKeyboardView extends RelativeLayout {
 
 
     public ArrayList<Map<String, String>> getValueList() {
-        return valueList;
+        return mListValue;
     }
 
     private void initValueList() {
@@ -69,17 +69,17 @@ public class VirtualKeyboardView extends RelativeLayout {
             } else if (i == 12) {
                 map.put("name", ".");
             }
-            valueList.add(map);
+            mListValue.add(map);
         }
     }
 
     public GridView getGridView() {
-        return gridView;
+        return mGvKeyBoard;
     }
 
     private void setupView() {
-        KeyBoardAdapter keyBoardAdapter = new KeyBoardAdapter(context, valueList);
-        gridView.setAdapter(keyBoardAdapter);
+        KeyBoardAdapter keyBoardAdapter = new KeyBoardAdapter(mContext, mListValue);
+        mGvKeyBoard.setAdapter(keyBoardAdapter);
     }
 
 }
