@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <View
         android:id="@+id/view_statusbar_placeholder"
@@ -13,8 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dip"
-        android:layout_below="@id/view_statusbar_placeholder"
-        >
+        android:layout_below="@id/view_statusbar_placeholder">
 
         <ImageView
             android:id="@+id/iv_topbar_back"
@@ -35,8 +33,7 @@
             android:maxWidth="220dip"
             android:text=""
             android:textColor="@color/uikit_title_center_text"
-            android:textSize="@dimen/textFontSize_18"
-            tools:text="标题" />
+            android:textSize="@dimen/textFontSize_18" />
 
 
         <LinearLayout
