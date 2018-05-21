@@ -113,52 +113,30 @@
         <item name="android:paddingRight">10dp</item>
     </style>
 
-    <!--短信验证码输入框-->
-    <style name="UikitEditText.SMSCheckCode">
+    <!--验证码输入框-->
+    <style name="UikitEditText.CheckCode">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">40dp</item>
-        <item name="android:hint">@string/uikit_edit_text_get_sms_check_code_hint</item>
+        <item name="android:hint">@string/uikit_edit_text_get_check_code_hint</item>
         <item name="android:singleLine">true</item>
         <item name="android:background">@null</item>
     </style>
 
-    <!--获取短信验证码的按钮-->
-    <style name="UikitButton.SMSCheckCode">
+    <!--获取验证码的按钮-->
+    <style name="UikitButton.CheckCode">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">29dp</item>
-        <item name="android:textColor">#ffa3a3a3</item>
+        <item name="android:textColor">#FFA3A3A3</item>
         <item name="android:layout_marginLeft">12dp</item>
         <item name="android:background">@drawable/uikit_btn_get_code_selector</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
-        <item name="android:text">@string/uikit_btn_get_sms_check_code</item>
+        <item name="android:text">@string/uikit_get_check_code</item>
     </style>
 
-    <!--邮箱验证码输入框-->
-    <style name="UikitEditText.EmailCheckCode">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">40dp</item>
-        <item name="android:hint">@string/uikit_edit_text_get_email_check_code_hint</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:background">@null</item>
-    </style>
-    <!--获取邮箱验证码的按钮-->
-    <style name="UikitButton.EmailCheckCode">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">29dp</item>
-        <item name="android:textColor">#ffa3a3a3</item>
-        <item name="android:layout_marginLeft">12dp</item>
-        <item name="android:background">@drawable/uikit_btn_get_code_selector</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
-        <item name="android:text">@string/uikit_btn_get_email_check_code</item>
-    </style>
 
     <!--密码输入框-->
     <style name="UikitEditText.Password">
@@ -180,6 +158,7 @@
         <item name="android:digits">@string/uikit_edit_text_input_mobile_digits_limit</item>
         <item name="android:hint">@string/uikit_edit_text_input_mobile_hint</item>
         <item name="android:maxLength">11</item>
+        <item name="android:textColor">#FF222222</item>
         <item name="android:inputType">numberSigned</item>
         <item name="android:singleLine">true</item>
         <item name="android:background">@null</item>

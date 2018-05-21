@@ -6,16 +6,18 @@
     <string name="uikit_load_end">这是我的底线</string>
 
 
-    <string name="uikit_edit_text_get_sms_check_code_hint">点击获取6位验证码</string>
-    <string name="uikit_btn_get_sms_check_code">获取</string>
-    <string name="uikit_edit_text_get_email_check_code_hint">点击获取6位验证码</string>
-    <string name="uikit_btn_get_email_check_code">获取</string>
+    <string name="uikit_edit_text_get_check_code_hint">点击获取6位验证码</string>
+    <string name="uikit_get_check_code">获取</string>
+    <string name="uikit_get_check_code_success">验证码获取成功</string>
+    <string name="uikit_get_check_code_failed">验证码获取失败</string>
+
+    <string name="uikit_get_check_code_count_down">%SS</string>
     <string name="uikit_edit_text_input_password_hint">输入6-16位密码</string>
+    <string name="uikit_edit_text_input_mobile_hint">请使用11位手机号</string>
     <string name="uikit_edit_text_input_mobile_digits_limit">0123456789</string>
     <string name="uikit_edit_text_input_money_digits_limit">0123456789</string>
-    <string name="uikit_edit_text_input_mobile_hint">请使用11位手机号</string>
 
     <!--自定义密码框-->
-    <string name="input_pay_pwd">请输入交易密码</string>
-    <string name="retrieve_password">忘记密码？</string>
+    <string name="uikit_input_pay_password">请输入交易密码</string>
+    <string name="uikit_forget_password">忘记密码？</string>
 </resources>

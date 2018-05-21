@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="HMPasswordEditText">
-        <attr name="iconShow" format="integer" />
-        <attr name="iconHide" format="integer" />
-        <attr name="hoverShowsPw" format="boolean" />
-        <attr name="nonMonospaceFont" format="boolean" />
-        <attr name="disableIconAlpha" format="boolean" />
+    <declare-styleable name="ShowHidePasswordEditText">
+        <attr name="drawable_hide" format="integer" />
+        <attr name="drawable_show" format="integer" />
+        <attr name="tint_color" format="color" />
+        <attr name="additionalTouchTargetSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="HMCountDownButton">
+        <attr name="textCountDown" format="string|reference" />
     </declare-styleable>
 
     <declare-styleable name="HmTopBar">

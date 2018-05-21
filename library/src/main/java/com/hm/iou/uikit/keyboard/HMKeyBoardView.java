@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 虚拟键盘
  */
-public class VirtualKeyboardView extends RelativeLayout {
+public class HMKeyBoardView extends RelativeLayout {
 
     Context mContext;
 
@@ -28,16 +28,16 @@ public class VirtualKeyboardView extends RelativeLayout {
     //因为要用Adapter中适配，用数组不能往adapter中填充
 
 
-    public VirtualKeyboardView(Context mContext) {
+    public HMKeyBoardView(Context mContext) {
         this(mContext, null);
     }
 
-    public VirtualKeyboardView(Context mContext, AttributeSet attrs) {
+    public HMKeyBoardView(Context mContext, AttributeSet attrs) {
         super(mContext, attrs);
 
         this.mContext = mContext;
 
-        View view = View.inflate(mContext, R.layout.layout_virtual_keyboard, null);
+        View view = View.inflate(mContext, R.layout.uikit_layout_keyboard_view, null);
         mListValue = new ArrayList<>();
 
 
@@ -78,8 +78,8 @@ public class VirtualKeyboardView extends RelativeLayout {
     }
 
     private void setupView() {
-        KeyBoardAdapter keyBoardAdapter = new KeyBoardAdapter(mContext, mListValue);
-        mGvKeyBoard.setAdapter(keyBoardAdapter);
+        HMKeyBoardAdapter HMKeyBoardAdapter = new HMKeyBoardAdapter(mContext, mListValue);
+        mGvKeyBoard.setAdapter(HMKeyBoardAdapter);
     }
 
 }

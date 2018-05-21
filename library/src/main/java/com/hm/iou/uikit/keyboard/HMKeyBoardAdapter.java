@@ -18,13 +18,13 @@ import java.util.Map;
 /**
  * 九宫格键盘适配器
  */
-public class KeyBoardAdapter extends BaseAdapter {
+public class HMKeyBoardAdapter extends BaseAdapter {
 
 
     private Context mContext;
     private ArrayList<Map<String, String>> mListValue;
 
-    public KeyBoardAdapter(Context mContext, ArrayList<Map<String, String>> mListValue) {
+    public HMKeyBoardAdapter(Context mContext, ArrayList<Map<String, String>> mListValue) {
         this.mContext = mContext;
         this.mListValue = mListValue;
     }
@@ -48,7 +48,7 @@ public class KeyBoardAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.layout_virtual_keyboard_adapter, null);
+            convertView = View.inflate(mContext, R.layout.uikit_layout_keyboard_adapter, null);
             viewHolder = new ViewHolder();
             viewHolder.tvKeys = convertView.findViewById(R.id.tv_keys);
             viewHolder.rlDelete = convertView.findViewById(R.id.rl_delete);

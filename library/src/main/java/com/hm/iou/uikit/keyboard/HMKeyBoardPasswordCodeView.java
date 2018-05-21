@@ -22,10 +22,10 @@ import java.util.Map;
 /**
  * 弹框里面的View
  */
-public class PasswordView extends RelativeLayout {
+public class HMKeyBoardPasswordCodeView extends RelativeLayout {
 
     Context mContext;
-    private VirtualKeyboardView mVirtualKeyboardView;
+    private HMKeyBoardView mHMKeyBoardView;
     private TextView[] mTvList;      //用数组保存6个TextView，
     private ImageView[] mIvList;      //用数组保存6个ImageView
     private GridView mGridView;
@@ -36,21 +36,21 @@ public class PasswordView extends RelativeLayout {
     private ImageView mIvClose;
     private OnPasswordViewListener mOnPasswordViewListener;
 
-    public PasswordView(Context context) {
+    public HMKeyBoardPasswordCodeView(Context context) {
         this(context, null);
     }
 
-    public PasswordView(Context context, AttributeSet attrs) {
+    public HMKeyBoardPasswordCodeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
 
-        View view = View.inflate(context, R.layout.layout_virtual_keyboard_password, null);
+        View view = View.inflate(context, R.layout.uikit_layout_keyboard_password_code_view, null);
 
-        mVirtualKeyboardView = view.findViewById(R.id.virtualKeyboardView);
+        mHMKeyBoardView = view.findViewById(R.id.virtualKeyboardView);
         mIvClose = view.findViewById(R.id.iv_close);
         mTvTitle = view.findViewById(R.id.tv_title);
         mTvForgetPsd = view.findViewById(R.id.tv_forgetPsd);
-        mGridView = mVirtualKeyboardView.getGridView();
+        mGridView = mHMKeyBoardView.getGridView();
 
         initValueList();
 
@@ -96,7 +96,7 @@ public class PasswordView extends RelativeLayout {
         mIvClose.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                PasswordView.this.setVisibility(GONE);
+                HMKeyBoardPasswordCodeView.this.setVisibility(GONE);
                 if (mOnPasswordViewListener != null) {
                     mOnPasswordViewListener.onCloseClick();
                 }
@@ -130,8 +130,8 @@ public class PasswordView extends RelativeLayout {
     private void setupView() {
 
         // 这里、重新为数字键盘mGridView设置了Adapter
-        KeyBoardAdapter keyBoardAdapter = new KeyBoardAdapter(mContext, mListValue);
-        mGridView.setAdapter(keyBoardAdapter);
+        HMKeyBoardAdapter HMKeyBoardAdapter = new HMKeyBoardAdapter(mContext, mListValue);
+        mGridView.setAdapter(HMKeyBoardAdapter);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -195,9 +195,9 @@ public class PasswordView extends RelativeLayout {
         this.mOnPasswordViewListener = onPasswordViewListener;
     }
 
-    public VirtualKeyboardView getVirtualKeyboardView() {
+    public HMKeyBoardView getVirtualKeyboardView() {
 
-        return mVirtualKeyboardView;
+        return mHMKeyBoardView;
     }
 
     public void setTitleText(CharSequence text) {

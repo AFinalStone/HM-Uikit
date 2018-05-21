@@ -3,27 +3,26 @@ package com.hm.iou.uikit.demo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
 
-import com.hm.iou.uikit.keyboard.PasswordView;
-import com.hm.iou.uikit.tabbar.BottomTabBar;
+import com.hm.iou.uikit.keyboard.HMKeyBoardPasswordCodeView;
+
 
 /**
- * Created by hjy on 18/5/1.<br>
+ * @author syl
+ * @time 2018/5/21 下午7:14
  */
-
 public class PasswordActivity extends AppCompatActivity {
 
-    PasswordView passwordView;
+    HMKeyBoardPasswordCodeView HMKeyBoardPasswordCodeView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
-        passwordView = findViewById(R.id.passwordView);
-        passwordView.setTitleText("请输入交易密码");
-        passwordView.setOnPasswordViewListener(new PasswordView.OnPasswordViewListener() {
+        HMKeyBoardPasswordCodeView = findViewById(R.id.passwordView);
+        HMKeyBoardPasswordCodeView.setTitleText("请输入交易密码");
+        HMKeyBoardPasswordCodeView.setOnPasswordViewListener(new HMKeyBoardPasswordCodeView.OnPasswordViewListener() {
             @Override
             public void onPasswordInputFinish(String passWord) {
                 Toast.makeText(PasswordActivity.this, passWord, Toast.LENGTH_SHORT).show();
