@@ -75,6 +75,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/textFontSize_14</item>
+        <item name="android:textColor">@color/uikit_text_common_color</item>
     </style>
 
     <!--通用的EditText-->
@@ -97,7 +98,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginLeft">35dp</item>
         <item name="android:layout_marginRight">35dp</item>
-        <item name="android:textColor">@color/uikit_color_bottom_btn_selector</item>
+        <item name="android:textColor">@color/uikit_color_btn_bottom_selector</item>
         <item name="android:textSize">@dimen/textFontSize_18</item>
     </style>
 
@@ -129,7 +130,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">29dp</item>
-        <item name="android:textColor">#FFA3A3A3</item>
+        <item name="android:textColor">#FF666666</item>
         <item name="android:layout_marginLeft">12dp</item>
         <item name="android:background">@drawable/uikit_btn_get_code_selector</item>
         <item name="android:paddingLeft">8dp</item>
@@ -158,7 +159,6 @@
         <item name="android:digits">@string/uikit_edit_text_input_mobile_digits_limit</item>
         <item name="android:hint">@string/uikit_edit_text_input_mobile_hint</item>
         <item name="android:maxLength">11</item>
-        <item name="android:textColor">#FF222222</item>
         <item name="android:inputType">numberSigned</item>
         <item name="android:singleLine">true</item>
         <item name="android:background">@null</item>

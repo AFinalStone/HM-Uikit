@@ -18,8 +18,8 @@
     <color name="uikit_shape_common_background_pressed">#FFFFC000</color>
     <color name="uikit_shape_common_background_unenable">#FFCCCCCC</color>
     <color name="uikit_text_hint_common_color">#FFA3A3A3</color>
-    <color name="uikit_common_text_color">#FF222222</color>
-    <color name="uikit_common_text_color_unenable">@color/white</color>
+    <color name="uikit_text_common_color">#FF222222</color>
+    <color name="uikit_text_common_color_unenable">@color/white</color>
     <color name="uikit_password_text_color">#FF222222</color>
     <color name="uikit_password_text_hint_color">#FFA3A3A3</color>
     <!-- 背景颜色 -->

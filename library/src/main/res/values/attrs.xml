@@ -8,7 +8,7 @@
         <attr name="additionalTouchTargetSize" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="HMCountDownButton">
+    <declare-styleable name="HMCountDownTextView">
         <attr name="textCountDown" format="string|reference" />
     </declare-styleable>
 

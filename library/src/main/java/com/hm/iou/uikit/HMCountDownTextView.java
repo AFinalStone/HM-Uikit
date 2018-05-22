@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Message;
-import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,7 +20,7 @@ import java.util.TimerTask;
  * @author syl
  * @time 2018/5/21 上午10:15
  */
-public class HMCountDownButton extends AppCompatButton implements View.OnClickListener {
+public class HMCountDownTextView extends AppCompatTextView implements View.OnClickListener {
     /**
      * 倒计时时长，默认倒计时时间60秒；
      */
@@ -49,23 +49,23 @@ public class HMCountDownButton extends AppCompatButton implements View.OnClickLi
     /**
      * 更新显示的文本
      */
-    private WeakReferenceHandler<HMCountDownButton> mHandler;
+    private WeakReferenceHandler<HMCountDownTextView> mHandler;
 
-    public HMCountDownButton(Context context) {
+    public HMCountDownTextView(Context context) {
         super(context);
         initFields(null, 0);
         initView();
         initHandler(this);
     }
 
-    public HMCountDownButton(Context context, AttributeSet attrs) {
+    public HMCountDownTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initFields(attrs, 0);
         initView();
         initHandler(this);
     }
 
-    public HMCountDownButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HMCountDownTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initFields(attrs, defStyleAttr);
         initView();
@@ -75,10 +75,10 @@ public class HMCountDownButton extends AppCompatButton implements View.OnClickLi
     public void initFields(AttributeSet attrs, int defStyleAttr) {
 
         if (attrs != null) {
-            TypedArray styledAttributes = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.HMCountDownButton, defStyleAttr, 0);
+            TypedArray styledAttributes = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.HMCountDownTextView, defStyleAttr, 0);
             try {
                 mStrText = getText().toString().trim();
-                mStrTextCountDown = styledAttributes.getString(R.styleable.HMCountDownButton_textCountDown);
+                mStrTextCountDown = styledAttributes.getString(R.styleable.HMCountDownTextView_textCountDown);
             } finally {
                 styledAttributes.recycle();
             }
@@ -101,8 +101,8 @@ public class HMCountDownButton extends AppCompatButton implements View.OnClickLi
     }
 
     @SuppressLint("HandlerLeak")
-    private void initHandler(final HMCountDownButton countDownButton) {
-        mHandler = new WeakReferenceHandler<HMCountDownButton>(countDownButton) {
+    private void initHandler(final HMCountDownTextView countDownButton) {
+        mHandler = new WeakReferenceHandler<HMCountDownTextView>(countDownButton) {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -168,7 +168,7 @@ public class HMCountDownButton extends AppCompatButton implements View.OnClickLi
      */
     @Override
     public void setOnClickListener(OnClickListener onclickListener) {
-        if (onclickListener instanceof HMCountDownButton) {
+        if (onclickListener instanceof HMCountDownTextView) {
             super.setOnClickListener(onclickListener);
         } else {
             this.mOnClickListener = onclickListener;
