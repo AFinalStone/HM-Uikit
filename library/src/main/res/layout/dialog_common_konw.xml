@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:src="@mipmap/icon_receipt_create_money_close" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="标题"
+        android:textColor="#ff222222"
+        android:textSize="@dimen/textFontSize_17"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="15dp"
+        android:lineSpacingExtra="8dp"
+        android:text="正文内容"
+        android:textColor="#ff666666"
+        android:textSize="@dimen/textFontSize_15"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#F6F6F6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_know"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:background="@drawable/uikit_selector_alertdialog_left"
+            android:gravity="center"
+            android:text="@string/uikit_dialog_know"
+            android:textColor="#ff666666"
+            android:textSize="@dimen/textFontSize_18"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

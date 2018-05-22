@@ -30,6 +30,12 @@
             android:layout_height="wrap_content"
             android:text="显示AlertDialog" />
 
+        <Button
+            android:id="@+id/btn_dialogCommon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="显示[知道了]对话框 " />
+
         <com.hm.iou.uikit.PullDownRefreshImageView
             android:id="@+id/pd_iv"
             android:layout_width="40dip"
@@ -74,7 +80,7 @@
             android:id="@+id/btn_checkCode"
             style="@style/UikitButton.CheckCode"
             android:layout_gravity="center"
-            android:text="获取"
+            android:text="获取验证码"
             app:textCountDown="%S秒后重新获取" />
 
 

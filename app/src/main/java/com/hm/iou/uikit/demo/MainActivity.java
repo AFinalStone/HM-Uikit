@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
+import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
@@ -48,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         })
+                        .show();
+            }
+        });
+        findViewById(R.id.btn_dialogCommon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DialogCommonKnow.Builder(MainActivity.this)
+                        .setMsg("正文提示信息")
+                        .setTitle("标题")
                         .show();
             }
         });

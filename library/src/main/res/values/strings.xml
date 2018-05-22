@@ -20,4 +20,8 @@
     <!--自定义密码框-->
     <string name="uikit_input_pay_password">请输入交易密码</string>
     <string name="uikit_forget_password">忘记密码？</string>
+
+    <!--我知道了提示对话框-->
+    <string name="uikit_dialog_know">知道了</string>
+
 </resources>
