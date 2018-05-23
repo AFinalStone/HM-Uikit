@@ -61,6 +61,29 @@ public class HMCountDownTextView extends AppCompatTextView {
         initHandler(this);
     }
 
+    /**
+     * 防止在倒计时的过程中，按钮被设置为true，开启二次倒计时
+     *
+     * @param enabled
+     */
+    @Override
+    public void setEnabled(boolean enabled) {
+        if (mTimerTask != null) {
+            return;
+        }
+        super.setEnabled(enabled);
+    }
+
+    /**
+     * 记得一定要在activity或者fragment消亡的时候清除倒计时，
+     * 因为如果倒计时没有完的话子线程还在跑，
+     * 这样的话就会引起内存溢出
+     */
+    @Override
+    protected void onDetachedFromWindow() {
+        clearTimer();
+        super.onDetachedFromWindow();
+    }
 
     /**
      * 初始化操作
@@ -159,14 +182,5 @@ public class HMCountDownTextView extends AppCompatTextView {
         }
     }
 
-    /**
-     * 记得一定要在activity或者fragment消亡的时候清除倒计时，
-     * 因为如果倒计时没有完的话子线程还在跑，
-     * 这样的话就会引起内存溢出
-     */
-    @Override
-    protected void onDetachedFromWindow() {
-        clearTimer();
-        super.onDetachedFromWindow();
-    }
+
 }
