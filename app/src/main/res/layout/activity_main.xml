@@ -77,11 +77,10 @@
             android:text="切换隐藏和显示的密码输入框" />
 
         <com.hm.iou.uikit.HMCountDownTextView
-            android:id="@+id/btn_checkCode"
+            android:id="@+id/tv_getCheckCode"
             style="@style/UikitButton.CheckCode"
             android:layout_gravity="center"
-            android:text="获取验证码"
-            app:textCountDown="%S秒后重新获取" />
+            android:text="获取验证码" />
 
 
         <com.hm.iou.uikit.HMLoadingView

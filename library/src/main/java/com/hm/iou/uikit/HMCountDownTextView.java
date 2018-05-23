@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.hm.iou.uikit.handler.WeakReferenceHandler;
 
@@ -20,7 +20,7 @@ import java.util.TimerTask;
  * @author syl
  * @time 2018/5/21 上午10:15
  */
-public class HMCountDownTextView extends AppCompatTextView implements View.OnClickListener {
+public class HMCountDownTextView extends AppCompatTextView {
     /**
      * 倒计时时长，默认倒计时时间60秒；
      */
@@ -40,11 +40,7 @@ public class HMCountDownTextView extends AppCompatTextView implements View.OnCli
     /**
      * 在开始倒计时之后那个秒数数字之后所要显示的字，默认是秒
      */
-    private String mStrTextCountDown;
-    /**
-     * 按钮点击事件
-     */
-    private OnClickListener mOnClickListener;
+    private String mStrTextCountDown = getResources().getString(R.string.uikit_get_check_code_count_down);
 
     /**
      * 更新显示的文本
@@ -52,53 +48,31 @@ public class HMCountDownTextView extends AppCompatTextView implements View.OnCli
     private WeakReferenceHandler<HMCountDownTextView> mHandler;
 
     public HMCountDownTextView(Context context) {
-        super(context);
-        initFields(null, 0);
-        initView();
-        initHandler(this);
+        this(context, null);
     }
 
     public HMCountDownTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initFields(attrs, 0);
-        initView();
-        initHandler(this);
+        this(context, attrs, 0);
     }
 
     public HMCountDownTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initFields(attrs, defStyleAttr);
         initView();
         initHandler(this);
     }
 
-    public void initFields(AttributeSet attrs, int defStyleAttr) {
-
-        if (attrs != null) {
-            TypedArray styledAttributes = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.HMCountDownTextView, defStyleAttr, 0);
-            try {
-                mStrText = getText().toString().trim();
-                mStrTextCountDown = styledAttributes.getString(R.styleable.HMCountDownTextView_textCountDown);
-            } finally {
-                styledAttributes.recycle();
-            }
-        }
-
-        if (TextUtils.isEmpty(mStrText)) {
-            mStrText = getResources().getString(R.string.uikit_get_check_code);
-        }
-        if (TextUtils.isEmpty(mStrTextCountDown)) {
-            mStrTextCountDown = getResources().getString(R.string.uikit_get_check_code_count_down);
-        }
-    }
 
     /**
      * 初始化操作
      */
     private void initView() {
+        mStrText = getText().toString().trim();
+        if (TextUtils.isEmpty(mStrText)) {
+            mStrText = getResources().getString(R.string.uikit_get_check_code);
+        }
         setText(mStrText);
-        setOnClickListener(this);
     }
+
 
     @SuppressLint("HandlerLeak")
     private void initHandler(final HMCountDownTextView countDownButton) {
@@ -139,7 +113,7 @@ public class HMCountDownTextView extends AppCompatTextView implements View.OnCli
      *
      * @param mLength 默认毫秒
      */
-    public void setLength(long mLength) {
+    public void setLength(@NonNull long mLength) {
         this.mLength = mLength;
     }
 
@@ -148,7 +122,7 @@ public class HMCountDownTextView extends AppCompatTextView implements View.OnCli
      *
      * @param mStrText
      */
-    public void setBeforeText(String mStrText) {
+    public void setBeforeText(@NonNull String mStrText) {
         this.mStrText = mStrText;
     }
 
@@ -157,44 +131,17 @@ public class HMCountDownTextView extends AppCompatTextView implements View.OnCli
      *
      * @param mStrText
      */
-    public void setAfterText(String mStrText) {
-        this.mStrTextCountDown = mStrTextCountDown;
-    }
-
-    /**
-     * 设置监听按钮点击事件
-     *
-     * @param onclickListener
-     */
-    @Override
-    public void setOnClickListener(OnClickListener onclickListener) {
-        if (onclickListener instanceof HMCountDownTextView) {
-            super.setOnClickListener(onclickListener);
-        } else {
-            this.mOnClickListener = onclickListener;
-        }
-    }
-
-    /**
-     * 点击按钮后的操作
-     *
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        start();
-        if (mOnClickListener != null) {
-            mOnClickListener.onClick(v);
-        }
+    public void setAfterText(@NonNull String mStrText) {
+        mStrTextCountDown = mStrText;
     }
 
     /**
      * 开始倒计时
      */
-    public void start() {
-        initTimer();
-        this.setText(mLength / 1000 + mStrTextCountDown);
+    public void startCountDown() {
         this.setEnabled(false);
+        this.setText(mLength / 1000 + mStrTextCountDown);
+        initTimer();
         mTimer.schedule(mTimerTask, 0, 1000);
     }
 

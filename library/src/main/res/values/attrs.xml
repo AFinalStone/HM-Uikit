@@ -8,10 +8,6 @@
         <attr name="additionalTouchTargetSize" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="HMCountDownTextView">
-        <attr name="textCountDown" format="string|reference" />
-    </declare-styleable>
-
     <declare-styleable name="HmTopBar">
         <attr name="titleText" format="string|reference"></attr>
         <attr name="titleSize" format="dimension|reference"></attr>

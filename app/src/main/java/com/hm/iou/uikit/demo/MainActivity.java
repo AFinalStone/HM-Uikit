@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
@@ -99,6 +100,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, HideShowPasswordActivity.class));
+            }
+        });
+
+        findViewById(R.id.tv_getCheckCode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HMCountDownTextView hmCountDownTextView = findViewById(R.id.tv_getCheckCode);
+                hmCountDownTextView.startCountDown();
             }
         });
 

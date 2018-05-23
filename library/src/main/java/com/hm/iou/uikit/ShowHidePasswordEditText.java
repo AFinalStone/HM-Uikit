@@ -64,15 +64,15 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
         if (attrs != null) {
             TypedArray attrsArray = getContext().obtainStyledAttributes(attrs, R.styleable.ShowHidePasswordEditText);
 
-            visibilityIndicatorShow = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawable_show, R.mipmap.uikit_icon_password_eye_open);
-            visibilityIndicatorHide = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawable_hide, R.mipmap.uikit_icon_password_eye_close);
+            visibilityIndicatorShow = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawable_show, R.mipmap.uikit_icon_password_eye_close);
+            visibilityIndicatorHide = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawable_hide, R.mipmap.uikit_icon_password_eye_open);
             tintColor = attrsArray.getColor(R.styleable.ShowHidePasswordEditText_tint_color, 0);
             additionalTouchTargetSize = attrsArray.getDimensionPixelSize(R.styleable.ShowHidePasswordEditText_additionalTouchTargetSize, DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE);
 
             attrsArray.recycle();
         } else {
-            visibilityIndicatorShow = R.mipmap.uikit_icon_password_eye_open;
-            visibilityIndicatorHide = R.mipmap.uikit_icon_password_eye_close;
+            visibilityIndicatorShow = R.mipmap.uikit_icon_password_eye_close;
+            visibilityIndicatorHide = R.mipmap.uikit_icon_password_eye_open;
 
         }
 
