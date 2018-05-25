@@ -108,10 +108,10 @@ public class HMCountDownTextView extends AppCompatTextView {
                     countDownButton.setText(strCountDown);
                     mLength -= 1000;
                     if (mLength < 0) {
-                        countDownButton.setEnabled(true);
-                        countDownButton.setText(mStrText);
                         clearTimer();
                         mLength = 60 * 1000;
+                        countDownButton.setEnabled(true);
+                        countDownButton.setText(mStrText);
                     }
                 }
             }
