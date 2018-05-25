@@ -89,13 +89,13 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/textFontSize_14</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/uikit_text_common_color</item>
     </style>
 
     <!--通用的EditText-->
     <style name="UikitEditText" parent="@style/UikitTextView">
         <item name="android:textColorHint">@color/uikit_text_hint_common_color</item>
-        <item name="android:gravity">center_vertical</item>
     </style>
 
     <!--通用的Button-->
