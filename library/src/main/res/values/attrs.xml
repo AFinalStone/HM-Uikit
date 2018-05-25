@@ -2,9 +2,9 @@
 <resources>
 
     <declare-styleable name="ShowHidePasswordEditText">
-        <attr name="drawable_hide" format="integer" />
-        <attr name="drawable_show" format="integer" />
-        <attr name="tint_color" format="color" />
+        <attr name="drawablePasswordShow" format="integer" />
+        <attr name="drawablePasswordHide" format="integer" />
+        <attr name="tintColor" format="color" />
         <attr name="additionalTouchTargetSize" format="dimension" />
     </declare-styleable>
 

@@ -12,30 +12,30 @@ import com.hm.iou.uikit.keyboard.HMKeyBoardPasswordCodeView;
  * @author syl
  * @time 2018/5/21 下午7:14
  */
-public class PasswordActivity extends AppCompatActivity {
+public class PasswordCustomerInputActivity extends AppCompatActivity {
 
     HMKeyBoardPasswordCodeView HMKeyBoardPasswordCodeView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password);
+        setContentView(R.layout.activity_password_customer_input);
         HMKeyBoardPasswordCodeView = findViewById(R.id.passwordView);
         HMKeyBoardPasswordCodeView.setTitleText("请输入交易密码");
         HMKeyBoardPasswordCodeView.setOnPasswordViewListener(new HMKeyBoardPasswordCodeView.OnPasswordViewListener() {
             @Override
             public void onPasswordInputFinish(String passWord) {
-                Toast.makeText(PasswordActivity.this, passWord, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PasswordCustomerInputActivity.this, passWord, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onForgetPsdClick() {
-                Toast.makeText(PasswordActivity.this, "忘记密码", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PasswordCustomerInputActivity.this, "忘记密码", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCloseClick() {
-                Toast.makeText(PasswordActivity.this, "关闭密码输入框", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PasswordCustomerInputActivity.this, "关闭密码输入框", Toast.LENGTH_SHORT).show();
             }
         });
     }

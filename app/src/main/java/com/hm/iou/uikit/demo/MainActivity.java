@@ -93,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_password).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PasswordActivity.class));
+                startActivity(new Intent(MainActivity.this, PasswordCustomerInputActivity.class));
             }
         });
         findViewById(R.id.btn_hindShowPassword).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HideShowPasswordActivity.class));
+                startActivity(new Intent(MainActivity.this, PasswordHideShowActivity.class));
             }
         });
 

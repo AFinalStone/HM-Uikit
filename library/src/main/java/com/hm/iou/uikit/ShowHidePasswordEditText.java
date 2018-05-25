@@ -14,12 +14,18 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+
+import java.lang.reflect.Field;
+import java.util.logging.Logger;
 
 
 /**
@@ -29,20 +35,21 @@ import android.view.View;
 public class ShowHidePasswordEditText extends AppCompatEditText {
 
     private static final String TAG = ShowHidePasswordEditText.class.getSimpleName();
-    private boolean isShowingPassword = false;
-    private Drawable drawableEnd;
-    private boolean leftToRight = true;
-    private int tintColor = 0;
-
-    private final int DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE = 40;
+    private static final String SHOWING_PASSWORD_STATE_KEY = "SHOWING_PASSWORD_STATE_KEY";
+    private static final String SUPER_STATE_KEY = "SUPER_STATE_KEY";
+    private boolean mIsShowingPassword;
+    private Drawable mDrawableEnd;
+    private boolean mLeftToRight = true;
+    private int mTintColor = 0;
+    private final int DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE = 80;
 
 
     @DrawableRes
-    private int visibilityIndicatorShow;
+    private int mPasswordHide;
     @DrawableRes
-    private int visibilityIndicatorHide;
+    private int mPasswordShow;
 
-    private int additionalTouchTargetSize = DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE;
+    private int mAdditionalTouchTargetSize = DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE;
 
 
     public ShowHidePasswordEditText(Context context) {
@@ -64,31 +71,56 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
         if (attrs != null) {
             TypedArray attrsArray = getContext().obtainStyledAttributes(attrs, R.styleable.ShowHidePasswordEditText);
 
-            visibilityIndicatorShow = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawable_show, R.mipmap.uikit_icon_password_eye_close);
-            visibilityIndicatorHide = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawable_hide, R.mipmap.uikit_icon_password_eye_open);
-            tintColor = attrsArray.getColor(R.styleable.ShowHidePasswordEditText_tint_color, 0);
-            additionalTouchTargetSize = attrsArray.getDimensionPixelSize(R.styleable.ShowHidePasswordEditText_additionalTouchTargetSize, DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE);
+            mPasswordHide = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawablePasswordHide, R.mipmap.uikit_icon_password_eye_close);
+            mPasswordShow = attrsArray.getResourceId(R.styleable.ShowHidePasswordEditText_drawablePasswordShow, R.mipmap.uikit_icon_password_eye_open);
+            mTintColor = attrsArray.getColor(R.styleable.ShowHidePasswordEditText_tintColor, 0);
+            mAdditionalTouchTargetSize = attrsArray.getDimensionPixelSize(R.styleable.ShowHidePasswordEditText_additionalTouchTargetSize, DEFAULT_ADDITIONAL_TOUCH_TARGET_SIZE);
 
+            //使用反射获取当前的输入类型
+            mIsShowingPassword = false;
+            int[] textAppearanceStyleArr = new int[0];
+            int inputTypeStyle = 0;
+            try {
+                Class clasz = Class.forName("com.android.internal.R$styleable");
+                Field field = clasz.getDeclaredField("TextView");
+                field.setAccessible(true);
+                textAppearanceStyleArr = (int[]) field.get(null);
+
+                field = clasz.getDeclaredField("TextView_inputType");
+                field.setAccessible(true);
+                inputTypeStyle = (Integer) field.get(null);
+                TypedArray a = getContext().obtainStyledAttributes(attrs, textAppearanceStyleArr);
+                int itemInputTypeStyle = a.getInt(inputTypeStyle, EditorInfo.TYPE_NULL);
+                int flagShowPassword = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+                if (itemInputTypeStyle == flagShowPassword) {
+                    mIsShowingPassword = true;
+//                Log.e("itemInputTypeStyle==", "itemInputTypeStyle" + itemInputTypeStyle);
+//                Log.e("flagShowPassword==", "flagShowPassword" + flagShowPassword);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             attrsArray.recycle();
         } else {
-            visibilityIndicatorShow = R.mipmap.uikit_icon_password_eye_close;
-            visibilityIndicatorHide = R.mipmap.uikit_icon_password_eye_open;
+            mPasswordHide = R.mipmap.uikit_icon_password_eye_close;
+            mPasswordShow = R.mipmap.uikit_icon_password_eye_open;
 
         }
 
-        leftToRight = isLeftToRight();
+        mLeftToRight = isLeftToRight();
 
         //ensures by default this view is only line only
         setMaxLines(1);
 
-        //note this must be set before maskPassword() otherwise it was undeo the passwordTransformation
+        //note this must be set before hidePassword() otherwise it was undeo the passwordTransformation
         setSingleLine(true);
 
-
-        //initial state is hiding
-        isShowingPassword = false;
-        maskPassword();
-
+        //初始化密码显示还是隐藏
+        if (mIsShowingPassword) {
+            showPassword();
+        } else {
+            hidePassword();
+        }
         //save the state of whether the password is being shown
         setSaveEnabled(true);
 
@@ -135,33 +167,33 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
                                      Drawable right, Drawable bottom) {
 
         //keep a reference to the right drawable so later on touch we can check if touch is on the drawable
-        if (leftToRight && right != null) {
-            drawableEnd = right;
-        } else if (!leftToRight && left != null) {
-            drawableEnd = left;
+        if (mLeftToRight && right != null) {
+            mDrawableEnd = right;
+        } else if (!mLeftToRight && left != null) {
+            mDrawableEnd = left;
         }
 
         super.setCompoundDrawables(left, top, right, bottom);
     }
 
-    public void setTintColor(@ColorInt int tintColor) {
-        this.tintColor = tintColor;
+    public void setTintColor(@ColorInt int mTintColor) {
+        this.mTintColor = mTintColor;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (event.getAction() == MotionEvent.ACTION_UP && drawableEnd != null) {
-            Rect bounds = drawableEnd.getBounds();
+        if (event.getAction() == MotionEvent.ACTION_UP && mDrawableEnd != null) {
+            Rect bounds = mDrawableEnd.getBounds();
 
             int x = (int) event.getX();
 
-            //take into account the padding and additionalTouchTargetSize
-            int drawableWidthWithPadding = bounds.width() + (leftToRight ? getPaddingRight() : getPaddingLeft()) + additionalTouchTargetSize;
+            //take into account the padding and mAdditionalTouchTargetSize
+            int drawableWidthWithPadding = bounds.width() + (mLeftToRight ? getPaddingRight() : getPaddingLeft()) + mAdditionalTouchTargetSize;
 
-            //check if the touch is within bounds of drawableEnd icon
-            if ((leftToRight && (x >= (this.getRight() - (drawableWidthWithPadding)))) ||
-                    (!leftToRight && (x <= (this.getLeft() + (drawableWidthWithPadding))))) {
+            //check if the touch is within bounds of mDrawableEnd icon
+            if ((mLeftToRight && (x >= (this.getRight() - (drawableWidthWithPadding)))) ||
+                    (!mLeftToRight && (x <= (this.getLeft() + (drawableWidthWithPadding))))) {
 
                 togglePasswordVisibility();
 
@@ -183,31 +215,31 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
         Drawable bottom = existingDrawables[3];
 
         if (show) {
-            Drawable original = isShowingPassword ?
-                    ContextCompat.getDrawable(getContext(), visibilityIndicatorHide) :
-                    ContextCompat.getDrawable(getContext(), visibilityIndicatorShow);
+            Drawable original = mIsShowingPassword ?
+                    ContextCompat.getDrawable(getContext(), mPasswordShow) :
+                    ContextCompat.getDrawable(getContext(), mPasswordHide);
             original.mutate();
 
-            if (tintColor == 0) {
-                setCompoundDrawablesWithIntrinsicBounds(leftToRight ? left : original, top, leftToRight ? original : right, bottom);
+            if (mTintColor == 0) {
+                setCompoundDrawablesWithIntrinsicBounds(mLeftToRight ? left : original, top, mLeftToRight ? original : right, bottom);
             } else {
                 Drawable wrapper = DrawableCompat.wrap(original);
-                DrawableCompat.setTint(wrapper, tintColor);
-                setCompoundDrawablesWithIntrinsicBounds(leftToRight ? left : wrapper, top, leftToRight ? wrapper : right, bottom);
+                DrawableCompat.setTint(wrapper, mTintColor);
+                setCompoundDrawablesWithIntrinsicBounds(mLeftToRight ? left : wrapper, top, mLeftToRight ? wrapper : right, bottom);
             }
         } else {
-            setCompoundDrawablesWithIntrinsicBounds(leftToRight ? left : null, top, leftToRight ? null : right, bottom);
+            setCompoundDrawablesWithIntrinsicBounds(mLeftToRight ? left : null, top, mLeftToRight ? null : right, bottom);
         }
     }
 
 
     //make it visible
-    private void unmaskPassword() {
+    private void showPassword() {
         setTransformationMethod(null);
     }
 
     //hide it
-    private void maskPassword() {
+    private void hidePassword() {
         setTransformationMethod(PasswordTransformationMethod.getInstance());
     }
 
@@ -217,85 +249,49 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
         int selectionEnd = this.getSelectionEnd();
 
         // Set transformation method to show/hide password
-        if (isShowingPassword) {
-            maskPassword();
+        if (mIsShowingPassword) {
+            hidePassword();
         } else {
-            unmaskPassword();
+            showPassword();
         }
 
         // Restore selection
         this.setSelection(selectionStart, selectionEnd);
 
         // Toggle flag and show indicator
-        isShowingPassword = !isShowingPassword;
+        mIsShowingPassword = !mIsShowingPassword;
         showPasswordVisibilityIndicator(true);
     }
 
     @Override
     protected void finalize() throws Throwable {
-        drawableEnd = null;
+        mDrawableEnd = null;
         super.finalize();
     }
 
-
-    public
-    @DrawableRes
-    int getVisibilityIndicatorShow() {
-        return visibilityIndicatorShow;
-    }
-
-    public void setVisibilityIndicatorShow(@DrawableRes int visibilityIndicatorShow) {
-        this.visibilityIndicatorShow = visibilityIndicatorShow;
-    }
-
-    public
-    @DrawableRes
-    int getVisibilityIndicatorHide() {
-        return visibilityIndicatorHide;
-    }
-
-    public void setVisibilityIndicatorHide(@DrawableRes int visibilityIndicatorHide) {
-        this.visibilityIndicatorHide = visibilityIndicatorHide;
-    }
-
     /**
-     * @return true if the password is visible | false if hidden
+     * @param mAdditionalTouchTargetSize inPixels
      */
-    public boolean isShowingPassword() {
-        return isShowingPassword;
+    public void setAdditionalTouchTargetSizePixels(int mAdditionalTouchTargetSize) {
+        this.mAdditionalTouchTargetSize = mAdditionalTouchTargetSize;
     }
-
-    public int getAdditionalTouchTargetSizePixels() {
-        return additionalTouchTargetSize;
-    }
-
-    /**
-     * @param additionalTouchTargetSize inPixels
-     */
-    public void setAdditionalTouchTargetSizePixels(int additionalTouchTargetSize) {
-        this.additionalTouchTargetSize = additionalTouchTargetSize;
-    }
-
-    private final static String IS_SHOWING_PASSWORD_STATE_KEY = "IS_SHOWING_PASSWORD_STATE_KEY";
-    private final static String SUPER_STATE_KEY = "SUPER_STATE_KEY";
 
     @Override
     public Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(SUPER_STATE_KEY, super.onSaveInstanceState());
-        bundle.putBoolean(IS_SHOWING_PASSWORD_STATE_KEY, this.isShowingPassword);
+        bundle.putBoolean(SHOWING_PASSWORD_STATE_KEY, this.mIsShowingPassword);
         return bundle;
     }
-
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
-            this.isShowingPassword = bundle.getBoolean(IS_SHOWING_PASSWORD_STATE_KEY, false);
+            this.mIsShowingPassword = bundle.getBoolean(SHOWING_PASSWORD_STATE_KEY, false);
 
-            if (isShowingPassword) {
-                unmaskPassword();
+            if (mIsShowingPassword) {
+                showPassword();
             }
             state = bundle.getParcelable(SUPER_STATE_KEY);
         }
