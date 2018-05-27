@@ -24,4 +24,6 @@
     <!--我知道了提示对话框-->
     <string name="uikit_dialog_know">知道了</string>
 
+    <string name="uikit_dialog_common_title">温馨提示</string>
+
 </resources>

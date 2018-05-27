@@ -21,7 +21,7 @@
             android:id="@+id/iv_close"
             android:layout_width="31dp"
             android:layout_height="31dp"
-            android:src="@mipmap/icon_receipt_create_money_close" />
+            android:src="@mipmap/uikit_icon_know_dialog_close" />
     </LinearLayout>
 
 
