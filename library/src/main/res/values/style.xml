@@ -15,6 +15,11 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--全屏的Activity-->
+    <style name="UikitFullScreenTheme" parent="UikitAppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <!--dialog-->
     <style name="UikitCustomProgressDialog" parent="@style/UikitCustomDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
