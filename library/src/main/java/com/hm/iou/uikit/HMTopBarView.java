@@ -65,6 +65,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     private LinearLayout mLayoutRightContainer;
     private View mViewDivider;
     private View mViewStatusBarPlaceHolder;
+    private View mLayout;
 
     private OnTopBarBackClickListener mBackListener;
     private OnTopBarMenuClickListener mMenuListener;
@@ -107,20 +108,20 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
 
 
     private void initView(Context context) {
-        View layout = LayoutInflater.from(context).inflate(R.layout.uikit_top_bar, null);
+        mLayout = LayoutInflater.from(context).inflate(R.layout.uikit_top_bar, null);
         LayoutParams params = new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        addView(layout, params);
+        addView(mLayout, params);
 
-        mTvTitle = layout.findViewById(R.id.tv_topbar_title);
-        mIvBack = layout.findViewById(R.id.iv_topbar_back);
-        mLayoutRightContainer = layout.findViewById(R.id.ll_topbar_rightcontianer);
-        mTvRight = layout.findViewById(R.id.tv_topbar_right);
-        mIvRight = layout.findViewById(R.id.iv_topbar_right);
-        mViewDivider = layout.findViewById(R.id.view_topbar_divider);
-        mViewStatusBarPlaceHolder = layout.findViewById(R.id.view_statusbar_placeholder);
+        mTvTitle = mLayout.findViewById(R.id.tv_topbar_title);
+        mIvBack = mLayout.findViewById(R.id.iv_topbar_back);
+        mLayoutRightContainer = mLayout.findViewById(R.id.ll_topbar_rightcontianer);
+        mTvRight = mLayout.findViewById(R.id.tv_topbar_right);
+        mIvRight = mLayout.findViewById(R.id.iv_topbar_right);
+        mViewDivider = mLayout.findViewById(R.id.view_topbar_divider);
+        mViewStatusBarPlaceHolder = mLayout.findViewById(R.id.view_statusbar_placeholder);
 
         if (!TextUtils.isEmpty(mTitleTextStr))
             mTvTitle.setText(mTitleTextStr);
@@ -140,7 +141,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mTvRight.setTextColor(mRightTextColor);
 
         if (mBgDrawable != null) {
-            layout.setBackground(mBgDrawable);
+            mLayout.setBackground(mBgDrawable);
         }
         if (!mBottomDividerIsShow) {
             mViewDivider.setVisibility(GONE);
@@ -166,6 +167,16 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mIvBack.setOnClickListener(this);
         mTvRight.setOnClickListener(this);
         mIvRight.setOnClickListener(this);
+    }
+
+    /**
+     * 設置背景顏色
+     *
+     * @param color
+     */
+    public void setHMBackground(int color) {
+        mBgDrawable = new ColorDrawable(color);
+        mLayout.setBackground(mBgDrawable);
     }
 
     /**

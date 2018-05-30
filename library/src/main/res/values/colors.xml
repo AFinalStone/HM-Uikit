@@ -2,11 +2,20 @@
 <resources>
 
     <!--标题栏的颜色-->
-    <color name="uikit_colorPrimary">#FFFFD200</color>
+    <color name="uikit_colorPrimary">#FFFFDD4A</color>
     <!--状态栏的颜色-->
-    <color name="uikit_colorPrimaryDark">#FFFFC000</color>
+    <color name="uikit_colorPrimaryDark">#FFFFB400</color>
     <!--控件的选中颜色，即checked或selected状态的颜色。-->
-    <color name="uikit_colorAccent">#3B99DF</color>
+    <color name="uikit_colorAccent">#FF3B99DF</color>
+    <!--红色-->
+    <color name="uikit_red">#FFFF3C4B</color>
+    <!--青色-->
+    <color name="uikit_cyan">#FF00C5B9</color>
+    <!--蓝色-->
+    <color name="uikit_blue">#FF3C6EFF</color>
+    <!--背景色-->
+    <color name="uikit_background">#FFF2F2F2</color>
+
 
     <!--水波纹颜色-->
     <color name="whiteRipple">#FFD7D7D7</color>
