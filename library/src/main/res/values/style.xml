@@ -104,10 +104,13 @@
     </style>
 
     <!--通用的Button-->
-    <style name="UikitButton" parent="UikitTextView">
-        <item name="android:background">@drawable/uikit_shape_common_btn_selector</item>
+    <style name="UikitButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/textFontSize_14</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/textFontSize_16</item>
+        <item name="android:textColor">@color/uikit_text_common_color</item>
+        <item name="android:background">@drawable/uikit_shape_common_btn_selector</item>
     </style>
 
     <!--通用的底部Button-->
