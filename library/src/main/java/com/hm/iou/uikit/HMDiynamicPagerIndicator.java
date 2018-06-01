@@ -72,6 +72,22 @@ public class HMDiynamicPagerIndicator extends DynamicPagerIndicator {
         }
     }
 
+    public void updateTitle(int position, String title) {
+        if (mTabParentView == null) {
+            throw new RuntimeException("TitleParentView is null");
+        }
+        for (int i = 0; i < mTabParentView.getChildCount(); i++) {
+            View childView = mTabParentView.getChildAt(i);
+            if (childView instanceof PageTabView) {
+                TextView textView = ((PageTabView) childView).getTitleTextView();
+                if (textView != null && position == i) {
+                    textView.setText(title);
+                    break;
+                }
+            }
+        }
+    }
+
     /**
      * 设置一个TextView，用于显示标题，这是必不可少的一个View
      */
