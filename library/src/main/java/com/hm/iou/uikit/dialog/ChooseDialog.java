@@ -146,12 +146,7 @@ public class ChooseDialog extends Dialog {
                     if (mItemClickListener != null) {
                         mItemClickListener.onClick(dialog, position);
                     }
-                    view.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.dismiss();
-                        }
-                    }, 300);
+                    dialog.dismiss();
                 }
             });
 
