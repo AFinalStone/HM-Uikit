@@ -59,7 +59,7 @@ public class DialogCommonKnow extends Dialog {
 
             final DialogCommonKnow mDialog = new DialogCommonKnow(context, R.style.UikitAlertDialogStyle);
 
-            View view = LayoutInflater.from(context).inflate(R.layout.dialog_common_konw, null);
+            View view = LayoutInflater.from(context).inflate(R.layout.uikit_dialog_common_konw, null);
             View background = view.findViewById(R.id.background);
             TextView tv_title = view.findViewById(R.id.tv_title);
             TextView tv_msg = view.findViewById(R.id.tv_msg);

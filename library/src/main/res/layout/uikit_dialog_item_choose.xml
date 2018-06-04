@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dip"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/uikit_bg_dialog_item_choose"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="19dip"
+        android:layout_centerVertical="true"
+        >
+
+        <TextView
+            android:id="@+id/tv_dialog_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#ff222222"
+            android:textSize="16sp"
+            tools:text="月利率"
+            />
+
+        <TextView
+            android:id="@+id/tv_dialog_item_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#ff9b9b9b"
+            android:textSize="12sp"
+            android:layout_marginTop="4dip"
+            tools:text="月利率一般用‰（千分之）表示"
+            />
+
+    </LinearLayout>
+
+
+    <com.hm.iou.uikit.SmoothCheckBox
+        android:id="@+id/cb_dialog_item"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="24dp"
+        app:color_checked="#55AC48"
+        />
+
+
+</RelativeLayout>
