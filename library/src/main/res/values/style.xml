@@ -124,6 +124,17 @@
         <item name="android:textSize">@dimen/textFontSize_18</item>
     </style>
 
+    <style name="UikitButton.Red">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">35dp</item>
+        <item name="android:layout_marginRight">35dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/uikit_shape_btn_red_selector</item>
+        <item name="android:textSize">@dimen/textFontSize_18</item>
+    </style>
+
     <!--底部的Linearlayout-->
     <style name="UikitLinearBottom">
         <item name="android:layout_width">match_parent</item>
