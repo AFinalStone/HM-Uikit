@@ -20,15 +20,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <!--dialog-->
-    <style name="UikitCustomProgressDialog" parent="@style/UikitCustomDialog">
+    <!--loadingDialog-->
+    <style name="UikitCustomProgressDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <!--背景是否变暗，可以控制背景是半透明还是全透明-->
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <style name="UikitCustomDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -36,6 +33,7 @@
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
 
+    <!--Dialog-->
     <style name="UikitAlertDialogStyle" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

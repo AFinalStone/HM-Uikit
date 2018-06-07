@@ -2,9 +2,12 @@ package com.hm.iou.uikit.demo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.hm.iou.uikit.HMCountDownTextView;
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        transparentStatusBar();
+        initStatusBarDarkFont(true);
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
@@ -150,5 +155,30 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }, 3000);
+    }
+
+    /**
+     * 使状态栏透明
+     */
+    protected void transparentStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        } else {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
+    /**
+     * 设置状态栏字体为深色
+     */
+    protected void initStatusBarDarkFont(boolean isDarkFont) {
+        //全屏
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (isDarkFont) {
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+        }
     }
 }
