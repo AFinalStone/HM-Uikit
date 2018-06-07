@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -48,7 +49,7 @@ public class IOSAlertDialog extends Dialog {
         private OnClickListener mPositiveButtonClickListener;
         private OnClickListener mNegativeButtonClickListener;
         private boolean flagCancelable = true;
-
+        private int mMsgGravity = Gravity.NO_GRAVITY;
 
         public Builder(Context context) {
             this.mContext = context;
@@ -108,6 +109,11 @@ public class IOSAlertDialog extends Dialog {
             return this;
         }
 
+        public Builder setGravity(int gravity) {
+            mMsgGravity = gravity;
+            return this;
+        }
+
         /**
          * 创建dialog
          *
@@ -127,7 +133,12 @@ public class IOSAlertDialog extends Dialog {
             }
             if (mMessage != null) {
                 layout.findViewById(R.id.txt_msg).setVisibility(View.VISIBLE);
-                ((TextView) layout.findViewById(R.id.txt_msg)).setText(mMessage);
+                TextView tvMsg = layout.findViewById(R.id.txt_msg);
+                tvMsg.setText(mMessage);
+
+                if (mMsgGravity != Gravity.NO_GRAVITY) {
+                    tvMsg.setGravity(mMsgGravity);
+                }
             }
             if (mPositiveButtonText != null) {
                 layout.findViewById(R.id.btn_pos).setVisibility(View.VISIBLE);
