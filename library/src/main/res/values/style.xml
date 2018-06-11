@@ -49,7 +49,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <!-- 浮于Activity之上 -->
-<!--        <item name="android:windowIsFloating">true</item>-->
+        <!--        <item name="android:windowIsFloating">true</item>-->
         <!-- 边框 -->
         <item name="android:windowFrame">@null</item>
         <!-- Dialog以外的区域模糊效果 -->
@@ -75,12 +75,12 @@
     <!--横线条的分割线-->
     <style name="UikitDivider.Horizontal">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1px</item>
+        <item name="android:layout_height">1dp</item>
         <item name="android:background">@drawable/uikit_comm_divider_gray</item>
     </style>
     <!--竖线条的分割线-->
     <style name="UikitDivider.Vertical">
-        <item name="android:layout_width">1px</item>
+        <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/uikit_comm_divider_gray</item>
     </style>
