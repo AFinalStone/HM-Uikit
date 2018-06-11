@@ -27,11 +27,9 @@ import java.util.List;
 
 
 /**
- * Created by liuling on 2017/11/28.
- * <p>
- * 该类为项目公用Dialog弹窗，包含单按钮、双按钮，使用规则和AlertDialog相似（如果只有一个按钮时，请实现setPositiveButton方法）
+ * @author syl
+ * @time 2018/6/11 下午7:50
  */
-
 public class IOSActionSheetTitleDialog extends Dialog {
 
     private IOSActionSheetTitleDialog(@NonNull Context context) {
@@ -252,7 +250,7 @@ public class IOSActionSheetTitleDialog extends Dialog {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         DensityUtil.dp2px(60)
-                        );
+                );
                 lLayout_content.addView(itemView, params);
             }
         }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,11 +20,9 @@ import com.hm.iou.uikit.R;
 
 
 /**
- * Created by liuling on 2017/11/28.
- * <p>
- * 该类为项目公用Dialog弹窗，包含单按钮、双按钮，使用规则和AlertDialog相似（如果只有一个按钮时，请实现setPositiveButton方法）
+ * @author syl
+ * @time 2018/6/11 下午7:50
  */
-
 public class IOSAlertDialog extends Dialog {
 
     private IOSAlertDialog(@NonNull Context context) {
@@ -44,6 +43,7 @@ public class IOSAlertDialog extends Dialog {
         private Context mContext;
         private String mTitle;
         private String mMessage;
+        private View mView;
         private String mPositiveButtonText;
         private String mNegativeButtonText;
         private OnClickListener mPositiveButtonClickListener;
@@ -74,6 +74,16 @@ public class IOSAlertDialog extends Dialog {
          */
         public Builder setMessage(String message) {
             this.mMessage = message;
+            return this;
+        }
+
+        /**
+         * 设置自定义的View
+         *
+         * @param view
+         */
+        public Builder setView(View view) {
+            this.mView = view;
             return this;
         }
 
@@ -119,14 +129,14 @@ public class IOSAlertDialog extends Dialog {
          *
          * @return
          */
-        private IOSAlertDialog create() {
+        public IOSAlertDialog create() {
 
             final IOSAlertDialog dialog = new IOSAlertDialog(mContext, R.style.UikitAlertDialogStyle);
             // 获取Dialog布局
             View layout = LayoutInflater.from(mContext).inflate(
                     R.layout.uikit_layout_ios_alert_dialog, null);
-            LinearLayout lLayout_bg = (LinearLayout) layout.findViewById(R.id.lLayout_bg);
-
+            LinearLayout lLayout_bg = layout.findViewById(R.id.lLayout_bg);
+            ImageView ivLine = layout.findViewById(R.id.iv_line);
             if (mTitle != null) {
                 layout.findViewById(R.id.txt_title).setVisibility(View.VISIBLE);
                 ((TextView) layout.findViewById(R.id.txt_title)).setText(mTitle);
@@ -140,7 +150,13 @@ public class IOSAlertDialog extends Dialog {
                     tvMsg.setGravity(mMsgGravity);
                 }
             }
+            if (mView != null) {
+                FrameLayout frameLayout = layout.findViewById(R.id.fl_view);
+                frameLayout.setVisibility(View.VISIBLE);
+                frameLayout.addView(mView);
+            }
             if (mPositiveButtonText != null) {
+                ivLine.setVisibility(View.VISIBLE);
                 layout.findViewById(R.id.btn_pos).setVisibility(View.VISIBLE);
                 ((TextView) layout.findViewById(R.id.btn_pos)).setText(mPositiveButtonText);
                 if (mPositiveButtonClickListener != null) {

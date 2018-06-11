@@ -26,4 +26,7 @@
 
     <string name="uikit_dialog_common_title">温馨提示</string>
 
+    <!--人民币符号-->
+    <string name="uikit_money">¥</string>
+    <string name="uikit_money_form" formatted="true">¥ %S</string>
 </resources>

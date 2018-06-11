@@ -13,6 +13,7 @@
         <attr name="titleSize" format="dimension|reference"></attr>
         <attr name="titleColor" format="color|reference"></attr>
         <attr name="backIcon" format="reference"></attr>
+        <attr name="backIconIsShow" format="boolean"></attr>
         <attr name="rightIcon" format="reference"></attr>
         <attr name="rightText" format="string|reference"></attr>
         <attr name="rightTextSize" format="dimension|reference"></attr>

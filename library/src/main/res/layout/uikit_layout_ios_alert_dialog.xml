@@ -33,6 +33,12 @@
         android:textSize="@dimen/textFontSize_16"
         android:visibility="gone" />
 
+    <FrameLayout
+        android:id="@+id/fl_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -51,16 +57,17 @@
             android:layout_weight="1"
             android:background="@drawable/uikit_selector_alertdialog_left"
             android:gravity="center"
-            android:textColor="@color/iosActionSheet_blue"
+            android:textColor="@color/iosActionSheet_gray"
             android:textSize="@dimen/textFontSize_18"
             android:textStyle="bold"
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/img_line"
+            android:id="@+id/iv_line"
             android:layout_width="1px"
             android:layout_height="43dp"
-            android:background="@color/iosAlertDialog_line" />
+            android:background="@color/iosAlertDialog_line"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_pos"

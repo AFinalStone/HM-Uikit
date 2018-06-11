@@ -29,59 +29,61 @@ public class DialogCommonKnow extends Dialog {
     }
 
     public static class Builder {
-        Context context;
-        String title;
-        String msg;
+        Context mContext;
+        String mTitle;
+        String mMsg;
+        String mBtnText;
 
         public Builder(Context context) {
-            this.context = context;
-        }
-
-        public String getTitle() {
-            return title;
+            this.mContext = context;
         }
 
         public Builder setTitle(String title) {
-            this.title = title;
+            this.mTitle = title;
             return this;
         }
 
-        public String getMsg() {
-            return msg;
+        public Builder setMsg(String msg) {
+            this.mMsg = msg;
+            return this;
         }
 
-        public Builder setMsg(String msg) {
-            this.msg = msg;
+        public Builder setBtnText(String btnText) {
+            this.mBtnText = btnText;
             return this;
         }
 
         private DialogCommonKnow CreateDialog() {
 
-            final DialogCommonKnow mDialog = new DialogCommonKnow(context, R.style.UikitAlertDialogStyle);
+            final DialogCommonKnow mDialog = new DialogCommonKnow(mContext, R.style.UikitAlertDialogStyle);
 
-            View view = LayoutInflater.from(context).inflate(R.layout.uikit_dialog_common_konw, null);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.uikit_dialog_common_konw, null);
             View background = view.findViewById(R.id.background);
             TextView tv_title = view.findViewById(R.id.tv_title);
             TextView tv_msg = view.findViewById(R.id.tv_msg);
+            TextView tv_know = view.findViewById(R.id.tv_know);
             view.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mDialog.dismiss();
                 }
             });
-            view.findViewById(R.id.btn_know).setOnClickListener(new View.OnClickListener() {
+            tv_know.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mDialog.dismiss();
                 }
             });
-            if (!TextUtils.isEmpty(title)) {
+            if (!TextUtils.isEmpty(mTitle)) {
                 tv_title.setVisibility(View.VISIBLE);
-                tv_title.setText(title);
+                tv_title.setText(mTitle);
             }
-            if (!TextUtils.isEmpty(msg)) {
+            if (!TextUtils.isEmpty(mMsg)) {
                 tv_msg.setVisibility(View.VISIBLE);
-                tv_msg.setText(msg);
+                tv_msg.setText(mMsg);
+            }
+            if (!TextUtils.isEmpty(mBtnText)) {
+                tv_know.setText(mBtnText);
             }
             // 定义Dialog布局和参数
             // 调整dialog背景大小
@@ -90,7 +92,7 @@ public class DialogCommonKnow extends Dialog {
 
             mDialog.setContentView(view);
             // 调整dialog背景大小
-            WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
             Display display = windowManager.getDefaultDisplay();
             background.setLayoutParams(new FrameLayout.LayoutParams((int) (display.getWidth() * 0.8), LinearLayout.LayoutParams.WRAP_CONTENT));
 

@@ -60,6 +60,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
 
     private TextView mTvTitle;
     private ImageView mIvBack;
+    private boolean mIvBackIsShow;
     private TextView mTvRight;
     private ImageView mIvRight;
     private LinearLayout mLayoutRightContainer;
@@ -88,6 +89,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
                 (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics())));
         mTitleTextColor = ta.getColor(R.styleable.HmTopBar_titleColor, getResources().getColor(R.color.uikit_title_center_text));
         mBackDrawable = ta.getDrawable(R.styleable.HmTopBar_backIcon);
+        mIvBackIsShow = ta.getBoolean(R.styleable.HmTopBar_backIconIsShow, true);
 
         mRightText = ta.getString(R.styleable.HmTopBar_rightText);
         mRightTextSize = ta.getDimensionPixelSize(R.styleable.HmTopBar_rightTextSize,
@@ -127,9 +129,13 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
             mTvTitle.setText(mTitleTextStr);
         mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
         mTvTitle.setTextColor(mTitleTextColor);
+        if (mIvBackIsShow) {
+            if (mBackDrawable != null)
+                mIvBack.setImageDrawable(mBackDrawable);
+        } else {
+            mIvBack.setVisibility(INVISIBLE);
+        }
 
-        if (mBackDrawable != null)
-            mIvBack.setImageDrawable(mBackDrawable);
 
         if (TextUtils.isEmpty(mRightText)) {
             mTvRight.setVisibility(View.GONE);
