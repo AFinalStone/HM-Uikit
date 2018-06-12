@@ -14,13 +14,21 @@ import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
+import com.hm.iou.uikit.datepicker.CustomDatePicker;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
+
+    CustomDatePicker mDatePicker;
+    String TIME_TODAY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         transparentStatusBar();
         initStatusBarDarkFont(true);
         setContentView(R.layout.activity_main);
+        initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 hmCountDownTextView.startCountDown();
             }
         });
+        findViewById(R.id.btn_showDatePick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDatePicker.show(TIME_TODAY);
+            }
+        });
 
         findViewById(R.id.btn_actionsheet).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +170,29 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }, 3000);
+    }
+
+    private void initDatePick() {
+        //初始化时间选择控件
+//        final TimeUtil timeUtil = TimeUtil.getInstance(TimeUtil.SimpleDateFormatEnum.DateFormatForApp);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        Date today = new Date(System.currentTimeMillis());
+        TIME_TODAY = simpleDateFormat.format(today);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.YEAR, 10);
+        Date endTime = calendar.getTime();
+        String TIME_END = simpleDateFormat.format(endTime);
+
+        mDatePicker = new CustomDatePicker(MainActivity.this, new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                String strTime = time.split(" ")[0];
+                Toast.makeText(MainActivity.this, strTime, Toast.LENGTH_SHORT).show();
+            }
+        }, TIME_TODAY, TIME_END); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        mDatePicker.showSpecificTime(false); // 不显示时和分
+        mDatePicker.setIsLoop(false); // 不允许循环滚动
     }
 
     /**

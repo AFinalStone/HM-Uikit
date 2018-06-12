@@ -77,6 +77,12 @@
             android:layout_height="wrap_content"
             android:text="切换隐藏和显示的密码输入框" />
 
+        <Button
+            android:id="@+id/btn_showDatePick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="时间选择控件" />
+
         <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/tv_getCheckCode"
             style="@style/UikitButton.CheckCode"
