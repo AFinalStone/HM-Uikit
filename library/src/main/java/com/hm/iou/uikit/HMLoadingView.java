@@ -1,10 +1,12 @@
 package com.hm.iou.uikit;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ public class HMLoadingView extends RelativeLayout {
     private View mLayoutEmpty;
     private View mLayoutFail;
     private View mLayoutLoading;
+    private ImageView mIvLoading;
 
     private OnClickListener mRetryClickListener;
 
@@ -49,6 +52,7 @@ public class HMLoadingView extends RelativeLayout {
         }
         mLayoutLoading.setVisibility(View.VISIBLE);
         setVisibility(View.VISIBLE);
+        startLoadingAnim();
     }
 
     /**
@@ -66,6 +70,7 @@ public class HMLoadingView extends RelativeLayout {
         }
         if (mLayoutLoading != null) {
             mLayoutLoading.setVisibility(View.GONE);
+            stopLoadingAnim();
         }
         setVisibility(View.VISIBLE);
     }
@@ -88,6 +93,7 @@ public class HMLoadingView extends RelativeLayout {
         ((TextView) mLayoutFail.findViewById(R.id.tv_data_fail)).setText(tips);
         if (mLayoutLoading != null) {
             mLayoutLoading.setVisibility(View.GONE);
+            stopLoadingAnim();
         }
         setVisibility(View.VISIBLE);
     }
@@ -108,6 +114,7 @@ public class HMLoadingView extends RelativeLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(CENTER_IN_PARENT);
         addView(mLayoutLoading, params);
+        mIvLoading = mLayoutLoading.findViewById(R.id.iv_loading);
     }
 
     private void addDataEmptyView() {
@@ -135,6 +142,16 @@ public class HMLoadingView extends RelativeLayout {
         params.addRule(CENTER_IN_PARENT);
         addView(mLayoutFail, params);
 
+    }
+
+    public void startLoadingAnim() {
+        AnimationDrawable animationDrawable = (AnimationDrawable) mIvLoading.getDrawable();
+        animationDrawable.start();
+    }
+
+    public void stopLoadingAnim() {
+        AnimationDrawable animationDrawable = (AnimationDrawable) mIvLoading.getDrawable();
+        animationDrawable.stop();
     }
 
 }
