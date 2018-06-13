@@ -27,8 +27,9 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:gravity="center"
+        android:gravity="center|left"
         android:lineSpacingMultiplier="1.3"
+        android:minHeight="100dp"
         android:text=""
         android:textSize="@dimen/textFontSize_16"
         android:visibility="gone" />
@@ -57,9 +58,8 @@
             android:layout_weight="1"
             android:background="@drawable/uikit_selector_alertdialog_left"
             android:gravity="center"
-            android:textColor="@color/iosActionSheet_gray"
+            android:textColor="@color/iosActionSheet_blue"
             android:textSize="@dimen/textFontSize_18"
-            android:textStyle="bold"
             android:visibility="gone" />
 
         <ImageView
@@ -78,7 +78,6 @@
             android:gravity="center"
             android:textColor="@color/iosActionSheet_blue"
             android:textSize="@dimen/textFontSize_18"
-            android:textStyle="bold"
             android:visibility="gone" />
     </LinearLayout>
 

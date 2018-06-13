@@ -3,14 +3,17 @@ package com.hm.iou.uikit.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,7 +48,9 @@ public class IOSAlertDialog extends Dialog {
         private String mMessage;
         private View mView;
         private String mPositiveButtonText;
+        private int mPositiveButtonTextColor = -1;
         private String mNegativeButtonText;
+        private int mNegativeButtonTextColor = -1;
         private OnClickListener mPositiveButtonClickListener;
         private OnClickListener mNegativeButtonClickListener;
         private boolean flagCancelable = true;
@@ -113,6 +118,27 @@ public class IOSAlertDialog extends Dialog {
             return this;
         }
 
+        /**
+         * 设置确定按钮的颜色
+         *
+         * @param positiveButtonTextColor
+         * @return
+         */
+        public Builder setPositiveButtonTextColor(@ColorInt int positiveButtonTextColor) {
+            this.mPositiveButtonTextColor = positiveButtonTextColor;
+            return this;
+        }
+
+        /**
+         * 设置取消按钮的颜色
+         *
+         * @param negativeButtonTextColor
+         * @return
+         */
+        public Builder setNegativeButtonTextColor(@ColorInt int negativeButtonTextColor) {
+            this.mNegativeButtonTextColor = negativeButtonTextColor;
+            return this;
+        }
 
         public Builder setCancelable(boolean flagCancelable) {
             this.flagCancelable = flagCancelable;
@@ -157,8 +183,12 @@ public class IOSAlertDialog extends Dialog {
             }
             if (mPositiveButtonText != null) {
                 ivLine.setVisibility(View.VISIBLE);
-                layout.findViewById(R.id.btn_pos).setVisibility(View.VISIBLE);
-                ((TextView) layout.findViewById(R.id.btn_pos)).setText(mPositiveButtonText);
+                Button btnPos = layout.findViewById(R.id.btn_pos);
+                if (mPositiveButtonTextColor != -1) {
+                    btnPos.setTextColor(mPositiveButtonTextColor);
+                }
+                btnPos.setVisibility(View.VISIBLE);
+                btnPos.setText(mPositiveButtonText);
                 if (mPositiveButtonClickListener != null) {
                     layout.findViewById(R.id.btn_pos).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
@@ -169,8 +199,12 @@ public class IOSAlertDialog extends Dialog {
                 }
             }
             if (mNegativeButtonText != null) {
-                layout.findViewById(R.id.btn_neg).setVisibility(View.VISIBLE);
-                ((TextView) layout.findViewById(R.id.btn_neg)).setText(mNegativeButtonText);
+                Button btnNeg = layout.findViewById(R.id.btn_neg);
+                if (mNegativeButtonTextColor != -1) {
+                    btnNeg.setTextColor(mNegativeButtonTextColor);
+                }
+                btnNeg.setVisibility(View.VISIBLE);
+                btnNeg.setText(mNegativeButtonText);
                 if (mNegativeButtonClickListener != null) {
                     (layout.findViewById(R.id.btn_neg)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
