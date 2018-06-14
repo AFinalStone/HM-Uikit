@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:lineSpacingMultiplier="1.3"
-        android:minHeight="80dp"
+        android:minHeight="60dp"
         android:padding="15dp"
         android:text=""
         android:textSize="@dimen/textFontSize_16"
