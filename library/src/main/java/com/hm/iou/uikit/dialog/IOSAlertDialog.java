@@ -162,7 +162,8 @@ public class IOSAlertDialog extends Dialog {
             View layout = LayoutInflater.from(mContext).inflate(
                     R.layout.uikit_layout_ios_alert_dialog, null);
             LinearLayout lLayout_bg = layout.findViewById(R.id.lLayout_bg);
-            ImageView ivLine = layout.findViewById(R.id.iv_line);
+            ImageView ivLine01 = layout.findViewById(R.id.iv_line01);
+            ImageView ivLine02 = layout.findViewById(R.id.iv_line02);
             if (mTitle != null) {
                 layout.findViewById(R.id.txt_title).setVisibility(View.VISIBLE);
                 ((TextView) layout.findViewById(R.id.txt_title)).setText(mTitle);
@@ -182,7 +183,7 @@ public class IOSAlertDialog extends Dialog {
                 frameLayout.addView(mView);
             }
             if (mPositiveButtonText != null) {
-                ivLine.setVisibility(View.VISIBLE);
+                ivLine01.setVisibility(View.VISIBLE);
                 Button btnPos = layout.findViewById(R.id.btn_pos);
                 if (mPositiveButtonTextColor != -1) {
                     btnPos.setTextColor(mPositiveButtonTextColor);
@@ -199,6 +200,7 @@ public class IOSAlertDialog extends Dialog {
                 }
             }
             if (mNegativeButtonText != null) {
+                ivLine01.setVisibility(View.VISIBLE);
                 Button btnNeg = layout.findViewById(R.id.btn_neg);
                 if (mNegativeButtonTextColor != -1) {
                     btnNeg.setTextColor(mNegativeButtonTextColor);
@@ -213,6 +215,9 @@ public class IOSAlertDialog extends Dialog {
                         }
                     });
                 }
+            }
+            if (mNegativeButtonText != null && mPositiveButtonText != null) {
+                ivLine02.setVisibility(View.VISIBLE);
             }
             dialog.setCancelable(flagCancelable);
             dialog.setContentView(layout);
