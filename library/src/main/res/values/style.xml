@@ -64,8 +64,8 @@
 
     <!-- ActionSheet进出动画 -->
     <style name="UikitActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/uikit_actionsheet_dialog_in</item>
-        <item name="android:windowExitAnimation">@anim/uikit_actionsheet_dialog_out</item>
+        <item name="android:windowEnterAnimation">@anim/uikit_dialog_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/uikit_dialog_out_to_bottom</item>
     </style>
 
     <!--分割线-->
@@ -92,6 +92,17 @@
         <item name="android:textSize">@dimen/textFontSize_14</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/uikit_text_common_color</item>
+    </style>
+    <!--通用的自定义正方形输入6位数字的密码框-->
+    <style name="UikitTextView.InputNumberCode">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/uikit_shape_btn_input_code</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textSize">@dimen/textFontSize_30</item>
+        <item name="android:inputType">number</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FF111111</item>
     </style>
 
     <!--通用的EditText-->

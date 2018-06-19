@@ -104,7 +104,7 @@ public class HMCountDownTextView extends AppCompatTextView {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (countDownButton != null) {
-                    String strCountDown = String.format(mStrTextCountDown, mLength / 1000);
+                    String strCountDown = String.format(mStrTextCountDown, mLength / 1000 + "");
                     countDownButton.setText(strCountDown);
                     mLength -= 1000;
                     if (mLength < 0) {
@@ -163,7 +163,8 @@ public class HMCountDownTextView extends AppCompatTextView {
      */
     public void startCountDown() {
         this.setEnabled(false);
-        this.setText(mLength / 1000 + mStrTextCountDown);
+        String strCountDown = String.format(mStrTextCountDown, mLength / 1000 + "");
+        this.setText(strCountDown);
         initTimer();
         mTimer.schedule(mTimerTask, 0, 1000);
     }
