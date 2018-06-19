@@ -30,7 +30,7 @@
         android:padding="15dp"
         android:text=""
         android:textSize="@dimen/textFontSize_16"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/fl_view"
@@ -43,7 +43,8 @@
         android:id="@+id/iv_line01"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/iosAlertDialog_line" />
+        android:background="@color/iosAlertDialog_line"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,7 +65,7 @@
         <ImageView
             android:id="@+id/iv_line02"
             android:layout_width="1px"
-            android:layout_height="43dp"
+            android:layout_height="52dp"
             android:background="@color/iosAlertDialog_line"
             android:visibility="gone" />
 
