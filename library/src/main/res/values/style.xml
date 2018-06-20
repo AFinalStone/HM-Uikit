@@ -90,7 +90,7 @@
     </style>
 
     <!--通用的EditText-->
-    <style name="UikitEditText" parent="@style/UikitTextView">
+    <style name="UikitEditText" parent="UikitTextView">
         <item name="android:textColorHint">@color/uikit_text_hint_common_color</item>
     </style>
 
