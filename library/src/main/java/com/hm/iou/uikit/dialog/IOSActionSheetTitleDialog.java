@@ -108,7 +108,7 @@ public class IOSActionSheetTitleDialog extends Dialog {
          * @return
          */
         private IOSActionSheetTitleDialog create() {
-            final IOSActionSheetTitleDialog dialog = new IOSActionSheetTitleDialog(context, R.style.UikitActionSheetDialogStyle);
+            final IOSActionSheetTitleDialog dialog = new IOSActionSheetTitleDialog(context, R.style.UikitAlertDialogStyle_FromBottom);
             // 获取Dialog布局
             View view = LayoutInflater.from(context).inflate(R.layout.uikit_layout_actionsheet_title, null);
             // 获取自定义Dialog布局中的控件

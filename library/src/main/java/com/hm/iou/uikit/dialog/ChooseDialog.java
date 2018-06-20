@@ -104,7 +104,7 @@ public class ChooseDialog extends Dialog {
          * @return
          */
         public ChooseDialog create() {
-            final ChooseDialog dialog = new ChooseDialog(mContext, com.hm.iou.uikit.R.style.UikitActionSheetDialogStyle);
+            final ChooseDialog dialog = new ChooseDialog(mContext, R.style.UikitAlertDialogStyle_FromBottom);
             // 获取Dialog布局
             View view = LayoutInflater.from(mContext).inflate(R.layout.uikit_dialog_choose_interest, null);
             TextView tvTitle = view.findViewById(R.id.tv_dialog_title);
@@ -167,7 +167,7 @@ public class ChooseDialog extends Dialog {
 
     public static int dip2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
-        return (int)(dpValue * scale + 0.5F);
+        return (int) (dpValue * scale + 0.5F);
     }
 
     private static class MenuAdapter extends BaseQuickAdapter<MenuItem, BaseViewHolder> {

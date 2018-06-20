@@ -23,10 +23,10 @@ public class LoadingDialogUtil {
      */
     public static Dialog showLoading(Activity context, String msg, boolean cancelable) {
         View view = LayoutInflater.from(context).inflate(R.layout.uikit_layout_ios_loading_dialog, null);
-        TextView loadingText = (TextView) view.findViewById(R.id.tv_loadingMsg);
+        TextView loadingText = view.findViewById(R.id.tv_loadingMsg);
         loadingText.setText(msg);
 
-        Dialog mLoadingDialog = new Dialog(context, R.style.UikitCustomProgressDialog);
+        Dialog mLoadingDialog = new Dialog(context, R.style.UikitAlertDialogStyle_LoadingProgress);
         mLoadingDialog.setCancelable(cancelable);
         mLoadingDialog.setCanceledOnTouchOutside(false);
         mLoadingDialog.setContentView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
