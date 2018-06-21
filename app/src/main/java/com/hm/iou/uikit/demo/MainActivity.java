@@ -1,5 +1,6 @@
 package com.hm.iou.uikit.demo;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
+import com.hm.iou.uikit.dialog.PermissionDialog;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
 
 import java.text.SimpleDateFormat;
@@ -170,6 +172,29 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }, 3000);
+
+
+        findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new PermissionDialog.Builder(MainActivity.this)
+                        .setTitle("开启位置权限")
+                        .setMessage("我们需要获得该权限，才能为您提供省市头条信息及附近律师。")
+                        .setPermissionIcon(R.mipmap.uikit_icon_header_man)
+                        .setOnClickListener(new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == DialogInterface.BUTTON_POSITIVE) {
+                                    Toast.makeText(MainActivity.this, "允许", Toast.LENGTH_SHORT).show();
+                                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                                    Toast.makeText(MainActivity.this, "不允许", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setCancelable(false)
+                        .create().show();
+            }
+        });
     }
 
     private void initDatePick() {
