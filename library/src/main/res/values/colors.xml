@@ -48,4 +48,6 @@
     <color name="uikit_title_center_text">#ff000000</color>
     <color name="uikit_title_right_text">#ff111111</color>
 
+    <color name="uikit_wheel_line_border">#C7C7C7</color>
+
 </resources>
