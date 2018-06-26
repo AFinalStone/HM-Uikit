@@ -53,7 +53,7 @@ public class DialogCommonKnow extends Dialog {
             return this;
         }
 
-        private DialogCommonKnow CreateDialog() {
+        private DialogCommonKnow createDialog() {
 
             final DialogCommonKnow mDialog = new DialogCommonKnow(mContext, R.style.UikitAlertDialogStyle);
 
@@ -99,8 +99,10 @@ public class DialogCommonKnow extends Dialog {
             return mDialog;
         }
 
-        public void show() {
-            CreateDialog().show();
+        public DialogCommonKnow show() {
+            DialogCommonKnow dialog = createDialog();
+            dialog.show();
+            return dialog;
         }
 
     }

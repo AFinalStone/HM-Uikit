@@ -97,9 +97,10 @@ public class IOSActionSheetTitleDialog extends Dialog {
             return this;
         }
 
-        public void show() {
+        public IOSActionSheetTitleDialog show() {
             final IOSActionSheetTitleDialog dialog = create();
             dialog.show();
+            return dialog;
         }
 
         /**
