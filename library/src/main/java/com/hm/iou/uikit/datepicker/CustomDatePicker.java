@@ -63,6 +63,8 @@ public class CustomDatePicker {
     private Calendar selectedCalender, startCalendar, endCalendar;
     private TextView tv_cancle, tv_select, hour_text, minute_text;
 
+    private TextView mTvTitle;
+
     public CustomDatePicker(Context context, ResultHandler resultHandler, String startDate, String endDate) {
         if (isValidDate(startDate, "yyyy.MM.dd HH:mm:ss") && isValidDate(endDate, "yyyy.MM.dd HH:mm:ss")) {
             canAccess = true;
@@ -126,6 +128,7 @@ public class CustomDatePicker {
                 datePickerDialog.dismiss();
             }
         });
+        mTvTitle = datePickerDialog.findViewById(R.id.tv_title);
     }
 
     private void initParameter() {
@@ -528,6 +531,12 @@ public class CustomDatePicker {
             this.day_pv.setIsLoop(isLoop);
             this.hour_pv.setIsLoop(isLoop);
             this.minute_pv.setIsLoop(isLoop);
+        }
+    }
+
+    public void setTitle(CharSequence title) {
+        if (canAccess) {
+            mTvTitle.setText(title);
         }
     }
 
