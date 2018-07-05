@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -61,9 +62,9 @@ public class CustomDatePicker {
     private int startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private boolean spanYear, spanMon, spanDay, spanHour, spanMin;
     private Calendar selectedCalender, startCalendar, endCalendar;
-    private TextView tv_cancle, tv_select, hour_text, minute_text;
-
+    private TextView mTvLeftText, mTvRightText, hour_text, minute_text;
     private TextView mTvTitle;
+    private OnDatePickerClickListener mOnDatePickerClickListener;
 
     public CustomDatePicker(Context context, ResultHandler resultHandler, String startDate, String endDate) {
         if (isValidDate(startDate, "yyyy.MM.dd HH:mm:ss") && isValidDate(endDate, "yyyy.MM.dd HH:mm:ss")) {
@@ -102,30 +103,41 @@ public class CustomDatePicker {
         }
     }
 
-    private void initView() {
-        year_pv = (DatePickerView) datePickerDialog.findViewById(R.id.year_pv);
-        month_pv = (DatePickerView) datePickerDialog.findViewById(R.id.month_pv);
-        day_pv = (DatePickerView) datePickerDialog.findViewById(R.id.day_pv);
-        hour_pv = (DatePickerView) datePickerDialog.findViewById(R.id.hour_pv);
-        minute_pv = (DatePickerView) datePickerDialog.findViewById(R.id.minute_pv);
-        tv_cancle = (TextView) datePickerDialog.findViewById(R.id.tv_cancle);
-        tv_select = (TextView) datePickerDialog.findViewById(R.id.tv_select);
-        hour_text = (TextView) datePickerDialog.findViewById(R.id.hour_text);
-        minute_text = (TextView) datePickerDialog.findViewById(R.id.minute_text);
+    public void setOnDatePickerClickListener(OnDatePickerClickListener mOnDatePickerClickListener) {
+        this.mOnDatePickerClickListener = mOnDatePickerClickListener;
+    }
 
-        tv_cancle.setOnClickListener(new View.OnClickListener() {
+    private void initView() {
+        year_pv = datePickerDialog.findViewById(R.id.year_pv);
+        month_pv = datePickerDialog.findViewById(R.id.month_pv);
+        day_pv = datePickerDialog.findViewById(R.id.day_pv);
+        hour_pv = datePickerDialog.findViewById(R.id.hour_pv);
+        minute_pv = datePickerDialog.findViewById(R.id.minute_pv);
+        mTvLeftText = datePickerDialog.findViewById(R.id.tv_leftText);
+        mTvRightText = datePickerDialog.findViewById(R.id.tv_rightText);
+        hour_text = datePickerDialog.findViewById(R.id.hour_text);
+        minute_text = datePickerDialog.findViewById(R.id.minute_text);
+
+        mTvLeftText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datePickerDialog.dismiss();
+                if (mOnDatePickerClickListener != null) {
+                    mOnDatePickerClickListener.onTitleLeftTextClick(datePickerDialog, "");
+                }
             }
         });
 
-        tv_select.setOnClickListener(new View.OnClickListener() {
+        mTvRightText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.CHINA);
-                handler.handle(sdf.format(selectedCalender.getTime()));
+                String time = sdf.format(selectedCalender.getTime());
+                handler.handle(time);
                 datePickerDialog.dismiss();
+                if (mOnDatePickerClickListener != null) {
+                    mOnDatePickerClickListener.onTitleRightTextClick(datePickerDialog, time);
+                }
             }
         });
         mTvTitle = datePickerDialog.findViewById(R.id.tv_title);
@@ -540,6 +552,36 @@ public class CustomDatePicker {
         }
     }
 
+    public void setTitleTextColor(int titleTextColor) {
+        if (canAccess) {
+            mTvTitle.setTextColor(titleTextColor);
+        }
+    }
+
+    public void setLeftText(CharSequence title) {
+        if (canAccess) {
+            mTvLeftText.setText(title);
+        }
+    }
+
+    public void setLeftTextColor(int leftTextColor) {
+        if (canAccess) {
+            mTvLeftText.setTextColor(leftTextColor);
+        }
+    }
+
+    public void setRightText(CharSequence title) {
+        if (canAccess) {
+            mTvRightText.setText(title);
+        }
+    }
+
+    public void setRightTextColor(int rightTextColor) {
+        if (canAccess) {
+            mTvRightText.setTextColor(rightTextColor);
+        }
+    }
+
     /**
      * 设置日期控件默认选中的时间
      */
@@ -661,4 +703,20 @@ public class CustomDatePicker {
         return convertSuccess;
     }
 
+    public interface OnDatePickerClickListener {
+        /**
+         * 左侧按钮点击事件
+         *
+         * @param value
+         */
+        void onTitleLeftTextClick(DialogInterface dialog, String value);
+
+        /**
+         * 右侧按钮点击事件
+         *
+         * @param dialog
+         * @param value
+         */
+        void onTitleRightTextClick(DialogInterface dialog, String value);
+    }
 }

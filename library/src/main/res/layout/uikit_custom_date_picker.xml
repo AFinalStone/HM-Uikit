@@ -11,14 +11,16 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/tv_cancle"
+            android:id="@+id/tv_leftText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
             android:text="取消"
             android:textColor="#666666"
-            android:textSize="@dimen/textFontSize_16" />
+            android:textSize="@dimen/textFontSize_15" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -27,18 +29,20 @@
             android:layout_centerInParent="true"
             android:text="请选择时间"
             android:textColor="#007AFF"
-            android:textSize="@dimen/textFontSize_20" />
+            android:textSize="@dimen/textFontSize_18" />
 
         <TextView
-            android:id="@+id/tv_select"
+            android:id="@+id/tv_rightText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
             android:text="确定"
             android:textColor="#59B29C"
-            android:textSize="@dimen/textFontSize_16" />
+            android:textSize="@dimen/textFontSize_15" />
 
     </RelativeLayout>
 
