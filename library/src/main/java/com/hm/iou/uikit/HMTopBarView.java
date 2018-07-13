@@ -164,7 +164,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             if (mBgDrawable instanceof ColorDrawable) {
                 ColorDrawable colorDrawable = (ColorDrawable) mBgDrawable;
-                if (colorDrawable.getColor() == Color.WHITE) {
+                if (colorDrawable.getColor() == Color.WHITE || colorDrawable.getColor() == Color.TRANSPARENT) {
                     mViewStatusBarPlaceHolder.setBackgroundColor(0xffa0a0a0);
                 }
             }
@@ -319,7 +319,6 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
                 mBackListener.onClickBack();
             } else {
                 if (mContext instanceof Activity) {
-                    Log.e("点击事件", "可以设置点击事件");
                     ((Activity) mContext).onBackPressed();
                 }
             }
