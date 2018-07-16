@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="textFontSize_8">8dp</dimen>
     <dimen name="textFontSize_9">9dp</dimen>
     <dimen name="textFontSize_10">10dp</dimen>
     <dimen name="textFontSize_11">11dp</dimen>
