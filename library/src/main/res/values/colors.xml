@@ -22,6 +22,8 @@
     <!--水波纹颜色-->
     <color name="whiteRipple">#FFD7D7D7</color>
     <color name="white">#FFFFFFFF</color>
+    <!--白色按压颜色-->
+    <color name="whitePress">#FFEFEFEF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
 
@@ -34,7 +36,7 @@
 
 
     <color name="uikit_shape_common_background_normal">@color/uikit_colorPrimary</color>
-    <color name="uikit_shape_common_background_pressed">@color/uikit_colorPrimaryDark</color>
+    <color name="uikit_shape_common_background_pressed">#FFFFDA00</color>
     <color name="uikit_shape_common_background_unenable">#FFCCCCCC</color>
     <color name="uikit_text_hint_common_color">#FFA3A3A3</color>
     <color name="uikit_text_common_color">#FF222222</color>

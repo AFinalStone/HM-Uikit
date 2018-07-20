@@ -31,74 +31,86 @@
 
         <Button
             android:id="@+id/btn_loading_dialog"
+            style="@style/UikitButton"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="显示LoadingDialog" />
 
         <Button
             android:id="@+id/btn_alert_dialog"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="显示AlertDialog" />
 
         <Button
             android:id="@+id/btn_dialogCommon"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="显示[知道了]对话框 " />
 
         <com.hm.iou.uikit.PullDownRefreshImageView
             android:id="@+id/pd_iv"
+            android:layout_marginTop="5dp"
             android:layout_width="40dip"
             android:layout_height="40dip" />
 
 
         <Button
             android:id="@+id/btn_tab"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="TabBar" />
 
         <Button
             android:id="@+id/btn_actionsheet"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="ActionSheet" />
 
         <Button
             android:id="@+id/btn_password"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="九宫格密码输入框" />
 
         <Button
             android:id="@+id/btn_hindShowPassword"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="切换隐藏和显示的密码输入框" />
 
         <Button
             android:id="@+id/btn_showDatePick"
+            style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="时间选择控件" />
 
         <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/tv_getCheckCode"
             style="@style/UikitButton.CheckCode"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:text="获取验证码" />
 
 
         <com.hm.iou.uikit.HMLoadingView
             android:id="@+id/hmloadingview"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_permission"
+            style="@style/UikitButton"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="权限弹窗" />
     </LinearLayout>
 
