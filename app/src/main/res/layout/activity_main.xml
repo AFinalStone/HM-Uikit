@@ -32,8 +32,8 @@
         <Button
             android:id="@+id/btn_loading_dialog"
             style="@style/UikitButton"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
             android:text="显示LoadingDialog" />
 
         <Button
@@ -52,9 +52,9 @@
 
         <com.hm.iou.uikit.PullDownRefreshImageView
             android:id="@+id/pd_iv"
-            android:layout_marginTop="5dp"
             android:layout_width="40dip"
-            android:layout_height="40dip" />
+            android:layout_height="40dip"
+            android:layout_marginTop="5dp" />
 
 
         <Button
@@ -102,16 +102,23 @@
 
         <com.hm.iou.uikit.HMLoadingView
             android:id="@+id/hmloadingview"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp" />
 
         <Button
             android:id="@+id/btn_permission"
             style="@style/UikitButton"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
             android:text="权限弹窗" />
+
+        <Button
+            android:id="@+id/btn_inputNum"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="数字输入框" />
     </LinearLayout>
 
 </ScrollView>

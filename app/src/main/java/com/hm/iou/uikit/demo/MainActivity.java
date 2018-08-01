@@ -1,6 +1,5 @@
 package com.hm.iou.uikit.demo;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,9 +16,9 @@ import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.datepicker.CustomDatePicker;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
-import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
+import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.PermissionDialog;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
 
@@ -193,6 +192,13 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setCancelable(false)
                         .create().show();
+            }
+        });
+
+        findViewById(R.id.btn_inputNum).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NumInputActivity.class));
             }
         });
     }

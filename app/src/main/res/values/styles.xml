@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--通用的自定义正方形输入6位数字的密码框-->
+    <style name="NumInputNumberCode" parent="UikitTextView.InputNumberCode">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/shape_btn_num_input_code</item>
+        <item name="android:digits">0123456789</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textSize">@dimen/textFontSize_30</item>
+        <item name="android:inputType">number</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FF111111</item>
+    </style>
+
 </resources>
