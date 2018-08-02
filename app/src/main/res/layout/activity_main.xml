@@ -72,13 +72,6 @@
             android:text="ActionSheet" />
 
         <Button
-            android:id="@+id/btn_password"
-            style="@style/UikitButton"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:text="九宫格密码输入框" />
-
-        <Button
             android:id="@+id/btn_hindShowPassword"
             style="@style/UikitButton"
             android:layout_width="match_parent"

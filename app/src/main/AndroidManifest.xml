@@ -19,7 +19,6 @@
 
         <activity android:name=".TabActivity" />
         <activity android:name=".NumInputActivity" />
-        <activity android:name=".PasswordCustomerInputActivity" />
         <activity android:name=".PasswordHideShowActivity" />
 
     </application>

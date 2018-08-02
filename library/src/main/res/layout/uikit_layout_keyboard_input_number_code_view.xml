@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="292dp"
         android:layout_height="44dp"
         android:layout_gravity="center_horizontal"
@@ -14,36 +14,36 @@
 
         <TextView
             android:id="@+id/tv_code1"
-            style="@style/NumInputNumberCode"
+            style="@style/UikitTextView.InputNumberCode"
             android:layout_marginEnd="5dp" />
 
         <TextView
             android:id="@+id/tv_code2"
-            style="@style/NumInputNumberCode"
+            style="@style/UikitTextView.InputNumberCode"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp" />
 
         <TextView
             android:id="@+id/tv_code3"
-            style="@style/NumInputNumberCode"
+            style="@style/UikitTextView.InputNumberCode"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp" />
 
         <TextView
             android:id="@+id/tv_code4"
-            style="@style/NumInputNumberCode"
+            style="@style/UikitTextView.InputNumberCode"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp" />
 
         <TextView
             android:id="@+id/tv_code5"
-            style="@style/NumInputNumberCode"
+            style="@style/UikitTextView.InputNumberCode"
             android:layout_marginEnd="5dp"
             android:layout_marginStart="5dp" />
 
         <TextView
             android:id="@+id/tv_code6"
-            style="@style/NumInputNumberCode"
+            style="@style/UikitTextView.InputNumberCode"
             android:layout_marginStart="5dp" />
 
     </LinearLayout>

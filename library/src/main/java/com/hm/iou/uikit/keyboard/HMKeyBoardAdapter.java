@@ -8,11 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.hm.iou.uikit.R;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 
 /**
@@ -22,9 +20,9 @@ public class HMKeyBoardAdapter extends BaseAdapter {
 
 
     private Context mContext;
-    private ArrayList<Map<String, String>> mListValue;
+    private ArrayList<String> mListValue;
 
-    public HMKeyBoardAdapter(Context mContext, ArrayList<Map<String, String>> mListValue) {
+    public HMKeyBoardAdapter(Context mContext, ArrayList<String> mListValue) {
         this.mContext = mContext;
         this.mListValue = mListValue;
     }
@@ -61,7 +59,7 @@ public class HMKeyBoardAdapter extends BaseAdapter {
         if (position == 9) {
             viewHolder.rlDelete.setVisibility(View.INVISIBLE);
             viewHolder.tvKeys.setVisibility(View.VISIBLE);
-            viewHolder.tvKeys.setText(mListValue.get(position).get("name"));
+            viewHolder.tvKeys.setText(mListValue.get(position));
             viewHolder.tvKeys.setBackgroundColor(Color.parseColor("#e0e0e0"));
         } else if (position == 11) {
             viewHolder.tvKeys.setBackgroundResource(R.mipmap.uikit_icon_keyboard_delete);
@@ -71,8 +69,7 @@ public class HMKeyBoardAdapter extends BaseAdapter {
         } else {
             viewHolder.rlDelete.setVisibility(View.INVISIBLE);
             viewHolder.tvKeys.setVisibility(View.VISIBLE);
-
-            viewHolder.tvKeys.setText(mListValue.get(position).get("name"));
+            viewHolder.tvKeys.setText(mListValue.get(position));
         }
 
         return convertView;

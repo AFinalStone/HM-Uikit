@@ -1,85 +1,97 @@
 package com.hm.iou.uikit.keyboard;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.RelativeLayout;
-
 
 import com.hm.iou.uikit.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
  * 虚拟键盘
  */
-public class HMKeyBoardView extends RelativeLayout {
+public class HMKeyBoardView extends FrameLayout {
 
-    Context mContext;
+    private OnItemClickListener mItemClickListener;
 
-    //因为就6个输入框不会变了，用数组内存申请固定空间，比List省空间（自己认为）
-    private GridView mGvKeyBoard;    //用GrideView布局键盘，其实并不是真正的键盘，只是模拟键盘的功能
-
-    private ArrayList<Map<String, String>> mListValue;    //有人可能有疑问，为何这里不用数组了？
-    //因为要用Adapter中适配，用数组不能往adapter中填充
-
-
-    public HMKeyBoardView(Context mContext) {
-        this(mContext, null);
+    public HMKeyBoardView(@NonNull Context context) {
+        super(context);
+        initView();
     }
 
-    public HMKeyBoardView(Context mContext, AttributeSet attrs) {
-        super(mContext, attrs);
+    public HMKeyBoardView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        initView();
+    }
 
-        this.mContext = mContext;
-
-        View view = View.inflate(mContext, R.layout.uikit_layout_keyboard_view, null);
-        mListValue = new ArrayList<>();
-
-
-        mGvKeyBoard = view.findViewById(R.id.gv_keyBoard);
-
-        initValueList();
-
-        setupView();
-
-        addView(view);      //必须要，不然不显示控件
+    public HMKeyBoardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView();
     }
 
 
-    public ArrayList<Map<String, String>> getValueList() {
-        return mListValue;
-    }
+    private void initView() {
+        LayoutInflater.from(getContext()).inflate(R.layout.uikit_layout_keyboard_view, this, true);
 
-    private void initValueList() {
-
-        // 初始化按钮上应该显示的数字
+        GridView gvKeyBoard = findViewById(R.id.gv_keyBoard);
+        final ArrayList<String> listValue = new ArrayList<>();
+        //初始化按钮上应该显示的数字
         for (int i = 1; i < 13; i++) {
-            Map<String, String> map = new HashMap<>();
             if (i < 10) {
-                map.put("name", String.valueOf(i));
+                listValue.add(String.valueOf(i));
             } else if (i == 10) {
-                map.put("name", ".");
+                listValue.add("");
             } else if (i == 11) {
-                map.put("name", String.valueOf(0));
+                listValue.add("0");
             } else if (i == 12) {
-                map.put("name", ".");
+                listValue.add("");
             }
-            mListValue.add(map);
         }
+        HMKeyBoardAdapter HMKeyBoardAdapter = new HMKeyBoardAdapter(getContext(), listValue);
+        gvKeyBoard.setAdapter(HMKeyBoardAdapter);
+
+        gvKeyBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position < 11 && position != 9) {    //点击0~9按钮
+                    if (mItemClickListener != null) {
+                        mItemClickListener.onNumberCodeClick(listValue.get(position));
+                    }
+                } else if (position == 11) {//点击退格键
+                    if (mItemClickListener != null) {
+                        mItemClickListener.onDeleteClick();
+                    }
+                }
+            }
+        });
     }
 
-    public GridView getGridView() {
-        return mGvKeyBoard;
+    public void setOnItemClickListener(OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 
-    private void setupView() {
-        HMKeyBoardAdapter HMKeyBoardAdapter = new HMKeyBoardAdapter(mContext, mListValue);
-        mGvKeyBoard.setAdapter(HMKeyBoardAdapter);
+    public interface OnItemClickListener {
+        /**
+         * 数字键盘被点击
+         *
+         * @param number
+         */
+        void onNumberCodeClick(String number);
+
+
+        /**
+         * 删除按钮被点击
+         */
+        void onDeleteClick();
+
     }
 
 }
