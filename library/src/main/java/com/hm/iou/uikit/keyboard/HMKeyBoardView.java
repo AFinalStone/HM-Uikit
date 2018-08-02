@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class HMKeyBoardView extends FrameLayout {
 
-    private OnItemClickListener mItemClickListener;
+    private ArrayList<OnItemClickListener> mItemClickListeners;
 
     public HMKeyBoardView(@NonNull Context context) {
         super(context);
@@ -62,20 +62,27 @@ public class HMKeyBoardView extends FrameLayout {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position < 11 && position != 9) {    //点击0~9按钮
-                    if (mItemClickListener != null) {
-                        mItemClickListener.onNumberCodeClick(listValue.get(position));
+                    if (mItemClickListeners != null) {
+                        for (int i = 0; i < mItemClickListeners.size(); i++) {
+                            mItemClickListeners.get(i).onNumberCodeClick(listValue.get(position));
+                        }
                     }
                 } else if (position == 11) {//点击退格键
-                    if (mItemClickListener != null) {
-                        mItemClickListener.onDeleteClick();
+                    if (mItemClickListeners != null) {
+                        for (int i = 0; i < mItemClickListeners.size(); i++) {
+                            mItemClickListeners.get(i).onDeleteClick();
+                        }
                     }
                 }
             }
         });
     }
 
-    public void setOnItemClickListener(OnItemClickListener mItemClickListener) {
-        this.mItemClickListener = mItemClickListener;
+    public void addOnItemClickListener(OnItemClickListener itemClickListener) {
+        if (mItemClickListeners == null) {
+            mItemClickListeners = new ArrayList<OnItemClickListener>();
+        }
+        mItemClickListeners.add(itemClickListener);
     }
 
     public interface OnItemClickListener {

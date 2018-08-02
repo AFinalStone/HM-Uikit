@@ -192,7 +192,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_inputNum).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NumInputActivity.class));
+                startActivity(new Intent(MainActivity.this, InputNumActivity.class));
+            }
+        });
+        findViewById(R.id.btn_inputPsd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, InputPsdActivity.class));
             }
         });
     }

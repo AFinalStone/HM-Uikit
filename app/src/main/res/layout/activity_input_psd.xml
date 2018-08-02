@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:text="校验失败" />
 
-    <com.hm.iou.uikit.keyboard.HMInputNumberCodeView
-        android:id="@+id/inputNumberView"
+    <com.hm.iou.uikit.keyboard.HMInputPasswordView
+        android:id="@+id/inputPsdView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
