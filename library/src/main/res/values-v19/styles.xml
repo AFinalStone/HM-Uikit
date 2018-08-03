@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="UikitAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:actionBarSize">48dp</item>
+        <item name="toolbarStyle">@style/UikitClubToolbar</item>
+        <item name="colorPrimary">@color/uikit_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/uikit_colorPrimaryDark</item>
+        <item name="colorAccent">@color/uikit_colorAccent</item>
+    </style>
+
+</resources>

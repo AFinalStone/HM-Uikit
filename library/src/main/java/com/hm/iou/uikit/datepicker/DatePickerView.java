@@ -13,6 +13,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.hm.iou.uikit.handler.WeakReferenceHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -60,27 +62,47 @@ public class DatePickerView extends View {
     private Timer timer;
     private MyTimerTask mTask;
 
-    private Handler updateHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (Math.abs(mMoveLen) < SPEED) {
-                mMoveLen = 0;
-                if (mTask != null) {
-                    mTask.cancel();
-                    mTask = null;
-                    performSelect();
-                }
-            } else {
-                // 这里mMoveLen / Math.abs(mMoveLen)是为了保有mMoveLen的正负号，以实现上滚或下滚
-                mMoveLen = mMoveLen - mMoveLen / Math.abs(mMoveLen) * SPEED;
-            }
-            invalidate();
-        }
-    };
+//    private Handler updateHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if (Math.abs(mMoveLen) < SPEED) {
+//                mMoveLen = 0;
+//                if (mTask != null) {
+//                    mTask.cancel();
+//                    mTask = null;
+//                    performSelect();
+//                }
+//            } else {
+//                // 这里mMoveLen / Math.abs(mMoveLen)是为了保有mMoveLen的正负号，以实现上滚或下滚
+//                mMoveLen = mMoveLen - mMoveLen / Math.abs(mMoveLen) * SPEED;
+//            }
+//            invalidate();
+//        }
+//    };
+
+    private WeakReferenceHandler<DatePickerView> mUpdateHandler;
 
     public DatePickerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        mUpdateHandler = new WeakReferenceHandler<DatePickerView>(this) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (Math.abs(mMoveLen) < SPEED) {
+                    mMoveLen = 0;
+                    if (mTask != null) {
+                        mTask.cancel();
+                        mTask = null;
+                        performSelect();
+                    }
+                } else {
+                    // 这里mMoveLen / Math.abs(mMoveLen)是为了保有mMoveLen的正负号，以实现上滚或下滚
+                    mMoveLen = mMoveLen - mMoveLen / Math.abs(mMoveLen) * SPEED;
+                }
+                invalidate();
+            }
+        };
         init();
     }
 

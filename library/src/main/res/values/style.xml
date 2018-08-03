@@ -9,6 +9,10 @@
         <item name="colorAccent">@color/uikit_colorAccent</item>
     </style>
 
+    <style name="UikitClubToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item><!-- 设置该属性解决空白部分-->
+    </style>
+
     <!--透明activity弹窗-->
     <style name="UikitTranslucentThemeActivity" parent="UikitAppTheme">
         <item name="android:windowBackground">@color/transparent</item>
