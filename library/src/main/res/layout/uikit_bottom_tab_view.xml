@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_tab"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:scaleType="centerInside"
         tools:src="@mipmap/uikit_icon_check_default" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/tv_tab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:textSize="@dimen/textFontSize_10"
         tools:text="首页" />
