@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.hm.iou.uikit.keyboard.HMInputNumberView;
 import com.hm.iou.uikit.keyboard.HMKeyBoardView;
+import com.hm.iou.uikit.keyboard.OnInputCodeListener;
 
 /**
  * @author syl
@@ -25,10 +26,10 @@ public class InputNumActivity extends AppCompatActivity {
         mInputNumView = findViewById(R.id.inputNumView);
         mHMKeyBoardView = findViewById(R.id.keyboardView);
         mInputNumView.bindKeyBoardView(mHMKeyBoardView);
-        mInputNumView.setOnInputNumberListener(new HMInputNumberView.OnInputNumberListener() {
+        mInputNumView.setOnInputCodeListener(new OnInputCodeListener() {
             @Override
-            public void onInputNumberFinish(String number) {
-                Toast.makeText(getApplicationContext(), "输入的数字" + number, Toast.LENGTH_SHORT).show();
+            public void onInputCodeFinish(String code) {
+                Toast.makeText(getApplicationContext(), "输入的数字" + code, Toast.LENGTH_SHORT).show();
             }
         });
         findViewById(R.id.btn_checkFailed).setOnClickListener(new View.OnClickListener() {

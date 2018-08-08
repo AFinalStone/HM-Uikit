@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hm.iou.uikit.demo.MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+
+        <com.hm.iou.uikit.HMBottomTabView
+            android:id="@+id/btv_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:isSelect="true"
+            app:tabImageSelectDrawable="@mipmap/ic_tab_home_selected"
+            app:tabImageUnSelectDrawable="@mipmap/ic_tab_home_unselected"
+            app:tabText="首页"
+            app:tabTextUnSelectColor="@color/uikit_text_common_color" />
+
+        <com.hm.iou.uikit.HMBottomTabView
+            android:id="@+id/btv_news"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:tabImageSelectDrawable="@mipmap/ic_tab_news_selected"
+            app:tabImageUnSelectDrawable="@mipmap/ic_tab_news_unselected"
+            app:tabText="资讯"
+            app:tabTextUnSelectColor="@color/uikit_text_common_color" />
+
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/uikit_red"
+            android:scaleType="centerInside"
+            android:src="@mipmap/uikit_ic_arrow_right" />
+
+        <com.hm.iou.uikit.HMBottomTabView
+            android:id="@+id/btv_recommend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:tabImageSelectDrawable="@mipmap/ic_tab_recommend_select"
+            app:tabImageUnSelectDrawable="@mipmap/ic_tab_recommend_unselect"
+            app:tabText="推荐"
+            app:tabTextUnSelectColor="@color/uikit_text_common_color" />
+
+        <com.hm.iou.uikit.HMBottomTabView
+            android:id="@+id/btv_personal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:tabImageSelectDrawable="@mipmap/ic_tab_mine_selected"
+            app:tabImageUnSelectDrawable="@mipmap/ic_tab_mine_unselected"
+            app:tabText="我的"
+            app:tabTextUnSelectColor="@color/uikit_text_common_color" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ll_bottom" />
+</RelativeLayout>
