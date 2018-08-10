@@ -91,6 +91,7 @@ public class HMInputNumberView extends FrameLayout {
                 }
             });
         }
+        mTvList[mCurrentIndex].setSelected(true);
     }
 
     public void bindKeyBoardView(HMKeyBoardView keyBoardView) {
@@ -101,6 +102,7 @@ public class HMInputNumberView extends FrameLayout {
                 if (mCurrentIndex >= 0 && mCurrentIndex < mTvList.length) {
                     //判断输入位置————要小心数组越界
                     mTvList[mCurrentIndex].setText(number);
+                    mCurrentIndex++;
                     for (int i = 0; i < mTvList.length; i++) {
                         mTvList[i].setEnabled(true);
                         if (i == mCurrentIndex) {
@@ -109,7 +111,6 @@ public class HMInputNumberView extends FrameLayout {
                             mTvList[i].setSelected(false);
                         }
                     }
-                    mCurrentIndex++;
                 }
 
             }
@@ -122,7 +123,7 @@ public class HMInputNumberView extends FrameLayout {
                     mTvList[mCurrentIndex].setText("");
                     for (int i = 0; i < mTvList.length; i++) {
                         mTvList[i].setEnabled(true);
-                        if (i == mCurrentIndex - 1) {
+                        if (i == mCurrentIndex) {
                             mTvList[i].setSelected(true);
                         } else {
                             mTvList[i].setSelected(false);
@@ -144,6 +145,7 @@ public class HMInputNumberView extends FrameLayout {
             mTvList[i].setText("");
         }
         mCurrentIndex = 0;
+        mTvList[mCurrentIndex].setSelected(true);
     }
 
     public void setOnInputCodeListener(OnInputCodeListener onInputCodeListener) {

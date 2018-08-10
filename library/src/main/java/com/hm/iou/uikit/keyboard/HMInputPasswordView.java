@@ -93,6 +93,9 @@ public class HMInputPasswordView extends FrameLayout {
                 }
             });
         }
+        //默认第一个输入框被选中
+        mTvList[mCurrentIndex].setSelected(true);
+
         //黑色原点控件
         mIvList[0] = findViewById(R.id.iv_hide1);
         mIvList[1] = findViewById(R.id.iv_hide2);
@@ -111,6 +114,7 @@ public class HMInputPasswordView extends FrameLayout {
                     //判断输入位置————要小心数组越界
                     mTvList[mCurrentIndex].setText(number);
                     mIvList[mCurrentIndex].setVisibility(VISIBLE);
+                    mCurrentIndex++;
                     for (int i = 0; i < mTvList.length; i++) {
                         mTvList[i].setEnabled(true);
                         if (i == mCurrentIndex) {
@@ -119,7 +123,6 @@ public class HMInputPasswordView extends FrameLayout {
                             mTvList[i].setSelected(false);
                         }
                     }
-                    mCurrentIndex++;
                 }
 
             }
@@ -133,7 +136,7 @@ public class HMInputPasswordView extends FrameLayout {
                     mIvList[mCurrentIndex].setVisibility(INVISIBLE);
                     for (int i = 0; i < mTvList.length; i++) {
                         mTvList[i].setEnabled(true);
-                        if (i == mCurrentIndex - 1) {
+                        if (i == mCurrentIndex) {
                             mTvList[i].setSelected(true);
                         } else {
                             mTvList[i].setSelected(false);
@@ -150,6 +153,7 @@ public class HMInputPasswordView extends FrameLayout {
             mIvList[i].setVisibility(INVISIBLE);
         }
         mCurrentIndex = 0;
+        mTvList[mCurrentIndex].setSelected(true);
     }
 
     public void setError() {
