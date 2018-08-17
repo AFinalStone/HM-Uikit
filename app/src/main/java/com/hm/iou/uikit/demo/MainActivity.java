@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
@@ -22,6 +24,8 @@ import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.PermissionDialog;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
+import com.hm.iou.uikit.newkeyboard.HMKeyboardManager;
+import com.hm.iou.uikit.newkeyboard.key.HMNumberKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     CustomDatePicker mDatePicker;
     String TIME_TODAY;
+    HMKeyboardManager mHMKeyboardManager;
+    EditText mEtClear;
+    ClearEditText mEtTestInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
         transparentStatusBar();
         initStatusBarDarkFont(true);
         setContentView(R.layout.activity_main);
+
+        mEtClear = findViewById(R.id.et_clear);
+        mEtTestInput = findViewById(R.id.edit_testInput);
+        mHMKeyboardManager = new HMKeyboardManager(this);
+        mHMKeyboardManager.bindToEditor(mEtTestInput, new HMNumberKey(this, HMNumberKey.DEFAULT_NUMBER_XML_LAYOUT));
+
+
         initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {

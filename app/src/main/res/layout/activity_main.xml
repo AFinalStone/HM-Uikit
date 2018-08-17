@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:hint="自动清除框" />
 
+        <com.hm.iou.uikit.ClearEditText
+            android:id="@+id/edit_testInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="测试输入法" />
+
         <Button
             android:id="@+id/btn_loading_dialog"
             style="@style/UikitButton"
