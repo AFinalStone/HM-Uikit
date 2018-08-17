@@ -1,4 +1,4 @@
-package com.hm.iou.uikit.newkeyboard.key;
+package com.hm.iou.uikit.keyboard.key;
 
 public class Padding {
     int top;

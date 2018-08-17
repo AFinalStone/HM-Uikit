@@ -18,6 +18,8 @@
     <!--背景色-->
     <color name="uikit_background">#FFF2F2F2</color>
 
+    <color name="uikit_divider">#FFD8D8D8</color>
+
 
     <!--白色水波纹颜色-->
     <color name="whiteRipple">#FFD7D7D7</color>

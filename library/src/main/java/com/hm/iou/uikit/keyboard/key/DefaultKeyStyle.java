@@ -1,4 +1,4 @@
-package com.hm.iou.uikit.newkeyboard.key;
+package com.hm.iou.uikit.keyboard.key;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -22,7 +22,7 @@ public class DefaultKeyStyle implements KeyStyle {
         if (key.iconPreview != null) {
             return key.iconPreview;
         } else {
-            return ContextCompat.getDrawable(mContext, R.drawable.keyboard_bg_number_bg);
+            return ContextCompat.getDrawable(mContext, R.drawable.uikit_keyboard_bg_number_bg);
         }
     }
 

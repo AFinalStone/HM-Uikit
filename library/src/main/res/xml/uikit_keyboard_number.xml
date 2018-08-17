@@ -50,7 +50,7 @@
             android:keyLabel="0" />
         <Key
             android:codes="@integer/uikit_keyboard_delete"
-            android:iconPreview="@drawable/keyboard_bg_delete"
+            android:iconPreview="@drawable/uikit_keyboard_bg_delete"
             android:isRepeatable="true" />
     </Row>
 

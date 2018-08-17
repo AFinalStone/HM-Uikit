@@ -1,4 +1,4 @@
-package com.hm.iou.uikit.newkeyboard;
+package com.hm.iou.uikit.keyboard;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,10 +12,9 @@ import android.inputmethodservice.KeyboardView;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.EditText;
 
-import com.hm.iou.uikit.newkeyboard.key.BaseKey;
-import com.hm.iou.uikit.newkeyboard.key.KeyStyle;
+import com.hm.iou.uikit.keyboard.key.BaseKey;
+import com.hm.iou.uikit.keyboard.key.KeyStyle;
 
 import java.util.List;
 
@@ -105,7 +104,6 @@ public class HMKeyboardView extends KeyboardView {
         }
 
         //拿到当前键盘被弹起的输入源 和 键盘为每个key的定制实现customKeyStyle
-        EditText etCur = ((BaseKey) getKeyboard()).getEditText();
         KeyStyle customKeyStyle = ((BaseKey) getKeyboard()).getKeyStyle();
 
         List<Keyboard.Key> keys = getKeyboard().getKeys();

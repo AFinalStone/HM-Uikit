@@ -99,8 +99,7 @@
         <FrameLayout
             android:layout_width="40dp"
             android:layout_height="44dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/uikit_bg_keyboard_input_number">
+            android:layout_marginStart="5dp">
 
             <TextView
                 android:id="@+id/tv_code6"

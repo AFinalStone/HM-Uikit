@@ -1,4 +1,4 @@
-package com.hm.iou.uikit.newkeyboard;
+package com.hm.iou.uikit.keyboard;
 
 import android.text.TextUtils;
 import android.util.Log;

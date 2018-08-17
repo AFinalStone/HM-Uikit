@@ -1,4 +1,4 @@
-package com.hm.iou.uikit.keyboard;
+package com.hm.iou.uikit.keyboard.input;
 
 public interface OnInputCodeListener {
     /**

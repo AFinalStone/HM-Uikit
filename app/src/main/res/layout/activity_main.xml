@@ -29,11 +29,17 @@
             android:layout_height="wrap_content"
             android:hint="自动清除框" />
 
-        <com.hm.iou.uikit.ClearEditText
-            android:id="@+id/edit_testInput"
+        <com.hm.iou.uikit.keyboard.input.HMKeyboardEditText
+            android:id="@+id/edit_testInputNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="测试输入法" />
+            android:hint="自定义数字输入法" />
+
+        <com.hm.iou.uikit.keyboard.input.HMKeyboardEditText
+            android:id="@+id/edit_testInputABC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="自定义字母输入法" />
 
         <Button
             android:id="@+id/btn_loading_dialog"
@@ -113,18 +119,11 @@
             android:text="权限弹窗" />
 
         <Button
-            android:id="@+id/btn_inputNum"
+            android:id="@+id/btn_inputCode"
             style="@style/UikitButton"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:text="数字输入框" />
-
-        <Button
-            android:id="@+id/btn_inputPsd"
-            style="@style/UikitButton"
-            android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:text="密码输入框" />
+            android:text="数字/密码输入框" />
 
         <Button
             android:id="@+id/btn_bottomTabView"

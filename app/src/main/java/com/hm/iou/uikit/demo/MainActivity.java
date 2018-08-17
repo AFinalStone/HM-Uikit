@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hm.iou.uikit.ClearEditText;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
@@ -23,9 +22,10 @@ import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.PermissionDialog;
+import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
-import com.hm.iou.uikit.newkeyboard.HMKeyboardManager;
-import com.hm.iou.uikit.newkeyboard.key.HMNumberKey;
+import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
+import com.hm.iou.uikit.keyboard.key.NumberKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     CustomDatePicker mDatePicker;
     String TIME_TODAY;
-    HMKeyboardManager mHMKeyboardManager;
     EditText mEtClear;
-    ClearEditText mEtTestInput;
+    HMKeyboardEditText mEtTestInputNum;
+    HMKeyboardEditText mEtTestInputABC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mEtClear = findViewById(R.id.et_clear);
-        mEtTestInput = findViewById(R.id.edit_testInput);
-        mHMKeyboardManager = new HMKeyboardManager(this);
-        mHMKeyboardManager.bindToEditor(mEtTestInput, new HMNumberKey(this, HMNumberKey.DEFAULT_NUMBER_XML_LAYOUT));
-
-
+        mEtTestInputNum = findViewById(R.id.edit_testInputNum);
+        mEtTestInputNum.initKeyBoardView(getWindow(), new NumberKey(this));
+        mEtTestInputABC = findViewById(R.id.edit_testInputABC);
+        mEtTestInputABC.initKeyBoardView(getWindow(), new ABCKey(this));
         initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
@@ -204,16 +203,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_inputNum).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_inputCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InputNumActivity.class));
-            }
-        });
-        findViewById(R.id.btn_inputPsd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InputPsdActivity.class));
+                startActivity(new Intent(MainActivity.this, InputCodeActivity.class));
             }
         });
         findViewById(R.id.btn_bottomTabView).setOnClickListener(new View.OnClickListener() {

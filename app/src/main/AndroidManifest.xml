@@ -18,8 +18,7 @@
         </activity>
 
         <activity android:name=".TabActivity" />
-        <activity android:name=".InputNumActivity" />
-        <activity android:name=".InputPsdActivity" />
+        <activity android:name=".InputCodeActivity" />
         <activity android:name=".PasswordHideShowActivity" />
         <activity android:name=".tabview.BottomTabViewActivity" />
         <activity
