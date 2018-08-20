@@ -11,29 +11,45 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="条管家安全键盘" />
-
-            <ImageView
-                android:id="@+id/iv_close"
-                android:layout_width="40dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:padding="12dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/uikit_ic_arrow_bottom" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="5dp"
+                    android:text="条管家安全键盘"
+                    android:textSize="@dimen/textFontSize_18" />
+
+
+                <ImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/uikit_ic_arrow_bottom" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <View style="@style/UikitDivider.Horizontal" />
+        <View
+            style="@style/UikitDivider.Horizontal"
+            android:background="#FFDCDCDC" />
 
         <com.hm.iou.uikit.keyboard.HMKeyboardView
             android:id="@+id/keyboard"

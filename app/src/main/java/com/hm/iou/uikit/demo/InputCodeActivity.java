@@ -19,7 +19,8 @@ import com.hm.iou.uikit.keyboard.key.NumberKey;
 public class InputCodeActivity extends AppCompatActivity {
 
 
-    CheckBox mCheckBox;
+    CheckBox mCheckBoxHidePsd;
+    CheckBox mCheckHideKeyboardTitle;
 
     HMInputCodeView mInputCodeView;
 
@@ -27,19 +28,31 @@ public class InputCodeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_code);
-        mCheckBox = findViewById(R.id.check_hideCode);
-        mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mCheckBoxHidePsd = findViewById(R.id.check_hideCode);
+        mCheckHideKeyboardTitle = findViewById(R.id.check_hideKeyboardTitle);
+        mCheckBoxHidePsd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mInputCodeView.setHideCode(isChecked);
             }
         });
+        mCheckHideKeyboardTitle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mInputCodeView.isHideKeyBoardTitle(isChecked);
+            }
+        });
         mInputCodeView = findViewById(R.id.inputCodeVie);
-        mInputCodeView.initKeyBoardView(getWindow(), new NumberKey(this));
+        mInputCodeView.bindKeyBoardView(getWindow(), new NumberKey(this));
         mInputCodeView.setOnInputCodeListener(new OnInputCodeListener() {
             @Override
             public void onInputCodeFinish(String code) {
                 ToastUtil.showMessage(InputCodeActivity.this, code);
+            }
+
+            @Override
+            public void onDelete() {
+                ToastUtil.showMessage(InputCodeActivity.this, "删除按钮被点击");
             }
         });
         findViewById(R.id.btn_checkFailed).setOnClickListener(new View.OnClickListener() {
@@ -54,5 +67,6 @@ public class InputCodeActivity extends AppCompatActivity {
                 mInputCodeView.clearInputCode();
             }
         });
+
     }
 }

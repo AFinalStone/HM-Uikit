@@ -7,4 +7,9 @@ public interface OnInputCodeListener {
      * @param code
      */
     void onInputCodeFinish(String code);
+
+    /**
+     * 删除操作
+     */
+    void onDelete();
 }

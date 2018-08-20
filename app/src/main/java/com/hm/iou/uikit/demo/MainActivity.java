@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
         mEtClear = findViewById(R.id.et_clear);
         mEtTestInputNum = findViewById(R.id.edit_testInputNum);
-        mEtTestInputNum.initKeyBoardView(getWindow(), new NumberKey(this));
+        mEtTestInputNum.bindKeyBoardView(getWindow(), new NumberKey(this));
         mEtTestInputABC = findViewById(R.id.edit_testInputABC);
-        mEtTestInputABC.initKeyBoardView(getWindow(), new ABCKey(this));
+        mEtTestInputABC.bindKeyBoardView(getWindow(), new ABCKey(this));
         initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
