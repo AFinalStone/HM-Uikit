@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.demo.R;
-import com.hm.iou.uikit.richedittext.model.EditData;
 import com.hm.iou.uikit.richedittext.HMRichEditText;
-import com.hm.iou.uikit.richedittext.model.ImageData;
 import com.hm.iou.uikit.richedittext.RichDataUtil;
 import com.hm.iou.uikit.richedittext.itemview.DataImageView;
+import com.hm.iou.uikit.richedittext.itemview.RichItemData;
 import com.hm.iou.uikit.richedittext.listener.OnRtImageListener;
-import com.hm.iou.uikit.richedittext.listener.OnRtValueListener;
+import com.hm.iou.uikit.richedittext.listener.OnRtItemDataListener;
 
 import java.util.List;
 
@@ -38,9 +37,10 @@ public class RichEditActivity extends AppCompatActivity {
 
                 if (richEditText.getImagePathList().size() < 4) {
 //                richEditor.insertImage("http://t2.hddhhn.com/uploads/tu/201707/571/106st.png");
-                    ImageData data = new ImageData("http://t2.hddhhn.com/uploads/tu/201707/521/84st.png");
-                    data.setImageHeight("700");
-                    data.setImageWidth("300");
+                    RichItemData data = new RichItemData();
+                    data.setSrc("http://t2.hddhhn.com/uploads/tu/201707/521/84st.png");
+                    data.setWidth("700");
+                    data.setHeight("300");
                     richEditText.insertImage(data);
 //                richEditText.insertImage("file:///android_res/mipmap/ic_launcher.png");
                 } else {
@@ -56,9 +56,9 @@ public class RichEditActivity extends AppCompatActivity {
                 String content = RichDataUtil.getStringFromEditData(richEditText.buildEditData());
                 tvPreview.setText(content);
 
-                List<EditData> list = RichDataUtil.getEditDataFromString(content);
-                for (EditData data : list) {
-                    Log.d("EditData", "========" + data.toString());
+                List<RichItemData> list = RichDataUtil.getEditDataFromString(content);
+                for (RichItemData data : list) {
+                    Log.d("RichItemData", "========" + data.toString());
                 }
             }
         });
@@ -74,7 +74,7 @@ public class RichEditActivity extends AppCompatActivity {
                 new AlertDialog
                         .Builder(RichEditActivity.this)
                         .setTitle("是否删除图片")
-                        .setMessage("图片链接" + imageView.getImageData().getImagePath())
+                        .setMessage("图片链接" + imageView.getRichItemData().getSrc())
                         .setPositiveButton("删除", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -83,7 +83,7 @@ public class RichEditActivity extends AppCompatActivity {
                         }).show();
             }
         });
-        richEditText.setOnRtValueListener(new OnRtValueListener() {
+        richEditText.setOnRtValueListener(new OnRtItemDataListener() {
             @Override
             public void onRtEditTextChangeListener(String editValue) {
                 tvPreview.setText(editValue);
@@ -92,6 +92,18 @@ public class RichEditActivity extends AppCompatActivity {
             @Override
             public void onRtDataImageChangeListener(List<ImageData> list) {
                 tvPreview.setText("图片数量" + list.size());
+            }
+        });
+
+        richEditText.setOnRtValueListener(new OnRtItemDataListener() {
+            @Override
+            public void onRtEditTextChangeListener(String editValue) {
+
+            }
+
+            @Override
+            public void onRtDataImageChangeListener(List<RichItemData> list) {
+
             }
         });
     }

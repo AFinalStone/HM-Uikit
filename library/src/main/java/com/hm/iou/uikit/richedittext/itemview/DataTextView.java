@@ -11,19 +11,30 @@ import android.widget.EditText;
 /**
  * 可删除的EditText，主要用途是处理软键盘回删按钮backSpace时回调OnKeyListener
  */
-public class DeletableEditText extends EditText {
+public class DataTextView extends EditText {
 
-    public DeletableEditText(Context context, AttributeSet attrs, int defStyle) {
+    RichItemData mRichItemData;
+
+    public RichItemData getRichItemData() {
+        return mRichItemData;
+    }
+
+    public void setRichItemData(RichItemData richItemData) {
+        this.mRichItemData = richItemData;
+    }
+
+    public DataTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public DeletableEditText(Context context, AttributeSet attrs) {
+    public DataTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DeletableEditText(Context context) {
+    public DataTextView(Context context) {
         super(context);
     }
+
 
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {

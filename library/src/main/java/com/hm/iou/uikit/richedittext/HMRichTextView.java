@@ -17,9 +17,8 @@ import android.widget.TextView;
 
 import com.hm.iou.uikit.R;
 import com.hm.iou.uikit.richedittext.itemview.DataImageView;
+import com.hm.iou.uikit.richedittext.itemview.RichItemData;
 import com.hm.iou.uikit.richedittext.listener.OnRtImageListener;
-import com.hm.iou.uikit.richedittext.model.EditData;
-import com.hm.iou.uikit.richedittext.model.ImageData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -149,20 +148,20 @@ public class HMRichTextView extends ScrollView {
         this.mOnRtImageListener = onRtImageListener;
     }
 
-    public List<EditData> buildEditData() {
-        List<EditData> dataList = new ArrayList<EditData>();
+    public List<RichItemData> buildEditData() {
+        List<RichItemData> dataList = new ArrayList<RichItemData>();
         int num = mParentView.getChildCount();
         for (int index = 0; index < num; index++) {
             View itemView = mParentView.getChildAt(index);
-            EditData itemData = new EditData();
+            RichItemData richItemData = new RichItemData();
             if (itemView instanceof EditText) {
                 EditText item = (EditText) itemView;
-                itemData.setInputStr(item.getText().toString());
+                richItemData.setInputStr(item.getText().toString());
             } else if (itemView instanceof LinearLayout) {
                 DataImageView item = itemView.findViewById(R.id.edit_imageView);
-                itemData.setImageData(item.getImageData());
+                richItemData.setImageData(item.getImageData());
             }
-            dataList.add(itemData);
+            dataList.add(richItemData);
         }
         return dataList;
     }

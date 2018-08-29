@@ -3,18 +3,24 @@ package com.hm.iou.uikit.richedittext.itemview;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.hm.iou.uikit.richedittext.model.ImageData;
-
 /**
  * 自定义ImageView，可以存放Bitmap和Path等信息
  */
 public class DataImageView extends android.support.v7.widget.AppCompatImageView {
 
-//    private boolean showBorder = false; //是否显示边框
+    //    private boolean showBorder = false; //是否显示边框
 //    private int borderColor = Color.GRAY;//边框颜色
 //    private int borderWidth = 5;//边框大小
 
-    ImageData mImageData;
+    RichItemData mRichItemData;
+
+    public RichItemData getRichItemData() {
+        return mRichItemData;
+    }
+
+    public void setRichItemData(RichItemData richItemData) {
+        this.mRichItemData = richItemData;
+    }
 
     public DataImageView(Context context) {
         this(context, null);
@@ -28,13 +34,6 @@ public class DataImageView extends android.support.v7.widget.AppCompatImageView 
         super(context, attrs, defStyle);
     }
 
-    public ImageData getImageData() {
-        return mImageData;
-    }
-
-    public void setImageData(ImageData imageData) {
-        this.mImageData = imageData;
-    }
 //    @Override
 //    protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
