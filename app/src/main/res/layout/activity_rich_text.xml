@@ -26,4 +26,16 @@
         android:layout_height="wrap_content"
         android:text="插入图片" />
 
+    <Button
+        android:id="@+id/btn_insertList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="插入列表" />
+
+    <Button
+        android:id="@+id/btn_getContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取内容" />
+
 </LinearLayout>

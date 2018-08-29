@@ -3,8 +3,8 @@ package com.hm.iou.uikit.richedittext.itemview;
 public class RichItemData {
     private String text;
     private String src;
-    private String height;
-    private String width;
+    private int height;
+    private int width;
 
     public String getText() {
         return text;
@@ -22,19 +22,29 @@ public class RichItemData {
         this.src = src;
     }
 
-    public String getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public String getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(String width) {
+    public void setWidth(int width) {
         this.width = width;
+    }
+
+    @Override
+    public String toString() {
+        return "RichItemData{" +
+                "text='" + text + '\'' +
+                ", src='" + src + '\'' +
+                ", height=" + height +
+                ", width=" + width +
+                '}';
     }
 }

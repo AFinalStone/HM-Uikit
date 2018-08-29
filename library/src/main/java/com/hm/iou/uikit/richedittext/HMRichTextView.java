@@ -9,14 +9,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.hm.iou.uikit.R;
 import com.hm.iou.uikit.richedittext.itemview.DataImageView;
+import com.hm.iou.uikit.richedittext.itemview.DataTextView;
 import com.hm.iou.uikit.richedittext.itemview.RichItemData;
 import com.hm.iou.uikit.richedittext.listener.OnRtImageListener;
 import com.squareup.picasso.Picasso;
@@ -78,15 +76,32 @@ public class HMRichTextView extends ScrollView {
     /**
      * 在末尾插入文本展示框
      */
-    public void insertTextView(String textValue) {
-        if (TextUtils.isEmpty(textValue)) {
+    public void insertView(List<RichItemData> listData) {
+        for (RichItemData data : listData) {
+            if (!TextUtils.isEmpty(data.getText())) {
+                insertTextView(data);
+                continue;
+            }
+            if (!TextUtils.isEmpty(data.getSrc())) {
+                insertImageView(data);
+                continue;
+            }
+        }
+    }
+
+    /**
+     * 在末尾插入文本展示框
+     */
+    public void insertTextView(RichItemData data) {
+        if (TextUtils.isEmpty(data.getText())) {
             return;
         }
-        TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_textview, mParentView, false);
+        DataTextView textView = (DataTextView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_textview, mParentView, false);
+        textView.setRichItemData(data);
         if (rtTextSize != 0) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) rtTextSize);
         }
-        textView.setText(textValue);
+        textView.setText(data.getText());
         textView.setTextColor(rtTextColor);
         mParentView.addView(textView);
     }
@@ -94,11 +109,12 @@ public class HMRichTextView extends ScrollView {
     /**
      * 在末尾插入图片
      */
-    public void insertImageView(String picPath, int picWidth, int picHeight) {
-        if (TextUtils.isEmpty(picPath)) {
+    public void insertImageView(RichItemData data) {
+        if (TextUtils.isEmpty(data.getSrc())) {
             return;
         }
-        ImageView imageView = (ImageView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_text_imageview, mParentView, false);
+        DataImageView imageView = (DataImageView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_text_imageview, mParentView, false);
+        imageView.setRichItemData(data);
         //图片被点击
         imageView.setOnClickListener(new OnClickListener() {
             @Override
@@ -109,93 +125,37 @@ public class HMRichTextView extends ScrollView {
                 }
             }
         });
-        if (picWidth != 0 && picHeight != 0) {
+        if (data.getWidth() != 0 && data.getHeight() != 0) {
             int imageWidth = getResources().getDisplayMetrics().widthPixels - 100;
-            int imageHeight = imageWidth * picHeight / picWidth;
+            int imageHeight = imageWidth * data.getHeight() / data.getWidth();
             ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
             layoutParams.width = imageWidth;
             layoutParams.height = imageHeight;
             imageView.setLayoutParams(layoutParams);
         }
-        Picasso.get().load(picPath).placeholder(R.drawable.uikit_bg_pic_loading_place).error(R.drawable.uikit_bg_pic_loading_error).into(imageView);
+        Picasso.get().load(data.getSrc()).placeholder(R.drawable.uikit_bg_pic_loading_place).error(R.drawable.uikit_bg_pic_loading_error).into(imageView);
         mParentView.addView(imageView);
     }
 
     /**
-     * 在末尾插入图片
+     * 获取当前全部的数据列表
      */
-    public void insertImageView(String picPath) {
-        if (TextUtils.isEmpty(picPath)) {
-            return;
-        }
-        DataImageView imageView = (DataImageView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_text_imageview, mParentView, false);
-        //图片被点击
-        imageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("图片", "被点击");
-                if (mOnRtImageListener != null) {
-                    mOnRtImageListener.onRtImageClick((DataImageView) v);
-                }
-            }
-        });
-
-        Picasso.get().load(picPath).placeholder(R.drawable.uikit_bg_pic_loading_place).error(R.drawable.uikit_bg_pic_loading_error).into(imageView);
-        mParentView.addView(imageView);
-    }
-
-    public void setOnRtImageListener(OnRtImageListener onRtImageListener) {
-        this.mOnRtImageListener = onRtImageListener;
-    }
-
-    public List<RichItemData> buildEditData() {
+    public List<RichItemData> getAllRichItemData() {
         List<RichItemData> dataList = new ArrayList<RichItemData>();
         int num = mParentView.getChildCount();
         for (int index = 0; index < num; index++) {
             View itemView = mParentView.getChildAt(index);
-            RichItemData richItemData = new RichItemData();
-            if (itemView instanceof EditText) {
-                EditText item = (EditText) itemView;
-                richItemData.setInputStr(item.getText().toString());
-            } else if (itemView instanceof LinearLayout) {
-                DataImageView item = itemView.findViewById(R.id.edit_imageView);
-                richItemData.setImageData(item.getImageData());
+            if (itemView instanceof DataTextView) {
+                DataTextView item = (DataTextView) itemView;
+                RichItemData data = item.getRichItemData();
+                dataList.add(data);
+            } else if (itemView instanceof DataImageView) {
+                DataImageView item = (DataImageView) itemView;
+                RichItemData data = item.getRichItemData();
+                dataList.add(data);
             }
-            dataList.add(richItemData);
         }
         return dataList;
-    }
-
-    /**
-     * 获取当前输入的字符内容
-     */
-    public String getEditTextValue() {
-        String value = "";
-        int num = mParentView.getChildCount();
-        for (int index = 0; index < num; index++) {
-            View itemView = mParentView.getChildAt(index);
-            if (itemView instanceof EditText) {
-                EditText item = (EditText) itemView;
-                value += item.getText().toString();
-            }
-        }
-        return value;
-    }
-
-    /**
-     * 获取插入的图片地址列表
-     */
-    public List<ImageData> getImagePathList() {
-        List<ImageData> listPath = new ArrayList<>();
-        int num = mParentView.getChildCount();
-        for (int index = 0; index < num; index++) {
-            View itemView = mParentView.getChildAt(index);
-            if (itemView instanceof LinearLayout) {
-                DataImageView item = itemView.findViewById(R.id.edit_imageView);
-                listPath.add(item.getImageData());
-            }
-        }
-        return listPath;
     }
 
 }

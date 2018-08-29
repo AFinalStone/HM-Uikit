@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.demo.R;
 import com.hm.iou.uikit.richedittext.HMRichEditText;
-import com.hm.iou.uikit.richedittext.RichDataUtil;
+import com.hm.iou.uikit.richedittext.itemview.DataEditText;
 import com.hm.iou.uikit.richedittext.itemview.DataImageView;
 import com.hm.iou.uikit.richedittext.itemview.RichItemData;
 import com.hm.iou.uikit.richedittext.listener.OnRtImageListener;
@@ -39,8 +39,8 @@ public class RichEditActivity extends AppCompatActivity {
 //                richEditor.insertImage("http://t2.hddhhn.com/uploads/tu/201707/571/106st.png");
                     RichItemData data = new RichItemData();
                     data.setSrc("http://t2.hddhhn.com/uploads/tu/201707/521/84st.png");
-                    data.setWidth("700");
-                    data.setHeight("300");
+                    data.setWidth(700);
+                    data.setHeight(300);
                     richEditText.insertImage(data);
 //                richEditText.insertImage("file:///android_res/mipmap/ic_launcher.png");
                 } else {
@@ -53,10 +53,7 @@ public class RichEditActivity extends AppCompatActivity {
         findViewById(R.id.btn_getContent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String content = RichDataUtil.getStringFromEditData(richEditText.buildEditData());
-                tvPreview.setText(content);
-
-                List<RichItemData> list = RichDataUtil.getEditDataFromString(content);
+                List<RichItemData> list = richEditText.getAllRichItemData();
                 for (RichItemData data : list) {
                     Log.d("RichItemData", "========" + data.toString());
                 }
@@ -85,27 +82,16 @@ public class RichEditActivity extends AppCompatActivity {
         });
         richEditText.setOnRtValueListener(new OnRtItemDataListener() {
             @Override
-            public void onRtEditTextChangeListener(String editValue) {
-                tvPreview.setText(editValue);
+            public void onRtDataImageChangeListener() {
+                tvPreview.setText("图片数量" + richEditText.getImagePathList().size());
             }
 
             @Override
-            public void onRtDataImageChangeListener(List<ImageData> list) {
-                tvPreview.setText("图片数量" + list.size());
+            public void onRtDataEditChangeListener() {
+                tvPreview.setText(richEditText.getEditTextValue());
             }
         });
 
-        richEditText.setOnRtValueListener(new OnRtItemDataListener() {
-            @Override
-            public void onRtEditTextChangeListener(String editValue) {
-
-            }
-
-            @Override
-            public void onRtDataImageChangeListener(List<RichItemData> list) {
-
-            }
-        });
     }
 
 }

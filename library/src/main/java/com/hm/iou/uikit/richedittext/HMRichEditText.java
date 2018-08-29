@@ -40,7 +40,7 @@ public class HMRichEditText extends ScrollView {
     private OnKeyListener keyListener; // 所有EditText的软键盘监听器
     private TextWatcher mTextWatcher; // 编辑框编辑状态监听
     private OnFocusChangeListener focusListener; // 所有EditText的焦点监听listener
-    private EditText mCurrentFocusEdit; // 最近被聚焦的EditText
+    private DataEditText mCurrentFocusEdit; // 最近被聚焦的EditText
     private String mCurrentFocusEditBeforeTextChangedValue; // 最近被聚焦的EditText的未被编辑之前的内容
     private int editNormalPadding = 0; //
     private int disappearingImageIndex = 0;
@@ -119,7 +119,7 @@ public class HMRichEditText extends ScrollView {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    mCurrentFocusEdit = (EditText) v;
+                    mCurrentFocusEdit = (DataEditText) v;
                 }
             }
         };
@@ -147,7 +147,7 @@ public class HMRichEditText extends ScrollView {
                     return;
                 }
                 if (mOnRtItemDataListener != null) {
-                    mOnRtItemDataListener.onRtItemDataChangeListener(getEditTextValue());
+                    mOnRtItemDataListener.onRtDataEditChangeListener();
                 }
             }
         };
@@ -160,7 +160,7 @@ public class HMRichEditText extends ScrollView {
     private void insertFirstEdit() {
         LinearLayout.LayoutParams firstEditParam = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        EditText firstEdit = createEditText(rtTextInitHint, dip2px(getContext(), EDIT_PADDING));
+        DataEditText firstEdit = createEditText(rtTextInitHint, dip2px(getContext(), EDIT_PADDING));
         mParentView.addView(firstEdit, firstEditParam);
         mCurrentFocusEdit = firstEdit;
         firstEdit.requestFocus();
@@ -185,10 +185,10 @@ public class HMRichEditText extends ScrollView {
             View preView = mParentView.getChildAt(editIndex - 1); // 如果editIndex-1<0,
             // 则返回的是null
             if (null != preView) {
-                if (preView instanceof EditText) {
+                if (preView instanceof DataEditText) {
                     // 光标EditText的上一个view对应的还是文本框EditText
                     String str1 = editTxt.getText().toString();
-                    EditText preEdit = (EditText) preView;
+                    DataEditText preEdit = (DataEditText) preView;
                     String str2 = preEdit.getText().toString();
 
                     mParentView.removeView(editTxt);
@@ -212,8 +212,8 @@ public class HMRichEditText extends ScrollView {
     /**
      * 生成文本输入框
      */
-    private EditText createEditText(String hint, int paddingTop) {
-        EditText editText = (EditText) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_edittext, mParentView, false);
+    private DataEditText createEditText(String hint, int paddingTop) {
+        DataEditText editText = (DataEditText) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_edittext, mParentView, false);
         editText.setOnKeyListener(keyListener);
         editText.setPadding(editNormalPadding, paddingTop, editNormalPadding, paddingTop);
         editText.setHint(hint);
@@ -441,12 +441,12 @@ public class HMRichEditText extends ScrollView {
     /**
      * 删除图片
      */
-    public void deleteImage(DataImageView view) {
-        View imageParent = (View) view.getParent();
+    public void deleteImage(DataImageView dataImageView) {
+        View imageParent = (View) dataImageView.getParent();
         disappearingImageIndex = mParentView.indexOfChild(imageParent);
         mParentView.removeView(imageParent);
         if (mOnRtItemDataListener != null) {
-            mOnRtItemDataListener.onRtItemDataChangeListener(getAllRichItemData());
+            mOnRtItemDataListener.onRtDataImageChangeListener();
         }
         if (mParentView.getChildCount() == 0) {
             insertFirstEdit();
@@ -464,11 +464,11 @@ public class HMRichEditText extends ScrollView {
         View preView = mParentView.getChildAt(disappearingImageIndex - 1);
         View nextView = mParentView.getChildAt(disappearingImageIndex);
 
-        if (preView != null && preView instanceof EditText && null != nextView
-                && nextView instanceof EditText) {
+        if (preView != null && preView instanceof DataEditText && null != nextView
+                && nextView instanceof DataEditText) {
             Log.d("LeiTest", "合并EditText");
-            EditText preEdit = (EditText) preView;
-            EditText nextEdit = (EditText) nextView;
+            DataEditText preEdit = (DataEditText) preView;
+            DataEditText nextEdit = (DataEditText) nextView;
             String str1 = preEdit.getText().toString();
             String str2 = nextEdit.getText().toString();
             String mergeText = "";
@@ -484,9 +484,9 @@ public class HMRichEditText extends ScrollView {
             preEdit.requestFocus();
             preEdit.setSelection(str1.length(), str1.length());
         }
-        if (null != preView && preView instanceof EditText) {
+        if (null != preView && preView instanceof DataEditText) {
             preView.requestFocus();
-            mCurrentFocusEdit = (EditText) preView;
+            mCurrentFocusEdit = (DataEditText) preView;
         }
     }
 
@@ -521,18 +521,18 @@ public class HMRichEditText extends ScrollView {
      * @param editStr EditText显示的文字
      */
     private void addEditTextAtIndex(final int index, CharSequence editStr) {
-        EditText editText2 = createEditText("", EDIT_PADDING);
+        DataEditText editText = createEditText("", EDIT_PADDING);
         //判断插入的字符串是否为空，如果没有内容则显示hint提示信息
         if (editStr != null && editStr.length() > 0) {
-            editText2.setText(editStr);
+            editText.setText(editStr);
         }
-        editText2.setOnFocusChangeListener(focusListener);
+        editText.setOnFocusChangeListener(focusListener);
 
         // 请注意此处，EditText添加、或删除不触动Transition动画
         mParentView.setLayoutTransition(null);
-        mParentView.addView(editText2, index);
+        mParentView.addView(editText, index);
         //插入新的EditText之后，修改mCurrentFocusEdit的指向
-        mCurrentFocusEdit = editText2;
+        mCurrentFocusEdit = editText;
         mCurrentFocusEdit.requestFocus();
         mCurrentFocusEdit.setSelection(editStr.length(), editStr.length());
         openKeyboard();
@@ -554,13 +554,13 @@ public class HMRichEditText extends ScrollView {
         Picasso.get().load(data.getSrc()).placeholder(R.drawable.uikit_bg_pic_loading_place).error(R.drawable.uikit_bg_pic_loading_error).into(imageView);
         mParentView.addView(imageLayout, index);
         if (mOnRtItemDataListener != null) {
-            mOnRtItemDataListener.onRtItemDataChangeListener(getAllRichItemData());
+            mOnRtItemDataListener.onRtDataImageChangeListener();
         }
     }
 
 
     /**
-     * 对外提供的接口, 获取当前全部的数据列表
+     * 获取当前全部的数据列表
      */
     public List<RichItemData> getAllRichItemData() {
         List<RichItemData> dataList = new ArrayList<RichItemData>();
@@ -569,7 +569,8 @@ public class HMRichEditText extends ScrollView {
             View itemView = mParentView.getChildAt(index);
             if (itemView instanceof DataEditText) {
                 DataEditText item = (DataEditText) itemView;
-                RichItemData data = item.getRichItemData();
+                RichItemData data = new RichItemData();
+                data.setText(item.getText().toString());
                 dataList.add(data);
             } else if (itemView instanceof LinearLayout) {
                 DataImageView item = itemView.findViewById(R.id.edit_imageView);
@@ -581,35 +582,36 @@ public class HMRichEditText extends ScrollView {
     }
 
     /**
-     * 获取当前输入的字符内容
+     * 获取当前输入的全部字符内容
      */
     public String getEditTextValue() {
         String value = "";
         int num = mParentView.getChildCount();
         for (int index = 0; index < num; index++) {
             View itemView = mParentView.getChildAt(index);
-            if (itemView instanceof EditText) {
-                EditText item = (EditText) itemView;
+            if (itemView instanceof DataEditText) {
+                DataEditText item = (DataEditText) itemView;
                 value += item.getText().toString();
             }
         }
         return value;
     }
-//
-//    /**
-//     * 获取插入的图片地址列表
-//     */
-//    public List<RichItemData> getImagePathList() {
-//        List<RichItemData> listPath = new ArrayList<>();
-//        int num = mParentView.getChildCount();
-//        for (int index = 0; index < num; index++) {
-//            View itemView = mParentView.getChildAt(index);
-//            if (itemView instanceof LinearLayout) {
-//                DataImageView item = itemView.findViewById(R.id.edit_imageView);
-//                listPath.add(item.getRichItemData());
-//            }
-//        }
-//        return listPath;
-//    }
+
+
+    /**
+     * 获取插入的图片地址列表
+     */
+    public List<RichItemData> getImagePathList() {
+        List<RichItemData> listPath = new ArrayList<>();
+        int num = mParentView.getChildCount();
+        for (int index = 0; index < num; index++) {
+            View itemView = mParentView.getChildAt(index);
+            if (itemView instanceof LinearLayout) {
+                DataImageView item = itemView.findViewById(R.id.edit_imageView);
+                listPath.add(item.getRichItemData());
+            }
+        }
+        return listPath;
+    }
 
 }
