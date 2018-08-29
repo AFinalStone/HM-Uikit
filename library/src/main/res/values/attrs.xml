@@ -40,6 +40,17 @@
 
     </declare-styleable>
 
+    <declare-styleable name="HmWheelView">
+
+        <attr name="wheelBackground" format="color|reference" />
+        <attr name="centerDividerColor" format="color" />
+        <attr name="shadowStartColor" format="color" />
+        <attr name="shadowMiddleColor" format="color" />
+        <attr name="shadowEndColor" format="color" />
+        <attr name="isDrawShadows" format="boolean" />
+
+    </declare-styleable>
+
     <declare-styleable name="BottomTabBar">
         <!--BottomTabBar的整体背景-->
         <attr name="tab_bar_background" format="color" />
@@ -73,6 +84,21 @@
         <attr name="color_checked" format="color" />
         <attr name="color_unchecked" format="color" />
         <attr name="color_unchecked_stroke" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="HMRichEditText">
+        <attr name="rt_editor_image_height" format="integer" />
+        <attr name="rt_editor_image_bottom" format="integer" />
+        <attr name="rt_editor_text_max_length" format="integer" />
+        <attr name="rt_editor_text_init_hint" format="string" />
+        <attr name="rt_editor_text_size" format="dimension|reference" />
+        <attr name="rt_editor_text_color" format="color" />
+        <attr name="rt_editor_text_hint_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="HMRichTextView">
+        <attr name="rt_text_text_size" format="integer" />
+        <attr name="rt_text_text_color" format="color" />
     </declare-styleable>
 
     <declare-styleable name="HmShapedImageView">

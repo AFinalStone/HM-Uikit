@@ -131,6 +131,27 @@
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
             android:text="BottomTabView控件" />
+
+        <Button
+            android:id="@+id/btn_richEdit"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="富文本编辑框" />
+
+        <com.hm.iou.uikit.wheel.WheelView
+            android:id="@+id/wheelView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="100dp"
+            android:visibility="visible"
+            app:centerDividerColor="@color/uikit_divider"
+            app:isDrawShadows="true"
+            app:shadowEndColor="@color/transparent"
+            app:shadowMiddleColor="#9FB9AFA9"
+            app:shadowStartColor="#9FB9AFA9"
+            app:wheelBackground="@drawable/uikit_wheel_bg" />
     </LinearLayout>
 
 </ScrollView>

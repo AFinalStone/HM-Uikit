@@ -42,5 +42,8 @@ dependencies {
     compile 'com.kcrason:dynamicpagerindicator:1.0.3'
     //轮播图组件
     compile 'com.youth.banner:banner:1.4.10'
+    //毕加索
+    compile 'com.squareup.picasso:picasso:2.71828'
+
 }
 apply from: './maven_local.gradle'

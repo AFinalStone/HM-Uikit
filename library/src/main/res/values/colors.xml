@@ -36,14 +36,13 @@
     <color name="iosActionSheet_red">#FD4A2E</color>
     <color name="iosActionSheet_gray">#8F8F8F</color>
 
-    <color name="wheel_line_border">#C7C7C7</color>
-
 
     <color name="uikit_shape_common_background_normal">@color/uikit_colorPrimary</color>
     <color name="uikit_shape_common_background_pressed">#FFFFDA00</color>
     <color name="uikit_shape_common_background_unenable">#FFCCCCCC</color>
     <color name="uikit_text_hint_common_color">#FFA3A3A3</color>
     <color name="uikit_text_common_color">#FF222222</color>
+    <color name="uikit_button_text_common_color">#ff513516</color>
     <color name="uikit_text_common_color_unenable">@color/white</color>
     <!-- 背景颜色 -->
     <color name="uikit_main_bg_color">#fff2f2f2</color>
@@ -56,6 +55,6 @@
     <color name="uikit_title_center_text">#ff000000</color>
     <color name="uikit_title_right_text">#ff111111</color>
 
-    <color name="uikit_wheel_line_border">#C7C7C7</color>
+    <color name="uikit_wheel_center_divider_color">#C7C7C7</color>
 
 </resources>
