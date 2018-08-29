@@ -19,6 +19,16 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--从底部弹出的Activity-->
+    <style name="UikitTranslucentThemeActivity.FromBottom" parent="UikitTranslucentThemeActivity">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
     <!--全屏的Activity-->
     <style name="UikitFullScreenTheme" parent="UikitAppTheme">
         <item name="android:windowFullscreen">true</item>
@@ -87,7 +97,7 @@
         <item name="android:layout_height">44dp</item>
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
-        <item name="android:background">@drawable/uikit_bg_keyboard_input_number</item>
+        <item name="android:background">@drawable/uikit_keyboard_input_code_bg_normal</item>
         <item name="android:digits">0123456789</item>
         <item name="android:maxLength">1</item>
         <item name="android:textSize">@dimen/textFontSize_30</item>
@@ -95,7 +105,6 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">#FF111111</item>
     </style>
-
 
     <style name="UikitKeyBoardInputHide">
         <item name="android:layout_width">34dp</item>
@@ -107,7 +116,7 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:visibility">invisible</item>
-        <item name="android:src">@drawable/uikit_bg_keyboard_input_psd_hide</item>
+        <item name="android:src">@drawable/uikit_keyboard_input_code_bg_hide</item>
     </style>
 
     <!--通用的EditText-->

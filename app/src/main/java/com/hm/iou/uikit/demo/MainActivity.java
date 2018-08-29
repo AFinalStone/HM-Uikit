@@ -8,28 +8,43 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.datepicker.CustomDatePicker;
+import com.hm.iou.uikit.demo.rich.RichEditActivity;
+import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 import com.hm.iou.uikit.dialog.PermissionDialog;
+import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
+import com.hm.iou.uikit.keyboard.key.ABCKey;
+import com.hm.iou.uikit.keyboard.key.NumberKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
+import com.hm.iou.uikit.wheel.BaseWheelTextAdapter;
+import com.hm.iou.uikit.wheel.OnWheelChangedListener;
+import com.hm.iou.uikit.wheel.WheelView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     CustomDatePicker mDatePicker;
     String TIME_TODAY;
+    EditText mEtClear;
+    HMKeyboardEditText mEtTestInputNum;
+    HMKeyboardEditText mEtTestInputABC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         transparentStatusBar();
         initStatusBarDarkFont(true);
         setContentView(R.layout.activity_main);
+
+        mEtClear = findViewById(R.id.et_clear);
+        mEtTestInputNum = findViewById(R.id.edit_testInputNum);
+        mEtTestInputNum.bindKeyBoardView(getWindow(), new NumberKey(this));
+        mEtTestInputABC = findViewById(R.id.edit_testInputABC);
+        mEtTestInputABC.bindKeyBoardView(getWindow(), new ABCKey(this));
         initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
@@ -189,18 +210,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_inputNum).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_inputCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InputNumActivity.class));
+                startActivity(new Intent(MainActivity.this, InputCodeActivity.class));
             }
         });
-        findViewById(R.id.btn_inputPsd).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_bottomTabView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InputPsdActivity.class));
+                startActivity(new Intent(MainActivity.this, BottomTabViewActivity.class));
             }
         });
+        findViewById(R.id.btn_richEdit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RichEditActivity.class));
+            }
+        });
+        initWheelView();
     }
 
     private void initDatePick() {
@@ -224,6 +252,27 @@ public class MainActivity extends AppCompatActivity {
         }, TIME_TODAY, TIME_END); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         mDatePicker.showSpecificTime(false); // 不显示时和分
         mDatePicker.setIsLoop(false); // 不允许循环滚动
+    }
+
+    private void initWheelView() {
+        WheelView wheelViewTimeHour = findViewById(R.id.wheelView);
+        final List<String> listHour = new ArrayList<>();
+        for (int i = 0; i <= 23; i++) {
+            listHour.add(i + "时");
+        }
+        wheelViewTimeHour.setViewAdapter(new BaseWheelTextAdapter<String>(this, listHour) {
+            @Override
+            protected CharSequence getItemText(int i) {
+                return listHour.get(i);
+            }
+        });
+        wheelViewTimeHour.addChangingListener(new OnWheelChangedListener() {
+            @Override
+            public void onChanged(WheelView wheelView, int i, int currIndex) {
+                ToastUtil.showMessage(MainActivity.this, "old：" + i + "   new：" + currIndex);
+            }
+        });
+        wheelViewTimeHour.setVisibleItems(5);
     }
 
     /**

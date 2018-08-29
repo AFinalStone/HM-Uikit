@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hm.iou.uikit.demo">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/UikitAppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,12 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".TabActivity" />
-        <activity android:name=".InputNumActivity" />
-        <activity android:name=".InputPsdActivity" />
+        <activity android:name=".InputCodeActivity" />
         <activity android:name=".PasswordHideShowActivity" />
-
+        <activity android:name=".tabview.BottomTabViewActivity" />
+        <activity
+            android:name=".tabview.IndexAddActivity"
+            android:theme="@style/UikitTranslucentThemeActivity" />
+        <activity android:name=".rich.RichEditActivity" />
+        <activity android:name=".rich.RichTextActivity" />
     </application>
 
 </manifest>

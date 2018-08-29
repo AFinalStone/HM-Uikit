@@ -29,6 +29,18 @@
             android:layout_height="wrap_content"
             android:hint="自动清除框" />
 
+        <com.hm.iou.uikit.keyboard.input.HMKeyboardEditText
+            android:id="@+id/edit_testInputNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="自定义数字输入法" />
+
+        <com.hm.iou.uikit.keyboard.input.HMKeyboardEditText
+            android:id="@+id/edit_testInputABC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="自定义字母输入法" />
+
         <Button
             android:id="@+id/btn_loading_dialog"
             style="@style/UikitButton"
@@ -107,18 +119,39 @@
             android:text="权限弹窗" />
 
         <Button
-            android:id="@+id/btn_inputNum"
+            android:id="@+id/btn_inputCode"
             style="@style/UikitButton"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:text="数字输入框" />
+            android:text="数字/密码输入框" />
 
         <Button
-            android:id="@+id/btn_inputPsd"
+            android:id="@+id/btn_bottomTabView"
             style="@style/UikitButton"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:text="密码输入框" />
+            android:text="BottomTabView控件" />
+
+        <Button
+            android:id="@+id/btn_richEdit"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="富文本编辑框" />
+
+        <com.hm.iou.uikit.wheel.WheelView
+            android:id="@+id/wheelView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="100dp"
+            android:visibility="visible"
+            app:centerDividerColor="@color/uikit_divider"
+            app:isDrawShadows="true"
+            app:shadowEndColor="@color/transparent"
+            app:shadowMiddleColor="#9FB9AFA9"
+            app:shadowStartColor="#9FB9AFA9"
+            app:wheelBackground="@drawable/uikit_wheel_bg" />
     </LinearLayout>
 
 </ScrollView>
