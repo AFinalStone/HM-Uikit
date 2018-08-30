@@ -41,7 +41,7 @@ public class RichEditActivity extends AppCompatActivity {
                     data.setSrc("http://t2.hddhhn.com/uploads/tu/201707/521/84st.png");
                     data.setWidth(700);
                     data.setHeight(300);
-                    richEditText.insertImage(data);
+                    richEditText.insertImageOfFocus(data);
 //                richEditText.insertImage("file:///android_res/mipmap/ic_launcher.png");
                 } else {
                     ToastUtil.showMessage(RichEditActivity.this, "最多插入4张图片");
@@ -57,6 +57,13 @@ public class RichEditActivity extends AppCompatActivity {
                 for (RichItemData data : list) {
                     Log.d("RichItemData", "========" + data.toString());
                 }
+            }
+        });
+        findViewById(R.id.btn_insertList).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<RichItemData> list = richEditText.getAllRichItemData();
+                richEditText.insertImageOfFocus(list);
             }
         });
         findViewById(R.id.btn_showContent).setOnClickListener(new View.OnClickListener() {

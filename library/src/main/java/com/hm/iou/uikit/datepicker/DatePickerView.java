@@ -322,7 +322,7 @@ public class DatePickerView extends View {
             mTask.cancel();
             mTask = null;
         }
-        mTask = new MyTimerTask(updateHandler);
+        mTask = new MyTimerTask(mUpdateHandler);
         timer.schedule(mTask, 0, 10);
     }
 

@@ -25,7 +25,7 @@ public class RichTextActivity extends AppCompatActivity {
             public void onClick(View v) {
                 RichItemData data = new RichItemData();
                 data.setText("测试文本");
-                richTextView.insertTextView(data);
+                richTextView.insertTextViewOfEnd(data);
             }
         });
         findViewById(R.id.btn_insertImageView).setOnClickListener(new View.OnClickListener() {
@@ -33,20 +33,20 @@ public class RichTextActivity extends AppCompatActivity {
             public void onClick(View v) {
                 RichItemData data01 = new RichItemData();
                 data01.setSrc("http://t2.hddhhn.com/uploads/tu/201707/521/84st.png");
-                richTextView.insertImageView(data01);
+                richTextView.insertImageViewOfEnd(data01);
 
                 RichItemData data02 = new RichItemData();
                 data02.setSrc("http://t2.hddhhn.com/uploads/tu/201707/521/84st.png");
                 data02.setWidth(19);
                 data02.setHeight(14);
-                richTextView.insertImageView(data02);
+                richTextView.insertImageViewOfEnd(data02);
             }
         });
         findViewById(R.id.btn_insertList).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<RichItemData> list = richTextView.getAllRichItemData();
-                richTextView.insertView(list);
+                richTextView.insertViewOfEnd(list);
             }
         });
         findViewById(R.id.btn_getContent).setOnClickListener(new View.OnClickListener() {

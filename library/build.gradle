@@ -35,7 +35,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
 
-    compile 'com.google.code.gson:gson:2.8.0'
     //下拉刷新
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'

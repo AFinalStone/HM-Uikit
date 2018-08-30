@@ -74,16 +74,16 @@ public class HMRichTextView extends ScrollView {
     }
 
     /**
-     * 在末尾插入文本展示框
+     * 在末尾插入文本展示框/图片
      */
-    public void insertView(List<RichItemData> listData) {
+    public void insertViewOfEnd(List<RichItemData> listData) {
         for (RichItemData data : listData) {
             if (!TextUtils.isEmpty(data.getText())) {
-                insertTextView(data);
+                insertTextViewOfEnd(data);
                 continue;
             }
             if (!TextUtils.isEmpty(data.getSrc())) {
-                insertImageView(data);
+                insertImageViewOfEnd(data);
                 continue;
             }
         }
@@ -92,7 +92,7 @@ public class HMRichTextView extends ScrollView {
     /**
      * 在末尾插入文本展示框
      */
-    public void insertTextView(RichItemData data) {
+    public void insertTextViewOfEnd(RichItemData data) {
         if (TextUtils.isEmpty(data.getText())) {
             return;
         }
@@ -109,7 +109,7 @@ public class HMRichTextView extends ScrollView {
     /**
      * 在末尾插入图片
      */
-    public void insertImageView(RichItemData data) {
+    public void insertImageViewOfEnd(RichItemData data) {
         if (TextUtils.isEmpty(data.getSrc())) {
             return;
         }
