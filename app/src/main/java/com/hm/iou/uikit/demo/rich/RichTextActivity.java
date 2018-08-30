@@ -26,6 +26,7 @@ public class RichTextActivity extends AppCompatActivity {
                 RichItemData data = new RichItemData();
                 data.setText("测试文本");
                 richTextView.insertTextViewOfEnd(data);
+
             }
         });
         findViewById(R.id.btn_insertImageView).setOnClickListener(new View.OnClickListener() {

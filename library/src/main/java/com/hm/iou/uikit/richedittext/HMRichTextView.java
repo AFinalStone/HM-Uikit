@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import com.hm.iou.uikit.R;
 import com.hm.iou.uikit.richedittext.itemview.DataImageView;
@@ -27,14 +26,12 @@ import java.util.List;
  * @author syl
  * @time 2018/8/28 下午6:20
  */
-public class HMRichTextView extends ScrollView {
+public class HMRichTextView extends LinearLayout {
     /**
      * 自定义属性
      **/
     private double rtTextSize;
     private int rtTextColor;
-
-    private LinearLayout mParentView; // 这个是所有子view的容器，scrollView内部的唯一一个ViewGroup
 
     private OnRtImageListener mOnRtImageListener;
 
@@ -62,15 +59,17 @@ public class HMRichTextView extends ScrollView {
         ta.recycle();
 
         // 1. 初始化mParentView
-        mParentView = new LinearLayout(getContext());
-        mParentView.setOrientation(LinearLayout.VERTICAL);
+        setOrientation(LinearLayout.VERTICAL);
         //mParentView.setBackgroundColor(Color.WHITE);
         //setupLayoutTransitions();//禁止载入动画
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
-        mParentView.setPadding(50, 15, 50, 15);//设置间距，防止生成图片时文字太靠边，不能用margin，否则有黑边
-        addView(mParentView, layoutParams);
+        setPadding(50, 15, 50, 15);//设置间距，防止生成图片时文字太靠边，不能用margin，否则有黑边
 
+    }
+
+    public void setOnRtImageListener(OnRtImageListener onRtImageListener) {
+        this.mOnRtImageListener = onRtImageListener;
     }
 
     /**
@@ -96,14 +95,14 @@ public class HMRichTextView extends ScrollView {
         if (TextUtils.isEmpty(data.getText())) {
             return;
         }
-        DataTextView textView = (DataTextView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_textview, mParentView, false);
+        DataTextView textView = (DataTextView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_textview, this, false);
         textView.setRichItemData(data);
         if (rtTextSize != 0) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) rtTextSize);
         }
         textView.setText(data.getText());
         textView.setTextColor(rtTextColor);
-        mParentView.addView(textView);
+        addView(textView);
     }
 
     /**
@@ -113,7 +112,7 @@ public class HMRichTextView extends ScrollView {
         if (TextUtils.isEmpty(data.getSrc())) {
             return;
         }
-        DataImageView imageView = (DataImageView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_text_imageview, mParentView, false);
+        DataImageView imageView = (DataImageView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_text_imageview, this, false);
         imageView.setRichItemData(data);
         //图片被点击
         imageView.setOnClickListener(new OnClickListener() {
@@ -134,7 +133,7 @@ public class HMRichTextView extends ScrollView {
             imageView.setLayoutParams(layoutParams);
         }
         Picasso.get().load(data.getSrc()).placeholder(R.drawable.uikit_bg_pic_loading_place).error(R.drawable.uikit_bg_pic_loading_error).into(imageView);
-        mParentView.addView(imageView);
+        addView(imageView);
     }
 
     /**
@@ -142,9 +141,9 @@ public class HMRichTextView extends ScrollView {
      */
     public List<RichItemData> getAllRichItemData() {
         List<RichItemData> dataList = new ArrayList<RichItemData>();
-        int num = mParentView.getChildCount();
+        int num = getChildCount();
         for (int index = 0; index < num; index++) {
-            View itemView = mParentView.getChildAt(index);
+            View itemView = getChildAt(index);
             if (itemView instanceof DataTextView) {
                 DataTextView item = (DataTextView) itemView;
                 RichItemData data = item.getRichItemData();

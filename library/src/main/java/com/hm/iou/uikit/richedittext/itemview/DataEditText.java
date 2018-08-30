@@ -11,7 +11,7 @@ import android.widget.EditText;
 /**
  * 可删除的EditText，主要用途是处理软键盘回删按钮backSpace时回调OnKeyListener
  */
-public class DataEditText extends EditText {
+public class DataEditText extends android.support.v7.widget.AppCompatEditText {
 
     RichItemData mRichItemData;
 
