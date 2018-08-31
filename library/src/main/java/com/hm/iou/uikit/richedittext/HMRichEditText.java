@@ -487,23 +487,23 @@ public class HMRichEditText extends ScrollView {
      * 打开软键盘
      */
     private void openKeyboard() {
-        postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }, 300);
+//        postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//            }
+//        }, 300);
     }
 
     /**
      * 隐藏小键盘
      */
     private boolean hideKeyBoard() {
-        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            return imm.hideSoftInputFromWindow(getWindowToken(), 0);
-        }
+//        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        if (imm != null) {
+//            return imm.hideSoftInputFromWindow(getWindowToken(), 0);
+//        }
         return false;
     }
 
@@ -605,6 +605,12 @@ public class HMRichEditText extends ScrollView {
      * 在末尾插入文本展示框
      */
     public void insertViewOfEnd(List<RichItemData> listData) {
+        if (mParentView.getChildCount() == 1) {
+            View child = mParentView.getChildAt(0);
+            if (child instanceof DataEditText) {
+                mParentView.removeAllViews();
+            }
+        }
         for (RichItemData data : listData) {
             if (!TextUtils.isEmpty(data.getText())) {
                 addEditTextAtIndex(mParentView.getChildCount(), data.getText());

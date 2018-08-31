@@ -30,8 +30,12 @@ public class HMRichTextView extends LinearLayout {
     /**
      * 自定义属性
      **/
-    private double rtTextSize;
-    private int rtTextColor;
+    private double mRtTextSize;
+    private int mRtTextColor;
+    private double mPaddingLeft;
+    private double mPaddingRight;
+    private double mPaddingBottom;
+    private double mPaddingTop;
 
     private OnRtImageListener mOnRtImageListener;
 
@@ -53,18 +57,18 @@ public class HMRichTextView extends LinearLayout {
     private void initView(AttributeSet attrs) {
         //获取自定义属性
         TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.HMRichEditText);
-        rtTextSize = ta.getDimension(R.styleable.HMRichTextView_rt_text_text_size, 16);
-        rtTextColor = ta.getColor(R.styleable.HMRichTextView_rt_text_text_color, getResources().getColor(R.color.uikit_text_common_color));
+        mRtTextSize = ta.getDimension(R.styleable.HMRichTextView_rt_text_text_size, 16);
+        mRtTextColor = ta.getColor(R.styleable.HMRichTextView_rt_text_text_color, getResources().getColor(R.color.uikit_text_common_color));
+        mPaddingLeft = ta.getDimension(R.styleable.HMRichTextView_rt_paddingLeft, 0);
+        mPaddingRight = ta.getDimension(R.styleable.HMRichTextView_rt_paddingRight, 0);
+        mPaddingTop = ta.getDimension(R.styleable.HMRichTextView_rt_paddingTop, 0);
+        mPaddingBottom = ta.getDimension(R.styleable.HMRichTextView_rt_paddingBottom, 0);
 
         ta.recycle();
 
         // 1. 初始化mParentView
         setOrientation(LinearLayout.VERTICAL);
-        //mParentView.setBackgroundColor(Color.WHITE);
-        //setupLayoutTransitions();//禁止载入动画
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT);
-        setPadding(50, 15, 50, 15);//设置间距，防止生成图片时文字太靠边，不能用margin，否则有黑边
+//        setPadding(mPaddingLeft, mPaddingRight, mPaddingTop, mPaddingBottom);//设置间距，防止生成图片时文字太靠边，不能用margin，否则有黑边
 
     }
 
@@ -97,11 +101,11 @@ public class HMRichTextView extends LinearLayout {
         }
         DataTextView textView = (DataTextView) LayoutInflater.from(getContext()).inflate(R.layout.uikit_rich_textview, this, false);
         textView.setRichItemData(data);
-        if (rtTextSize != 0) {
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) rtTextSize);
+        if (mRtTextSize != 0) {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) mRtTextSize);
         }
         textView.setText(data.getText());
-        textView.setTextColor(rtTextColor);
+        textView.setTextColor(mRtTextColor);
         addView(textView);
     }
 
