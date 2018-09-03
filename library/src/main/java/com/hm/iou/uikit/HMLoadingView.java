@@ -76,6 +76,26 @@ public class HMLoadingView extends RelativeLayout {
     }
 
     /**
+     * 显示数据为空
+     *
+     * @param viewEmpty 数据为空的文案
+     */
+    public void showDataEmpty(View viewEmpty) {
+        if (mLayoutEmpty == null) {
+            addDataEmptyView(viewEmpty);
+        }
+        mLayoutEmpty.setVisibility(View.VISIBLE);
+        if (mLayoutFail != null) {
+            mLayoutFail.setVisibility(View.GONE);
+        }
+        if (mLayoutLoading != null) {
+            mLayoutLoading.setVisibility(View.GONE);
+            stopLoadingAnim();
+        }
+        setVisibility(View.VISIBLE);
+    }
+
+    /**
      * 显示数据加载失败
      *
      * @param tips     加载失败的文案
@@ -117,9 +137,19 @@ public class HMLoadingView extends RelativeLayout {
         mIvLoading = mLayoutLoading.findViewById(R.id.iv_loading);
     }
 
+
+
     private void addDataEmptyView() {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mLayoutEmpty = inflater.inflate(R.layout.uikit_view_data_empty, null);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.addRule(CENTER_IN_PARENT);
+        addView(mLayoutEmpty, params);
+    }
+
+    private void addDataEmptyView(View viewEmpty) {
+        mLayoutEmpty = viewEmpty;
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(CENTER_IN_PARENT);

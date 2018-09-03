@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.hm.iou.uikit.richedittext.itemview.DataImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/text_imageView"
-    android:layout_width="180dp"
-    android:layout_height="135dp"
-    android:layout_marginTop="6dp"
-    android:background="@drawable/uikit_bg_pic_loading_place"
-    android:scaleType="centerCrop" />

@@ -86,25 +86,6 @@
         <attr name="color_unchecked_stroke" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="HMRichEditText">
-        <attr name="rt_editor_image_height" format="integer" />
-        <attr name="rt_editor_image_bottom" format="integer" />
-        <attr name="rt_editor_text_max_length" format="integer" />
-        <attr name="rt_editor_text_init_hint" format="string" />
-        <attr name="rt_editor_text_size" format="dimension|reference" />
-        <attr name="rt_editor_text_color" format="color" />
-        <attr name="rt_editor_text_hint_color" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="HMRichTextView">
-        <attr name="rt_paddingLeft" format="dimension" />
-        <attr name="rt_paddingRight" format="dimension" />
-        <attr name="rt_paddingTop" format="dimension" />
-        <attr name="rt_paddingBottom" format="dimension" />
-        <attr name="rt_text_text_size" format="integer" />
-        <attr name="rt_text_text_color" format="color" />
-    </declare-styleable>
-
     <declare-styleable name="HmShapedImageView">
         <attr name="shape_mode" format="enum">
             <enum name="round_rect" value="1" />

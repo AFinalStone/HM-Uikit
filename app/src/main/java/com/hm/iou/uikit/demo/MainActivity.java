@@ -17,7 +17,6 @@ import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.datepicker.CustomDatePicker;
-import com.hm.iou.uikit.demo.rich.RichEditActivity;
 import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_richEdit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, RichEditActivity.class));
+//                startActivity(new Intent(MainActivity.this, RichEditActivity.class));
             }
         });
         initWheelView();

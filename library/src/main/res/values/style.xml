@@ -48,6 +48,10 @@
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
 
+    <style name="UikitAlertDialogStyle.FullScreen">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="UikitAlertDialogStyle.FromBottom">
         <item name="android:windowAnimationStyle">@style/UikitDialogFromBottomAnimation</item>
     </style>

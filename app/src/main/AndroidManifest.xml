@@ -26,8 +26,6 @@
         <activity
             android:name=".tabview.IndexAddActivity"
             android:theme="@style/UikitTranslucentThemeActivity" />
-        <activity android:name=".rich.RichEditActivity" />
-        <activity android:name=".rich.RichTextActivity" />
     </application>
 
 </manifest>

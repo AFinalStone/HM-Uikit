@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.hm.iou.uikit.richedittext.itemview.DataTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@null"
-    android:lineSpacingExtra="8dp"
-    android:textColor="#616161"
-    android:textIsSelectable="true"
-    android:textSize="16sp" />
