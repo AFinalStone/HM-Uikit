@@ -70,6 +70,19 @@
         <item name="android:windowExitAnimation">@anim/uikit_dialog_out_to_right</item>
     </style>
 
+    <style name="UikitPopupAnimationStyle" parent="android:Animation" />
+
+    <!-- PopWindow从底部弹出 -->
+    <style name="UikitPopupAnimationStyle.FromBottom">
+        <item name="android:windowEnterAnimation">@anim/uikit_pop_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/uikit_pop_to_bottom</item>
+    </style>
+    <!-- PopWindow从顶部弹出 -->
+    <style name="UikitPopupAnimationStyle.FromTop">
+        <item name="android:windowEnterAnimation">@anim/uikit_pop_from_top</item>
+        <item name="android:windowExitAnimation">@anim/uikit_pop_to_top</item>
+    </style>
+
     <!--分割线-->
     <style name="UikitDivider">
         <item name="android:background">@drawable/uikit_comm_divider_gray</item>

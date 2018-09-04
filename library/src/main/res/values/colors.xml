@@ -15,6 +15,8 @@
     <color name="uikit_blue">#FF3C6EFF</color>
     <!--绿色-->
     <color name="uikit_green">#55AC48</color>
+    <!--灰色-->
+    <color name="uikit_gray">#8F8F8F</color>
     <!--背景色-->
     <color name="uikit_background">#FFF2F2F2</color>
 

@@ -10,7 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="50dp">
 
         <com.hm.iou.uikit.HMTopBarView
             android:id="@+id/topbar"
@@ -152,6 +154,11 @@
             app:shadowMiddleColor="#9FB9AFA9"
             app:shadowStartColor="#9FB9AFA9"
             app:wheelBackground="@drawable/uikit_wheel_bg" />
+
+        <com.hm.iou.uikit.SmoothCheckBox
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp" />
     </LinearLayout>
 
 </ScrollView>
