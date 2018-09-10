@@ -26,7 +26,7 @@
     <!--白色水波纹颜色-->
     <color name="whiteRipple">#FFD7D7D7</color>
     <!--白色按压颜色-->
-    <color name="whitePress">#FFB9AFA9</color>
+    <color name="whitePress">#FFD7D7D7</color>
     <!--白色按压颜色-->
     <color name="white">#FFFFFFFF</color>
 
