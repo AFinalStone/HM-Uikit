@@ -3,6 +3,7 @@ package com.hm.iou.uikit.keyboard;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -138,7 +139,13 @@ public class HMKeyboardView extends KeyboardView {
                 keyBackground.setBounds(0, 0, key.width, key.height);
             }
             //第一行不进行分割线的绘制
-            if (i > 0) {
+            if (i == 0) {
+                Paint my = new Paint();
+                my.setColor(Color.WHITE);
+                canvas.translate(0, 0);
+                canvas.drawRect(0, 0, getMeasuredWidth(), 10, my);
+                canvas.translate(key.x + kbdPaddingLeft, key.y + kbdPaddingTop);
+            } else {
                 canvas.translate(key.x + kbdPaddingLeft, key.y + kbdPaddingTop);
             }
             keyBackground.draw(canvas);
