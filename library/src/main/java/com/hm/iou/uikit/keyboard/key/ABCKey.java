@@ -14,6 +14,7 @@ public class ABCKey extends BaseKey {
 
     public ABCKey(Context context) {
         super(context, R.xml.uikit_keyboard_abc);
+        setKeyStyle(new ABCKeyStyle(context));
     }
 
 }

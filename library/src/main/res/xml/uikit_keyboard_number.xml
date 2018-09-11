@@ -3,7 +3,7 @@
     android:horizontalGap="1px"
     android:keyHeight="60dp"
     android:keyWidth="33.33%p"
-    android:verticalGap="1px">
+    android:verticalGap="1dp">
     <Row>
         <Key
             android:codes="49"
@@ -50,7 +50,7 @@
             android:keyLabel="0" />
         <Key
             android:codes="@integer/uikit_keyboard_delete"
-            android:iconPreview="@drawable/uikit_keyboard_bg_delete"
+            android:iconPreview="@drawable/uikit_keyboard_bg_number_delete"
             android:isRepeatable="true" />
     </Row>
 

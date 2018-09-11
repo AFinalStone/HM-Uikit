@@ -3,7 +3,6 @@ package com.hm.iou.uikit.keyboard;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -15,7 +14,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 import com.hm.iou.uikit.keyboard.key.BaseKey;
-import com.hm.iou.uikit.keyboard.key.KeyStyle;
+import com.hm.iou.uikit.keyboard.key.BaseKeyStyle;
 
 import java.util.List;
 
@@ -60,6 +59,7 @@ public class HMKeyboardView extends KeyboardView {
         rKeyTextColor = (int) ReflectionUtils.getFieldValue(this, "mKeyTextColor");
         rShadowColor = (int) ReflectionUtils.getFieldValue(this, "mShadowColor");
         rShadowRadius = (float) ReflectionUtils.getFieldValue(this, "mShadowRadius");
+        setBackgroundColor(0xFFD7D7D7);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class HMKeyboardView extends KeyboardView {
         }
 
         //拿到当前键盘被弹起的输入源 和 键盘为每个key的定制实现customKeyStyle
-        KeyStyle customKeyStyle = ((BaseKey) getKeyboard()).getKeyStyle();
+        BaseKeyStyle customBaseKeyStyle = ((BaseKey) getKeyboard()).getKeyStyle();
 
         List<Keyboard.Key> keys = getKeyboard().getKeys();
         final int keyCount = keys.size();
@@ -117,7 +117,7 @@ public class HMKeyboardView extends KeyboardView {
             }
 
             //获取为Key自定义的背景, 若没有定制, 使用KeyboardView的默认属性keyBackground设置
-            keyBackground = customKeyStyle.getKeyBackground(key);
+            keyBackground = customBaseKeyStyle.getKeyBackground(key);
             if (null == keyBackground) {
                 keyBackground = rKeyBackground;
             }
@@ -126,7 +126,7 @@ public class HMKeyboardView extends KeyboardView {
             keyBackground.setState(drawableState);
 
             //获取为Key自定义的Label, 若没有定制, 使用xml布局中指定的
-            CharSequence keyLabel = customKeyStyle.getKeyLabel(key);
+            CharSequence keyLabel = customBaseKeyStyle.getKeyLabel(key);
             if (null == keyLabel) {
                 keyLabel = key.label;
             }
@@ -138,21 +138,12 @@ public class HMKeyboardView extends KeyboardView {
                     key.height != bounds.bottom) {
                 keyBackground.setBounds(0, 0, key.width, key.height);
             }
-            //第一行不进行分割线的绘制
-            if (i == 0) {
-                Paint my = new Paint();
-                my.setColor(Color.WHITE);
-                canvas.translate(0, 0);
-                canvas.drawRect(0, 0, getMeasuredWidth(), 10, my);
-                canvas.translate(key.x + kbdPaddingLeft, key.y + kbdPaddingTop);
-            } else {
-                canvas.translate(key.x + kbdPaddingLeft, key.y + kbdPaddingTop);
-            }
+            canvas.translate(key.x + kbdPaddingLeft, key.y + kbdPaddingTop);
             keyBackground.draw(canvas);
 
             if (label != null) {
                 //获取为Key的Label的字体大小, 若没有定制, 使用KeyboardView的默认属性keyTextSize设置
-                Float customKeyTextSize = customKeyStyle.getKeyTextSize(key);
+                Float customKeyTextSize = customBaseKeyStyle.getKeyTextSize(key);
                 // For characters, use large font. For labels like "Done", use small font.
                 if (null != customKeyTextSize) {
                     paint.setTextSize(customKeyTextSize);
@@ -171,7 +162,7 @@ public class HMKeyboardView extends KeyboardView {
                 }
 
                 //获取为Key的Label的字体颜色, 若没有定制, 使用KeyboardView的默认属性keyTextColor设置
-                Integer customKeyTextColor = customKeyStyle.getKeyTextColor(key);
+                Integer customKeyTextColor = customBaseKeyStyle.getKeyTextColor(key);
                 if (null != customKeyTextColor) {
                     paint.setColor(customKeyTextColor);
                 } else {

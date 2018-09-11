@@ -14,5 +14,7 @@ public class NumberKey extends BaseKey {
 
     public NumberKey(Context context) {
         super(context, R.xml.uikit_keyboard_number);
+        setKeyStyle(new NumberKeyStyle(context));
     }
+
 }

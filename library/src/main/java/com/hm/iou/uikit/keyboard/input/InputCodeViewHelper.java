@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.hm.iou.uikit.R;
 import com.hm.iou.uikit.keyboard.HMKeyboardView;
 import com.hm.iou.uikit.keyboard.key.BaseKey;
-import com.hm.iou.uikit.keyboard.key.DefaultKeyStyle;
+import com.hm.iou.uikit.keyboard.key.NumberKeyStyle;
 
 /**
  * Created by syl on 2018/8/17.
@@ -37,7 +37,7 @@ public class InputCodeViewHelper implements KeyboardView.OnKeyboardActionListene
         mRootView = mWindow.getDecorView().findViewById(android.R.id.content);
         //初始化Keyboard
         if (baseKey.getKeyStyle() == null) {
-            baseKey.setKeyStyle(new DefaultKeyStyle(mContext));
+            baseKey.setKeyStyle(new NumberKeyStyle(mContext));
         }
         mKeyboard = baseKey;
     }
@@ -73,7 +73,7 @@ public class InputCodeViewHelper implements KeyboardView.OnKeyboardActionListene
             mRootView.addView(getKeyBoardView());
         } else {
             mLlKeyboardView.setVisibility(View.VISIBLE);
-            mLlKeyboardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.down_to_up));
+            mLlKeyboardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.uikit_keyboard_down_to_up));
         }
     }
 
@@ -82,7 +82,7 @@ public class InputCodeViewHelper implements KeyboardView.OnKeyboardActionListene
      */
     public void hideSoftKeyboard() {
         if (mLlKeyboardView != null) {
-            mLlKeyboardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.up_to_hide));
+            mLlKeyboardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.uikit_keyboard_up_to_hide));
             mLlKeyboardView.setVisibility(View.GONE);
         }
     }

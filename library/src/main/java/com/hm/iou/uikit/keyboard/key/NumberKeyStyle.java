@@ -9,11 +9,11 @@ import android.util.TypedValue;
 
 import com.hm.iou.uikit.R;
 
-public class DefaultKeyStyle implements KeyStyle {
+public class NumberKeyStyle implements BaseKeyStyle {
 
     private Context mContext;
 
-    public DefaultKeyStyle(Context context) {
+    public NumberKeyStyle(Context context) {
         this.mContext = context;
     }
 

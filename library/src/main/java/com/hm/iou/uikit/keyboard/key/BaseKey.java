@@ -9,7 +9,7 @@ import android.inputmethodservice.Keyboard;
  */
 public abstract class BaseKey extends Keyboard {
 
-    private KeyStyle mKeyStyle;
+    private BaseKeyStyle mBaseKeyStyle;
 
     public BaseKey(Context context, int xmlLayoutResId) {
         super(context, xmlLayoutResId);
@@ -27,11 +27,11 @@ public abstract class BaseKey extends Keyboard {
         super(context, layoutTemplateResId, characters, columns, horizontalPadding);
     }
 
-    public void setKeyStyle(KeyStyle keyStyle) {
-        mKeyStyle = keyStyle;
+    public void setKeyStyle(BaseKeyStyle baseKeyStyle) {
+        mBaseKeyStyle = baseKeyStyle;
     }
 
-    public KeyStyle getKeyStyle() {
-        return mKeyStyle;
+    public BaseKeyStyle getKeyStyle() {
+        return mBaseKeyStyle;
     }
 }

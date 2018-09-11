@@ -3,7 +3,7 @@
     android:horizontalGap="1.6%p"
     android:keyHeight="42dp"
     android:keyWidth="8.4%p"
-    android:verticalGap="12dp">
+    android:verticalGap="10dp">
     <Row>
         <Key
             android:codes="113"
@@ -97,6 +97,7 @@
             android:keyLabel="m" />
         <Key
             android:codes="-5"
+            android:iconPreview="@drawable/uikit_keyboard_bg_abc_delete"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
             android:keyWidth="11.2%p" />
