@@ -32,6 +32,7 @@
         android:paddingRight="15dp"
         android:paddingTop="25dp"
         android:text=""
+        android:textColor="@color/uikit_text_common_color"
         android:textSize="@dimen/textFontSize_16"
         android:visibility="gone" />
 
