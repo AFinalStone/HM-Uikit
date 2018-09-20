@@ -23,6 +23,8 @@
         <activity android:name=".InputCodeActivity" />
         <activity android:name=".PasswordHideShowActivity" />
         <activity android:name=".tabview.BottomTabViewActivity" />
+        <activity android:name=".layoutmanager.viewpager.ViewPagerHorizontalActivity" />
+        <activity android:name=".layoutmanager.viewpager.ViewPagerVerticalActivity" />
         <activity
             android:name=".tabview.IndexAddActivity"
             android:theme="@style/UikitTranslucentThemeActivity" />

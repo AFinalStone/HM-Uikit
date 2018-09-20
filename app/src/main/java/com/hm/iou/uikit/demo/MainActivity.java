@@ -17,6 +17,8 @@ import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.datepicker.CustomDatePicker;
+import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
+import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
 import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
@@ -221,10 +223,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, BottomTabViewActivity.class));
             }
         });
-        findViewById(R.id.btn_richEdit).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_horizontalRecyclerView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, RichEditActivity.class));
+                startActivity(new Intent(MainActivity.this, ViewPagerHorizontalActivity.class));
+            }
+        });
+        findViewById(R.id.btn_verticalRecyclerView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ViewPagerVerticalActivity.class));
             }
         });
         initWheelView();

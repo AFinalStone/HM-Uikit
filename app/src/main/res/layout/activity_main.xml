@@ -135,11 +135,18 @@
             android:text="BottomTabView控件" />
 
         <Button
-            android:id="@+id/btn_richEdit"
+            android:id="@+id/btn_horizontalRecyclerView"
             style="@style/UikitButton"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:text="富文本编辑框" />
+            android:text="左右滑动切换页面" />
+
+        <Button
+            android:id="@+id/btn_verticalRecyclerView"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="上下滑动切换页面" />
 
         <com.hm.iou.uikit.wheel.WheelView
             android:id="@+id/wheelView"
@@ -159,6 +166,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="20dp" />
+
     </LinearLayout>
 
 </ScrollView>
