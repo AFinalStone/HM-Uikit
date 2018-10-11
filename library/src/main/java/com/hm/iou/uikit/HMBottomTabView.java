@@ -73,6 +73,7 @@ public class HMBottomTabView extends LinearLayout {
             mTabImageWidth = attributes.getDimension(R.styleable.HmBottomTabView_tabImageWidth, 20);
 
             mIsSelect = attributes.getBoolean(R.styleable.HmBottomTabView_isSelect, false);
+            attributes.recycle();
         }
 
         LayoutInflater.from(context).inflate(R.layout.uikit_bottom_tab_view, this, true);

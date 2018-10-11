@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hm.iou.tools.ToastUtil;
+import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     EditText mEtClear;
     HMKeyboardEditText mEtTestInputNum;
     HMKeyboardEditText mEtTestInputABC;
+
+    HMBottomBarView mBottomNavView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,6 +239,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         initWheelView();
+
+
+        mBottomNavView = findViewById(R.id.bottom_navview);
+        mBottomNavView.setOnTitleClickListener(new HMBottomBarView.OnTitleClickListener() {
+            @Override
+            public void onClickTitle() {
+                System.out.println("click title");
+                mBottomNavView.setEnabled(false);
+            }
+        });
     }
 
     private void initDatePick() {

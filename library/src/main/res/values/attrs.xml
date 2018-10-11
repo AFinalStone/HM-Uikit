@@ -22,8 +22,15 @@
         <attr name="bottomDividerIsShow" format="boolean"></attr>
     </declare-styleable>
 
-    <declare-styleable name="HmBottomTabView">
+    <declare-styleable name="HmBottomBar">
+        <attr name="bottomTitleText" format="string|reference"></attr>
+        <attr name="bottomTitleSize" format="dimension|reference"></attr>
+        <attr name="bottomTitleColor" format="color|reference"></attr>
+        <attr name="bottomBackIcon" format="reference"></attr>
+        <attr name="bottomIconWidth" format="dimension"></attr>
+    </declare-styleable>
 
+    <declare-styleable name="HmBottomTabView">
         <attr name="tabText" format="string|reference" />
         <attr name="tabTextSize" format="dimension|reference" />
         <attr name="tabTextSelectColor" format="color|reference" />

@@ -167,6 +167,14 @@
             android:layout_height="20dp"
             android:layout_marginTop="20dp" />
 
+        <com.hm.iou.uikit.HMBottomBarView
+            android:id="@+id/bottom_navview"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            app:bottomTitleText="这是一个按钮"
+            >
+        </com.hm.iou.uikit.HMBottomBarView>
+
     </LinearLayout>
 
 </ScrollView>

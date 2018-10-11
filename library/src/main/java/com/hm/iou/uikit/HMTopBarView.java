@@ -105,6 +105,8 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
             mBgDrawable = new ColorDrawable(context.getResources().getColor(R.color.uikit_title_bg_color));
         }
         mRightIconDrawable = ta.getDrawable(R.styleable.HmTopBar_rightIcon);
+        ta.recycle();
+
         initView(context);
     }
 
