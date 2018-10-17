@@ -54,7 +54,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HmBottomBar);
         mTitleTextStr = ta.getString(R.styleable.HmBottomBar_bottomTitleText);
         mTitleTextSize = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomTitleSize,
-                (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics())));
+                (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, getResources().getDisplayMetrics())));
         mBackDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomBackIcon);
         mIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomIconWidth,
                 (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics())));
