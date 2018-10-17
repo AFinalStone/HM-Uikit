@@ -32,6 +32,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private int mTitleTextSize;
     private Drawable mBackDrawable;
     private int mIconWidth;
+    private boolean mEnable;
 
     private ImageView mIvBack;
     private TextView mTvTitle;
@@ -57,6 +58,8 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mBackDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomBackIcon);
         mIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomIconWidth,
                 (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics())));
+        mEnable = ta.getBoolean(R.styleable.HmBottomBar_enable, true);
+
         ta.recycle();
 
         init(context);
@@ -89,6 +92,8 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mIvBack.setOnClickListener(this);
 
         setBackgroundResource(R.drawable.uikit_bg_bottom_navi_bar);
+
+        setEnabled(mEnable);
     }
 
     public void updateTitle(CharSequence title) {

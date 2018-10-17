@@ -28,6 +28,7 @@
         <attr name="bottomTitleColor" format="color|reference"></attr>
         <attr name="bottomBackIcon" format="reference"></attr>
         <attr name="bottomIconWidth" format="dimension"></attr>
+        <attr name="enable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="HmBottomTabView">
