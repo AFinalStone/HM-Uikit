@@ -21,8 +21,6 @@
 
     <!--从底部弹出的Activity-->
     <style name="UikitTranslucentThemeActivity.FromBottom" parent="UikitTranslucentThemeActivity">
-        <item name="android:windowBackground">@color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
