@@ -1,0 +1,9 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_time"
+    android:layout_width="250dp"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:padding="5dp"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/textFontSize_20"
+    android:textStyle="bold" />

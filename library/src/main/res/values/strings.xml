@@ -29,4 +29,8 @@
     <!--人民币符号-->
     <string name="uikit_money">¥</string>
     <string name="uikit_money_form" formatted="true">¥ %S</string>
+
+    <!--图片控件-->
+    <string name="uikit_contentDescription">图片控件</string>
+
 </resources>

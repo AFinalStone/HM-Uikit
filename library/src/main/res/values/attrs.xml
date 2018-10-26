@@ -9,25 +9,25 @@
     </declare-styleable>
 
     <declare-styleable name="HmTopBar">
-        <attr name="titleText" format="string|reference"></attr>
-        <attr name="titleSize" format="dimension|reference"></attr>
-        <attr name="titleColor" format="color|reference"></attr>
-        <attr name="backIcon" format="reference"></attr>
-        <attr name="backIconIsShow" format="boolean"></attr>
-        <attr name="rightIcon" format="reference"></attr>
-        <attr name="rightText" format="string|reference"></attr>
-        <attr name="rightTextSize" format="dimension|reference"></attr>
-        <attr name="rightTextColor" format="color|reference"></attr>
-        <attr name="titleBackground" format="color|reference"></attr>
-        <attr name="bottomDividerIsShow" format="boolean"></attr>
+        <attr name="titleText" format="string|reference" />
+        <attr name="titleSize" format="dimension|reference" />
+        <attr name="titleColor" format="color|reference" />
+        <attr name="backIcon" format="reference" />
+        <attr name="backIconIsShow" format="boolean" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="rightText" format="string|reference" />
+        <attr name="rightTextSize" format="dimension|reference" />
+        <attr name="rightTextColor" format="color|reference" />
+        <attr name="titleBackground" format="color|reference" />
+        <attr name="bottomDividerIsShow" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="HmBottomBar">
-        <attr name="bottomTitleText" format="string|reference"></attr>
-        <attr name="bottomTitleSize" format="dimension|reference"></attr>
-        <attr name="bottomTitleColor" format="color|reference"></attr>
-        <attr name="bottomBackIcon" format="reference"></attr>
-        <attr name="bottomIconWidth" format="dimension"></attr>
+        <attr name="bottomTitleText" format="string|reference" />
+        <attr name="bottomTitleSize" format="dimension|reference" />
+        <attr name="bottomTitleColor" format="color|reference" />
+        <attr name="bottomBackIcon" format="reference" />
+        <attr name="bottomIconWidth" format="dimension" />
         <attr name="enable" format="boolean" />
     </declare-styleable>
 

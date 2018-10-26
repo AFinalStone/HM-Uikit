@@ -2,7 +2,6 @@ package com.hm.iou.uikit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
@@ -10,9 +9,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.hm.iou.uikit.handler.WeakReferenceHandler;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 倒计时控件
@@ -26,14 +22,6 @@ public class HMCountDownTextView extends AppCompatTextView {
      */
     private long mLength = 60 * 1000;
     /**
-     * 开始执行计时的类，可以在每秒实行间隔任务
-     */
-    private Timer mTimer;
-    /**
-     * 每秒时间到了之后所执行的任务
-     */
-    private TimerTask mTimerTask;
-    /**
      * 在点击按钮之前按钮所显示的文字，默认是获取验证码
      */
     private String mStrText;
@@ -41,6 +29,11 @@ public class HMCountDownTextView extends AppCompatTextView {
      * 在开始倒计时之后那个秒数数字之后所要显示的字，默认是秒
      */
     private String mStrTextCountDown = getResources().getString(R.string.uikit_get_check_code_count_down);
+
+    /**
+     * 是否已经开始倒计时
+     */
+    private boolean mIsStartCountDown = false;
 
     /**
      * 更新显示的文本
@@ -58,7 +51,7 @@ public class HMCountDownTextView extends AppCompatTextView {
     public HMCountDownTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
-        initHandler(this);
+        initHandler();
     }
 
     /**
@@ -68,7 +61,7 @@ public class HMCountDownTextView extends AppCompatTextView {
      */
     @Override
     public void setEnabled(boolean enabled) {
-        if (mTimerTask != null) {
+        if (mIsStartCountDown) {
             return;
         }
         super.setEnabled(enabled);
@@ -81,7 +74,10 @@ public class HMCountDownTextView extends AppCompatTextView {
      */
     @Override
     protected void onDetachedFromWindow() {
-        clearTimer();
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+            mHandler = null;
+        }
         super.onDetachedFromWindow();
     }
 
@@ -98,35 +94,24 @@ public class HMCountDownTextView extends AppCompatTextView {
 
 
     @SuppressLint("HandlerLeak")
-    private void initHandler(final HMCountDownTextView countDownButton) {
-        mHandler = new WeakReferenceHandler<HMCountDownTextView>(countDownButton) {
+    private void initHandler() {
+        mHandler = new WeakReferenceHandler<HMCountDownTextView>(this) {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if (countDownButton != null) {
-                    String strCountDown = String.format(mStrTextCountDown, mLength / 1000 + "");
-                    countDownButton.setText(strCountDown);
-                    mLength -= 1000;
-                    if (mLength < 0) {
-                        clearTimer();
-                        mLength = 60 * 1000;
-                        countDownButton.setEnabled(true);
-                        countDownButton.setText(mStrText);
+                HMCountDownTextView countDownTextView = mWeakReferenceObject.get();
+                if (countDownTextView != null) {
+                    String strCountDown = String.format(countDownTextView.mStrTextCountDown, countDownTextView.mLength / 1000 + "");
+                    countDownTextView.setText(strCountDown);
+                    countDownTextView.mLength -= 1000;
+                    if (countDownTextView.mLength < 0) {
+                        countDownTextView.mLength = 60 * 1000;
+                        countDownTextView.setEnabled(true);
+                        countDownTextView.setText(countDownTextView.mStrText);
+                    } else {
+                        sendEmptyMessageDelayed(1, 1000);
                     }
                 }
-            }
-        };
-    }
-
-    /**
-     * 初始化时间
-     */
-    private void initTimer() {
-        mTimer = new Timer();
-        mTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                mHandler.sendEmptyMessage(1);
             }
         };
     }
@@ -162,24 +147,12 @@ public class HMCountDownTextView extends AppCompatTextView {
      * 开始倒计时
      */
     public void startCountDown() {
-        this.setEnabled(false);
-        String strCountDown = String.format(mStrTextCountDown, mLength / 1000 + "");
-        this.setText(strCountDown);
-        initTimer();
-        mTimer.schedule(mTimerTask, 0, 1000);
-    }
-
-    /**
-     * 清除倒计时
-     */
-    private void clearTimer() {
-        if (mTimerTask != null) {
-            mTimerTask.cancel();
-            mTimerTask = null;
-        }
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
+        if (mHandler != null) {
+            this.setEnabled(false);
+            String strCountDown = String.format(mStrTextCountDown, mLength / 1000 + "");
+            this.setText(strCountDown);
+            mIsStartCountDown = true;
+            mHandler.sendEmptyMessage(1);
         }
     }
 

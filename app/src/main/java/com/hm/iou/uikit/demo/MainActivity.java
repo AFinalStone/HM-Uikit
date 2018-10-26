@@ -18,6 +18,7 @@ import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
 import com.hm.iou.uikit.datepicker.CustomDatePicker;
+import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
 import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
@@ -42,7 +43,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    CustomDatePicker mDatePicker;
+    //    CustomDatePicker mDatePicker;
+    TimePickerDialog mTimePickerDialog;
     String TIME_TODAY;
     EditText mEtClear;
     HMKeyboardEditText mEtTestInputNum;
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mEtTestInputNum.bindKeyBoardView(getWindow(), new NumberKey(this));
         mEtTestInputABC = findViewById(R.id.edit_testInputABC);
         mEtTestInputABC.bindKeyBoardView(getWindow(), new ABCKey(this));
-        initDatePick();
+//        initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,13 +143,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 HMCountDownTextView hmCountDownTextView = findViewById(R.id.tv_getCheckCode);
+                hmCountDownTextView.setLength(10);
                 hmCountDownTextView.startCountDown();
             }
         });
         findViewById(R.id.btn_showDatePick).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatePicker.show(TIME_TODAY);
+                new TimePickerDialog
+                        .Builder(MainActivity.this)
+                        .show();
             }
         });
 
@@ -251,28 +256,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initDatePick() {
-        //初始化时间选择控件
-//        final TimeUtil timeUtil = TimeUtil.getInstance(TimeUtil.SimpleDateFormatEnum.DateFormatForApp);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        Date today = new Date(System.currentTimeMillis());
-        TIME_TODAY = simpleDateFormat.format(today);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(today);
-        calendar.add(Calendar.YEAR, 10);
-        Date endTime = calendar.getTime();
-        String TIME_END = simpleDateFormat.format(endTime);
-
-        mDatePicker = new CustomDatePicker(MainActivity.this, new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) { // 回调接口，获得选中的时间
-                String strTime = time.split(" ")[0];
-                Toast.makeText(MainActivity.this, strTime, Toast.LENGTH_SHORT).show();
-            }
-        }, TIME_TODAY, TIME_END); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        mDatePicker.showSpecificTime(false); // 不显示时和分
-        mDatePicker.setIsLoop(false); // 不允许循环滚动
-    }
+//    private void initDatePick() {
+//        //初始化时间选择控件
+////        final TimeUtil timeUtil = TimeUtil.getInstance(TimeUtil.SimpleDateFormatEnum.DateFormatForApp);
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+//        Date today = new Date(System.currentTimeMillis());
+//        TIME_TODAY = simpleDateFormat.format(today);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(today);
+//        calendar.add(Calendar.YEAR, 10);
+//        Date endTime = calendar.getTime();
+//        String TIME_END = simpleDateFormat.format(endTime);
+//
+//        mDatePicker = new CustomDatePicker(MainActivity.this, new CustomDatePicker.ResultHandler() {
+//            @Override
+//            public void handle(String time) { // 回调接口，获得选中的时间
+//                String strTime = time.split(" ")[0];
+//                Toast.makeText(MainActivity.this, strTime, Toast.LENGTH_SHORT).show();
+//            }
+//        }, TIME_TODAY, TIME_END); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+//        mDatePicker.showSpecificTime(false); // 不显示时和分
+//        mDatePicker.setIsLoop(false); // 不允许循环滚动
+//    }
 
     private void initWheelView() {
         WheelView wheelViewTimeHour = findViewById(R.id.wheelView);
