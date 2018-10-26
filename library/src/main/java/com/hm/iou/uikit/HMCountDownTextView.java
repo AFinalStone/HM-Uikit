@@ -106,6 +106,7 @@ public class HMCountDownTextView extends AppCompatTextView {
                     countDownTextView.mLength -= 1000;
                     if (countDownTextView.mLength < 0) {
                         countDownTextView.mLength = 60 * 1000;
+                        countDownTextView.mIsStartCountDown = false;
                         countDownTextView.setEnabled(true);
                         countDownTextView.setText(countDownTextView.mStrText);
                     } else {

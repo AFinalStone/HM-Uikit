@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 HMCountDownTextView hmCountDownTextView = findViewById(R.id.tv_getCheckCode);
-                hmCountDownTextView.setLength(10);
+                hmCountDownTextView.setLength(10000);
                 hmCountDownTextView.startCountDown();
             }
         });
