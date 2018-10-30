@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         PullDownRefreshImageView pullDownRefreshImageView = findViewById(R.id.pd_iv);
 
-        HMTopBarView topBarView = findViewById(R.id.topbar);
+        final HMTopBarView topBarView = findViewById(R.id.topbar);
         topBarView.setOnBackClickListener(new HMTopBarView.OnTopBarBackClickListener() {
             @Override
             public void onClickBack() {

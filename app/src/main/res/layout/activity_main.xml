@@ -17,7 +17,7 @@
         <com.hm.iou.uikit.HMTopBarView
             android:id="@+id/topbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/uikit_topbar_height"
+            android:layout_height="72dip"
             app:bottomDividerIsShow="false"
             app:rightIcon="@mipmap/uikit_ic_menu_back_black"
             app:rightText="更多"

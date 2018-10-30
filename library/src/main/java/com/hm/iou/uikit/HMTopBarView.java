@@ -3,6 +3,7 @@ package com.hm.iou.uikit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.lang.reflect.Field;
 
 
 /**
@@ -67,6 +70,13 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     private View mViewDivider;
     private View mViewStatusBarPlaceHolder;
     private View mLayout;
+    private RelativeLayout mRlBarContent;
+
+    //实际获取到的高度
+    private int mStatusBarHeight;
+    //在布局文件里默认设置状态栏高度
+    private int mDefaultStatusBarHeight;
+    private int mBarHeight;
 
     private OnTopBarBackClickListener mBackListener;
     private OnTopBarMenuClickListener mMenuListener;
@@ -126,6 +136,20 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mIvRight = mLayout.findViewById(R.id.iv_topbar_right);
         mViewDivider = mLayout.findViewById(R.id.view_topbar_divider);
         mViewStatusBarPlaceHolder = mLayout.findViewById(R.id.view_statusbar_placeholder);
+        mRlBarContent = mLayout.findViewById(R.id.rl_topbar_content);
+
+        mStatusBarHeight = getStatusBarHeight(context);
+        mDefaultStatusBarHeight = (int) (context.getResources().getDisplayMetrics().density * 24);
+        mBarHeight = (int) (context.getResources().getDisplayMetrics().density * 48);
+        //能够获取到状态栏高度
+        if (mStatusBarHeight > 0) {
+            RelativeLayout.LayoutParams statusBarParams = (RelativeLayout.LayoutParams) mViewStatusBarPlaceHolder.getLayoutParams();
+            statusBarParams.height = mStatusBarHeight;
+            mViewStatusBarPlaceHolder.setLayoutParams(statusBarParams);
+        }
+        RelativeLayout.LayoutParams barParams = (RelativeLayout.LayoutParams) mRlBarContent.getLayoutParams();
+        barParams.height = mBarHeight;
+        mRlBarContent.setLayoutParams(barParams);
 
         if (!TextUtils.isEmpty(mTitleTextStr))
             mTvTitle.setText(mTitleTextStr);
@@ -175,6 +199,18 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mIvBack.setOnClickListener(this);
         mTvRight.setOnClickListener(this);
         mIvRight.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int h = 0;
+        if (mViewStatusBarPlaceHolder.getVisibility() == View.GONE) {
+            h = mBarHeight;
+        } else {
+            h = mBarHeight + (mStatusBarHeight > 0 ? mStatusBarHeight : mDefaultStatusBarHeight);
+        }
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(h , MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     /**
@@ -334,4 +370,42 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
             }
         }
     }
+
+    private static int getStatusBarHeight(Context context) {
+        int h = getStatusBar1(context);
+        if (h == 0) {
+            h = getStatusBar2(context);
+        }
+        return h;
+    }
+
+    private static int getStatusBar1(Context context){
+        int result = 0;
+        try {
+            int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = context.getResources().getDimensionPixelSize(resourceId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private static int getStatusBar2(Context context) {
+        try {
+            Class c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            int statusBarHeight = context.getResources().getDimensionPixelSize(x);
+            return statusBarHeight;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
 }
