@@ -3,17 +3,14 @@ package com.hm.iou.uikit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -371,7 +368,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         }
     }
 
-    private static int getStatusBarHeight(Context context) {
+    public static int getStatusBarHeight(Context context) {
         int h = getStatusBar1(context);
         if (h == 0) {
             h = getStatusBar2(context);
@@ -379,7 +376,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         return h;
     }
 
-    private static int getStatusBar1(Context context){
+    public static int getStatusBar1(Context context){
         int result = 0;
         try {
             int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -392,7 +389,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         return result;
     }
 
-    private static int getStatusBar2(Context context) {
+    public static int getStatusBar2(Context context) {
         try {
             Class c = Class.forName("com.android.internal.R$dimen");
             Object obj = c.newInstance();
