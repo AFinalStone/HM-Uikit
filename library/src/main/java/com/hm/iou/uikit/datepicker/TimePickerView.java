@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
@@ -15,7 +14,6 @@ import com.hm.iou.uikit.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +55,7 @@ public class TimePickerView extends FrameLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.uikit_view_time_pick, this, true);
         mRvYear = findViewById(R.id.rv_year);
 
-        PickerLayoutManager mPlYear = new PickerLayoutManager(getContext(), mRvYear, PickerLayoutManager.VERTICAL, false, 3, 0.4f, true);
+        TimePickerLayoutManager mPlYear = new TimePickerLayoutManager(getContext(), mRvYear, TimePickerLayoutManager.VERTICAL, false, 3, 0.4f, true);
 
         mRvYear.setLayoutManager(mPlYear);
         initData();

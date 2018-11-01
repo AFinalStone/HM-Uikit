@@ -14,7 +14,7 @@ import android.view.View;
 
 
 public class PickerLayoutManager extends LinearLayoutManager {
-    private static final String TAG = "PickerLayoutManager";
+    private static final String TAG = "TimePickerLayoutManager";
 
     private float mScale = 0.5f;
     private boolean mIsAlpha = true;

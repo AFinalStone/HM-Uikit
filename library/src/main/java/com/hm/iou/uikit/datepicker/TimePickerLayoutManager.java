@@ -13,8 +13,8 @@ import android.view.View;
  */
 
 
-public class PickerLayoutManager extends LinearLayoutManager {
-    private static final String TAG = "PickerLayoutManager";
+public class TimePickerLayoutManager extends LinearLayoutManager {
+    private static final String TAG = "TimePickerLayoutManager";
 
     private float mScale = 0.5f;
     private boolean mIsAlpha = true;
@@ -26,13 +26,13 @@ public class PickerLayoutManager extends LinearLayoutManager {
     private RecyclerView mRecyclerView;
     private int mOrientation;
 
-    public PickerLayoutManager(Context context, int orientation, boolean reverseLayout) {
+    public TimePickerLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
         this.mLinearSnapHelper = new LinearSnapHelper();
         this.mOrientation = orientation;
     }
 
-    public PickerLayoutManager(Context context, RecyclerView recyclerView, int orientation, boolean reverseLayout, int itemCount, float scale, boolean isAlpha) {
+    public TimePickerLayoutManager(Context context, RecyclerView recyclerView, int orientation, boolean reverseLayout, int itemCount, float scale, boolean isAlpha) {
         super(context, orientation, reverseLayout);
         this.mLinearSnapHelper = new LinearSnapHelper();
         this.mItemCount = itemCount;
