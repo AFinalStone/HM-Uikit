@@ -29,10 +29,12 @@ public class DialogCommonKnow extends Dialog {
     }
 
     public static class Builder {
-        Context mContext;
-        String mTitle;
-        String mMsg;
-        String mBtnText;
+        private Context mContext;
+        private String mTitle;
+        private String mMsg;
+        private String mBtnText;
+        private boolean mCancelable = true;
+        private boolean mCancelableOnTouchOutside = true;
 
         public Builder(Context context) {
             this.mContext = context;
@@ -50,6 +52,16 @@ public class DialogCommonKnow extends Dialog {
 
         public Builder setBtnText(String btnText) {
             this.mBtnText = btnText;
+            return this;
+        }
+
+        public Builder setCancelable(boolean cancelable) {
+            mCancelable = cancelable;
+            return this;
+        }
+
+        public Builder setCancelableOnTouchOutside(boolean cancelableOnTouchOutside) {
+            mCancelableOnTouchOutside = cancelableOnTouchOutside;
             return this;
         }
 
@@ -91,6 +103,8 @@ public class DialogCommonKnow extends Dialog {
             dialogWindow.setGravity(Gravity.CENTER);
 
             mDialog.setContentView(view);
+            mDialog.setCancelable(mCancelable);
+            mDialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
             // 调整dialog背景大小
             WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
             Display display = windowManager.getDefaultDisplay();

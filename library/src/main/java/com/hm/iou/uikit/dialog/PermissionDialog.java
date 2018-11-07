@@ -3,8 +3,6 @@ package com.hm.iou.uikit.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
@@ -40,7 +38,8 @@ public class PermissionDialog extends Dialog {
         private String mTitle;
         private String mMessage;
         private int mIconResId;
-        private boolean mFlagCancelable = true;
+        private boolean mCancelable = false;
+        private boolean mCanceledOnTouchOutside = false;
         private DialogInterface.OnClickListener mOnClickListener;
 
         public Builder(Context context) {
@@ -74,8 +73,13 @@ public class PermissionDialog extends Dialog {
             return this;
         }
 
-        public Builder setCancelable(boolean flagCancelable) {
-            this.mFlagCancelable = flagCancelable;
+        public Builder setCancelable(boolean cancelable) {
+            this.mCancelable = cancelable;
+            return this;
+        }
+
+        public Builder setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
+            this.mCanceledOnTouchOutside = canceledOnTouchOutside;
             return this;
         }
 
@@ -116,7 +120,8 @@ public class PermissionDialog extends Dialog {
                 }
             });
 
-            dialog.setCancelable(mFlagCancelable);
+            dialog.setCancelable(mCancelable);
+            dialog.setCanceledOnTouchOutside(mCanceledOnTouchOutside);
             dialog.setContentView(layout);
 
             // 调整dialog背景大小

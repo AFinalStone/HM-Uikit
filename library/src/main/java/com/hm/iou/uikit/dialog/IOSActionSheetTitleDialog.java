@@ -52,8 +52,8 @@ public class IOSActionSheetTitleDialog extends Dialog {
         private int titleTextColor;
         private boolean showTitle = false;
         private List<IOSActionSheetItem> IOSActionSheetItemList;
-        private boolean flagCancelable = true;
-        private boolean flagCanceledOnTouchOutside = true;
+        private boolean mCancelable = true;
+        private boolean mCanceledOnTouchOutside = true;
         Display mDisplay;
 
         public Builder(Context context) {
@@ -79,12 +79,12 @@ public class IOSActionSheetTitleDialog extends Dialog {
 
 
         public Builder setCancelable(boolean cancel) {
-            flagCancelable = cancel;
+            mCancelable = cancel;
             return this;
         }
 
-        public Builder setCanceledOnTouchOutside(boolean cancel) {
-            flagCanceledOnTouchOutside = cancel;
+        public Builder setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
+            mCanceledOnTouchOutside = canceledOnTouchOutside;
             return this;
         }
 
@@ -153,8 +153,8 @@ public class IOSActionSheetTitleDialog extends Dialog {
             //初始化SheetItems
             setSheetItems(dialog, sLayout_content, lLayout_content);
 
-            dialog.setCancelable(flagCancelable);
-            dialog.setCanceledOnTouchOutside(flagCanceledOnTouchOutside);
+            dialog.setCancelable(mCancelable);
+            dialog.setCanceledOnTouchOutside(mCanceledOnTouchOutside);
             return dialog;
         }
 

@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hm.iou.uikit.R;
-import com.hm.iou.uikit.SmoothCheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,6 @@ public class ChooseDialog extends Dialog {
     public static class Builder {
 
         private Context mContext;
-
         private String mTitle;
         private String mTitleAction;
         private boolean mCancelable = true;
@@ -187,7 +185,7 @@ public class ChooseDialog extends Dialog {
         protected void convert(BaseViewHolder helper, MenuItem item) {
             helper.setText(R.id.tv_dialog_item_title, item.title);
             helper.setText(R.id.tv_dialog_item_desc, item.desc);
-            helper.setImageResource(R.id.iv_dialog_check, mCheckedIndex == helper.getAdapterPosition() ? R.mipmap.uikit_icon_check_green: R.mipmap.uikit_icon_check_default);
+            helper.setImageResource(R.id.iv_dialog_check, mCheckedIndex == helper.getAdapterPosition() ? R.mipmap.uikit_icon_check_green : R.mipmap.uikit_icon_check_default);
         }
     }
 

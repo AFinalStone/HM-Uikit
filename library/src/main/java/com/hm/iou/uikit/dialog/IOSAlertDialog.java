@@ -7,7 +7,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
-import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -53,7 +52,8 @@ public class IOSAlertDialog extends Dialog {
         private int mNegativeButtonTextColor = -1;
         private OnClickListener mPositiveButtonClickListener;
         private OnClickListener mNegativeButtonClickListener;
-        private boolean flagCancelable = true;
+        private boolean mCancelable = true;
+        private boolean mCanceledOnTouchOutside = true;
         private int mMsgGravity = Gravity.NO_GRAVITY;
 
         public Builder(Context context) {
@@ -141,7 +141,12 @@ public class IOSAlertDialog extends Dialog {
         }
 
         public Builder setCancelable(boolean flagCancelable) {
-            this.flagCancelable = flagCancelable;
+            this.mCancelable = flagCancelable;
+            return this;
+        }
+
+        public Builder setCanceledOnTouchOutside(boolean flagCanceledOnTouchOutside) {
+            this.mCanceledOnTouchOutside = flagCanceledOnTouchOutside;
             return this;
         }
 
@@ -219,7 +224,8 @@ public class IOSAlertDialog extends Dialog {
             if (mNegativeButtonText != null && mPositiveButtonText != null) {
                 ivLine02.setVisibility(View.VISIBLE);
             }
-            dialog.setCancelable(flagCancelable);
+            dialog.setCancelable(mCancelable);
+            dialog.setCanceledOnTouchOutside(mCanceledOnTouchOutside);
             dialog.setContentView(layout);
             // 调整dialog背景大小
             WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
