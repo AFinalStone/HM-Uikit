@@ -148,6 +148,13 @@
             android:layout_marginTop="5dp"
             android:text="上下滑动切换页面" />
 
+        <Button
+            android:id="@+id/btn_timePickerDialog"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="时间滚轮" />
+
         <com.hm.iou.uikit.wheel.WheelView
             android:id="@+id/wheelView"
             android:layout_width="match_parent"
@@ -171,9 +178,7 @@
             android:id="@+id/bottom_navview"
             android:layout_width="match_parent"
             android:layout_height="50dip"
-            app:bottomTitleText="这是一个按钮"
-            >
-        </com.hm.iou.uikit.HMBottomBarView>
+            app:bottomTitleText="这是一个按钮"></com.hm.iou.uikit.HMBottomBarView>
 
     </LinearLayout>
 

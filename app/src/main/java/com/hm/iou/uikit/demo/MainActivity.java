@@ -243,6 +243,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ViewPagerVerticalActivity.class));
             }
         });
+        findViewById(R.id.btn_timePickerDialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTimePickerDialog = new TimePickerDialog.Builder(MainActivity.this).show();
+            }
+        });
         initWheelView();
 
 

@@ -23,7 +23,6 @@
             app:isSelect="true"
             app:tabImageSelectDrawable="@mipmap/ic_tab_home_selected"
             app:tabImageUnSelectDrawable="@mipmap/ic_tab_home_unselected"
-            app:tabText="首页"
             app:tabTextUnSelectColor="@color/uikit_text_common_color" />
 
         <com.hm.iou.uikit.HMBottomTabView
@@ -32,8 +31,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            app:tabImageSelectDrawable="@mipmap/ic_tab_news_selected"
-            app:tabImageUnSelectDrawable="@mipmap/ic_tab_news_unselected"
             app:tabText="资讯"
             app:tabTextUnSelectColor="@color/uikit_text_common_color" />
 
