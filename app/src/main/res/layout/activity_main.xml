@@ -45,7 +45,7 @@
 
         <Button
             android:id="@+id/btn_loading_dialog"
-            style="@style/UikitButton"
+            style="@style/UikitHMButton.Large.Bordered"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
             android:text="显示LoadingDialog" />

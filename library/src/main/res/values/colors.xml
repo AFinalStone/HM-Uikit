@@ -20,9 +20,6 @@
     <!--背景色-->
     <color name="uikit_background">#FFF2F2F2</color>
 
-    <color name="uikit_divider">#FFD8D8D8</color>
-
-
     <!--白色水波纹颜色-->
     <color name="whiteRipple">#FFD7D7D7</color>
     <!--白色按压颜色-->
@@ -58,5 +55,34 @@
     <color name="uikit_title_right_text">#ff111111</color>
 
     <color name="uikit_wheel_center_divider_color">#C7C7C7</color>
+
+
+
+    <!-- 2.0颜色样式 -->
+    <!-- 主色 -->
+    <color name="uikit_main_color">#FFFFDE45</color>
+    <!-- 主色点击状态下的颜色值 -->
+    <color name="uikit_main_color_pressed">#FFFAD735</color>
+    <!-- 不可点 -->
+    <color name="uikit_disabled_color">#FFF0F0F0</color>
+    <color name="uikit_disabled_color_pressed">#FFE5E5E5</color>
+
+    <!-- 功能色：异常/错误 -->
+    <color name="uikit_function_exception">#FFEF5050</color>
+    <!-- 功能色：微信登录/成功等 -->
+    <color name="uikit_function_succ">#FF07C160</color>
+    <color name="uikit_function_succ_pressed">#FF06B359</color>
+
+    <!-- 功能色：提醒/可操作功能 -->
+    <color name="uikit_function_remind">#FF2782E2</color>
+    <!-- 主标题/正文 -->
+    <color name="uikit_text_main_content">#FF111111</color>
+    <!-- 字体 辅助标题 -->
+    <color name="uikit_text_sub_content">#FF575B62</color>
+    <!-- 字体 辅助信息 -->
+    <color name="uikit_text_auxiliary">#FF9B9B9B</color>
+
+    <!-- 衍生色 分割线 -->
+    <color name="uikit_divider">#FFE6E6E6</color>
 
 </resources>

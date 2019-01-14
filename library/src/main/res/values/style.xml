@@ -235,4 +235,60 @@
     </style>
 
 
+    <!-- 2.0样式 -->
+    <style name="UikitHMButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="UikitHMButton.Large">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/uikit_main_title_text_size</item>
+    </style>
+
+    <!-- 主button -->
+    <style name="UikitHMButton.Large.Main">
+        <item name="android:textColor">@color/uikit_selector_btn_main</item>
+        <item name="android:background">@drawable/uikit_selector_btn_main</item>
+    </style>
+
+    <!-- 次button，不重要的 -->
+    <style name="UikitHMButton.Large.Minor">
+        <item name="android:textColor">@color/uikit_text_auxiliary</item>
+        <item name="android:background">@drawable/uikit_selector_btn_minor</item>
+    </style>
+
+    <!-- 微信 -->
+    <style name="UikitHMButton.Large.Weixin">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/uikit_selector_btn_weixin</item>
+    </style>
+
+    <!-- 特殊button，带黑色边框 -->
+    <style name="UikitHMButton.Large.Bordered">
+        <item name="android:textColor">@color/uikit_selector_btn_main</item>
+        <item name="android:background">@drawable/uikit_selector_btn_bordered</item>
+    </style>
+
+    <!-- 弹窗button -->
+    <style name="UikitHMDialogButton" parent="UikitHMButton">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/uikit_main_title_text_size</item>
+    </style>
+
+    <!-- 弹窗主要button -->
+    <style name="UikitHMDialogButton.Main">
+        <item name="android:textColor">@color/uikit_text_main_content</item>
+        <item name="android:background">@drawable/uikit_selector_btn_dialog_main</item>
+    </style>
+
+    <!-- 弹窗次要button -->
+    <style name="UikitHMDialogButton.Secondary">
+        <item name="android:textColor">@color/uikit_text_auxiliary</item>
+        <item name="android:background">@drawable/uikit_selector_btn_dialog_secondary</item>
+    </style>
+
 </resources>

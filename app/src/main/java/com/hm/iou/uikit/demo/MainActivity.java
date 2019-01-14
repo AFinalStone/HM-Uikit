@@ -6,12 +6,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
@@ -23,6 +23,8 @@ import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
 import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
+import com.hm.iou.uikit.dialog.HMActionSheetDialog;
+import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.dialog.IOSActionSheetItem;
 import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
@@ -76,23 +78,26 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_alert_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new IOSAlertDialog.Builder(MainActivity.this)
-                        .setTitle("测试标题")
+                new HMAlertDialog.Builder(MainActivity.this)
+                        .setTitle("标题")
                         .setMessage("这是文本内容")
-                        .setCancelable(false)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        .setMessageGravity(Gravity.CENTER)
+                        .setCancelable(true)
+                        .setCanceledOnTouchOutside(false)
+                        .setPositiveButton("确定")
+                        .setNegativeButton("取消")
+                        .setOnClickListener(new HMAlertDialog.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onPosClick() {
+                                Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
                             }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
+                            @Override
+                            public void onNegClick() {
+                                Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .show();
+                        .create().show();
             }
         });
         findViewById(R.id.btn_dialogCommon).setOnClickListener(new View.OnClickListener() {
@@ -159,25 +164,22 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_actionsheet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new IOSActionSheetTitleDialog.Builder(MainActivity.this)
-                        .addSheetItem(IOSActionSheetItem.create("垃圾广告").setItemClickListener(new DialogInterface.OnClickListener() {
+                List<String> list = new ArrayList<>();
+                list.add("一月一付");
+                list.add("一季一付");
+                list.add("半年一付");
+                new HMActionSheetDialog.Builder(MainActivity.this)
+                        .setActionSheetList(list)
+                        .setTitle("还款方式")
+                        .setSelectedIndex(2)
+                        .setCancelable(false)
+                        .setOnItemClickListener(new HMActionSheetDialog.OnItemClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onItemClick(int index, String value) {
+                                Toast.makeText(MainActivity.this, index + " = " + value, Toast.LENGTH_LONG).show();
+
                             }
-                        }))
-                        .addSheetItem(IOSActionSheetItem.create("政治谣言").setItemClickListener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }))
-                        .addSheetItem(IOSActionSheetItem.create("色情图片").setItemClickListener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }))
-                        .show();
+                        }).create().show();
             }
         });
 
@@ -294,7 +296,6 @@ public class MainActivity extends AppCompatActivity {
         wheelViewTimeHour.addChangingListener(new OnWheelChangedListener() {
             @Override
             public void onChanged(WheelView wheelView, int i, int currIndex) {
-                ToastUtil.showMessage(MainActivity.this, "old：" + i + "   new：" + currIndex);
             }
         });
         wheelViewTimeHour.setVisibleItems(5);
