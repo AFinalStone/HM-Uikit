@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
             android:scaleType="centerInside"
-            android:src="@mipmap/uikit_ic_menu_back_black" />
+            android:src="@mipmap/uikit_icon_close_black" />
 
         <TextView
             android:id="@+id/tv_topbar_title"
@@ -32,8 +32,8 @@
             android:maxLines="1"
             android:maxWidth="220dip"
             android:text=""
-            android:textColor="@color/uikit_title_center_text"
-            android:textSize="@dimen/textFontSize_18" />
+            android:textColor="@color/uikit_text_main_content"
+            android:textSize="@dimen/uikit_main_title_text_size" />
 
 
         <LinearLayout
@@ -52,8 +52,8 @@
                 android:minWidth="48dip"
                 android:paddingLeft="10dip"
                 android:paddingRight="10dip"
-                android:textColor="@color/uikit_title_right_text"
-                android:textSize="16sp"
+                android:textColor="@color/uikit_text_sub_content"
+                android:textSize="@dimen/uikit_main_content_text_size"
                 tools:text="更多" />
 
             <ImageView
@@ -74,6 +74,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_alignParentBottom="true"
-        android:background="#ECECEC" />
+        android:background="@color/uikit_divider" />
 
 </RelativeLayout>

@@ -17,7 +17,6 @@ import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
-import com.hm.iou.uikit.datepicker.PickerDialog;
 import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
@@ -25,14 +24,10 @@ import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
-import com.hm.iou.uikit.dialog.PermissionDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
-import com.hm.iou.uikit.wheel.BaseWheelTextAdapter;
-import com.hm.iou.uikit.wheel.OnWheelChangedListener;
-import com.hm.iou.uikit.wheel.WheelView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -212,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "重试。。。。", Toast.LENGTH_LONG).show();
-                        loadingView.showDataEmpty("");
+                        loadingView.showDataEmpty("没有数据额，打个借条吧。");
                     }
                 });
             }
@@ -222,22 +217,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new PermissionDialog.Builder(MainActivity.this)
-                        .setTitle("开启位置权限")
-                        .setMessage("我们需要获得该权限，才能为您提供省市头条信息及附近律师。")
-                        .setPermissionIcon(R.mipmap.uikit_icon_header_man)
-                        .setOnClickListener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (which == DialogInterface.BUTTON_POSITIVE) {
-                                    Toast.makeText(MainActivity.this, "允许", Toast.LENGTH_SHORT).show();
-                                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
-                                    Toast.makeText(MainActivity.this, "不允许", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        })
-                        .setCancelable(false)
-                        .create().show();
+
             }
         });
 
@@ -279,23 +259,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initWheelView() {
-        WheelView wheelViewTimeHour = findViewById(R.id.wheelView);
-        final List<String> listHour = new ArrayList<>();
-        for (int i = 0; i <= 23; i++) {
-            listHour.add(i + "时");
-        }
-        wheelViewTimeHour.setViewAdapter(new BaseWheelTextAdapter<String>(this, listHour) {
-            @Override
-            protected CharSequence getItemText(int i) {
-                return listHour.get(i);
-            }
-        });
-        wheelViewTimeHour.addChangingListener(new OnWheelChangedListener() {
-            @Override
-            public void onChanged(WheelView wheelView, int i, int currIndex) {
-            }
-        });
-        wheelViewTimeHour.setVisibleItems(5);
+
     }
 
     /**

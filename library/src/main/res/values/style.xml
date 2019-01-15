@@ -145,7 +145,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/textFontSize_14</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/uikit_color_btn_bottom_selector</item>
+        <item name="android:textColor">@color/uikit_selector_btn_main</item>
         <item name="android:background">@drawable/uikit_shape_common_btn_selector</item>
     </style>
 
@@ -248,10 +248,21 @@
         <item name="android:textSize">@dimen/uikit_main_title_text_size</item>
     </style>
 
+    <style name="UikitHMButton.Small">
+        <item name="android:minHeight">30dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/uikit_main_content_text_size</item>
+    </style>
+
     <!-- 主button -->
     <style name="UikitHMButton.Large.Main">
         <item name="android:textColor">@color/uikit_selector_btn_main</item>
         <item name="android:background">@drawable/uikit_selector_btn_main</item>
+    </style>
+
+    <style name="UikitHMButton.Small.Main">
+        <item name="android:textColor">@color/uikit_selector_btn_main</item>
+        <item name="android:background">@drawable/uikit_selector_btn_main_small</item>
     </style>
 
     <!-- 次button，不重要的 -->

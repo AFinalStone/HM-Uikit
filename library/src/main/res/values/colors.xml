@@ -17,8 +17,6 @@
     <color name="uikit_green">#55AC48</color>
     <!--灰色-->
     <color name="uikit_gray">#8F8F8F</color>
-    <!--背景色-->
-    <color name="uikit_background">#FFF2F2F2</color>
 
     <!--白色水波纹颜色-->
     <color name="whiteRipple">#FFD7D7D7</color>
@@ -72,17 +70,22 @@
     <!-- 功能色：微信登录/成功等 -->
     <color name="uikit_function_succ">#FF07C160</color>
     <color name="uikit_function_succ_pressed">#FF06B359</color>
-
     <!-- 功能色：提醒/可操作功能 -->
     <color name="uikit_function_remind">#FF2782E2</color>
+
     <!-- 主标题/正文 -->
     <color name="uikit_text_main_content">#FF111111</color>
     <!-- 输入框内默认文字、次要信息 -->
-    <color name="uikit_text_sub_content">#FFCFCFD6</color>
+    <color name="uikit_text_sub_content">#FF575B62</color>
+    <!-- 输入框内文字、弱化信息 -->
+    <color name="uikit_text_hint">#FFCFCFD6</color>
     <!-- 字体 辅助信息 -->
     <color name="uikit_text_auxiliary">#FF9B9B9B</color>
 
     <!-- 衍生色 分割线 -->
     <color name="uikit_divider">#FFE6E6E6</color>
+
+    <!--背景色-->
+    <color name="uikit_background">#FFF8F8F9</color>
 
 </resources>

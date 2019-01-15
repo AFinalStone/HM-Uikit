@@ -33,4 +33,6 @@
     <!--图片控件-->
     <string name="uikit_contentDescription">图片控件</string>
 
+    <string name="uikit_network_disconnected">糟糕，与外界失联了，快去诊断网络</string>
+
 </resources>

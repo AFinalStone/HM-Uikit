@@ -29,6 +29,7 @@
     <dimen name="uikit_topbar_height">72dip</dimen>
     <dimen name="uikit_status_bar_height">24dp</dimen>
     <dimen name="uikit_shape_common_btn_corners_radius">4dp</dimen>
+    <dimen name="uikit_shape_common_btn_corners_radius_small">2dp</dimen>
 
     <!-- 用于导航栏、按钮、弹窗标题文字：如导航标题、登录按钮、验证次数提示文字等 -->
     <dimen name="uikit_main_title_text_size">18dp</dimen>
