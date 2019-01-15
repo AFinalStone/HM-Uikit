@@ -7,14 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Created by 钉某人
  * github: https://github.com/DingMouRen
- * email: naildingmouren@gmail.com
+ *
  */
+public class PickerLayoutManager extends LinearLayoutManager {
 
-
-public class TimePickerLayoutManager extends LinearLayoutManager {
-    private static final String TAG = "TimePickerLayoutManager";
+    /**
+     * 停止时，显示在中间的View的监听
+     */
+    public interface OnSelectedViewListener {
+        void onSelectedView(View view, int position);
+    }
 
     private float mScale = 0.5f;
     private boolean mIsAlpha = true;
@@ -26,13 +29,13 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
     private RecyclerView mRecyclerView;
     private int mOrientation;
 
-    public TimePickerLayoutManager(Context context, int orientation, boolean reverseLayout) {
+    public PickerLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
         this.mLinearSnapHelper = new LinearSnapHelper();
         this.mOrientation = orientation;
     }
 
-    public TimePickerLayoutManager(Context context, RecyclerView recyclerView, int orientation, boolean reverseLayout, int itemCount, float scale, boolean isAlpha) {
+    public PickerLayoutManager(Context context, RecyclerView recyclerView, int orientation, boolean reverseLayout, int itemCount, float scale, boolean isAlpha) {
         super(context, orientation, reverseLayout);
         this.mLinearSnapHelper = new LinearSnapHelper();
         this.mItemCount = itemCount;
@@ -45,6 +48,7 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
 
     /**
      * 添加LinearSnapHelper
+     *
      * @param view
      */
     @Override
@@ -56,6 +60,7 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
     /**
      * 没有指定显示条目的数量时，RecyclerView的宽高由自身确定
      * 指定显示条目的数量时，根据方向分别计算RecyclerView的宽高
+     *
      * @param recycler
      * @param state
      * @param widthSpec
@@ -74,16 +79,18 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
             if (mOrientation == HORIZONTAL) {
                 int paddingHorizontal = (mItemCount - 1) / 2 * mItemViewWidth;
                 mRecyclerView.setClipToPadding(false);
-                mRecyclerView.setPadding(paddingHorizontal,0,paddingHorizontal,0);
+                mRecyclerView.setPadding(paddingHorizontal, 0, paddingHorizontal, 0);
                 setMeasuredDimension(mItemViewWidth * mItemCount, mItemViewHeight);
             } else if (mOrientation == VERTICAL) {
                 int paddingVertical = (mItemCount - 1) / 2 * mItemViewHeight;
                 mRecyclerView.setClipToPadding(false);
-                mRecyclerView.setPadding(0,paddingVertical,0,paddingVertical);
-                setMeasuredDimension(mItemViewWidth, mItemViewHeight * mItemCount);
+                mRecyclerView.setPadding(0, paddingVertical, 0, paddingVertical);
+
+                int width = View.MeasureSpec.getSize(widthSpec);
+                setMeasuredDimension(width, mItemViewHeight * mItemCount);
             }
-        }else {
-            super.onMeasure(recycler,state,widthSpec,heightSpec);
+        } else {
+            super.onMeasure(recycler, state, widthSpec, heightSpec);
         }
 
     }
@@ -93,9 +100,9 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
         super.onLayoutChildren(recycler, state);
         if (getItemCount() < 0 || state.isPreLayout()) return;
 
-        if (mOrientation == HORIZONTAL){
+        if (mOrientation == HORIZONTAL) {
             scaleHorizontalChildView();
-        }else if (mOrientation == VERTICAL){
+        } else if (mOrientation == VERTICAL) {
             scaleVerticalChildView();
         }
 
@@ -119,7 +126,7 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
     private void scaleHorizontalChildView() {
         float mid = getWidth() / 2.0f;
         for (int i = 0; i < getChildCount(); i++) {
-            View child =  getChildAt(i);
+            View child = getChildAt(i);
             float childMid = (getDecoratedLeft(child) + getDecoratedRight(child)) / 2.0f;
             float scale = 1.0f + (-1 * (1 - mScale)) * (Math.min(mid, Math.abs(mid - childMid))) / mid;
             child.setScaleX(scale);
@@ -133,12 +140,12 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
     /**
      * 竖向方向上的缩放
      */
-    private void scaleVerticalChildView(){
+    private void scaleVerticalChildView() {
         float mid = getHeight() / 2.0f;
         for (int i = 0; i < getChildCount(); i++) {
-            View child =  getChildAt(i);
+            View child = getChildAt(i);
             float childMid = (getDecoratedTop(child) + getDecoratedBottom(child)) / 2.0f;
-            float scale = 1.0f + (-1 *  (1 - mScale)) * (Math.min(mid, Math.abs(mid - childMid))) / mid;
+            float scale = 1.0f + (-1 * (1 - mScale)) * (Math.min(mid, Math.abs(mid - childMid))) / mid;
             child.setScaleX(scale);
             child.setScaleY(scale);
             if (mIsAlpha) {
@@ -150,6 +157,7 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
 
     /**
      * 当滑动停止时触发回调
+     *
      * @param state
      */
     @Override
@@ -159,20 +167,13 @@ public class TimePickerLayoutManager extends LinearLayoutManager {
             if (mOnSelectedViewListener != null && mLinearSnapHelper != null) {
                 View view = mLinearSnapHelper.findSnapView(this);
                 int position = getPosition(view);
-                mOnSelectedViewListener.onSelectedView(view,position);
+                mOnSelectedViewListener.onSelectedView(view, position);
             }
         }
     }
-
 
     public void setOnSelectedViewListener(OnSelectedViewListener listener) {
         this.mOnSelectedViewListener = listener;
     }
 
-    /**
-     * 停止时，显示在中间的View的监听
-     */
-    public interface OnSelectedViewListener {
-        void onSelectedView(View view, int position);
-    }
 }

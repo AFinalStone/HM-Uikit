@@ -61,7 +61,7 @@ public class HMActionSheetDialog extends Dialog {
         WindowManager.LayoutParams attrs = window.getAttributes();
         attrs.width = WindowManager.LayoutParams.MATCH_PARENT;
         attrs.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setGravity(Gravity.BOTTOM);;
+        window.setGravity(Gravity.BOTTOM);
         window.setAttributes(attrs);
     }
 
