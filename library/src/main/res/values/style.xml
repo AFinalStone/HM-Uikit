@@ -33,7 +33,7 @@
     </style>
 
     <!--对话框-->
-    <style name="UikitAlertDialogStyle" parent="@android:style/Theme.Dialog">
+    <style name="UikitAlertDialogStyle" parent="@android:style/Theme.Holo.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFrame">@null</item>

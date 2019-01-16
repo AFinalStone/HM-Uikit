@@ -81,10 +81,10 @@ public class CircleIndicator extends LinearLayout {
                 typedArray.getResourceId(R.styleable.HMCircleIndicator_ci_animator_reverse, 0);
         mIndicatorBackgroundResId =
                 typedArray.getResourceId(R.styleable.HMCircleIndicator_ci_drawable,
-                        R.drawable.uikit_circle_indicator_radius_color_white);
+                        R.drawable.uikit_circle_indicator_radius_color_black);
         mIndicatorUnselectedBackgroundResId =
                 typedArray.getResourceId(R.styleable.HMCircleIndicator_ci_drawable_unselected,
-                        R.drawable.uikit_circle_indicator_radius_color_white);
+                        R.drawable.uikit_circle_indicator_radius_color_gray);
 
         int orientation = typedArray.getInt(R.styleable.HMCircleIndicator_ci_orientation, -1);
         setOrientation(orientation == VERTICAL ? VERTICAL : HORIZONTAL);
@@ -100,7 +100,7 @@ public class CircleIndicator extends LinearLayout {
      */
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin) {
         configureIndicator(indicatorWidth, indicatorHeight, indicatorMargin,
-                R.animator.uikit_circle_indicator_alpha, 0, R.drawable.uikit_circle_indicator_radius_color_white, R.drawable.uikit_circle_indicator_radius_color_white);
+                R.animator.uikit_circle_indicator_alpha, 0, R.drawable.uikit_circle_indicator_radius_color_black, R.drawable.uikit_circle_indicator_radius_color_gray);
     }
 
     public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,

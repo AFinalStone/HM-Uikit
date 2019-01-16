@@ -167,9 +167,10 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        dismiss();
         if (mBuilder == null)
             return;
+        if (mBuilder.mDismissedOnClickBtn)
+            dismiss();
         if (v == mBtnPos) {
             mBuilder.mOnClickListener.onPosClick();
         } else if (v == mBtnNeg) {
@@ -192,6 +193,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         private int mBtnNegStyleType;
         private OnClickListener mOnClickListener;
         private int mMessageGravity;
+        private boolean mDismissedOnClickBtn = true;
 
         public Builder(Context context) {
             mContext = context;
@@ -274,6 +276,11 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
         public Builder setMessageGravity(int gravity) {
             mMessageGravity = gravity;
+            return this;
+        }
+
+        public Builder setDismessedOnClickBtn(boolean dismissedOnClickBtn) {
+            mDismissedOnClickBtn = dismissedOnClickBtn;
             return this;
         }
 

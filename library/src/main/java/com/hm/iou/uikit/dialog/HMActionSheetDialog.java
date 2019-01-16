@@ -79,7 +79,7 @@ public class HMActionSheetDialog extends Dialog {
         }
 
         mRvList.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new SheetListAdapter(getContext(), mBuilder.mDataList);
+        mAdapter = new SheetListAdapter(getContext(), mBuilder.mDataList, mBuilder.mCanSelected);
         mAdapter.setSelected(mBuilder.mSelectedIndex);
         mRvList.setAdapter(mAdapter);
     }
@@ -89,10 +89,12 @@ public class HMActionSheetDialog extends Dialog {
         Context mContext;
         List<String> mDataList;
         int mSelectedIndex = -1;
+        boolean mCanSelected;
 
-        public SheetListAdapter(Context context, List<String> list) {
+        public SheetListAdapter(Context context, List<String> list, boolean canSelected) {
             mContext = context;
             mDataList = list;
+            mCanSelected = canSelected;
         }
 
         @Override
@@ -125,10 +127,18 @@ public class HMActionSheetDialog extends Dialog {
         @Override
         public void onBindViewHolder(SheetListViewHolder holder, int position) {
             holder.tvName.setText(mDataList.get(position));
-            holder.tvName.setTextColor(mSelectedIndex == position ?
-                    mContext.getResources().getColor(R.color.uikit_text_main_content) :
-                    mContext.getResources().getColor(R.color.uikit_text_auxiliary));
-            holder.ivSelected.setVisibility(mSelectedIndex == position ? View.VISIBLE : View.GONE);
+            if (mCanSelected) {
+                holder.tvName.setTextColor(mSelectedIndex == position ?
+                        mContext.getResources().getColor(R.color.uikit_text_main_content) :
+                        mContext.getResources().getColor(R.color.uikit_text_auxiliary));
+            } else {
+                holder.tvName.setTextColor(mContext.getResources().getColor(R.color.uikit_text_main_content));
+            }
+            if (mCanSelected) {
+                holder.ivSelected.setVisibility(mSelectedIndex == position ? View.VISIBLE : View.GONE);
+            } else {
+                holder.ivSelected.setVisibility(View.GONE);
+            }
             holder.itemView.setTag(position);
         }
 
@@ -161,6 +171,7 @@ public class HMActionSheetDialog extends Dialog {
         private List<String> mDataList;
         private int mSelectedIndex = -1;
         private OnItemClickListener mListener;
+        private boolean mCanSelected = true;        //选中之后，选中的会有打勾标记，否则没有
 
         public Builder(Context context) {
             mContext = context;
@@ -198,6 +209,11 @@ public class HMActionSheetDialog extends Dialog {
 
         public Builder setOnItemClickListener(OnItemClickListener listener) {
             mListener = listener;
+            return this;
+        }
+
+        public Builder setCanSelected(boolean canSelected) {
+            mCanSelected = canSelected;
             return this;
         }
 
