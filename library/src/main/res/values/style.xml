@@ -262,10 +262,20 @@
         <item name="android:textColorHint">@color/uikit_text_hint</item>
     </style>
 
+    <!-- 无背景的普通输入框 -->
     <style name="UikitEditText.Normal">
         <item name="android:layout_width">match_parent</item>
         <item name="android:minHeight">40dp</item>
         <item name="android:background">@null</item>
+    </style>
+
+    <!-- 有个灰色背景 输入区域的输入框 -->
+    <style name="UikitEditText.Normal.TextArea">
+        <item name="android:background">@drawable/uikit_bg_edit_gray</item>
+        <item name="android:textColor">@color/uikit_text_main_content</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <!--密码输入框-->
