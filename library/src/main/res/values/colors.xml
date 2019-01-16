@@ -75,7 +75,7 @@
 
     <!-- 主标题/正文 -->
     <color name="uikit_text_main_content">#FF111111</color>
-    <!-- 输入框内默认文字、次要信息 -->
+    <!--  -->
     <color name="uikit_text_sub_content">#FF575B62</color>
     <!-- 输入框内文字、弱化信息 -->
     <color name="uikit_text_hint">#FFCFCFD6</color>
