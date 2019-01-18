@@ -172,9 +172,13 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         if (mBuilder.mDismissedOnClickBtn)
             dismiss();
         if (v == mBtnPos) {
-            mBuilder.mOnClickListener.onPosClick();
+            if (mBuilder.mOnClickListener != null) {
+                mBuilder.mOnClickListener.onPosClick();
+            }
         } else if (v == mBtnNeg) {
-            mBuilder.mOnClickListener.onNegClick();
+            if (mBuilder.mOnClickListener != null) {
+                mBuilder.mOnClickListener.onNegClick();
+            }
         }
     }
 
