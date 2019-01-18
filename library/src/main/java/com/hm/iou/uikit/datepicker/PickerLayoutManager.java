@@ -29,6 +29,8 @@ public class PickerLayoutManager extends LinearLayoutManager {
     private RecyclerView mRecyclerView;
     private int mOrientation;
 
+    private int mLastScrolled = 0;
+
     public PickerLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
         this.mLinearSnapHelper = new LinearSnapHelper();
@@ -69,7 +71,6 @@ public class PickerLayoutManager extends LinearLayoutManager {
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
         if (getItemCount() != 0 && mItemCount != 0) {
-
             View view = recycler.getViewForPosition(0);
             measureChildWithMargins(view, widthSpec, heightSpec);
 
@@ -117,7 +118,20 @@ public class PickerLayoutManager extends LinearLayoutManager {
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
         scaleVerticalChildView();
-        return super.scrollVerticallyBy(dy, recycler, state);
+        int sy = super.scrollVerticallyBy(dy, recycler, state);
+        System.out.println("sy = " + sy);
+        // fix bug：当短距离快速滑到最后一项时，scrollState 不会变为 IDLE 状态
+        if (sy == 0 && mLastScrolled > 0) {
+            if (mRecyclerView != null && mRecyclerView.getAdapter() != null) {
+                mRecyclerView.scrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1);
+            }
+        } else if (sy == 0 && mLastScrolled < 0) {
+            if (mRecyclerView != null && mRecyclerView.getAdapter() != null) {
+                mRecyclerView.scrollToPosition(0);
+            }
+        }
+        mLastScrolled = sy;
+        return sy;
     }
 
     /**
@@ -132,7 +146,7 @@ public class PickerLayoutManager extends LinearLayoutManager {
             child.setScaleX(scale);
             child.setScaleY(scale);
             if (mIsAlpha) {
-                child.setAlpha(scale);
+                child.setAlpha(scale * 0.8f);
             }
         }
     }
@@ -149,7 +163,7 @@ public class PickerLayoutManager extends LinearLayoutManager {
             child.setScaleX(scale);
             child.setScaleY(scale);
             if (mIsAlpha) {
-                child.setAlpha(scale);
+                child.setAlpha(scale * 0.8f);
             }
         }
     }
