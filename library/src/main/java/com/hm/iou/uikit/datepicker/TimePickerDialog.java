@@ -132,7 +132,8 @@ public class TimePickerDialog extends Dialog {
         }
 
         for (PickerView pickerView : mPickers) {
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            int h = (int) (getContext().getResources().getDisplayMetrics().density * 250);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, h);
             params.weight = 1;
             mLayoutPickerContainer.addView(pickerView, params);
         }
@@ -299,6 +300,7 @@ public class TimePickerDialog extends Dialog {
     }
 
     private void onYearChange(int index, int year) {
+        System.out.println("onYear: " + year);
         mSelectedYear = year;
         mMonthList.clear();
         int startM = 0;
@@ -344,6 +346,7 @@ public class TimePickerDialog extends Dialog {
     }
 
     private void onMonthChange(int index, int month) {
+        System.out.println("onMonth: year = " + mSelectedYear + ", month = " + month);
         mSelectedMonth = month;
         mDayList.clear();
         int startD = -1;

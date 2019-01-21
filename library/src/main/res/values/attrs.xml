@@ -157,4 +157,8 @@
 
     </declare-styleable>
 
+    <declare-styleable name="MaxHeightRecyclerView">
+        <attr name="maxListHeight" format="dimension" />
+    </declare-styleable>
+
 </resources>
