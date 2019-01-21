@@ -237,12 +237,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/uikit_main_content_text_size</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/uikit_text_sub_content</item>
+        <item name="android:textColor">@color/uikit_text_main_content</item>
     </style>
 
     <!-- 描述性文字等辅助信息 -->
     <style name="UikitTextView.Auxiliary">
-        <item name="android:textColor">@color/uikit_text_sub_content</item>
+        <item name="android:textColor">@color/uikit_text_auxiliary</item>
     </style>
 
     <style name="UikitTextView.Auxiliary.Large">
