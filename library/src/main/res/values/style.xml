@@ -238,6 +238,7 @@
         <item name="android:textSize">@dimen/uikit_main_content_text_size</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/uikit_text_main_content</item>
+        <item name="android:textColorHint">@color/uikit_text_hint</item>
     </style>
 
     <!-- 描述性文字等辅助信息 -->
