@@ -38,13 +38,13 @@
         <attr name="tabTextUnSelectColor" format="color|reference" />
         <attr name="tabTextHeight" format="dimension" />
         <attr name="tabTextWidth" format="dimension" />
-
         <attr name="tabImageSelectDrawable" format="reference" />
         <attr name="tabImageUnSelectDrawable" format="reference" />
         <attr name="tabImageHeight" format="dimension" />
         <attr name="tabImageWidth" format="dimension" />
-
         <attr name="isSelect" format="boolean" />
+        <attr name="isShowDot" format="boolean" />
+        <attr name="tabDotColor" format="reference" />
 
     </declare-styleable>
 

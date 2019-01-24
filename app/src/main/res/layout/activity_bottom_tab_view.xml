@@ -62,6 +62,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            app:isShowDot="true"
+            app:tabDotColor="@color/uikit_green"
             app:tabImageSelectDrawable="@mipmap/ic_tab_mine_selected"
             app:tabImageUnSelectDrawable="@mipmap/ic_tab_mine_unselected"
             app:tabText="我的"
