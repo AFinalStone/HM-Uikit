@@ -1,51 +1,38 @@
 package com.hm.iou.uikit.demo;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
-import com.hm.iou.uikit.datepicker.CustomDatePicker;
 import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
 import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
-import com.hm.iou.uikit.dialog.IOSActionSheetItem;
-import com.hm.iou.uikit.dialog.IOSActionSheetTitleDialog;
-import com.hm.iou.uikit.dialog.IOSAlertDialog;
-import com.hm.iou.uikit.dialog.PermissionDialog;
+import com.hm.iou.uikit.dialog.HMActionSheetDialog;
+import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
-import com.hm.iou.uikit.wheel.BaseWheelTextAdapter;
-import com.hm.iou.uikit.wheel.OnWheelChangedListener;
-import com.hm.iou.uikit.wheel.WheelView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    CustomDatePicker mDatePicker;
-    TimePickerDialog mTimePickerDialog;
-    String TIME_TODAY;
     EditText mEtClear;
     HMKeyboardEditText mEtTestInputNum;
     HMKeyboardEditText mEtTestInputABC;
@@ -64,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         mEtTestInputNum.bindKeyBoardView(getWindow(), new NumberKey(this));
         mEtTestInputABC = findViewById(R.id.edit_testInputABC);
         mEtTestInputABC.bindKeyBoardView(getWindow(), new ABCKey(this));
-//        initDatePick();
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,23 +62,26 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_alert_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new IOSAlertDialog.Builder(MainActivity.this)
-                        .setTitle("测试标题")
+                new HMAlertDialog.Builder(MainActivity.this)
+                        .setTitle("标题")
                         .setMessage("这是文本内容")
-                        .setCancelable(false)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        .setMessageGravity(Gravity.CENTER)
+                        .setCancelable(true)
+                        .setCanceledOnTouchOutside(false)
+                        .setPositiveButton("确定")
+                        .setNegativeButton("取消")
+                        .setOnClickListener(new HMAlertDialog.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onPosClick() {
+                                Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_SHORT).show();
                             }
-                        })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
+                            @Override
+                            public void onNegClick() {
+                                Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .show();
+                        .create().show();
             }
         });
         findViewById(R.id.btn_dialogCommon).setOnClickListener(new View.OnClickListener() {
@@ -150,34 +139,57 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_showDatePick).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimePickerDialog
-                        .Builder(MainActivity.this)
+/*                List<String> list = new ArrayList<>();
+                for (int i=0; i<40; i++) {
+                    list.add(i + "");
+                }
+                new PickerDialog.Builder(MainActivity.this)
+                        .setTitle("最近还款日")
+                        .setPickerListWithString(list)
+                        .setOnPickerConfirmListener(new PickerDialog.OnPickerConfirmListener() {
+                            @Override
+                            public void onConfirm(int index, Object value) {
+                                System.out.println("index = " + index + ", value = " + value);
+                            }
+                        })
+                        .create().show();*/
+
+                new TimePickerDialog.Builder(MainActivity.this)
+                        .setTitle("还款时间选择")
+                        .setScrollType(TimePickerDialog.SCROLL_TYPE.MINUTE)
+                        .setTimeRange("2008-05-12 12:00:00", "2022-02-28 16:23:39")
+//                        .setSelectedTime("2012-11-04 12:23:34")
+                        .setOnPickerConfirmListener(new TimePickerDialog.OnTimeConfirmListener() {
+                            @Override
+                            public void onConfirm(int year, int month, int day, int hour, int minute) {
+                                System.out.println(year + "-" + month + "-" + day + " " + hour + ":" + minute);
+                            }
+                        })
+                        .create()
                         .show();
+
             }
         });
 
         findViewById(R.id.btn_actionsheet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new IOSActionSheetTitleDialog.Builder(MainActivity.this)
-                        .addSheetItem(IOSActionSheetItem.create("垃圾广告").setItemClickListener(new DialogInterface.OnClickListener() {
+                List<String> list = new ArrayList<>();
+                list.add("一月一付");
+                list.add("一季一付");
+                list.add("半年一付");
+                new HMActionSheetDialog.Builder(MainActivity.this)
+                        .setActionSheetList(list)
+                        .setTitle("还款方式")
+                        .setSelectedIndex(2)
+                        .setCancelable(false)
+                        .setOnItemClickListener(new HMActionSheetDialog.OnItemClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onItemClick(int index, String value) {
+                                Toast.makeText(MainActivity.this, index + " = " + value, Toast.LENGTH_LONG).show();
+
                             }
-                        }))
-                        .addSheetItem(IOSActionSheetItem.create("政治谣言").setItemClickListener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }))
-                        .addSheetItem(IOSActionSheetItem.create("色情图片").setItemClickListener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }))
-                        .show();
+                        }).create().show();
             }
         });
 
@@ -190,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "重试。。。。", Toast.LENGTH_LONG).show();
-                        loadingView.showDataEmpty("");
+                        loadingView.showDataEmpty("没有数据额，打个借条吧。");
                     }
                 });
             }
@@ -200,22 +212,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new PermissionDialog.Builder(MainActivity.this)
-                        .setTitle("开启位置权限")
-                        .setMessage("我们需要获得该权限，才能为您提供省市头条信息及附近律师。")
-                        .setPermissionIcon(R.mipmap.uikit_icon_header_man)
-                        .setOnClickListener(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (which == DialogInterface.BUTTON_POSITIVE) {
-                                    Toast.makeText(MainActivity.this, "允许", Toast.LENGTH_SHORT).show();
-                                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
-                                    Toast.makeText(MainActivity.this, "不允许", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        })
-                        .setCancelable(false)
-                        .create().show();
+
             }
         });
 
@@ -246,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_timePickerDialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTimePickerDialog = new TimePickerDialog.Builder(MainActivity.this).show();
+                new TimePickerDialog.Builder(MainActivity.this).create().show();
             }
         });
         initWheelView();
@@ -262,48 +259,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    private void initDatePick() {
-//        //初始化时间选择控件
-////        final TimeUtil timeUtil = TimeUtil.getInstance(TimeUtil.SimpleDateFormatEnum.DateFormatForApp);
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-//        Date today = new Date(System.currentTimeMillis());
-//        TIME_TODAY = simpleDateFormat.format(today);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(today);
-//        calendar.add(Calendar.YEAR, 10);
-//        Date endTime = calendar.getTime();
-//        String TIME_END = simpleDateFormat.format(endTime);
-//
-//        mDatePicker = new CustomDatePicker(MainActivity.this, new CustomDatePicker.ResultHandler() {
-//            @Override
-//            public void handle(String time) { // 回调接口，获得选中的时间
-//                String strTime = time.split(" ")[0];
-//                Toast.makeText(MainActivity.this, strTime, Toast.LENGTH_SHORT).show();
-//            }
-//        }, TIME_TODAY, TIME_END); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-//        mDatePicker.showSpecificTime(false); // 不显示时和分
-//        mDatePicker.setIsLoop(false); // 不允许循环滚动
-//    }
-
     private void initWheelView() {
-        WheelView wheelViewTimeHour = findViewById(R.id.wheelView);
-        final List<String> listHour = new ArrayList<>();
-        for (int i = 0; i <= 23; i++) {
-            listHour.add(i + "时");
-        }
-        wheelViewTimeHour.setViewAdapter(new BaseWheelTextAdapter<String>(this, listHour) {
-            @Override
-            protected CharSequence getItemText(int i) {
-                return listHour.get(i);
-            }
-        });
-        wheelViewTimeHour.addChangingListener(new OnWheelChangedListener() {
-            @Override
-            public void onChanged(WheelView wheelView, int i, int currIndex) {
-                ToastUtil.showMessage(MainActivity.this, "old：" + i + "   new：" + currIndex);
-            }
-        });
-        wheelViewTimeHour.setVisibleItems(5);
+
     }
 
     /**

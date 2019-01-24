@@ -25,20 +25,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     compile 'com.android.support:design:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
-
+    compile 'com.android.support:cardview-v7:26.1.0'
     //下拉刷新
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-
     compile 'com.kcrason:dynamicpagerindicator:1.0.3'
     //轮播图组件
     compile 'com.youth.banner:banner:1.4.10'

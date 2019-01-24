@@ -16,9 +16,8 @@ import android.widget.TextView;
 
 public class HMLoadingView extends RelativeLayout {
 
-    private static String DEFAULT_FAIL_MSG = "网络加载失败，请检查网络";
-
     private Context mContext;
+    private String mDefaultFailMsg;
 
     private View mLayoutEmpty;
     private View mLayoutFail;
@@ -38,6 +37,7 @@ public class HMLoadingView extends RelativeLayout {
     public HMLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
+        mDefaultFailMsg = mContext.getString(R.string.uikit_network_disconnected);
     }
 
     public void showDataLoading() {
@@ -71,6 +71,10 @@ public class HMLoadingView extends RelativeLayout {
         if (mLayoutLoading != null) {
             mLayoutLoading.setVisibility(View.GONE);
             stopLoadingAnim();
+        }
+        TextView tvEmpty = mLayoutEmpty.findViewById(R.id.tv_data_empty);
+        if (tvEmpty != null) {
+            tvEmpty.setText(tips);
         }
         setVisibility(View.VISIBLE);
     }
@@ -119,12 +123,12 @@ public class HMLoadingView extends RelativeLayout {
     }
 
     /**
-     * 显示数据加载失败，默认失败提示文案为"网络加载失败，请检查网络"
+     * 显示数据加载失败，默认失败提示文案为"糟糕，与外界失联了，快去诊断网络"
      *
      * @param listener
      */
     public void showDataFail(OnClickListener listener) {
-        showDataFail(DEFAULT_FAIL_MSG, listener);
+        showDataFail(mDefaultFailMsg, listener);
     }
 
     private void addDataLoadingView() {
@@ -136,8 +140,6 @@ public class HMLoadingView extends RelativeLayout {
         addView(mLayoutLoading, params);
         mIvLoading = mLayoutLoading.findViewById(R.id.iv_loading);
     }
-
-
 
     private void addDataEmptyView() {
         LayoutInflater inflater = LayoutInflater.from(mContext);

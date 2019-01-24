@@ -17,23 +17,22 @@
         android:id="@+id/tv_data_fail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:maxLines="1"
-        android:text="网络加载失败，请检查网络"
-        android:textColor="#ff999999"
-        android:textSize="13dp" />
+        android:text="@string/uikit_network_disconnected"
+        android:textColor="@color/uikit_text_auxiliary"
+        android:textSize="@dimen/uikit_main_content_text_size" />
 
     <TextView
         android:id="@+id/tv_data_fail_retry"
-        android:layout_width="80dip"
-        android:layout_height="32dp"
+        android:layout_width="52dip"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:layout_marginTop="12dip"
-        android:background="@drawable/uikit_bg_fail_retry"
+        android:layout_marginTop="30dip"
         android:gravity="center"
-        android:text="重新加载"
-        android:textColor="#ff222222"
-        android:textSize="13dp" />
+        android:text="刷新"
+        style="@style/UikitHMButton.Small.Main"
+        />
 
 </LinearLayout>
