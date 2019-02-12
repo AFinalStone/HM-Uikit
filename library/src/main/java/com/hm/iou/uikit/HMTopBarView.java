@@ -238,6 +238,10 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         return mTvTitle.getText();
     }
 
+    public TextView getTitleView() {
+        return mTvTitle;
+    }
+
     /**
      * 设置右边显示操作item文字
      *
