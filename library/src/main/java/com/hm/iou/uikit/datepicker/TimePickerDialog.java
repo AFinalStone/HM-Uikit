@@ -52,7 +52,6 @@ public class TimePickerDialog extends Dialog {
     private Builder mBuilder;
 
     private TextView mTvTitle;
-    private LinearLayout mLayoutPickerContainer;
     private PickerView[] mPickers;
 
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -93,7 +92,6 @@ public class TimePickerDialog extends Dialog {
 
     private void initContent() {
         mTvTitle = findViewById(R.id.tv_dialog_title);
-        mLayoutPickerContainer = findViewById(R.id.ll_dialog_picker_container);
         findViewById(R.id.tv_dialog_confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,27 +113,17 @@ public class TimePickerDialog extends Dialog {
             mTvTitle.setText(mBuilder.mTitle);
         }
 
+        PickerView pickerYear = findViewById(R.id.pv_dialog_year);
+        PickerView pickerMonth = findViewById(R.id.pv_dialog_month);
+        PickerView pickerDay = findViewById(R.id.pv_dialog_day);
+        PickerView pickerHour = findViewById(R.id.pv_dialog_hour);
+        PickerView pickerMinute = findViewById(R.id.pv_dialog_minute);
         if (mBuilder.mScrollType == SCROLL_TYPE.DAY) {
-            mPickers = new PickerView[]{
-                    new PickerView(getContext()),
-                    new PickerView(getContext()),
-                    new PickerView(getContext()),
-            };
+            mPickers = new PickerView[]{pickerYear, pickerMonth, pickerDay};
         } else if (mBuilder.mScrollType == SCROLL_TYPE.MINUTE) {
-            mPickers = new PickerView[]{
-                    new PickerView(getContext()),
-                    new PickerView(getContext()),
-                    new PickerView(getContext()),
-                    new PickerView(getContext()),
-                    new PickerView(getContext())
-            };
-        }
-
-        for (PickerView pickerView : mPickers) {
-            int h = (int) (getContext().getResources().getDisplayMetrics().density * 250);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, h);
-            params.weight = 1;
-            mLayoutPickerContainer.addView(pickerView, params);
+            mPickers = new PickerView[]{pickerYear, pickerMonth, pickerDay, pickerHour, pickerMinute};
+            pickerHour.setVisibility(View.VISIBLE);
+            pickerMinute.setVisibility(View.VISIBLE);
         }
 
         initPicker();
@@ -300,7 +288,6 @@ public class TimePickerDialog extends Dialog {
     }
 
     private void onYearChange(int index, int year) {
-        System.out.println("onYear: " + year);
         mSelectedYear = year;
         mMonthList.clear();
         int startM = 0;
@@ -346,7 +333,6 @@ public class TimePickerDialog extends Dialog {
     }
 
     private void onMonthChange(int index, int month) {
-        System.out.println("onMonth: year = " + mSelectedYear + ", month = " + month);
         mSelectedMonth = month;
         mDayList.clear();
         int startD = -1;

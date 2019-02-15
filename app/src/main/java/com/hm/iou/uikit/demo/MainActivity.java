@@ -16,6 +16,7 @@ import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
+import com.hm.iou.uikit.datepicker.PickerDialog;
 import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
@@ -153,11 +154,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .create().show();*/
-
                 new TimePickerDialog.Builder(MainActivity.this)
                         .setTitle("还款时间选择")
                         .setScrollType(TimePickerDialog.SCROLL_TYPE.MINUTE)
-                        .setTimeRange("2008-05-12 12:00:00", "2022-02-28 16:23:39")
+                        .setTimeRange("1978-05-12 12:00:00", "2042-01-18 16:23:39")
 //                        .setSelectedTime("2012-11-04 12:23:34")
                         .setOnPickerConfirmListener(new TimePickerDialog.OnTimeConfirmListener() {
                             @Override
@@ -167,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .create()
                         .show();
-
             }
         });
 
@@ -178,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
                 list.add("一月一付");
                 list.add("一季一付");
                 list.add("半年一付");
+                for (int j=0; j<20; j++) {
+                    list.add("半年一付");
+                }
                 new HMActionSheetDialog.Builder(MainActivity.this)
                         .setActionSheetList(list)
                         .setTitle("还款方式")

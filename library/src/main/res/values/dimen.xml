@@ -31,6 +31,12 @@
     <dimen name="uikit_shape_common_btn_corners_radius">4dp</dimen>
     <dimen name="uikit_shape_common_btn_corners_radius_small">2dp</dimen>
 
+    <dimen name="WheelItemTextSize">16sp</dimen>
+    <dimen name="WheelSelectedItemTextSize">20sp</dimen>
+    <dimen name="WheelItemHeightSpace">16dp</dimen>
+    <dimen name="WheelItemWidthSpace">32dp</dimen>
+
+
     <!-- 用于导航栏、按钮、弹窗标题文字：如导航标题、登录按钮、验证次数提示文字等 -->
     <dimen name="uikit_main_title_text_size">18dp</dimen>
     <!-- 用于列表昵称文字、下拉筛选标题：如订单列表昵称、地区年限筛选标题、资讯律师列表昵称 -->
