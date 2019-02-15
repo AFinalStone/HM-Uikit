@@ -283,7 +283,7 @@ public class WheelPicker extends View {
                 getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace));
         mItemHeightSpace = a.getDimensionPixelSize(R.styleable.WheelPicker_itemHeightSpace,
                 getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace));
-        mIsZoomInSelectedItem = a.getBoolean(R.styleable.WheelPicker_zoomInSelectedItem, true);
+        mIsZoomInSelectedItem = a.getBoolean(R.styleable.WheelPicker_zoomInSelectedItem, false);
         mIsShowCurtain = a.getBoolean(R.styleable.WheelPicker_wheelCurtain, true);
         mCurtainColor = a.getColor(R.styleable.WheelPicker_wheelCurtainColor, 0x083d3d3d);
         mIsShowCurtainBorder = a.getBoolean(R.styleable.WheelPicker_wheelCurtainBorder, false);
