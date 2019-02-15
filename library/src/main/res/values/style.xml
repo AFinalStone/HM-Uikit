@@ -192,6 +192,11 @@
         <item name="android:background">@drawable/uikit_selector_btn_bordered</item>
     </style>
 
+    <style name="UikitHMButton.Large.Black">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/uikit_selector_btn_black</item>
+    </style>
+
     <!-- 弹窗button -->
     <style name="UikitHMDialogButton" parent="UikitHMButton">
         <item name="android:layout_height">48dp</item>
