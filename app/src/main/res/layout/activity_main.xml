@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
+        android:paddingTop="100dip"
         android:paddingBottom="50dp">
 
         <com.hm.iou.uikit.HMTopBarView
