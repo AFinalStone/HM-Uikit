@@ -16,7 +16,6 @@ import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
-import com.hm.iou.uikit.datepicker.PickerDialog;
 import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         transparentStatusBar();
         initStatusBarDarkFont(true);
         setContentView(R.layout.activity_main);
+
 
         mEtClear = findViewById(R.id.et_clear);
         mEtTestInputNum = findViewById(R.id.edit_testInputNum);

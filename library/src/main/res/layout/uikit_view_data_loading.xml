@@ -12,7 +12,7 @@
         android:id="@+id/iv_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/uikit_loading_animlist"
+        android:src="@drawable/uikit_refresh_animlist"
         />
 
 </LinearLayout>
