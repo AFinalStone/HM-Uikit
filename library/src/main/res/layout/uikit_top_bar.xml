@@ -21,7 +21,22 @@
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
             android:scaleType="centerInside"
-            android:src="@mipmap/uikit_icon_close_black" />
+            android:src="@mipmap/uikit_icon_close_black"
+            />
+
+        <TextView
+            android:id="@+id/tv_topbar_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:minWidth="48dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:textColor="@color/uikit_text_sub_content"
+            android:textSize="@dimen/uikit_main_content_text_size"
+            android:visibility="gone"
+            tools:text="更多" />
 
         <TextView
             android:id="@+id/tv_topbar_title"
