@@ -49,8 +49,8 @@
     <color name="uikit_title_bg_color">#ffffffff</color>
 
     <!-- 导航栏中间title的颜色值 -->
-    <color name="uikit_title_center_text">#ff000000</color>
-    <color name="uikit_title_right_text">#ff111111</color>
+    <color name="uikit_title_center_text">#FF111111</color>
+    <color name="uikit_title_right_text">#ff575b62</color>
 
     <color name="uikit_wheel_center_divider_color">#C7C7C7</color>
 

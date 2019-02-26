@@ -100,7 +100,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
 
         mRightText = ta.getString(R.styleable.HmTopBar_rightText);
         mRightTextSize = ta.getDimensionPixelSize(R.styleable.HmTopBar_rightTextSize,
-                (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics())));
+                (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, getResources().getDisplayMetrics())));
         mRightTextColor = ta.getColorStateList(R.styleable.HmTopBar_rightTextColor);
         mBottomDividerIsShow = ta.getBoolean(R.styleable.HmTopBar_bottomDividerIsShow, true);
         if (mRightTextColor == null) {
@@ -343,6 +343,8 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         hideBackIcon();
         TextView tvLeft = findViewById(R.id.tv_topbar_left);
         tvLeft.setText(text);
+        tvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
+        tvLeft.setTextColor(mRightTextColor);
         tvLeft.setVisibility(View.VISIBLE);
         tvLeft.setOnClickListener(listener);
     }
