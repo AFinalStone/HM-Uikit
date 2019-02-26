@@ -2,5 +2,6 @@
 <resources>
 
     <item name="uikit_bind_editor_keyboard" type="id" />
+    <item name="hm_bottom_bar_title" type="id" />
 
 </resources>

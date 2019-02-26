@@ -38,6 +38,8 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private ImageView mIvBack;
     private TextView mTvTitle;
 
+    private TextView mSecondTitle;
+
     private OnBackClickListener mListener;
     private OnTitleClickListener mTitleClickListener;
 
@@ -94,6 +96,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         int pad = (int) (density * 10);
         mTvTitle.setPadding(pad, 0, pad, 0);
         addView(mTvTitle, params);
+        mTvTitle.setId(R.id.hm_bottom_bar_title);
 
         mTvTitle.setOnClickListener(this);
         mIvBack.setOnClickListener(this);
@@ -108,6 +111,31 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
 
     public void setOnBackClickListener(OnBackClickListener listener) {
         mListener = listener;
+    }
+
+    public void showSecondButton(CharSequence title, OnClickListener listener) {
+        if (mSecondTitle == null) {
+            mSecondTitle = new TextView(mContext);
+            mSecondTitle.setGravity(Gravity.CENTER);
+            float density = mContext.getResources().getDisplayMetrics().density;
+            RelativeLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
+            params.addRule(RelativeLayout.CENTER_VERTICAL);
+            params.addRule(RelativeLayout.LEFT_OF, R.id.hm_bottom_bar_title);
+            params.rightMargin = (int) (density * 12);
+            mSecondTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
+            mSecondTitle.setTextColor(getResources().getColor(R.color.uikit_text_sub_content));
+            mSecondTitle.setBackgroundResource(R.drawable.uikit_selector_btn_bordered_small);
+            int pad = (int) (density * 10);
+            mSecondTitle.setPadding(pad, 0, pad, 0);
+            addView(mSecondTitle, params);
+        }
+        mSecondTitle.setText(title);
+        mSecondTitle.setOnClickListener(listener);
+    }
+
+    public void hideSecondButton() {
+        if (mSecondTitle != null)
+            mSecondTitle.setVisibility(View.GONE);
     }
 
     public void setOnTitleClickListener(OnTitleClickListener listener) {

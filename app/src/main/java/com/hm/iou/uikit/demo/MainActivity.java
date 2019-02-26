@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
@@ -257,6 +258,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClickTitle() {
                 System.out.println("click title");
                 mBottomNavView.setEnabled(false);
+            }
+        });
+
+        mBottomNavView.showSecondButton("删除", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showMessage(MainActivity.this, "删除...");
             }
         });
     }
