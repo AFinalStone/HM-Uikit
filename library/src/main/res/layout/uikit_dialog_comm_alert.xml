@@ -21,6 +21,18 @@
         />
 
     <TextView
+        android:id="@+id/tv_dialog_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="为什么需要实名认证呢？"
+        android:textColor="@color/uikit_text_sub_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_marginTop="8dip"
+        android:visibility="gone"
+        />
+
+    <TextView
         android:id="@+id/txt_dialog_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

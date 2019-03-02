@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 new HMAlertDialog.Builder(MainActivity.this)
                         .setTitle("标题")
                         .setMessage("这是文本内容")
+                        .setSubTitle("这是副标题")
                         .setMessageGravity(Gravity.CENTER)
                         .setCancelable(true)
                         .setCanceledOnTouchOutside(false)

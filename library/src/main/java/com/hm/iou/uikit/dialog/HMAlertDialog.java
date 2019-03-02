@@ -37,6 +37,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
     private Builder mBuilder;
 
     private TextView mTvTitle;
+    private TextView mTvSubTitle;
     private TextView mTvMsg;
     private FrameLayout mFlCustomView;
     private Button mBtnNeg;
@@ -84,6 +85,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
     private void initContent() {
         mTvTitle = findViewById(R.id.tv_dialog_title);
+        mTvSubTitle = findViewById(R.id.tv_dialog_subtitle);
         mTvMsg = findViewById(R.id.txt_dialog_msg);
         mFlCustomView = findViewById(R.id.fl_dialog_custom);
         mBtnPos = findViewById(R.id.btn_dialog_pos);
@@ -109,6 +111,13 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
                 params.bottomMargin = (int) density * 46;
                 mTvTitle.setLayoutParams(params);
             }
+        }
+
+        if (TextUtils.isEmpty(mBuilder.mSubTitle)) {
+            mTvSubTitle.setVisibility(View.GONE);
+        } else {
+            mTvSubTitle.setVisibility(View.VISIBLE);
+            mTvSubTitle.setText(mBuilder.mSubTitle);
         }
 
         if (TextUtils.isEmpty(mBuilder.mMessage)) {
@@ -189,6 +198,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         private boolean mCancelable = true;
         private boolean mCanceledOnTouchOutside = true;
         private CharSequence mTitle;
+        private CharSequence mSubTitle;
         private CharSequence mMessage;
         private View mCustomContentView;
         private CharSequence mBtnPosText;
@@ -225,6 +235,16 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
         public Builder setTitle(int titleResId) {
             mTitle = mContext.getString(titleResId);
+            return this;
+        }
+
+        public Builder setSubTitle(CharSequence title) {
+            mSubTitle = title;
+            return this;
+        }
+
+        public Builder setSubTitle(int titleResId) {
+            mSubTitle = mContext.getString(titleResId);
             return this;
         }
 
