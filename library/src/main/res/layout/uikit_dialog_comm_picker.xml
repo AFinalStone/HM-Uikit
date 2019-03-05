@@ -34,10 +34,9 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="@color/uikit_divider" />
+    <View
+        style="@style/UikitDivider.Horizontal"
+        />
 
     <com.hm.iou.uikit.datepicker.PickerView
         android:id="@+id/picker_dialog"

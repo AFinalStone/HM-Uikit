@@ -47,9 +47,7 @@
 
         </LinearLayout>
 
-        <View
-            style="@style/UikitDivider.Horizontal"
-            android:background="#FFDCDCDC" />
+        <View style="@style/UikitDivider.Horizontal" />
 
         <com.hm.iou.uikit.keyboard.HMKeyboardView
             android:id="@+id/keyboard"

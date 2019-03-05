@@ -18,10 +18,8 @@
         tools:text="还款方式"
         />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="@color/uikit_divider"
+    <View
+        style="@style/UikitDivider.Horizontal"
         />
 
     <com.hm.iou.uikit.MaxHeightRecyclerView
