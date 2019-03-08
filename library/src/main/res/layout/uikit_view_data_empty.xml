@@ -21,7 +21,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:maxLines="1"
-        android:text=""
+        android:text="您当前无任何数据"
         android:textColor="@color/uikit_text_auxiliary"
         android:textSize="@dimen/uikit_main_content_text_size" />
 </LinearLayout>

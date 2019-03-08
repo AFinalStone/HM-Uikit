@@ -2,6 +2,7 @@ package com.hm.iou.uikit;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class HMLoadingView extends RelativeLayout {
             stopLoadingAnim();
         }
         TextView tvEmpty = mLayoutEmpty.findViewById(R.id.tv_data_empty);
-        if (tvEmpty != null) {
+        if (tvEmpty != null && !TextUtils.isEmpty(tips)) {
             tvEmpty.setText(tips);
         }
         setVisibility(View.VISIBLE);
