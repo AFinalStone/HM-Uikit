@@ -148,6 +148,15 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mTvTitle.setEnabled(enabled);
     }
 
+    /**
+     * 设置主button 背景
+     *
+     * @param bgResId
+     */
+    public void setTitleBackgournd(int bgResId) {
+        mTvTitle.setBackgroundResource(bgResId);
+    }
+
     @Override
     public void onClick(View v) {
         if (v == mTvTitle) {
