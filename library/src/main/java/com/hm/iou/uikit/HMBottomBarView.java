@@ -31,7 +31,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private Context mContext;
     private String mTitleTextStr;
     private int mTitleTextSize;
+    private int mTitleTextColor;
     private Drawable mBackDrawable;
+    private Drawable mTitleBackgroundDrawable;
     private int mIconWidth;
     private boolean mEnable;
 
@@ -59,7 +61,10 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mTitleTextStr = ta.getString(R.styleable.HmBottomBar_bottomTitleText);
         mTitleTextSize = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomTitleSize,
                 (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, getResources().getDisplayMetrics())));
+        mTitleTextColor = ta.getColor(R.styleable.HmBottomBar_bottomTitleColor, -1);
+
         mBackDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomBackIcon);
+        mTitleBackgroundDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleBackground);
         mIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomIconWidth, 0);
         mEnable = ta.getBoolean(R.styleable.HmBottomBar_enable, true);
         ta.recycle();
@@ -91,8 +96,16 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         params.rightMargin = (int) (density * 12);
         mTvTitle.setText(mTitleTextStr);
         mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
-        mTvTitle.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_main));
-        mTvTitle.setBackgroundResource(R.drawable.uikit_selector_btn_main_small);
+        if (mTitleTextColor != -1) {
+            mTvTitle.setTextColor(mTitleTextColor);
+        } else {
+            mTvTitle.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_main));
+        }
+        if (mTitleBackgroundDrawable != null) {
+            mTvTitle.setBackground(mTitleBackgroundDrawable);
+        } else {
+            mTvTitle.setBackgroundResource(R.drawable.uikit_selector_btn_main_small);
+        }
         int pad = (int) (density * 10);
         mTvTitle.setPadding(pad, 0, pad, 0);
         addView(mTvTitle, params);
@@ -155,6 +168,15 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
      */
     public void setTitleBackgournd(int bgResId) {
         mTvTitle.setBackgroundResource(bgResId);
+    }
+
+    /**
+     * 设置住button 文字颜色
+     *
+     * @param colorResId
+     */
+    public void setTitleTextColor(int colorResId) {
+        mTvTitle.setTextColor(getResources().getColor(colorResId));
     }
 
     @Override
