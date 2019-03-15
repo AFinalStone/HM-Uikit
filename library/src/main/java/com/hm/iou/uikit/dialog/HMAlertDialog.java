@@ -54,7 +54,9 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         setContentView(R.layout.uikit_dialog_comm_alert);
 
         initWindow();
-        setBgRadius();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setBgRadius();
+        }
 
         initContent();
     }
