@@ -82,7 +82,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         if (mBackDrawable != null) {
             mIvBack.setImageDrawable(mBackDrawable);
         } else {
-            mIvBack.setImageResource(R.mipmap.uikit_ic_menu_back_black);
+            mIvBack.setImageResource(R.mipmap.uikit_ic_arrow_left_black);
         }
         mIvBack.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
         mIvBack.setPadding((int) (density * 18), 0, (int) (density * 15), 0);
