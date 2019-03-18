@@ -132,7 +132,7 @@ public class HMActionSheetDialog extends Dialog {
             if (mCanSelected) {
                 holder.tvName.setTextColor(mSelectedIndex == position ?
                         mContext.getResources().getColor(R.color.uikit_text_main_content) :
-                        mContext.getResources().getColor(R.color.uikit_text_auxiliary));
+                        mContext.getResources().getColor(R.color.uikit_text_sub_content));
             } else {
                 holder.tvName.setTextColor(mContext.getResources().getColor(R.color.uikit_text_sub_content));
             }
