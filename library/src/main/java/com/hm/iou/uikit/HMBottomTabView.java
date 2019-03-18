@@ -25,16 +25,16 @@ import android.widget.TextView;
 public class HMBottomTabView extends LinearLayout {
 
     private String mTabText;
-    private double mTabTextSize;
+    private int mTabTextSize;
     private int mTabTextSelectColor;
     private int mTabTextUnSelectColor;
-    private double mTabTextHeight;
-    private double mTabTextWidth;
+    private int mTabTextHeight;
+    private int mTabTextWidth;
     private Drawable mTabImageSelectDrawable;
 
     private Drawable mTabImageUnSelectDrawable;
-    private double mTabImageHeight;
-    private double mTabImageWidth;
+    private int mTabImageHeight;
+    private int mTabImageWidth;
 
     private boolean mIsSelect;//是否选中
     private boolean mIsShowDot;//是否显示红色标记
@@ -63,7 +63,8 @@ public class HMBottomTabView extends LinearLayout {
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.HmBottomTabView);
         if (attributes != null) {
             mTabText = attributes.getString(R.styleable.HmBottomTabView_tabText);
-            mTabTextSize = attributes.getDimension(R.styleable.HmBottomTabView_tabTextSize, 10);
+            mTabTextSize = attributes.getDimensionPixelSize(R.styleable.HmBottomTabView_tabTextSize,
+                    (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics())));
             mTabTextSelectColor = attributes.getColor(R.styleable.HmBottomTabView_tabTextSelectColor, getResources().getColor(R.color.uikit_text_common_color));
             mTabTextUnSelectColor = attributes.getColor(R.styleable.HmBottomTabView_tabTextUnSelectColor, getResources().getColor(R.color.uikit_text_hint_common_color));
 
@@ -94,15 +95,15 @@ public class HMBottomTabView extends LinearLayout {
         } else {
             mTvTab.setText(mTabText);
             if (mTabTextSize != 0) {
-                mTvTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, (float) mTabTextSize);
+                mTvTab.setTextSize(mTabTextSize);
             }
         }
         if (mTabImageSelectDrawable == null || mTabImageUnSelectDrawable == null) {
             mIvTab.setVisibility(GONE);
         } else {
             ViewGroup.LayoutParams layoutParams = mIvTab.getLayoutParams();
-            layoutParams.width = (int) mTabImageWidth;
-            layoutParams.height = (int) mTabImageHeight;
+            layoutParams.width = mTabImageWidth;
+            layoutParams.height = mTabImageHeight;
             mIvTab.setLayoutParams(layoutParams);
         }
         if (mIsSelect) {
