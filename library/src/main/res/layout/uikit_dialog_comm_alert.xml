@@ -15,7 +15,6 @@
         android:gravity="center"
         android:textColor="@color/uikit_text_main_content"
         android:textSize="@dimen/uikit_main_title_text_size"
-        android:textStyle="bold"
         tools:text="新版本上线" />
 
     <TextView
