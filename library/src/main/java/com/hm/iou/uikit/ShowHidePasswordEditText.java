@@ -191,7 +191,7 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
             int drawableWidthWithPadding = bounds.width() + (mLeftToRight ? getPaddingRight() : getPaddingLeft()) + mAdditionalTouchTargetSize;
 
             //check if the touch is within bounds of mDrawableEnd icon
-            if ((mLeftToRight && (x >= (this.getRight() - (drawableWidthWithPadding)))) ||
+            if ((mLeftToRight && (x >= (this.getRight() - this.getLeft() - (drawableWidthWithPadding)))) ||
                     (!mLeftToRight && (x <= (this.getLeft() + (drawableWidthWithPadding))))) {
 
                 togglePasswordVisibility();
