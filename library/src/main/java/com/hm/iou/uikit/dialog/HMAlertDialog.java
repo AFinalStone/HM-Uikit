@@ -7,6 +7,7 @@ import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -127,6 +128,8 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         } else {
             mTvMsg.setVisibility(View.VISIBLE);
             mTvMsg.setText(mBuilder.mMessage);
+
+            mTvMsg.setMovementMethod(ScrollingMovementMethod.getInstance());
         }
 
         if (mBuilder.mMessageGravity != 0) {

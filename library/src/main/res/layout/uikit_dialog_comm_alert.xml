@@ -39,7 +39,9 @@
         android:paddingTop="12dip"
         android:textColor="@color/uikit_text_auxiliary"
         android:textSize="@dimen/uikit_main_content_text_size"
-        tools:text="这是测试内容" />
+        android:maxHeight="420dip"
+        android:text=""
+        />
 
     <FrameLayout
         android:id="@+id/fl_dialog_custom"
