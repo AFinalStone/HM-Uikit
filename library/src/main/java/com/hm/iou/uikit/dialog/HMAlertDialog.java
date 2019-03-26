@@ -4,9 +4,12 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Outline;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -127,6 +130,17 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         } else {
             mTvMsg.setVisibility(View.VISIBLE);
             mTvMsg.setText(mBuilder.mMessage);
+
+            mTvMsg.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+            if (mBuilder.mPaddingRect != null) {
+                Rect rect = mBuilder.mPaddingRect;
+                mTvMsg.setPadding(rect.left, rect.top, rect.right, rect.bottom);
+            }
+
+            if (mBuilder.mMsgTextSize > 0) {
+                mTvMsg.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBuilder.mMsgTextSize);
+            }
         }
 
         if (mBuilder.mMessageGravity != 0) {
@@ -210,6 +224,9 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         private OnClickListener mOnClickListener;
         private int mMessageGravity;
         private boolean mDismissedOnClickBtn = true;
+
+        private Rect mPaddingRect;
+        private int mMsgTextSize;
 
         public Builder(Context context) {
             mContext = context;
@@ -307,6 +324,17 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
         public Builder setDismessedOnClickBtn(boolean dismissedOnClickBtn) {
             mDismissedOnClickBtn = dismissedOnClickBtn;
+            return this;
+        }
+
+        public Builder setPadding(int left, int top, int right, int bottom) {
+            mPaddingRect = new Rect();
+            mPaddingRect.set(left, top, right, bottom);
+            return this;
+        }
+
+        public Builder setMessageTextSize(int textSize) {
+            mMsgTextSize = textSize;
             return this;
         }
 
