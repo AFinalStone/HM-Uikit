@@ -12,16 +12,15 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="100dip"
-        android:paddingBottom="50dp">
+        android:paddingBottom="50dp"
+        android:paddingTop="100dip">
 
 
         <Button
+            style="@style/UikitHMButton.Small.Bordered"
             android:layout_width="52dip"
             android:layout_height="30dip"
-            style="@style/UikitHMButton.Small.Bordered"
-            android:text="删除"
-            />
+            android:text="删除" />
 
 
         <com.hm.iou.uikit.HMTopBarView
@@ -175,8 +174,15 @@
             android:id="@+id/bottom_navview"
             android:layout_width="match_parent"
             android:layout_height="50dip"
-            app:bottomTitleText="这是一个按钮"/>
+            app:bottomTitleText="这是一个按钮" />
 
+
+        <Button
+            android:id="@+id/btn_circleView"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="点号导航器控件" />
     </LinearLayout>
 
 </ScrollView>

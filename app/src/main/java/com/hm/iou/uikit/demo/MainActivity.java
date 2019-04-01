@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hm.iou.tools.ToastUtil;
+import com.hm.iou.uikit.CircleIndicator;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMLoadingView;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     HMKeyboardEditText mEtTestInputABC;
 
     HMBottomBarView mBottomNavView;
+
+    CircleIndicator mCircleIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 list.add("一月一付");
                 list.add("一季一付");
                 list.add("半年一付");
-                for (int j=0; j<20; j++) {
+                for (int j = 0; j < 20; j++) {
                     list.add("半年一付");
                 }
                 new HMActionSheetDialog.Builder(MainActivity.this)
@@ -266,6 +269,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ToastUtil.showMessage(MainActivity.this, "删除...");
+            }
+        });
+
+        findViewById(R.id.btn_circleView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CircleViewActivity.class));
             }
         });
     }
