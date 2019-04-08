@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TabActivity" />
+        <activity android:name=".CircleViewActivity" />
         <activity android:name=".InputCodeActivity" />
         <activity android:name=".PasswordHideShowActivity" />
         <activity android:name=".tabview.BottomTabViewActivity" />

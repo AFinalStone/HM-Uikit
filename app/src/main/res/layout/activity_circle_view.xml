@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hm.iou.uikit.demo.CircleViewActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/indicator" />
+
+    <com.hm.iou.uikit.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dip"
+        app:ci_animator="@animator/demo_circle_indicator_zoom_large"
+        app:ci_animator_reverse="@animator/demo_circle_indicator_zoom_small"
+        app:ci_drawable="@drawable/demo_circle_indicator_radius_color_select"
+        app:ci_drawable_unselected="@drawable/demo_circle_indicator_radius_color"
+        app:ci_height="6dp"
+        app:ci_width="6dp" />
+
+
+</RelativeLayout>

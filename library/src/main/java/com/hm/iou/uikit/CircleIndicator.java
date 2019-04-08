@@ -51,12 +51,6 @@ public class CircleIndicator extends LinearLayout {
         init(context, attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CircleIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
-    }
-
     private void init(Context context, AttributeSet attrs) {
         handleTypedArray(context, attrs);
         checkIndicatorConfig(context);
@@ -95,30 +89,30 @@ public class CircleIndicator extends LinearLayout {
         typedArray.recycle();
     }
 
-    /**
-     * Create and configure Indicator in Java code.
-     */
-    public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin) {
-        configureIndicator(indicatorWidth, indicatorHeight, indicatorMargin,
-                R.animator.uikit_circle_indicator_alpha, 0, R.drawable.uikit_circle_indicator_radius_color_black, R.drawable.uikit_circle_indicator_radius_color_gray);
-    }
-
-    public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,
-                                   @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
-                                   @DrawableRes int indicatorBackgroundId,
-                                   @DrawableRes int indicatorUnselectedBackgroundId) {
-
-        mIndicatorWidth = indicatorWidth;
-        mIndicatorHeight = indicatorHeight;
-        mIndicatorMargin = indicatorMargin;
-
-        mAnimatorResId = animatorId;
-        mAnimatorReverseResId = animatorReverseId;
-        mIndicatorBackgroundResId = indicatorBackgroundId;
-        mIndicatorUnselectedBackgroundResId = indicatorUnselectedBackgroundId;
-
-        checkIndicatorConfig(getContext());
-    }
+//    /**
+//     * Create and configure Indicator in Java code.
+//     */
+//    public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin) {
+//        configureIndicator(indicatorWidth, indicatorHeight, indicatorMargin,
+//                R.animator.uikit_circle_indicator_alpha, 0, R.drawable.uikit_circle_indicator_radius_color_black, R.drawable.uikit_circle_indicator_radius_color_gray);
+//    }
+//
+//    public void configureIndicator(int indicatorWidth, int indicatorHeight, int indicatorMargin,
+//                                   @AnimatorRes int animatorId, @AnimatorRes int animatorReverseId,
+//                                   @DrawableRes int indicatorBackgroundId,
+//                                   @DrawableRes int indicatorUnselectedBackgroundId) {
+//
+//        mIndicatorWidth = indicatorWidth;
+//        mIndicatorHeight = indicatorHeight;
+//        mIndicatorMargin = indicatorMargin;
+//
+//        mAnimatorResId = animatorId;
+//        mAnimatorReverseResId = animatorReverseId;
+//        mIndicatorBackgroundResId = indicatorBackgroundId;
+//        mIndicatorUnselectedBackgroundResId = indicatorUnselectedBackgroundId;
+//
+//        checkIndicatorConfig(getContext());
+//    }
 
     private void checkIndicatorConfig(Context context) {
         mIndicatorWidth = (mIndicatorWidth < 0) ? dip2px(DEFAULT_INDICATOR_WIDTH) : mIndicatorWidth;
