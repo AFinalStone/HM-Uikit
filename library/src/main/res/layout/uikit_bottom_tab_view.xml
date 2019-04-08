@@ -36,5 +36,5 @@
         android:layout_height="6dp"
         android:layout_alignEnd="@id/ll_tab"
         android:layout_alignTop="@id/ll_tab"
-        android:background="@drawable/uikit_bg_bottom_tab_view_dot" />
+        android:background="@drawable/uikit_bg_function_exception_dot_view" />
 </RelativeLayout>

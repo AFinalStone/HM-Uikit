@@ -4,4 +4,6 @@
 
     <solid android:color="@color/uikit_function_exception" />
 
+    <corners android:radius="8dp" />
+
 </shape>

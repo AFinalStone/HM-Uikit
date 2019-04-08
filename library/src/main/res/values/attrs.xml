@@ -95,6 +95,14 @@
         <attr name="color_unchecked_stroke" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="HmDotTextView">
+        <attr name="dotText" format="string" />
+        <attr name="dotTextColor" format="color" />
+        <attr name="dotTextSize" format="dimension" />
+        <attr name="dotBackgroundColor" format="color" />
+        <attr name="dotMoreText" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="HmShapedImageView">
         <attr name="shape_mode" format="enum">
             <enum name="round_rect" value="1" />

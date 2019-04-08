@@ -10,10 +10,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -124,7 +122,7 @@ public class HMBottomTabView extends LinearLayout {
         if (mIsShowDot) {
             mViewDot.setVisibility(VISIBLE);
             if (mTabDotDrawable == null) {
-                mViewDot.setBackground(getResources().getDrawable(R.drawable.uikit_bg_bottom_tab_view_dot));
+                mViewDot.setBackground(getResources().getDrawable(R.drawable.uikit_bg_function_exception_dot_view));
             } else {
                 mViewDot.setBackground(mTabDotDrawable);
             }

@@ -15,6 +15,7 @@ import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.CircleIndicator;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
+import com.hm.iou.uikit.HMDotTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
@@ -40,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
     HMKeyboardEditText mEtTestInputABC;
 
     HMBottomBarView mBottomNavView;
-
-    CircleIndicator mCircleIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -278,6 +277,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CircleViewActivity.class));
             }
         });
+        HMDotTextView dotTextView = findViewById(R.id.dotText);
+        dotTextView.showMoreText();
     }
 
     private void initWheelView() {
