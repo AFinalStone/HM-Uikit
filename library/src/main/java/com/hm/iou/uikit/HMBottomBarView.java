@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -30,6 +31,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
 
     private Context mContext;
     private String mTitleTextStr;
+    private String mBackTextStr;
+    private int mBackTextSize;
+    private int mBackTextColor;
     private int mTitleTextSize;
     private int mTitleTextColor;
     private Drawable mBackDrawable;
@@ -38,6 +42,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private boolean mEnable;
 
     private ImageView mIvBack;
+    private TextView mTvBack;
     private TextView mTvTitle;
 
     private TextView mSecondTitle;
@@ -57,15 +62,22 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         super(context, attrs, defStyleAttr);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HmBottomBar);
-        //兼容以前的版本，属性名暂不改，TODO 后续需要修正
+        //兼容以前的版本，属性名暂不改,右侧按钮文字描述
         mTitleTextStr = ta.getString(R.styleable.HmBottomBar_bottomTitleText);
         mTitleTextSize = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomTitleSize,
                 (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, getResources().getDisplayMetrics())));
         mTitleTextColor = ta.getColor(R.styleable.HmBottomBar_bottomTitleColor, -1);
+        //左侧返回文字描述
+        mBackTextStr = ta.getString(R.styleable.HmBottomBar_bottomBackText);
+        mBackTextSize = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomBackTextSize,
+                (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 18, getResources().getDisplayMetrics())));
+        mBackTextColor = ta.getColor(R.styleable.HmBottomBar_bottomBackTextColor, -1);
 
+        //左侧返回icon
         mBackDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomBackIcon);
-        mTitleBackgroundDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleBackground);
         mIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomIconWidth, 0);
+        //右侧按钮背景颜色
+        mTitleBackgroundDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleBackground);
         mEnable = ta.getBoolean(R.styleable.HmBottomBar_enable, true);
         ta.recycle();
 
@@ -76,6 +88,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mContext = context;
         float density = mContext.getResources().getDisplayMetrics().density;
 
+        //左侧返回icon
         mIvBack = new ImageView(context);
         mIvBack.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         LayoutParams params = new LayoutParams(mIconWidth != 0 ? mIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -87,32 +100,54 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mIvBack.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
         mIvBack.setPadding((int) (density * 18), 0, (int) (density * 15), 0);
         addView(mIvBack, params);
-
-        mTvTitle = new TextView(context);
-        mTvTitle.setGravity(Gravity.CENTER);
-        params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
-        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        params.addRule(RelativeLayout.CENTER_VERTICAL);
-        params.rightMargin = (int) (density * 12);
-        mTvTitle.setText(mTitleTextStr);
-        mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
-        if (mTitleTextColor != -1) {
-            mTvTitle.setTextColor(mTitleTextColor);
-        } else {
-            mTvTitle.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_main));
-        }
-        if (mTitleBackgroundDrawable != null) {
-            mTvTitle.setBackground(mTitleBackgroundDrawable);
-        } else {
-            mTvTitle.setBackgroundResource(R.drawable.uikit_selector_btn_main_small);
-        }
-        int pad = (int) (density * 10);
-        mTvTitle.setPadding(pad, 0, pad, 0);
-        addView(mTvTitle, params);
-        mTvTitle.setId(R.id.hm_bottom_bar_title);
-
-        mTvTitle.setOnClickListener(this);
+        mIvBack.setId(R.id.hm_bottom_bar_back_icon);
         mIvBack.setOnClickListener(this);
+
+        //左侧返回文字
+        if (!TextUtils.isEmpty(mBackTextStr)) {
+            mTvBack = new TextView(context);
+            mTvBack.setGravity(Gravity.CENTER);
+            params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
+            params.addRule(RelativeLayout.RIGHT_OF, mIvBack.getId());
+            params.addRule(RelativeLayout.CENTER_VERTICAL);
+            mTvBack.setText(mBackTextStr);
+            mTvBack.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBackTextSize);
+            if (mBackTextColor != -1) {
+                mTvBack.setTextColor(mBackTextColor);
+            } else {
+                mTvBack.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_minor));
+            }
+            addView(mTvBack, params);
+            mTvBack.setOnClickListener(this);
+        }
+
+
+        //右侧按钮的文字
+        if (!TextUtils.isEmpty(mTitleTextStr)) {
+            mTvTitle = new TextView(context);
+            mTvTitle.setGravity(Gravity.CENTER);
+            params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.addRule(RelativeLayout.CENTER_VERTICAL);
+            params.rightMargin = (int) (density * 12);
+            mTvTitle.setText(mTitleTextStr);
+            mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
+            if (mTitleTextColor != -1) {
+                mTvTitle.setTextColor(mTitleTextColor);
+            } else {
+                mTvTitle.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_main));
+            }
+            if (mTitleBackgroundDrawable != null) {
+                mTvTitle.setBackground(mTitleBackgroundDrawable);
+            } else {
+                mTvTitle.setBackgroundResource(R.drawable.uikit_selector_btn_main_small);
+            }
+            int pad = (int) (density * 10);
+            mTvTitle.setPadding(pad, 0, pad, 0);
+            addView(mTvTitle, params);
+            mTvTitle.setId(R.id.hm_bottom_bar_title);
+            mTvTitle.setOnClickListener(this);
+        }
 
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
@@ -185,7 +220,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             if (mTitleClickListener != null) {
                 mTitleClickListener.onClickTitle();
             }
-        } else if (v == mIvBack) {
+        } else if (v == mIvBack || v == mTvBack) {
             if (mListener != null) {
                 mListener.onClickBack();
                 return;
