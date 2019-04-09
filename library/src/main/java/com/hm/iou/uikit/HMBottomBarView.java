@@ -154,7 +154,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     }
 
     public void updateTitle(CharSequence title) {
-        mTvTitle.setText(title);
+        if (mTvTitle != null) {
+            mTvTitle.setText(title);
+        }
     }
 
     public void setOnBackClickListener(OnBackClickListener listener) {
@@ -193,7 +195,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        mTvTitle.setEnabled(enabled);
+        if (mTvTitle != null) {
+            mTvTitle.setEnabled(enabled);
+        }
     }
 
     /**
@@ -202,7 +206,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
      * @param bgResId
      */
     public void setTitleBackgournd(int bgResId) {
-        mTvTitle.setBackgroundResource(bgResId);
+        if (mTvTitle != null) {
+            mTvTitle.setBackgroundResource(bgResId);
+        }
     }
 
     /**
@@ -211,7 +217,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
      * @param colorResId
      */
     public void setTitleTextColor(int colorResId) {
-        mTvTitle.setTextColor(getResources().getColor(colorResId));
+        if (mTvTitle != null) {
+            mTvTitle.setTextColor(getResources().getColor(colorResId));
+        }
     }
 
     @Override
