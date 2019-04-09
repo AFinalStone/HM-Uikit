@@ -28,10 +28,10 @@ public class HMDotTextView extends View {
     private int mDotTextColor;
     private int mDotTextSize;
     private Rect mDotTextBound;
+    private Rect mDotMoreTextBound;
     private int mDotBackgroundColor;
     private int mRoundWidth;
     private int mRoundHeight;
-    private RectF mRoundRectF;
 
     private Paint mDotTextPaint;
     private Paint mRoundRectPaint;
@@ -63,6 +63,9 @@ public class HMDotTextView extends View {
                 break;
             default:
                 mRoundWidth = getPaddingLeft() + getPaddingRight() + mDotTextBound.width() + dip2px(5);
+                if (mIsShowMoreText) {
+                    mRoundWidth = getPaddingLeft() + getPaddingRight() + mDotMoreTextBound.width() + dip2px(5);
+                }
                 if (mRoundWidth < dip2px(16)) {
                     mRoundWidth = dip2px(16);
                 }
@@ -76,15 +79,19 @@ public class HMDotTextView extends View {
                 break;
             default:
                 mRoundHeight = getPaddingTop() + getPaddingBottom() + mDotTextBound.height() + dip2px(5);
+                if (mIsShowMoreText) {
+                    mRoundHeight = getPaddingLeft() + getPaddingRight() + mDotMoreTextBound.height() + dip2px(5);
+                }
                 if (mRoundHeight < dip2px(16)) {
                     mRoundHeight = dip2px(16);
                 }
         }
-        int textWidth = mDotTextBound.width();
         if (mDotText.length() > 1) {
+            int textWidth = mDotTextBound.width();
             mRoundWidth = textWidth + mRoundHeight - textWidth / mDotText.length();
         }
         if (mIsShowMoreText) {
+            int textWidth = mDotMoreTextBound.width();
             mRoundWidth = textWidth + mRoundHeight - textWidth / mDotMoreText.length();
         }
         setMeasuredDimension(mRoundWidth, mRoundHeight);
@@ -151,11 +158,14 @@ public class HMDotTextView extends View {
             } else if (attr == R.styleable.HmDotTextView_dotMoreText) {
                 mDotMoreText = a.getString(attr);
                 Log.d("mDotMoreText", "" + mDotMoreText);
+            } else if (attr == R.styleable.HmDotTextView_dotIsShowMoreText) {
+                mIsShowMoreText = a.getBoolean(attr, false);
+                Log.d("mIsShowMoreText", "" + mIsShowMoreText);
             }
         }
         a.recycle();
         if (TextUtils.isEmpty(mDotText)) {
-            mDotText = "1";
+            mDotText = "";
         }
         if (TextUtils.isEmpty(mDotMoreText)) {
             mDotMoreText = "...";
@@ -165,7 +175,6 @@ public class HMDotTextView extends View {
         mRoundRectPaint.setStyle(Paint.Style.FILL);
         mRoundRectPaint.setAntiAlias(true);
         mRoundRectPaint.setColor(mDotBackgroundColor);
-        mRoundRectF = new RectF();
         //文字画笔
         mDotTextPaint = new Paint(Paint.LINEAR_TEXT_FLAG);
         mDotTextPaint.setColor(mDotTextColor);
@@ -175,6 +184,8 @@ public class HMDotTextView extends View {
         mDotTextPaint.setTextAlign(Paint.Align.CENTER);
         mDotTextBound = new Rect();
         mDotTextPaint.getTextBounds(mDotText, 0, mDotText.length(), mDotTextBound);
+        mDotMoreTextBound = new Rect();
+        mDotTextPaint.getTextBounds(mDotMoreText, 0, mDotMoreText.length(), mDotMoreTextBound);
         //实现抗锯齿
         mPaintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     }

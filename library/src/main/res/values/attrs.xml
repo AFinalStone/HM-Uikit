@@ -101,6 +101,7 @@
         <attr name="dotTextSize" format="dimension" />
         <attr name="dotBackgroundColor" format="color" />
         <attr name="dotMoreText" format="string" />
+        <attr name="dotIsShowMoreText" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="HmShapedImageView">

@@ -205,11 +205,21 @@
 
 
         <com.hm.iou.uikit.HMDotTextView
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="5dp"
+            app:dotBackgroundColor="@color/uikit_function_exception"
+            app:dotTextColor="@color/white"
+            app:dotTextSize="@dimen/textFontSize_12" />
+
+        <com.hm.iou.uikit.HMDotTextView
             android:id="@+id/dotText"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginTop="5dp"
             app:dotBackgroundColor="@color/uikit_function_exception"
+            app:dotIsShowMoreText="true"
+            app:dotMoreText="..."
             app:dotTextColor="@color/white"
             app:dotTextSize="@dimen/textFontSize_12" />
     </LinearLayout>
