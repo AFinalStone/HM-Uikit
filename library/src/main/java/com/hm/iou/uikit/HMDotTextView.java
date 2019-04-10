@@ -121,13 +121,14 @@ public class HMDotTextView extends View {
 
 
     public void setText(String dotText) {
+        mIsShowMoreText = false;
         this.mDotText = dotText;
-        requestLayout();
+        postInvalidate();
     }
 
     public void showMoreText() {
         mIsShowMoreText = true;
-        requestLayout();
+        postInvalidate();
     }
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -147,8 +148,7 @@ public class HMDotTextView extends View {
                 Log.d("mDotTextColor", "" + mDotTextColor);
 
             } else if (attr == R.styleable.HmDotTextView_dotTextSize) {// 默认设置为12sp，TypeValue也可以把sp转化为px
-                mDotTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+                mDotTextSize = a.getDimensionPixelSize(attr, (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, getResources().getDisplayMetrics())));
                 Log.d("mDotTextSize", "" + mDotTextSize);
 
             } else if (attr == R.styleable.HmDotTextView_dotBackgroundColor) {
