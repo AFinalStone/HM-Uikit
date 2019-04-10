@@ -62,9 +62,9 @@ public class HMDotTextView extends View {
                 mRoundWidth = getPaddingLeft() + getPaddingRight() + specSize;
                 break;
             default:
-                mRoundWidth = getPaddingLeft() + getPaddingRight() + mDotTextBound.width() + dip2px(5);
+                mRoundWidth = getPaddingLeft() + getPaddingRight() + mDotTextBound.width() + dip2px(8);
                 if (mIsShowMoreText) {
-                    mRoundWidth = getPaddingLeft() + getPaddingRight() + mDotMoreTextBound.width() + dip2px(5);
+                    mRoundWidth = getPaddingLeft() + getPaddingRight() + mDotMoreTextBound.width() + dip2px(8);
                 }
                 if (mRoundWidth < dip2px(16)) {
                     mRoundWidth = dip2px(16);
@@ -78,9 +78,9 @@ public class HMDotTextView extends View {
                 mRoundHeight = getPaddingTop() + getPaddingBottom() + specSize;
                 break;
             default:
-                mRoundHeight = getPaddingTop() + getPaddingBottom() + mDotTextBound.height() + dip2px(5);
+                mRoundHeight = getPaddingTop() + getPaddingBottom() + mDotTextBound.height() + dip2px(8);
                 if (mIsShowMoreText) {
-                    mRoundHeight = getPaddingLeft() + getPaddingRight() + mDotMoreTextBound.height() + dip2px(5);
+                    mRoundHeight = getPaddingLeft() + getPaddingRight() + mDotMoreTextBound.height() + dip2px(8);
                 }
                 if (mRoundHeight < dip2px(16)) {
                     mRoundHeight = dip2px(16);

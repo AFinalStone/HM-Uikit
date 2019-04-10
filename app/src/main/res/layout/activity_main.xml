@@ -200,6 +200,15 @@
             android:layout_height="16dp"
             android:layout_marginTop="5dp"
             app:dotBackgroundColor="@color/uikit_function_exception"
+            app:dotText="50"
+            app:dotTextColor="@color/white"
+            app:dotTextSize="@dimen/textFontSize_12" />
+
+        <com.hm.iou.uikit.HMDotTextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="5dp"
+            app:dotBackgroundColor="@color/uikit_function_exception"
             app:dotText="1"
             app:dotTextColor="@color/white"
             app:dotTextSize="@dimen/textFontSize_12" />

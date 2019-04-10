@@ -125,7 +125,6 @@
     </style>
 
 
-
     <!--获取验证码的按钮-->
     <style name="UikitButton.CheckCode">
         <item name="android:layout_width">wrap_content</item>
@@ -223,7 +222,6 @@
     </style>
 
 
-
     <!--分割线-->
     <style name="UikitDivider">
         <item name="android:background">@drawable/uikit_comm_divider_gray</item>
@@ -250,6 +248,14 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/uikit_text_main_content</item>
         <item name="android:textColorHint">@color/uikit_text_hint</item>
+    </style>
+
+    <style name="UikitTextView.Large">
+        <item name="android:textSize">@dimen/uikit_main_title_text_size</item>
+    </style>
+
+    <style name="UikitTextView.Small">
+        <item name="android:textSize">@dimen/uikti_sub_content_text_size</item>
     </style>
 
     <!-- 描述性文字等辅助信息 -->
