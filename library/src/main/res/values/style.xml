@@ -168,6 +168,10 @@
         <item name="android:background">@drawable/uikit_selector_btn_red</item>
     </style>
 
+    <style name="UikitHMButton.Large.Red.Minor">
+        <item name="android:background">@drawable/uikit_selector_btn_red_minor</item>
+    </style>
+
     <style name="UikitHMButton.Small.Main">
         <item name="android:textColor">@color/uikit_selector_btn_main</item>
         <item name="android:background">@drawable/uikit_selector_btn_main_small</item>
