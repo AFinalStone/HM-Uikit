@@ -118,7 +118,6 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
                 mTvBack.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_minor));
             }
             addView(mTvBack, params);
-            mTvBack.setOnClickListener(this);
         }
 
 
@@ -228,7 +227,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             if (mTitleClickListener != null) {
                 mTitleClickListener.onClickTitle();
             }
-        } else if (v == mIvBack || v == mTvBack) {
+        } else if (v == mTvBack) {
             if (mListener != null) {
                 mListener.onClickBack();
                 return;
