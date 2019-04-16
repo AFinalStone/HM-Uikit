@@ -227,7 +227,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             if (mTitleClickListener != null) {
                 mTitleClickListener.onClickTitle();
             }
-        } else if (v == mTvBack) {
+        } else if (v == mIvBack) {
             if (mListener != null) {
                 mListener.onClickBack();
                 return;
