@@ -45,16 +45,43 @@
             android:scaleType="centerInside"
             android:src="@mipmap/uikit_ic_arrow_right" />
 
-        <com.hm.iou.uikit.HMBottomTabView
-            android:id="@+id/btv_recommend"
+
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            app:tabImageSelectDrawable="@mipmap/ic_tab_recommend_select"
-            app:tabImageUnSelectDrawable="@mipmap/ic_tab_recommend_unselect"
-            app:tabText="推荐"
-            app:tabTextUnSelectColor="@color/uikit_text_common_color" />
+            android:layout_weight="1">
+
+            <com.hm.iou.uikit.HMBottomTabView
+                android:id="@+id/btv_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                app:tabImageSelectDrawable="@mipmap/ic_tab_recommend_select"
+                app:tabImageUnSelectDrawable="@mipmap/ic_tab_recommend_unselect"
+                app:tabText="推荐"
+                app:tabTextUnSelectColor="@color/uikit_text_common_color" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-10dp"
+                android:layout_toEndOf="@id/btv_recommend">
+
+                <com.hm.iou.uikit.HMDotTextView
+                    android:id="@+id/dt_message"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="visible"
+                    app:dotBackgroundColor="@color/uikit_function_exception"
+                    app:dotMoreText="..."
+                    app:dotText="100"
+                    app:dotTextColor="@color/white"
+                    app:dotTextSize="@dimen/textFontSize_10" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <com.hm.iou.uikit.HMBottomTabView
             android:id="@+id/btv_personal"
