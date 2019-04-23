@@ -40,6 +40,7 @@ public class HMDiynamicPagerIndicator extends DynamicPagerIndicator {
      *
      * @param isBold
      */
+    @Deprecated
     public void setSelectedTextBold(boolean isBold) {
         mSelectedTextBold = isBold;
         invalidate();
@@ -58,10 +59,11 @@ public class HMDiynamicPagerIndicator extends DynamicPagerIndicator {
                     if (position == i) {
                         textView.setTextColor(mTabSelectedTextColor);
                         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabSelectedTextSize);
-                        if (mSelectedTextBold)
+/*                        if (mSelectedTextBold)
                             textView.setTypeface(Typeface.DEFAULT_BOLD);
                         else
-                            textView.setTypeface(Typeface.DEFAULT);
+                            textView.setTypeface(Typeface.DEFAULT);*/
+                        textView.setTypeface(Typeface.DEFAULT);
                     } else {
                         textView.setTextColor(mTabNormalTextColor);
                         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabNormalTextSize);
