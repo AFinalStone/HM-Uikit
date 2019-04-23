@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -255,40 +256,68 @@ public class ShapedImageView extends android.support.v7.widget.AppCompatImageVie
         }
     }
 
+
     private void drawBitmap(Canvas canvas, Shape shape) {
         if (getDrawable() == null || ((BitmapDrawable) getDrawable()).getBitmap() == null) {
             return;
         }
         canvas.save();
-        Bitmap src = ((BitmapDrawable) getDrawable()).getBitmap();
-        src = zoom(src, getMeasuredWidth(), getMeasuredHeight());
-        Bitmap shadeBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), src.getConfig());
-        Canvas shadeCanvas = new Canvas(shadeBitmap);
+        Drawable drawable = getDrawable();
+        if (drawable != null) {
+            /**
+             * 把默认的src图片资源作为画布来进行缩放绘制
+             */
+            //获取drawable的宽和高
+            int dWidth = drawable.getIntrinsicWidth();
+            int dHeight = drawable.getIntrinsicHeight();
+            //创建bitmap
+            Bitmap src = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+            float scale = 1.0f;
+            //创建画布
+            Canvas drawCanvas = new Canvas(src);
+            //按照bitmap的宽高，以及view的宽高，计算缩放比例；因为设置的src宽高比例可能和imageview的宽高比例不同，这里我们不希望图片失真；
+            if (mShapeMode == SHAPE_ROUND_RECT) {
+                // 如果图片的宽或者高与view的宽高不匹配，计算出需要缩放的比例；缩放后的图片的宽高，一定要大于我们view的宽高；所以我们这里取大值；
+                scale = Math.max(getWidth() * 1.0f / dWidth, getHeight()
+                        * 1.0f / dHeight);
+            } else {
+                scale = getWidth() * 1.0F / Math.min(dWidth, dHeight);
+            }
+            //根据缩放比例，设置bounds，相当于缩放图片了
+            drawable.setBounds(0, 0, (int) (scale * dWidth),
+                    (int) (scale * dHeight));
+            drawable.draw(drawCanvas);
 
-        if (shape == Shape.Circle) {
-            shadeCanvas.drawCircle(getMeasuredWidth() / 2, getMeasuredWidth() / 2, getMeasuredWidth() / 2, mPaint);
+            src = zoom(src, getMeasuredWidth(), getMeasuredHeight());
+            Bitmap shadeBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), src.getConfig());
+            Canvas shadeCanvas = new Canvas(shadeBitmap);
+
+            if (shape == Shape.Circle) {
+                shadeCanvas.drawCircle(getMeasuredWidth() / 2, getMeasuredWidth() / 2, getMeasuredWidth() / 2, mPaint);
+            }
+
+            if (shape == Shape.Rect) {
+                float innerStartX = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+                float innerStartY = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+                shadeCanvas.drawRect(innerStartX, innerStartY, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+            }
+
+            if (shape == Shape.RoundRect) {
+                float innerStartX = mBorderWidth == 0 ? 0.0f : mBorderWidth;
+                float innerStartY = mBorderWidth == 0 ? 0.0f : mBorderWidth;
+                float innerEndX = getMeasuredWidth() - mBorderWidth;
+                float innerEndY = getMeasuredHeight() - mBorderWidth;
+                shadeCanvas.drawRoundRect(new RectF(innerStartX, innerStartY, innerEndX, innerEndY), mRadius, mRadius, mPaint);
+            }
+
+            canvas.saveLayer(0, 0, getMeasuredWidth(), getMeasuredHeight(), null, Canvas.ALL_SAVE_FLAG);
+            canvas.drawBitmap(src, 0, 0, mPaint);
+            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+            canvas.drawBitmap(shadeBitmap, 0, 0, mPaint);
+            mPaint.setXfermode(null);
+            canvas.restore();
         }
 
-        if (shape == Shape.Rect) {
-            float innerStartX = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
-            float innerStartY = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
-            shadeCanvas.drawRect(innerStartX, innerStartY, getMeasuredWidth(), getMeasuredHeight(), mPaint);
-        }
-
-        if (shape == Shape.RoundRect) {
-            float innerStartX = mBorderWidth == 0 ? 0.0f : mBorderWidth;
-            float innerStartY = mBorderWidth == 0 ? 0.0f : mBorderWidth;
-            float innerEndX = getMeasuredWidth() - mBorderWidth;
-            float innerEndY = getMeasuredHeight() - mBorderWidth;
-            shadeCanvas.drawRoundRect(new RectF(innerStartX, innerStartY, innerEndX, innerEndY), mRadius, mRadius, mPaint);
-        }
-
-        canvas.saveLayer(0, 0, getMeasuredWidth(), getMeasuredHeight(), null, Canvas.ALL_SAVE_FLAG);
-        canvas.drawBitmap(src, 0, 0, mPaint);
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        canvas.drawBitmap(shadeBitmap, 0, 0, mPaint);
-        mPaint.setXfermode(null);
-        canvas.restore();
     }
 
     private void drawRect(Canvas canvas) {
