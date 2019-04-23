@@ -296,6 +296,14 @@
             android:layout_height="50dp"
             android:src="@mipmap/uikit_icon_delete_black"
             app:shape_mode="circle" />
+
+        <Button
+            android:id="@+id/btn_open_shape_activity"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:text="打开圆角图片demo" />
+
     </LinearLayout>
 
 </ScrollView>

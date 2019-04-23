@@ -5,104 +5,393 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Xfermode;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.shapes.RoundRectShape;
-import android.graphics.drawable.shapes.Shape;
-import android.os.Build;
-import android.support.v7.widget.AppCompatImageView;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import java.lang.ref.WeakReference;
-import java.util.Arrays;
-
 /**
- * 可以实现圆角和圆角矩形的ImageView
- * SHI
- * 2016年5月12日 19:39:16
+ * @author syl
+ * @time 2019/4/23 7:47 PM
  */
-public class ShapedImageView extends AppCompatImageView {
+public class ShapedImageView extends android.support.v7.widget.AppCompatImageView {
 
-    private static final int SHAPE_MODE_ROUND_RECT = 1;
-    private static final int SHAPE_MODE_CIRCLE = 2;
+    public static final int SHAPE_RECT = 0;
+    public static final int SHAPE_CIRCLE = 2;
+    public static final int SHAPE_ROUND_RECT = 1;
 
-    private int mShapeMode = 0;
-    private float mRadius = 0;
-    private Shape mShape;
-    private Paint mPaint;
+    private static final int DEFAULT_SHAPE = SHAPE_RECT;
+    private static final int DEFAULT_BACKGROUND = Color.WHITE;
+    private static final int DEFAULT_TEXT_COLOR = Color.WHITE;
+    private static final int DEFAULT_BORDER_COLOR = Color.WHITE;
+    private static final int DEFAULT_RADIUS = 0xA;
+    private static final int DEFAULT_TEXT_SIZE = 0xE;
+    private static final int DEFAULT_MIN_PADDING = 0x5;
+
+    private int mShapeMode;
+    private int mRadius;
+    private int mTextSize;
+    private int mTextColor;
+    private int mTextStyle;
+    private int mBorderWidth;
+    private int mBorderColor;
+    private int mMinimumSize;
+    private int mBackgroundColor;
+    private CharSequence mText;
+
+    private Rect mTargetRect;
+    private Typeface mTypeface;
+    private Paint mPaint, mBorderPaint;
+    private TextPaint mTextPaint;
 
     public ShapedImageView(Context context) {
-        super(context);
-        init(null);
+        this(context, null);
     }
 
     public ShapedImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(attrs);
+        this(context, attrs, 0);
     }
 
     public ShapedImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs);
+        init(context, attrs);
     }
 
-    private void init(AttributeSet attrs) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            setLayerType(LAYER_TYPE_HARDWARE, null);
+    private void init(Context context, AttributeSet attrs) {
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.HmShapedImageView);
+        mShapeMode = ta.getInt(R.styleable.HmShapedImageView_shape_mode, DEFAULT_SHAPE);
+        mTextStyle = ta.getInt(R.styleable.HmShapedImageView_textStyle, Typeface.NORMAL);
+        mTextColor = ta.getColor(R.styleable.HmShapedImageView_textColor, DEFAULT_TEXT_COLOR);
+        mTextSize = ta.getDimensionPixelSize(R.styleable.HmShapedImageView_textSize, sp2px(context, DEFAULT_TEXT_SIZE));
+        mText = ta.getString(R.styleable.HmShapedImageView_text);
+        mBackgroundColor = ta.getColor(R.styleable.HmShapedImageView_backgroundColor, DEFAULT_BACKGROUND);
+        mRadius = ta.getDimensionPixelSize(R.styleable.HmShapedImageView_round_radius, DEFAULT_RADIUS);
+        mBorderWidth = ta.getDimensionPixelSize(R.styleable.HmShapedImageView_borderWidth, 0);
+        mBorderColor = ta.getColor(R.styleable.HmShapedImageView_borderColor, DEFAULT_BORDER_COLOR);
+        ta.recycle();
+        initValues();
+    }
+
+    private void initValues() {
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
+    }
+
+    public void setText(CharSequence s) {
+        mText = s;
+        invalidate();
+    }
+
+    public String getText() {
+        return TextUtils.isEmpty(mText) ? "" : mText.toString();
+    }
+
+    public void setShapeType(Shape type) {
+        if (Shape.Circle == type) {
+            mShapeMode = SHAPE_CIRCLE;
+            invalidate();
+            return;
         }
-        if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.HmShapedImageView);
-            mShapeMode = a.getInt(R.styleable.HmShapedImageView_shape_mode, 0);
-            mRadius = a.getDimension(R.styleable.HmShapedImageView_round_radius, 0);
-            a.recycle();
+        if (Shape.Rect == type) {
+            mShapeMode = SHAPE_RECT;
+            invalidate();
+            return;
         }
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setFilterBitmap(true);
-        mPaint.setColor(Color.BLACK);
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        if (Shape.RoundRect == type) {
+            mShapeMode = SHAPE_ROUND_RECT;
+            invalidate();
+            return;
+        }
+        mShapeMode = DEFAULT_SHAPE;
+        invalidate();
+    }
+
+    public int getShapeMode() {
+        return mShapeMode;
+    }
+
+    public void setBorderWidth(int dp) {
+        mBorderWidth = dp2px(getContext(), dp);
+    }
+
+    public void setBorderWidthPx(int px) {
+        mBorderWidth = px;
+    }
+
+    public void setBorderColor(int color) {
+        mBorderColor = color;
+    }
+
+    public void setRadius(int dp) {
+        mRadius = dp2px(getContext(), dp);
+    }
+
+    public void setRadiusPx(int px) {
+        mRadius = px;
+    }
+
+    public void setBackgroundColor(int bgColor) {
+        mBackgroundColor = bgColor;
+    }
+
+    public void setTextSize(int sp) {
+        mTextSize = sp2px(getContext(), sp);
+    }
+
+    public void setTextStyle(int textStyle) {
+        mTextStyle = textStyle;
+    }
+
+    public void setTextColor(int color) {
+        mTextColor = color;
+    }
+
+    public void setTypeface(Typeface typeface) {
+        mTypeface = typeface;
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        if (changed) {
-            switch (mShapeMode) {
-                case SHAPE_MODE_ROUND_RECT:
-                    break;
-                case SHAPE_MODE_CIRCLE:
-                    int min = Math.min(getWidth(), getHeight());
-                    mRadius = (float) min / 2;
-                    break;
-            }
-            if (mShape == null) {
-                float[] radius = new float[8];
-                Arrays.fill(radius, mRadius);
-                mShape = new RoundRectShape(radius, null, null);
-            }
-            mShape.resize(getWidth(), getHeight());
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        boolean isAtMost = (widthMode < 0 || heightMode < 0);
+
+        int suggestedMinimumHeight = getMeasuredHeight() == 0 ? getMinimumSize() : getMeasuredHeight() + (mBorderWidth << 1);
+        int width = measureDimension(getMeasuredWidth() + (mBorderWidth << 1), widthMeasureSpec);
+        int height = measureDimension(suggestedMinimumHeight, heightMeasureSpec);
+
+        if (getDrawable() != null && TextUtils.isEmpty(getText()) && isAtMost) {
+            Bitmap src = ((BitmapDrawable) getDrawable()).getBitmap();
+            width = Math.max(src.getWidth(), getMinimumSize());
+            height = Math.max(src.getHeight(), getMinimumSize());
         }
+
+        if (mShapeMode == SHAPE_CIRCLE) {
+            width = Math.min(width, height);
+            height = Math.min(width, height);
+        }
+        setMeasuredDimension(width, height);
+    }
+
+    private int measureDimension(int measuredSize, int measureSpec) {
+        int result;
+        int specSize = MeasureSpec.getSize(measureSpec);
+        int specMode = MeasureSpec.getMode(measureSpec);
+        switch (specMode) {
+            case MeasureSpec.UNSPECIFIED:
+            case MeasureSpec.EXACTLY:
+                result = measuredSize;
+                break;
+            case MeasureSpec.AT_MOST:
+                result = Math.min(getMinimumSize(), specSize);
+                break;
+            default:
+                result = specSize;
+                break;
+        }
+        return result;
+    }
+
+    private int getMinimumSize() {
+        if (mMinimumSize == 0) {
+            Paint textPaint = new TextPaint();
+            textPaint.setTextSize(mTextSize);
+            int textHeight = (int) (textPaint.getFontMetrics().bottom - textPaint.getFontMetrics().top);
+            int textWidth = (int) textPaint.measureText(getText());
+            int padding = dp2px(getContext(), (DEFAULT_MIN_PADDING << 1));
+            mMinimumSize = Math.max(textWidth, textHeight) + padding + (mBorderWidth << 1);
+        }
+        return mMinimumSize;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int saveCount = canvas.getSaveCount();
-        canvas.save();
-        super.onDraw(canvas);
-        switch (mShapeMode) {
-            case SHAPE_MODE_ROUND_RECT:
-            case SHAPE_MODE_CIRCLE:
-                if (mShape != null) {
-                    mShape.draw(canvas, mPaint);
-                }
-                break;
-        }
-        canvas.restoreToCount(saveCount);
+        drawShape(canvas);
+        drawText(canvas);
     }
 
-}
+    private void drawShape(Canvas canvas) {
+        switch (getShapeMode()) {
+            case SHAPE_CIRCLE:
+                drawCircle(canvas);
+                break;
+            case SHAPE_RECT:
+                drawRect(canvas);
+                break;
+            case SHAPE_ROUND_RECT:
+                drawRoundRect(canvas);
+                break;
+            default:
+                drawCircle(canvas);
+                break;
+        }
+    }
 
+    private void drawCircle(Canvas canvas) {
+        mPaint.setColor(mBackgroundColor);
+        float innerStartX = getMeasuredWidth() >> 1;
+        float innerStartY = getMeasuredHeight() >> 1;
+        float innerRadius = (getMeasuredHeight() - 2 * mBorderWidth) >> 1;
+        canvas.drawCircle(innerStartX, innerStartY, innerRadius, mPaint);
+        drawBitmap(canvas, Shape.Circle);
+
+        float startX = getMeasuredWidth() >> 1;
+        float startY = getMeasuredHeight() >> 1;
+        float radius = ((getMeasuredHeight() - 2 * mBorderWidth) >> 1) + mBorderWidth / 2;
+        if (mBorderWidth > 0) {
+            mBorderPaint.setColor(mBorderColor);
+            mBorderPaint.setStyle(Paint.Style.STROKE);
+            mBorderPaint.setStrokeWidth(mBorderWidth);
+            canvas.drawCircle(startX, startY, radius, mBorderPaint);
+        }
+    }
+
+    private void drawBitmap(Canvas canvas, Shape shape) {
+        if (getDrawable() == null || ((BitmapDrawable) getDrawable()).getBitmap() == null) {
+            return;
+        }
+        canvas.save();
+        Bitmap src = ((BitmapDrawable) getDrawable()).getBitmap();
+        src = zoom(src, getMeasuredWidth(), getMeasuredHeight());
+        Bitmap shadeBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), src.getConfig());
+        Canvas shadeCanvas = new Canvas(shadeBitmap);
+
+        if (shape == Shape.Circle) {
+            shadeCanvas.drawCircle(getMeasuredWidth() / 2, getMeasuredWidth() / 2, getMeasuredWidth() / 2, mPaint);
+        }
+
+        if (shape == Shape.Rect) {
+            float innerStartX = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+            float innerStartY = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+            shadeCanvas.drawRect(innerStartX, innerStartY, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+        }
+
+        if (shape == Shape.RoundRect) {
+            float innerStartX = mBorderWidth == 0 ? 0.0f : mBorderWidth;
+            float innerStartY = mBorderWidth == 0 ? 0.0f : mBorderWidth;
+            float innerEndX = getMeasuredWidth() - mBorderWidth;
+            float innerEndY = getMeasuredHeight() - mBorderWidth;
+            shadeCanvas.drawRoundRect(new RectF(innerStartX, innerStartY, innerEndX, innerEndY), mRadius, mRadius, mPaint);
+        }
+
+        canvas.saveLayer(0, 0, getMeasuredWidth(), getMeasuredHeight(), null, Canvas.ALL_SAVE_FLAG);
+        canvas.drawBitmap(src, 0, 0, mPaint);
+        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        canvas.drawBitmap(shadeBitmap, 0, 0, mPaint);
+        mPaint.setXfermode(null);
+        canvas.restore();
+    }
+
+    private void drawRect(Canvas canvas) {
+        mPaint.setColor(mBackgroundColor);
+        float innerStartX = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+        float innerStartY = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+        canvas.drawRect(innerStartX, innerStartY, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+
+        drawBitmap(canvas, Shape.Rect);
+
+        float startX = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+        float startY = mBorderWidth == 0 ? 0.0f : (mBorderWidth >> 1);
+        float endX = getMeasuredWidth() - (mBorderWidth >> 1);
+        float endY = getMeasuredHeight() - (mBorderWidth >> 1);
+        if (mBorderWidth > 0) {
+            mBorderPaint.setColor(mBorderColor);
+            mBorderPaint.setStyle(Paint.Style.STROKE);
+            mBorderPaint.setStrokeWidth(mBorderWidth);
+            canvas.drawRect(startX, startY, endX, endY, mBorderPaint);
+        }
+    }
+
+    private void drawRoundRect(Canvas canvas) {
+        mPaint.setColor(mBackgroundColor);
+        float startX = mBorderWidth == 0 ? 0.0f : ((float) mBorderWidth) / 2;
+        float startY = mBorderWidth == 0 ? 0.0f : ((float) mBorderWidth) / 2;
+        float endX = getMeasuredWidth() - (((float) mBorderWidth) / 2);
+        float endY = getMeasuredHeight() - (((float) mBorderWidth) / 2);
+
+        if (mBorderWidth > 0) {
+            mBorderPaint.setColor(mBorderColor);
+            mBorderPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            mBorderPaint.setStrokeWidth(mBorderWidth);
+            canvas.drawRoundRect(new RectF(startX, startY, endX, endY), mRadius, mRadius, mBorderPaint);
+        }
+
+        float innerStartX = mBorderWidth == 0 ? 0.0f : mBorderWidth;
+        float innerStartY = mBorderWidth == 0 ? 0.0f : mBorderWidth;
+        float innerEndX = getMeasuredWidth() - mBorderWidth;
+        float innerEndY = getMeasuredHeight() - mBorderWidth;
+        int innerRadius = mRadius + px2dp(getContext(), mRadius / 2);
+        canvas.drawRoundRect(new RectF(innerStartX, innerStartY, innerEndX, innerEndY), innerRadius, innerRadius, mPaint);
+        drawBitmap(canvas, Shape.RoundRect);
+    }
+
+    private void drawText(Canvas canvas) {
+        if (mTargetRect == null) {
+            mTargetRect = new Rect(0, 0, getMeasuredWidth(), getMeasuredHeight());
+        }
+        if (mTextPaint == null) {
+            mTextPaint = new TextPaint();
+        }
+
+        Typeface typeface = (mTypeface == null) ? Typeface.create(Typeface.SANS_SERIF, mTextStyle) : mTypeface;
+        mTextPaint.setTypeface(typeface);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setColor(mTextColor);
+
+        Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();
+        int baseline = (mTargetRect.bottom + mTargetRect.top - fontMetrics.bottom - fontMetrics.top) >> 1;
+        canvas.drawText(getText(), mTargetRect.centerX(), baseline, mTextPaint);
+    }
+
+    public enum Shape {
+        Circle, Rect, RoundRect;
+    }
+
+    public static int dp2px(Context context, float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
+
+    public static int px2dp(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int sp2px(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    public static Bitmap zoom(Bitmap bitmap, int targetWidth, int targetHeight) {
+        float scaleVal = getScaleVal(bitmap, targetWidth, targetHeight);
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleVal, scaleVal);
+        Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        return resizeBmp;
+    }
+
+    private static float getScaleVal(Bitmap bitmap, float targetWidth, float targetHeight) {
+        if (bitmap == null) {
+            return 0;
+        }
+        try {
+            int srcWidth = bitmap.getWidth();
+            int srcHeight = bitmap.getHeight();
+            float scaleVal = Math.max(targetWidth / srcWidth, targetHeight / srcHeight);
+            return scaleVal;
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
+}

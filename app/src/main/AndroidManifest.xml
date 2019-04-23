@@ -29,6 +29,9 @@
         <activity
             android:name=".tabview.IndexAddActivity"
             android:theme="@style/UikitTranslucentThemeActivity" />
+        <activity
+            android:name=".ShapeViewActivity"
+            android:theme="@style/UikitTranslucentThemeActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#555"
+    tools:context=".ShapeViewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#555"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@mipmap/c"
+            app:backgroundColor="@color/colorPrimary"
+            app:borderColor="@android:color/white"
+            app:borderWidth="4dp"
+            app:shape_mode="circle"
+            app:textColor="#fff"
+            app:textSize="20sp" />
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:src="@mipmap/d"
+            app:borderColor="@android:color/white"
+            app:shape_mode="circle" />
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:id="@+id/siv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@mipmap/b" />
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="5dp"
+            android:src="@mipmap/a"
+            app:backgroundColor="@android:color/black"
+            app:borderColor="@android:color/holo_orange_dark"
+            app:borderWidth="2dp"
+            app:round_radius="12dp"
+            app:shape_mode="round_rect" />
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:backgroundColor="@color/colorPrimary"
+            app:borderColor="@color/colorAccent"
+            app:borderWidth="3dp"
+            app:shape_mode="rect"
+            app:text="rect"
+            app:textColor="@android:color/white"
+            app:textSize="20sp"
+            app:textStyle="bold_italic" />
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:src="@mipmap/c"
+            app:backgroundColor="@android:color/holo_blue_dark"
+            app:borderColor="@android:color/white"
+            app:round_radius="10dp"
+            app:shape_mode="round_rect"
+            app:text="round_rect"
+            app:textColor="#fff"
+            app:textSize="22sp"
+            app:textStyle="normal" />
+
+    </LinearLayout>
+
+</ScrollView>

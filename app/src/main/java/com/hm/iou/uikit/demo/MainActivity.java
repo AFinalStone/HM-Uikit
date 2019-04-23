@@ -252,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 new TimePickerDialog.Builder(MainActivity.this).create().show();
             }
         });
+
         initWheelView();
 
 
@@ -279,6 +280,13 @@ public class MainActivity extends AppCompatActivity {
         });
         HMDotTextView dotTextView = findViewById(R.id.dotText);
         dotTextView.showMoreText();
+
+        findViewById(R.id.btn_open_shape_activity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ShapeViewActivity.class));
+            }
+        });
     }
 
     private void initWheelView() {
