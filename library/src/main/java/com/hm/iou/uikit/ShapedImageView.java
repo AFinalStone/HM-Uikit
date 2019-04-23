@@ -258,12 +258,9 @@ public class ShapedImageView extends android.support.v7.widget.AppCompatImageVie
 
 
     private void drawBitmap(Canvas canvas, Shape shape) {
-        if (getDrawable() == null || ((BitmapDrawable) getDrawable()).getBitmap() == null) {
-            return;
-        }
-        canvas.save();
         Drawable drawable = getDrawable();
         if (drawable != null) {
+            canvas.save();
             /**
              * 把默认的src图片资源作为画布来进行缩放绘制
              */
