@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
+import com.hm.iou.uikit.dialog.HMBottomDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
@@ -89,12 +91,14 @@ public class MainActivity extends AppCompatActivity {
                         .create().show();
             }
         });
-        findViewById(R.id.btn_dialogCommon).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_dialogBottom).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DialogCommonKnow.Builder(MainActivity.this)
-                        .setMsg("正文提示信息")
-                        .setTitle("标题")
+                View bottomView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_layout_bottom_view, null, false);
+                new HMBottomDialog.Builder(MainActivity.this)
+                        .setTitle("底部对话框")
+                        .setBottomView(bottomView)
+                        .create()
                         .show();
             }
         });
