@@ -84,6 +84,10 @@ public class HMActionSheetDialog extends Dialog {
         mAdapter = new SheetListAdapter(getContext(), mBuilder.mDataList, mBuilder.mCanSelected);
         mAdapter.setSelected(mBuilder.mSelectedIndex);
         mRvList.setAdapter(mAdapter);
+
+        if (mBuilder.mSelectedIndex >= 0) {
+            mRvList.getLayoutManager().scrollToPosition(mBuilder.mSelectedIndex);
+        }
     }
 
     class SheetListAdapter extends RecyclerView.Adapter<SheetListAdapter.SheetListViewHolder> implements View.OnClickListener {
