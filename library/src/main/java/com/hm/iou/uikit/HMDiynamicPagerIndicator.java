@@ -98,7 +98,7 @@ public class HMDiynamicPagerIndicator extends DynamicPagerIndicator {
         if (position == 0) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabSelectedTextSize);
             textView.setTextColor(mTabSelectedTextColor);
-            textView.setTypeface(Typeface.DEFAULT_BOLD);
+            textView.setTypeface(Typeface.DEFAULT);
         } else {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTabNormalTextSize);
             textView.setTextColor(mTabNormalTextColor);
