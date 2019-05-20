@@ -269,12 +269,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mBottomNavView.showSecondButton("删除", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtil.showMessage(MainActivity.this, "删除...");
-            }
-        });
+//        mBottomNavView.showSecondButton("删除", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ToastUtil.showMessage(MainActivity.this, "删除...");
+//            }
+//        });
 
         findViewById(R.id.btn_circleView).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -37,12 +37,15 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private int mBackTextColor;
     private int mTitleTextSize;
     private int mTitleTextColor;
-    private Drawable mBackDrawable;
+    private Drawable mBackIconDrawable;
+    private Drawable mTitleIconDrawable;
     private Drawable mTitleBackgroundDrawable;
-    private int mIconWidth;
+    private int mBackIconWidth;
+    private int mTitleIconWidth;
     private boolean mEnable;
 
-    private ImageView mIvBack;
+    private ImageView mIvBackIcon;
+    private ImageView mIvTitleIcon;
     private LinearLayout mLlBack;
     private TextView mTvBack;
     private TextView mTvTitle;
@@ -76,8 +79,11 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mBackTextColor = ta.getColor(R.styleable.HmBottomBar_bottomBackTextColor, -1);
 
         //左侧返回icon
-        mBackDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomBackIcon);
-        mIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomIconWidth, 0);
+        mBackIconDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomBackIcon);
+        mBackIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomIconWidth, 0);
+        //右侧标题icon
+        mTitleIconDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleIcon);
+        mTitleIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomTitleIconWidth, 0);
         //右侧按钮背景颜色
         mTitleBackgroundDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleBackground);
         mEnable = ta.getBoolean(R.styleable.HmBottomBar_enable, true);
@@ -102,23 +108,23 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mLlBack.setPadding((int) (density * 18), 0, (int) (density * 18), 0);
         addView(mLlBack, params);
         //左侧返回Icon
-        mIvBack = new ImageView(context);
-        mIvBack.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        params = new LayoutParams(mIconWidth != 0 ? mIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        if (mBackDrawable != null) {
-            mIvBack.setImageDrawable(mBackDrawable);
+        mIvBackIcon = new ImageView(context);
+        mIvBackIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        params = new LayoutParams(mBackIconWidth != 0 ? mBackIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (mBackIconDrawable != null) {
+            mIvBackIcon.setImageDrawable(mBackIconDrawable);
         } else {
-            mIvBack.setImageResource(R.mipmap.uikit_ic_arrow_left_black);
+            mIvBackIcon.setImageResource(R.mipmap.uikit_ic_arrow_left_black);
         }
-        mIvBack.setPadding(0, 0, (int) (density * 15), 0);
-        mIvBack.setId(R.id.hm_bottom_bar_back_icon);
-        mLlBack.addView(mIvBack, params);
+        mIvBackIcon.setPadding(0, 0, (int) (density * 15), 0);
+        mIvBackIcon.setId(R.id.hm_bottom_bar_back_icon);
+        mLlBack.addView(mIvBackIcon, params);
         //左侧返回文字
         if (!TextUtils.isEmpty(mBackTextStr)) {
             mTvBack = new TextView(context);
             mTvBack.setGravity(Gravity.CENTER);
             params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
-            params.addRule(RelativeLayout.RIGHT_OF, mIvBack.getId());
+            params.addRule(RelativeLayout.RIGHT_OF, mIvBackIcon.getId());
             params.addRule(RelativeLayout.CENTER_VERTICAL);
             mTvBack.setText(mBackTextStr);
             mTvBack.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBackTextSize);
@@ -130,6 +136,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mLlBack.addView(mTvBack, params);
         }
 
+        /**
+         * 右侧标题和图标
+         */
         //右侧按钮的文字
         if (!TextUtils.isEmpty(mTitleTextStr)) {
             mTvTitle = new TextView(context);
@@ -156,7 +165,18 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mTvTitle.setId(R.id.hm_bottom_bar_title);
             mTvTitle.setOnClickListener(this);
         }
-
+        //右侧Icon
+        if (mTitleIconDrawable != null) {
+            mIvTitleIcon = new ImageView(mContext);
+            mIvTitleIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            params = new LayoutParams(mTitleIconWidth != 0 ? mTitleIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.addRule(RelativeLayout.CENTER_VERTICAL);
+            mIvTitleIcon.setImageDrawable(mTitleIconDrawable);
+            mIvTitleIcon.setPadding((int) (density * 10), 0, (int) (density * 10), 0);
+            mIvTitleIcon.setId(R.id.hm_bottom_bar_title_icon);
+            addView(mIvTitleIcon, params);
+        }
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
     }

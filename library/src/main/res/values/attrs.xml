@@ -26,6 +26,8 @@
         <attr name="bottomTitleText" format="string|reference" />
         <attr name="bottomTitleSize" format="dimension|reference" />
         <attr name="bottomTitleColor" format="color|reference" />
+        <attr name="bottomTitleIcon" format="reference" />
+        <attr name="bottomTitleIconWidth" format="dimension" />
         <attr name="bottomBackIcon" format="reference" />
         <attr name="bottomBackText" format="string|reference" />
         <attr name="bottomBackTextSize" format="dimension|reference" />
