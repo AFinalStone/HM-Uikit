@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private boolean mEnable;
 
     private ImageView mIvBack;
+    private LinearLayout mLlBack;
     private TextView mTvBack;
     private TextView mTvTitle;
 
@@ -88,21 +90,29 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mContext = context;
         float density = mContext.getResources().getDisplayMetrics().density;
 
-        //左侧返回icon
+        /**
+         * 左侧返回图标和标题
+         */
+        mLlBack = new LinearLayout(mContext);
+        LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mLlBack.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
+        mLlBack.setOrientation(LinearLayout.HORIZONTAL);
+        mLlBack.setGravity(Gravity.CENTER_VERTICAL);
+        mLlBack.setOnClickListener(this);
+        mLlBack.setPadding((int) (density * 18), 0, (int) (density * 18), 0);
+        addView(mLlBack, params);
+        //左侧返回Icon
         mIvBack = new ImageView(context);
         mIvBack.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        LayoutParams params = new LayoutParams(mIconWidth != 0 ? mIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params = new LayoutParams(mIconWidth != 0 ? mIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
         if (mBackDrawable != null) {
             mIvBack.setImageDrawable(mBackDrawable);
         } else {
             mIvBack.setImageResource(R.mipmap.uikit_ic_arrow_left_black);
         }
-        mIvBack.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
-        mIvBack.setPadding((int) (density * 18), 0, (int) (density * 15), 0);
-        addView(mIvBack, params);
+        mIvBack.setPadding(0, 0, (int) (density * 15), 0);
         mIvBack.setId(R.id.hm_bottom_bar_back_icon);
-        mIvBack.setOnClickListener(this);
-
+        mLlBack.addView(mIvBack, params);
         //左侧返回文字
         if (!TextUtils.isEmpty(mBackTextStr)) {
             mTvBack = new TextView(context);
@@ -117,9 +127,8 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             } else {
                 mTvBack.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_minor));
             }
-            addView(mTvBack, params);
+            mLlBack.addView(mTvBack, params);
         }
-
 
         //右侧按钮的文字
         if (!TextUtils.isEmpty(mTitleTextStr)) {
@@ -227,7 +236,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             if (mTitleClickListener != null) {
                 mTitleClickListener.onClickTitle();
             }
-        } else if (v == mIvBack) {
+        } else if (v == mLlBack) {
             if (mListener != null) {
                 mListener.onClickBack();
                 return;
