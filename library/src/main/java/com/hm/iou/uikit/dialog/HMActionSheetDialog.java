@@ -75,6 +75,7 @@ public class HMActionSheetDialog extends Dialog {
         }
         if (TextUtils.isEmpty(mBuilder.mTitle)) {
             mTvTitle.setVisibility(View.GONE);
+            findViewById(R.id.view_dialog_divider).setVisibility(View.GONE);
         } else {
             mTvTitle.setVisibility(View.VISIBLE);
             mTvTitle.setText(mBuilder.mTitle);
