@@ -2,6 +2,7 @@ package com.hm.iou.uikit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -161,9 +162,9 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             }
             int pad = (int) (density * 10);
             mTvTitle.setPadding(pad, 0, pad, 0);
-            addView(mTvTitle, params);
             mTvTitle.setId(R.id.hm_bottom_bar_title);
             mTvTitle.setOnClickListener(this);
+            addView(mTvTitle, params);
         }
         //右侧Icon
         if (mTitleIconDrawable != null) {
@@ -175,6 +176,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mIvTitleIcon.setImageDrawable(mTitleIconDrawable);
             mIvTitleIcon.setPadding((int) (density * 10), 0, (int) (density * 10), 0);
             mIvTitleIcon.setId(R.id.hm_bottom_bar_title_icon);
+            mIvTitleIcon.setOnClickListener(this);
             addView(mIvTitleIcon, params);
         }
         setBackgroundColor(Color.WHITE);
@@ -216,6 +218,18 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mSecondTitle.setVisibility(View.GONE);
     }
 
+    public void setTitleBtnBackground(int drawableResId) {
+        mTvTitle.setBackgroundResource(drawableResId);
+    }
+
+    public void setTitleBtnTextColor(int colorRGB) {
+        mTvTitle.setTextColor(colorRGB);
+    }
+
+    public void setTitleBtnTextColor(ColorStateList colorStateList) {
+        mTvTitle.setTextColor(colorStateList);
+    }
+
     public void setOnTitleClickListener(OnTitleClickListener listener) {
         mTitleClickListener = listener;
     }
@@ -252,7 +266,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == mTvTitle) {
+        if (v == mTvTitle || v == mIvTitleIcon) {
             if (mTitleClickListener != null) {
                 mTitleClickListener.onClickTitle();
             }
