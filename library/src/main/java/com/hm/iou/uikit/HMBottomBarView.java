@@ -140,31 +140,34 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         /**
          * 右侧标题和图标
          */
+        mTvTitle = new TextView(context);
+        mTvTitle.setGravity(Gravity.CENTER);
+        params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.addRule(RelativeLayout.CENTER_VERTICAL);
+        params.rightMargin = (int) (density * 12);
+        mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
+        if (mTitleTextColor != -1) {
+            mTvTitle.setTextColor(mTitleTextColor);
+        } else {
+            mTvTitle.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_main));
+        }
+        if (mTitleBackgroundDrawable != null) {
+            mTvTitle.setBackground(mTitleBackgroundDrawable);
+        } else {
+            mTvTitle.setBackgroundResource(R.drawable.uikit_selector_btn_main_small);
+        }
+        int pad = (int) (density * 10);
+        mTvTitle.setPadding(pad, 0, pad, 0);
+        mTvTitle.setId(R.id.hm_bottom_bar_title);
+        mTvTitle.setOnClickListener(this);
+        addView(mTvTitle, params);
         //右侧按钮的文字
-        if (!TextUtils.isEmpty(mTitleTextStr)) {
-            mTvTitle = new TextView(context);
-            mTvTitle.setGravity(Gravity.CENTER);
-            params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) (density * 30));
-            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            params.addRule(RelativeLayout.CENTER_VERTICAL);
-            params.rightMargin = (int) (density * 12);
+        if (TextUtils.isEmpty(mTitleTextStr)) {
+            mTvTitle.setVisibility(INVISIBLE);
+        } else {
             mTvTitle.setText(mTitleTextStr);
-            mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
-            if (mTitleTextColor != -1) {
-                mTvTitle.setTextColor(mTitleTextColor);
-            } else {
-                mTvTitle.setTextColor(getResources().getColorStateList(R.color.uikit_selector_btn_main));
-            }
-            if (mTitleBackgroundDrawable != null) {
-                mTvTitle.setBackground(mTitleBackgroundDrawable);
-            } else {
-                mTvTitle.setBackgroundResource(R.drawable.uikit_selector_btn_main_small);
-            }
-            int pad = (int) (density * 10);
-            mTvTitle.setPadding(pad, 0, pad, 0);
-            mTvTitle.setId(R.id.hm_bottom_bar_title);
-            mTvTitle.setOnClickListener(this);
-            addView(mTvTitle, params);
+            mTvTitle.setVisibility(VISIBLE);
         }
         //右侧Icon
         if (mTitleIconDrawable != null) {
@@ -187,6 +190,38 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         if (mTvTitle != null) {
             mTvTitle.setText(title);
         }
+    }
+
+    public void setTitleVisible(boolean isShow) {
+        if (mTvTitle != null) {
+            if (isShow) {
+                mTvTitle.setVisibility(VISIBLE);
+            } else {
+                mTvTitle.setVisibility(INVISIBLE);
+            }
+        }
+    }
+
+    public void setTitleBtnBackground(int drawableResId) {
+        if (mTvTitle != null) {
+            mTvTitle.setBackgroundResource(drawableResId);
+        }
+    }
+
+    public void setTitleBtnTextColor(int colorRGB) {
+        if (mTvTitle != null) {
+            mTvTitle.setTextColor(colorRGB);
+        }
+    }
+
+    public void setTitleBtnTextColor(ColorStateList colorStateList) {
+        if (mTvTitle != null) {
+            mTvTitle.setTextColor(colorStateList);
+        }
+    }
+
+    public void setOnTitleClickListener(OnTitleClickListener listener) {
+        mTitleClickListener = listener;
     }
 
     public void setOnBackClickListener(OnBackClickListener listener) {
@@ -218,21 +253,6 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mSecondTitle.setVisibility(View.GONE);
     }
 
-    public void setTitleBtnBackground(int drawableResId) {
-        mTvTitle.setBackgroundResource(drawableResId);
-    }
-
-    public void setTitleBtnTextColor(int colorRGB) {
-        mTvTitle.setTextColor(colorRGB);
-    }
-
-    public void setTitleBtnTextColor(ColorStateList colorStateList) {
-        mTvTitle.setTextColor(colorStateList);
-    }
-
-    public void setOnTitleClickListener(OnTitleClickListener listener) {
-        mTitleClickListener = listener;
-    }
 
     @Override
     public void setEnabled(boolean enabled) {
