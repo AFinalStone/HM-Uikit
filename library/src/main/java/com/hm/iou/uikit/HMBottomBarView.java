@@ -202,6 +202,22 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    public void setTitleIconVisible(boolean isShow) {
+        if (mIvTitleIcon != null) {
+            if (isShow) {
+                mIvTitleIcon.setVisibility(VISIBLE);
+            } else {
+                mIvTitleIcon.setVisibility(INVISIBLE);
+            }
+        }
+    }
+
+    public void setTitleIconDrawable(int drawableResId) {
+        if (mIvTitleIcon != null) {
+            mIvTitleIcon.setImageResource(drawableResId);
+        }
+    }
+
     public void setTitleBtnBackground(int drawableResId) {
         if (mTvTitle != null) {
             mTvTitle.setBackgroundResource(drawableResId);
