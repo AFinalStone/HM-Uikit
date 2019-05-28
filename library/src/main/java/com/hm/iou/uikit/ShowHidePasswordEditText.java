@@ -123,7 +123,8 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
         //save the state of whether the password is being shown
         setSaveEnabled(true);
 
-        if (!TextUtils.isEmpty(getText())) {
+        showPasswordVisibilityIndicator(true);
+/*        if (!TextUtils.isEmpty(getText())) {
             showPasswordVisibilityIndicator(true);
         }
 
@@ -144,7 +145,7 @@ public class ShowHidePasswordEditText extends AppCompatEditText {
             @Override
             public void afterTextChanged(Editable s) {
             }
-        });
+        });*/
     }
 
     private boolean isLeftToRight() {
