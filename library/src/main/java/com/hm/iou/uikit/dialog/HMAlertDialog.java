@@ -109,7 +109,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
             mTvTitle.setText(mBuilder.mTitle);
 
             //如果只有标题，没有内容，则调整上下边距
-            if (TextUtils.isEmpty(mBuilder.mMessage)) {
+            if (TextUtils.isEmpty(mBuilder.mMessage) && mBuilder.mCustomContentView == null) {
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mTvTitle.getLayoutParams();
                 float density = getContext().getResources().getDisplayMetrics().density;
                 params.topMargin = (int) density * 26;
@@ -151,6 +151,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             mFlCustomView.addView(mBuilder.mCustomContentView, params);
+            mFlCustomView.setVisibility(View.VISIBLE);
         }
 
         if (TextUtils.isEmpty(mBuilder.mBtnPosText)) {
