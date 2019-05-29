@@ -192,6 +192,12 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    public void updateBackText(CharSequence backText) {
+        if (mTvBack != null) {
+            mTvBack.setText(backText);
+        }
+    }
+
     public void setTitleVisible(boolean isShow) {
         if (mTvTitle != null) {
             if (isShow) {

@@ -305,6 +305,12 @@
             android:layout_marginTop="5dp"
             android:text="打开圆角图片demo" />
 
+        <TextView
+            android:id="@+id/tv_bottom_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="开始画下划线，我被加了下划线，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕" />
     </LinearLayout>
 
 </ScrollView>

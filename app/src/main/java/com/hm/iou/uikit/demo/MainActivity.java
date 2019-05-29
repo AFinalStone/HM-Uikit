@@ -5,15 +5,16 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hm.iou.tools.ToastUtil;
-import com.hm.iou.uikit.CircleIndicator;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMDotTextView;
@@ -24,7 +25,6 @@ import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
 import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
-import com.hm.iou.uikit.dialog.DialogCommonKnow;
 import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.dialog.HMBottomDialog;
@@ -32,6 +32,7 @@ import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
+import com.hm.iou.uikit.underline.UnderlineSpan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -291,6 +292,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ShapeViewActivity.class));
             }
         });
+
+        TextView tvBottomLine = findViewById(R.id.tv_bottom_line);
+        String content = tvBottomLine.getText().toString();
+        SpannableStringBuilder spanString = new SpannableStringBuilder(content);
+        spanString.setSpan(new UnderlineSpan(tvBottomLine.getLineHeight(), tvBottomLine.getPaint(),
+                        content.substring(7, 30), Color.RED), 7, 30,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+        tvBottomLine.setText(spanString);
     }
 
     private void initWheelView() {
