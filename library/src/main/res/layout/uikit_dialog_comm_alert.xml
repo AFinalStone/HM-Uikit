@@ -34,10 +34,10 @@
         android:layout_height="wrap_content"
         android:lineSpacingMultiplier="1.3"
         android:maxHeight="420dip"
-        android:paddingBottom="35dip"
         android:paddingLeft="32dip"
-        android:paddingRight="32dip"
         android:paddingTop="12dip"
+        android:paddingRight="32dip"
+        android:paddingBottom="35dip"
         android:text=""
         android:textColor="@color/uikit_text_auxiliary"
         android:textSize="@dimen/uikit_main_content_text_size" />
@@ -46,7 +46,9 @@
         android:id="@+id/fl_dialog_custom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="visible">
+
+    </FrameLayout>
 
     <View style="@style/UikitDivider.Horizontal" />
 
