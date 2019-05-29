@@ -349,6 +349,11 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         tvLeft.setOnClickListener(listener);
     }
 
+    public void hideLeftText() {
+        TextView tvLeft = findViewById(R.id.tv_topbar_left);
+        tvLeft.setVisibility(View.GONE);
+    }
+
     public View getStatusBarPlaceHolder() {
         return mViewStatusBarPlaceHolder;
     }
