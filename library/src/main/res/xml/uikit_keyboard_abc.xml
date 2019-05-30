@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:horizontalGap="1.6%p"
+    android:horizontalGap="0px"
     android:keyHeight="42dp"
     android:keyWidth="8.4%p"
-    android:verticalGap="10dp">
+    android:verticalGap="0px">
     <Row>
         <Key
             android:codes="113"
@@ -97,10 +97,11 @@
             android:keyLabel="m" />
         <Key
             android:codes="-5"
-            android:iconPreview="@drawable/uikit_keyboard_bg_abc_delete"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
-            android:keyWidth="11.2%p" />
+            android:keyHeight="11.2%p"
+            android:keyIcon="@drawable/uikit_ic_keyboard_delete_32dp" />
+             
     </Row>
 
 </Keyboard>

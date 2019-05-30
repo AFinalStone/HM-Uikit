@@ -1,6 +1,7 @@
 package com.hm.iou.uikit.keyboard.input;
 
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,34 +12,31 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import com.hm.iou.uikit.R;
-import com.hm.iou.uikit.keyboard.HMKeyboardView;
-import com.hm.iou.uikit.keyboard.key.BaseKey;
-import com.hm.iou.uikit.keyboard.key.NumberKeyStyle;
 
 /**
  * Created by syl on 2018/8/17.
  */
 
-public class InputCodeViewHelper implements KeyboardView.OnKeyboardActionListener {
+public class InputCodeViewHelper {
+
+    public interface KeyClickListener {
+        void onKey(int primaryCode, int[] keyCodes);
+    }
 
     private Context mContext;
     //和自定义输入法相关的变量
-    protected Window mWindow;                //当前窗口
-    protected LinearLayout mLlKeyboardView;  //自定义输入法键盘
-    protected LinearLayout mLlKeyboardTitle;  //自定义输入法键盘标题
-    protected ViewGroup mRootView;           //自定义输入法所在的根布局文件
-    protected BaseKey mKeyboard;             //按键
-    protected KeyClickListener mKeyClickListener;
+    private Window mWindow;                //当前窗口
+    private LinearLayout mLlKeyboardView;  //自定义输入法键盘
+    private LinearLayout mLlKeyboardTitle;  //自定义输入法键盘标题
+    private ViewGroup mRootView;           //自定义输入法所在的根布局文件
+    private Keyboard mKeyboard;             //按键
+    private KeyClickListener mKeyClickListener;
 
-    public InputCodeViewHelper(Context mContext, Window mWindow, BaseKey baseKey) {
+    public InputCodeViewHelper(Context mContext, Window mWindow, Keyboard baseKey) {
         this.mContext = mContext;
         this.mWindow = mWindow;
         this.mKeyboard = baseKey;
         mRootView = mWindow.getDecorView().findViewById(android.R.id.content);
-        //初始化Keyboard
-        if (baseKey.getKeyStyle() == null) {
-            baseKey.setKeyStyle(new NumberKeyStyle(mContext));
-        }
         mKeyboard = baseKey;
     }
 
@@ -96,19 +94,13 @@ public class InputCodeViewHelper implements KeyboardView.OnKeyboardActionListene
         View view = LayoutInflater.from(mContext).inflate(R.layout.uikit_layout_keyoard_view, null);
         mLlKeyboardView = view.findViewById(R.id.ll_keyboard);
         mLlKeyboardTitle = view.findViewById(R.id.ll_title);
-        view.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSoftKeyboard();
-            }
-        });
-        HMKeyboardView keyboardView = view.findViewById(R.id.keyboard);
+        KeyboardView keyboardView = view.findViewById(R.id.keyboard);
         keyboardView.setKeyboard(mKeyboard);
         keyboardView.setEnabled(true);
         //禁用键盘的按键的放大效果
         keyboardView.setPreviewEnabled(false);
         //设置按钮点击的监听事件
-        keyboardView.setOnKeyboardActionListener(this);
+        keyboardView.setOnKeyboardActionListener(mOnKeyboardActionListener);
         return view;
     }
 
@@ -122,50 +114,53 @@ public class InputCodeViewHelper implements KeyboardView.OnKeyboardActionListene
         }
     }
 
-    @Override
-    public void onPress(int primaryCode) {
+    private KeyboardView.OnKeyboardActionListener mOnKeyboardActionListener = new KeyboardView.OnKeyboardActionListener() {
+        @Override
+        public void onPress(int primaryCode) {
 
-    }
-
-    @Override
-    public void onRelease(int primaryCode) {
-
-    }
-
-    @Override
-    public void onKey(int primaryCode, int[] keyCodes) {
-        if (mKeyClickListener != null) {
-            mKeyClickListener.onKey(primaryCode, keyCodes);
         }
-    }
 
-    @Override
-    public void onText(CharSequence text) {
+        @Override
+        public void onRelease(int primaryCode) {
 
-    }
+        }
 
-    @Override
-    public void swipeLeft() {
+        @Override
+        public void onKey(int primaryCode, int[] keyCodes) {
+            if (primaryCode == Keyboard.KEYCODE_CANCEL || primaryCode == Keyboard.KEYCODE_DONE) {
+                hideSoftKeyboard();
+                return;
+            }
+            if (mKeyClickListener != null) {
+                mKeyClickListener.onKey(primaryCode, keyCodes);
+            }
+        }
 
-    }
+        @Override
+        public void onText(CharSequence text) {
 
-    @Override
-    public void swipeRight() {
+        }
 
-    }
+        @Override
+        public void swipeLeft() {
 
-    @Override
-    public void swipeDown() {
+        }
 
-    }
+        @Override
+        public void swipeRight() {
 
-    @Override
-    public void swipeUp() {
+        }
 
-    }
+        @Override
+        public void swipeDown() {
+
+        }
+
+        @Override
+        public void swipeUp() {
+
+        }
+    };
 
 
-    public interface KeyClickListener {
-        void onKey(int primaryCode, int[] keyCodes);
-    }
 }
