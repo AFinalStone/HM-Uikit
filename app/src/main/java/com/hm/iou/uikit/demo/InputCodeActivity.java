@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.keyboard.input.HMInputCodeView;
 import com.hm.iou.uikit.keyboard.input.OnInputCodeListener;
+import com.hm.iou.uikit.keyboard.key.NumberKey;
 
 /**
  * @author syl
@@ -43,7 +44,7 @@ public class InputCodeActivity extends AppCompatActivity {
             }
         });
         mInputCodeView = findViewById(R.id.inputCodeVie);
-        mInputCodeView.bindKeyBoardView(getWindow(), new Keyboard(this, R.xml.uikit_keyboard_number));
+        mInputCodeView.bindKeyBoardView(getWindow(), new NumberKey(this));
         mInputCodeView.setOnInputCodeListener(new OnInputCodeListener() {
             @Override
             public void onInputCodeFinish(String code) {

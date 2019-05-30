@@ -1,7 +1,6 @@
 package com.hm.iou.uikit.keyboard.input;
 
 import android.content.Context;
-import android.inputmethodservice.Keyboard;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hm.iou.uikit.R;
+import com.hm.iou.uikit.keyboard.key.BaseKey;
 
 /**
  * Created by syl on 2018/8/1.
@@ -111,7 +111,7 @@ public class HMInputCodeView extends FrameLayout {
     }
 
 
-    public void bindKeyBoardView(Window window, Keyboard baseKey) {
+    public void bindKeyBoardView(Window window, BaseKey baseKey) {
         mInputCodeViewHelper = new InputCodeViewHelper(getContext(), window, baseKey);
         mInputCodeViewHelper.showSoftKeyboard();
         mInputCodeViewHelper.setKeyClickListener(new InputCodeViewHelper.KeyClickListener() {

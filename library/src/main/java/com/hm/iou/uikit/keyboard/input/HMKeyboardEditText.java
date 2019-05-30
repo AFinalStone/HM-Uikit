@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.Window;
 
 import com.hm.iou.uikit.R;
+import com.hm.iou.uikit.keyboard.key.BaseKey;
 
 /**
  * @author syl
@@ -35,7 +36,7 @@ public class HMKeyboardEditText extends android.support.v7.widget.AppCompatEditT
         initView();
     }
 
-    public void bindKeyBoardView(Window window, Keyboard baseKey) {
+    public void bindKeyBoardView(Window window, BaseKey baseKey) {
         mInputCodeViewHelper = new InputCodeViewHelper(getContext(), window, baseKey);
         mInputCodeViewHelper.setKeyClickListener(new InputCodeViewHelper.KeyClickListener() {
             @Override

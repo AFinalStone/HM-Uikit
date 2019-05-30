@@ -30,6 +30,8 @@ import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.dialog.HMBottomDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
+import com.hm.iou.uikit.keyboard.key.ABCKey;
+import com.hm.iou.uikit.keyboard.key.NumberKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
 import com.hm.iou.uikit.underline.UnderlineSpan;
 
@@ -54,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         mEtClear = findViewById(R.id.et_clear);
         mEtTestInputNum = findViewById(R.id.edit_testInputNum);
-        mEtTestInputNum.bindKeyBoardView(getWindow(), new Keyboard(this, R.xml.uikit_keyboard_number));
+        mEtTestInputNum.bindKeyBoardView(getWindow(), new NumberKey(this));
         mEtTestInputABC = findViewById(R.id.edit_testInputABC);
-        mEtTestInputABC.bindKeyBoardView(getWindow(), new Keyboard(this, R.xml.uikit_keyboard_abc));
+        mEtTestInputABC.bindKeyBoardView(getWindow(), new ABCKey(this));
 
         findViewById(R.id.btn_loading_dialog).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import com.hm.iou.uikit.R;
+import com.hm.iou.uikit.keyboard.key.BaseKey;
 
 /**
  * Created by syl on 2018/8/17.
@@ -29,10 +30,10 @@ public class InputCodeViewHelper {
     private LinearLayout mLlKeyboardView;  //自定义输入法键盘
     private LinearLayout mLlKeyboardTitle;  //自定义输入法键盘标题
     private ViewGroup mRootView;           //自定义输入法所在的根布局文件
-    private Keyboard mKeyboard;             //按键
+    private BaseKey mKeyboard;             //按键
     private KeyClickListener mKeyClickListener;
 
-    public InputCodeViewHelper(Context mContext, Window mWindow, Keyboard baseKey) {
+    public InputCodeViewHelper(Context mContext, Window mWindow, BaseKey baseKey) {
         this.mContext = mContext;
         this.mWindow = mWindow;
         this.mKeyboard = baseKey;
