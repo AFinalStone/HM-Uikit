@@ -44,6 +44,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private int mBackIconWidth;
     private int mTitleIconWidth;
     private boolean mEnable;
+    private boolean mTitleIconIsShow;
 
     private ImageView mIvBackIcon;
     private ImageView mIvTitleIcon;
@@ -85,6 +86,8 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         //右侧标题icon
         mTitleIconDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleIcon);
         mTitleIconWidth = ta.getDimensionPixelSize(R.styleable.HmBottomBar_bottomTitleIconWidth, 0);
+        mTitleIconIsShow = ta.getBoolean(R.styleable.HmBottomBar_bottomTitleIconIsShow, true);
+
         //右侧按钮背景颜色
         mTitleBackgroundDrawable = ta.getDrawable(R.styleable.HmBottomBar_bottomTitleBackground);
         mEnable = ta.getBoolean(R.styleable.HmBottomBar_enable, true);
@@ -181,6 +184,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mIvTitleIcon.setId(R.id.hm_bottom_bar_title_icon);
             mIvTitleIcon.setOnClickListener(this);
             addView(mIvTitleIcon, params);
+            mIvTitleIcon.setVisibility(mTitleIconIsShow ? VISIBLE : INVISIBLE);
         }
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
@@ -209,6 +213,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     }
 
     public void setTitleIconVisible(boolean isShow) {
+        mTitleIconIsShow = isShow;
         if (mIvTitleIcon != null) {
             if (isShow) {
                 mIvTitleIcon.setVisibility(VISIBLE);
