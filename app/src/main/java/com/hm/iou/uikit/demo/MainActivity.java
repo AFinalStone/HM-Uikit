@@ -2,6 +2,7 @@ package com.hm.iou.uikit.demo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.inputmethodservice.Keyboard;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

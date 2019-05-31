@@ -35,24 +35,24 @@
                     android:text="条管家安全键盘"
                     android:textSize="@dimen/textFontSize_18" />
 
-
-                <ImageView
-                    android:id="@+id/iv_close"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/uikit_ic_arrow_bottom" />
             </LinearLayout>
 
         </LinearLayout>
 
         <View style="@style/UikitDivider.Horizontal" />
 
-        <com.hm.iou.uikit.keyboard.HMKeyboardView
+        <android.inputmethodservice.KeyboardView
             android:id="@+id/keyboard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:keyBackground="@drawable/uikit_keyboard_bg_key"
+            android:keyPreviewOffset="0dp"
+            android:keyTextColor="#000"
+            android:paddingTop="0dp"
+            android:shadowColor="#fff"
+            android:shadowRadius="0.0" />
 
     </LinearLayout>
 </FrameLayout>

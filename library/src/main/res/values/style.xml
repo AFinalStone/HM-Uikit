@@ -356,13 +356,18 @@
 
 
     <style name="UikitKeyBoardInputHide">
-        <item name="android:layout_width">42dp</item>
-        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">12dp</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:visibility">invisible</item>
         <item name="android:src">@drawable/uikit_keyboard_input_code_bg_hide</item>
     </style>
+
 
     <style name="UikitHMButton.CheckCode">
         <item name="android:layout_height">40dip</item>

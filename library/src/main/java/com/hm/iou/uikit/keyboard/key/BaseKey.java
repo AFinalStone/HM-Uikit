@@ -9,8 +9,6 @@ import android.inputmethodservice.Keyboard;
  */
 public abstract class BaseKey extends Keyboard {
 
-    private BaseKeyStyle mBaseKeyStyle;
-
     public BaseKey(Context context, int xmlLayoutResId) {
         super(context, xmlLayoutResId);
     }
@@ -25,13 +23,5 @@ public abstract class BaseKey extends Keyboard {
 
     public BaseKey(Context context, int layoutTemplateResId, CharSequence characters, int columns, int horizontalPadding) {
         super(context, layoutTemplateResId, characters, columns, horizontalPadding);
-    }
-
-    public void setKeyStyle(BaseKeyStyle baseKeyStyle) {
-        mBaseKeyStyle = baseKeyStyle;
-    }
-
-    public BaseKeyStyle getKeyStyle() {
-        return mBaseKeyStyle;
     }
 }

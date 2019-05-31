@@ -2,6 +2,7 @@ package com.hm.iou.uikit.keyboard.input;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.inputmethodservice.Keyboard;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
