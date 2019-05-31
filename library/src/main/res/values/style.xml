@@ -365,12 +365,12 @@
     </style>
 
     <style name="UikitHMButton.CheckCode">
-        <item name="android:layout_height">30dip</item>
-        <item name="android:layout_width">60dip</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:layout_width">40dip</item>
         <item name="android:textColor">@color/uikit_text_auxiliary</item>
-        <item name="android:textSize">@dimen/uikit_main_content_text_size</item>
+        <item name="android:textSize">@dimen/uikti_sub_content_text_size</item>
         <item name="android:text">@string/uikit_get_check_code</item>
-        <item name="android:background">@drawable/uikit_btn_get_code_selector</item>
+        <item name="android:background">@null</item>
     </style>
 
 </resources>

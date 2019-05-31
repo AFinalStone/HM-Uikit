@@ -11,7 +11,7 @@
     <string name="uikit_get_check_code_success">验证码获取成功</string>
     <string name="uikit_get_check_code_failed">验证码获取失败</string>
 
-    <string name="uikit_get_check_code_count_down">%SS</string>
+    <string name="uikit_get_check_code_count_down">%Ss</string>
     <string name="uikit_edit_text_input_password_hint">输入6-16位密码</string>
     <string name="uikit_edit_text_input_mobile_hint">请使用11位手机号</string>
     <string name="uikit_edit_text_input_mobile_digits_limit">0123456789</string>

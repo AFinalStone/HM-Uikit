@@ -2,6 +2,8 @@ package com.hm.iou.uikit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
@@ -39,6 +41,9 @@ public class HMCountDownTextView extends AppCompatTextView {
      * 更新显示的文本
      */
     private WeakReferenceHandler<HMCountDownTextView> mHandler;
+
+    private Drawable mBg;
+    private int mPaddingTop;
 
     public HMCountDownTextView(Context context) {
         this(context, null);
@@ -90,6 +95,9 @@ public class HMCountDownTextView extends AppCompatTextView {
             mStrText = getResources().getString(R.string.uikit_get_check_code);
         }
         setText(mStrText);
+        mBg = getResources().getDrawable(R.drawable.uikit_btn_get_code_selector);
+        float density = getResources().getDisplayMetrics().density;
+        mPaddingTop = (int) (density * 10);
     }
 
 
@@ -157,5 +165,10 @@ public class HMCountDownTextView extends AppCompatTextView {
         }
     }
 
-
+    @Override
+    protected void onDraw(Canvas canvas) {
+        mBg.setBounds(0, mPaddingTop, getWidth(), getHeight() - mPaddingTop);
+        mBg.draw(canvas);
+        super.onDraw(canvas);
+    }
 }
