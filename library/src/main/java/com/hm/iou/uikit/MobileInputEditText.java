@@ -26,43 +26,48 @@ public class MobileInputEditText extends android.support.v7.widget.AppCompatEdit
             if (s == null || s.length() == 0) {
                 return;
             }
-            System.out.println(s.toString() + " start = " + start + ", before = " + before + ", count = " + count);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < s.length(); i++) {
-                if (i != 3 && i != 8 && s.charAt(i) == ' ') {
-                    continue;
-                } else {
-                    sb.append(s.charAt(i));
-                    if ((sb.length() == 4 || sb.length() == 9)
-                            && sb.charAt(sb.length() - 1) != ' ') {
-                        sb.insert(sb.length() - 1, ' ');
+            try {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < s.length(); i++) {
+                    if (i != 3 && i != 8 && s.charAt(i) == ' ') {
+                        continue;
+                    } else {
+                        sb.append(s.charAt(i));
+                        if ((sb.length() == 4 || sb.length() == 9)
+                                && sb.charAt(sb.length() - 1) != ' ') {
+                            sb.insert(sb.length() - 1, ' ');
+                        }
                     }
                 }
-            }
-            if (!sb.toString().equals(s.toString())) {
-                int index = start + 1;
-                if (sb.charAt(start) == ' ') {
-                    if (before == 0) {
-                        index++;
+                if (!sb.toString().equals(s.toString())) {
+                    int index = start + 1;
+                    if (sb.charAt(start) == ' ') {
+                        if (before == 0) {
+                            index++;
+                        } else {
+                            index--;
+                        }
                     } else {
-                        index--;
+                        if (before == 1) {
+                            index--;
+                        } else {
+                            index++;
+                        }
                     }
-                } else {
-                    if (before == 1) {
-                        index--;
-                    } else {
-                        index++;
-                    }
-                }
-                index += count;
-                if (index > sb.length())
-                    index = sb.length();
+                    index += count;
+                    if (index > sb.length())
+                        index = sb.length();
+                    if (index < 0)
+                        index = 0;
 
-                removeTextChangedListener(watcher);
-                setText(sb.toString());
-                if (index <= sb.length())
-                    setSelection(index);
-                addTextChangedListener(watcher);
+                    removeTextChangedListener(watcher);
+                    setText(sb.toString());
+                    if (index <= sb.length())
+                        setSelection(index);
+                    addTextChangedListener(watcher);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
