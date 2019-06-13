@@ -259,6 +259,10 @@
         <item name="android:textSize">@dimen/uikit_main_title_text_size</item>
     </style>
 
+    <style name="UikitTextView.Normal">
+        <item name="android:textSize">@dimen/uikit_main_content_text_size</item>
+    </style>
+
     <style name="UikitTextView.Small">
         <item name="android:textSize">@dimen/uikti_sub_content_text_size</item>
     </style>
