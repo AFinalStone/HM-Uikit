@@ -53,6 +53,8 @@ public class PickerView extends WheelPicker implements WheelPicker.OnWheelChange
     }
 
     public void setPickerList(List<IPickerItem> pickerList) {
+        if (pickerList == null)
+            pickerList = new ArrayList<>();
         mDataList = pickerList;
         setDataList(pickerList);
     }

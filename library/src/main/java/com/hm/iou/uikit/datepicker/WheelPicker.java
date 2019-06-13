@@ -247,7 +247,7 @@ public class WheelPicker extends View {
     }
 
     public WheelPicker(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public WheelPicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -296,7 +296,7 @@ public class WheelPicker extends View {
 
     public void computeTextSize() {
         mTextMaxWidth = mTextMaxHeight = 0;
-        if (mDataList.size() == 0) {
+        if (mDataList == null || mDataList.size() == 0) {
             return;
         }
 
@@ -334,7 +334,8 @@ public class WheelPicker extends View {
     }
 
     /**
-     *  计算实际的大小
+     * 计算实际的大小
+     *
      * @param specMode 测量模式
      * @param specSize 测量的大小
      * @param size     需要的大小
@@ -370,7 +371,7 @@ public class WheelPicker extends View {
      */
     private void computeFlingLimitY() {
         mMinFlingY = mIsCyclic ? Integer.MIN_VALUE :
-                - mItemHeight * (mDataList.size() - 1);
+                -mItemHeight * (mDataList.size() - 1);
         mMaxFlingY = mIsCyclic ? Integer.MAX_VALUE : 0;
     }
 
@@ -393,8 +394,9 @@ public class WheelPicker extends View {
 
     /**
      * 修正坐标值，让其回到dateList的范围内
+     *
      * @param position 修正前的值
-     * @return  修正后的值
+     * @return 修正后的值
      */
     private int fixItemPosition(int position) {
         if (position < 0) {
@@ -402,7 +404,7 @@ public class WheelPicker extends View {
             position = mDataList.size() + (position % mDataList.size());
 
         }
-        if (position >= mDataList.size()){
+        if (position >= mDataList.size()) {
             //将数据集限定在0 ~ mDataList.size()-1之间
             position = position % mDataList.size();
         }
@@ -424,7 +426,7 @@ public class WheelPicker extends View {
             canvas.drawRect(mSelectedItemRect, mPaint);
             canvas.drawRect(mDrawnRect, mPaint);
         }
-        int drawnSelectedPos = - mScrollOffsetY / mItemHeight;
+        int drawnSelectedPos = -mScrollOffsetY / mItemHeight;
         mPaint.setStyle(Paint.Style.FILL);
         //首尾各多绘制一个用于缓冲
         for (int drawDataPos = drawnSelectedPos - mHalfVisibleItemCount - 1;
@@ -463,7 +465,7 @@ public class WheelPicker extends View {
                     alphaRatio = itemDrawY / (float) mCenterItemDrawnY;
                 }
 
-                alphaRatio = alphaRatio < 0 ? 0 :alphaRatio;
+                alphaRatio = alphaRatio < 0 ? 0 : alphaRatio;
                 mSelectedItemPaint.setAlpha((int) (alphaRatio * 255));
                 mTextPaint.setAlpha((int) (alphaRatio * 255));
             }
@@ -624,6 +626,7 @@ public class WheelPicker extends View {
 
     /**
      * 一般列表的文本颜色
+     *
      * @param textColor 文本颜色
      */
     public void setTextColor(@ColorInt int textColor) {
@@ -642,6 +645,7 @@ public class WheelPicker extends View {
 
     /**
      * 一般列表的文本大小
+     *
      * @param textSize 文字大小
      */
     public void setTextSize(int textSize) {
@@ -660,6 +664,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置被选中时候的文本颜色
+     *
      * @param selectedItemTextColor 文本颜色
      */
     public void setSelectedItemTextColor(@ColorInt int selectedItemTextColor) {
@@ -678,6 +683,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置被选中时候的文本大小
+     *
      * @param selectedItemTextSize 文字大小
      */
     public void setSelectedItemTextSize(int selectedItemTextSize) {
@@ -697,6 +703,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置输入的一段文字，用来测量 mTextMaxWidth
+     *
      * @param itemMaximumWidthText 文本内容
      */
     public void setItemMaximumWidthText(String itemMaximumWidthText) {
@@ -711,6 +718,7 @@ public class WheelPicker extends View {
 
     /**
      * 显示的个数等于上下两边Item的个数+ 中间的Item
+     *
      * @return 总显示的数量
      */
     public int getVisibleItemCount() {
@@ -720,6 +728,7 @@ public class WheelPicker extends View {
     /**
      * 设置显示数据量的个数的一半。
      * 为保证总显示个数为奇数,这里将总数拆分，总数为 mHalfVisibleItemCount * 2 + 1
+     *
      * @param halfVisibleItemCount 总数量的一半
      */
     public void setHalfVisibleItemCount(int halfVisibleItemCount) {
@@ -748,6 +757,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置两个Item之间的间隔
+     *
      * @param itemHeightSpace 间隔值
      */
     public void setItemHeightSpace(int itemHeightSpace) {
@@ -764,6 +774,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置当前选中的列表项,将滚动到所选位置
+     *
      * @param currentPosition 设置的当前位置
      */
     public void setCurrentPosition(int currentPosition) {
@@ -772,8 +783,9 @@ public class WheelPicker extends View {
 
     /**
      * 设置当前选中的列表位置
+     *
      * @param currentPosition 设置的当前位置
-     * @param smoothScroll 是否平滑滚动
+     * @param smoothScroll    是否平滑滚动
      */
     public synchronized void setCurrentPosition(int currentPosition, boolean smoothScroll) {
         if (currentPosition > mDataList.size() - 1) {
@@ -825,6 +837,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置是否循环滚动。
+     *
      * @param cyclic 上下边界是否相邻
      */
     public void setCyclic(boolean cyclic) {
@@ -842,6 +855,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置最小滚动速度,如果实际速度小于此速度，将不会触发滚动。
+     *
      * @param minimumVelocity 最小速度
      */
     public void setMinimumVelocity(int minimumVelocity) {
@@ -854,6 +868,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置最大滚动的速度,实际滚动速度的上限
+     *
      * @param maximumVelocity 最大滚动速度
      */
     public void setMaximumVelocity(int maximumVelocity) {
@@ -866,6 +881,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置文字渐变，离中心越远越淡。
+     *
      * @param textGradual 是否渐变
      */
     public void setTextGradual(boolean textGradual) {
@@ -882,6 +898,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置中心Item是否有幕布遮盖
+     *
      * @param showCurtain 是否有幕布
      */
     public void setShowCurtain(boolean showCurtain) {
@@ -898,6 +915,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置幕布颜色
+     *
      * @param curtainColor 幕布颜色
      */
     public void setCurtainColor(@ColorInt int curtainColor) {
@@ -914,6 +932,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置幕布是否显示边框
+     *
      * @param showCurtainBorder 是否有幕布边框
      */
     public void setShowCurtainBorder(boolean showCurtainBorder) {
@@ -930,6 +949,7 @@ public class WheelPicker extends View {
 
     /**
      * 幕布边框的颜色
+     *
      * @param curtainBorderColor 幕布边框颜色
      */
     public void setCurtainBorderColor(@ColorInt int curtainBorderColor) {
@@ -959,6 +979,7 @@ public class WheelPicker extends View {
 
     /**
      * 设置数据集格式
+     *
      * @param dataFormat 格式
      */
     public void setDataFormat(Format dataFormat) {
