@@ -31,6 +31,10 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         void onClickTitle();
     }
 
+    public interface OnTitleIconClickListener {
+        void onClickIcon();
+    }
+
     private Context mContext;
     private String mTitleTextStr;
     private String mBackTextStr;
@@ -56,6 +60,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
 
     private OnBackClickListener mListener;
     private OnTitleClickListener mTitleClickListener;
+    private OnTitleIconClickListener mOnTitleIconClickListener;
 
     public HMBottomBarView(Context context) {
         this(context, null);
@@ -176,6 +181,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         if (mTitleIconDrawable != null) {
             mIvTitleIcon = new ImageView(mContext);
             mIvTitleIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            mIvTitleIcon.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
             params = new LayoutParams(mTitleIconWidth != 0 ? mTitleIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -185,6 +191,14 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             mIvTitleIcon.setOnClickListener(this);
             addView(mIvTitleIcon, params);
             mIvTitleIcon.setVisibility(mTitleIconIsShow ? VISIBLE : INVISIBLE);
+
+            if (mTitleIconIsShow) {
+                RelativeLayout.LayoutParams params1 = (LayoutParams) mTvTitle.getLayoutParams();
+                params1.addRule(RelativeLayout.LEFT_OF, R.id.hm_bottom_bar_title_icon);
+                params1.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                params.rightMargin = (int) (density * 5);
+                mTvTitle.setLayoutParams(params1);
+            }
         }
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
@@ -251,6 +265,10 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mTitleClickListener = listener;
     }
 
+    public void setOnTitleIconClickListener(OnTitleIconClickListener listener) {
+        mOnTitleIconClickListener = listener;
+    }
+
     public void setOnBackClickListener(OnBackClickListener listener) {
         mListener = listener;
     }
@@ -313,7 +331,16 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == mTvTitle || v == mIvTitleIcon) {
+        if (v == mTvTitle) {
+            if (mTitleClickListener != null) {
+                mTitleClickListener.onClickTitle();
+            }
+        } else if (v == mIvTitleIcon) {
+            if (mOnTitleIconClickListener != null) {
+                mOnTitleIconClickListener.onClickIcon();
+                return;
+            }
+            //兼容以前的，2个点击响应的是同一个事件
             if (mTitleClickListener != null) {
                 mTitleClickListener.onClickTitle();
             }
