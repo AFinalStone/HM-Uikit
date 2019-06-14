@@ -3,6 +3,7 @@ package com.hm.iou.uikit.dialog;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Outline;
 import android.graphics.Rect;
 import android.os.Build;
@@ -176,19 +177,24 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
             mBtnPos.setTextColor(mBuilder.mContext.getResources().getColor(R.color.uikit_text_auxiliary));
         } else {
             mBtnPos.setBackgroundResource(R.drawable.uikit_selector_btn_dialog_main);
-            mBtnPos.setTextColor(mBuilder.mContext.getResources().getColor(R.color.uikit_text_main_content));
+            mBtnPos.setTextColor(mBuilder.mContext.getResources().getColorStateList(R.color.uikit_selector_btn_main));
         }
-
+        mBtnPos.setEnabled(mBuilder.mEnablePosButton);
 
         int btnNegStyle = mBuilder.mBtnNegStyleType;
         //neg button默认设置为次要色
         if (btnNegStyle == BUTTON_TYPE_MAIN) {
             mBtnNeg.setBackgroundResource(R.drawable.uikit_selector_btn_dialog_main);
-            mBtnNeg.setTextColor(mBuilder.mContext.getResources().getColor(R.color.uikit_text_main_content));
+            mBtnNeg.setTextColor(mBuilder.mContext.getResources().getColorStateList(R.color.uikit_selector_btn_main));
         } else {
             mBtnNeg.setBackgroundResource(R.drawable.uikit_selector_btn_dialog_secondary);
             mBtnNeg.setTextColor(mBuilder.mContext.getResources().getColor(R.color.uikit_text_auxiliary));
         }
+    }
+
+    public void enablePosButton(boolean enabled) {
+        if (mBtnPos != null)
+            mBtnPos.setEnabled(enabled);
     }
 
     @Override
@@ -225,6 +231,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         private OnClickListener mOnClickListener;
         private int mMessageGravity;
         private boolean mDismissedOnClickBtn = true;
+        private boolean mEnablePosButton = true;
 
         private Rect mPaddingRect;
         private int mMsgTextSize;
@@ -336,6 +343,11 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
         public Builder setMessageTextSize(int textSize) {
             mMsgTextSize = textSize;
+            return this;
+        }
+
+        public Builder enablePostButton(boolean enabled) {
+            mEnablePosButton = enabled;
             return this;
         }
 
