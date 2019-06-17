@@ -179,29 +179,34 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         }
         //右侧Icon
         if (mTitleIconDrawable != null) {
-            mIvTitleIcon = new ImageView(mContext);
-            mIvTitleIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            mIvTitleIcon.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
-            params = new LayoutParams(mTitleIconWidth != 0 ? mTitleIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            params.addRule(RelativeLayout.CENTER_VERTICAL);
-            mIvTitleIcon.setImageDrawable(mTitleIconDrawable);
-            mIvTitleIcon.setPadding((int) (density * 10), 0, (int) (density * 10), 0);
-            mIvTitleIcon.setId(R.id.hm_bottom_bar_title_icon);
-            mIvTitleIcon.setOnClickListener(this);
-            addView(mIvTitleIcon, params);
-            mIvTitleIcon.setVisibility(mTitleIconIsShow ? VISIBLE : INVISIBLE);
-
-            if (mTitleIconIsShow) {
-                RelativeLayout.LayoutParams params1 = (LayoutParams) mTvTitle.getLayoutParams();
-                params1.addRule(RelativeLayout.LEFT_OF, R.id.hm_bottom_bar_title_icon);
-                params1.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                params.rightMargin = (int) (density * 5);
-                mTvTitle.setLayoutParams(params1);
-            }
+            addTitleIcon();
         }
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
+    }
+
+    private void addTitleIcon() {
+        mIvTitleIcon = new ImageView(mContext);
+        mIvTitleIcon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        mIvTitleIcon.setBackgroundResource(R.drawable.uikit_bg_item_ripple);
+        RelativeLayout.LayoutParams params = new LayoutParams(mTitleIconWidth != 0 ? mTitleIconWidth : ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.addRule(RelativeLayout.CENTER_VERTICAL);
+        mIvTitleIcon.setImageDrawable(mTitleIconDrawable);
+        float density = mContext.getResources().getDisplayMetrics().density;
+        mIvTitleIcon.setPadding((int) (density * 10), 0, (int) (density * 10), 0);
+        mIvTitleIcon.setId(R.id.hm_bottom_bar_title_icon);
+        mIvTitleIcon.setOnClickListener(this);
+        addView(mIvTitleIcon, params);
+        mIvTitleIcon.setVisibility(mTitleIconIsShow ? VISIBLE : INVISIBLE);
+
+        if (mTitleIconIsShow) {
+            RelativeLayout.LayoutParams params1 = (LayoutParams) mTvTitle.getLayoutParams();
+            params1.addRule(RelativeLayout.LEFT_OF, R.id.hm_bottom_bar_title_icon);
+            params1.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            params.rightMargin = (int) (density * 5);
+            mTvTitle.setLayoutParams(params1);
+        }
     }
 
     public void updateTitle(CharSequence title) {
@@ -231,14 +236,30 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         if (mIvTitleIcon != null) {
             if (isShow) {
                 mIvTitleIcon.setVisibility(VISIBLE);
+
+                RelativeLayout.LayoutParams params = (LayoutParams) mTvTitle.getLayoutParams();
+                float density = mContext.getResources().getDisplayMetrics().density;
+                params.addRule(RelativeLayout.LEFT_OF, R.id.hm_bottom_bar_title_icon);
+                params.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                params.rightMargin = (int) (density * 5);
+                mTvTitle.setLayoutParams(params);
             } else {
                 mIvTitleIcon.setVisibility(INVISIBLE);
+
+                RelativeLayout.LayoutParams params = (LayoutParams) mTvTitle.getLayoutParams();
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                params.addRule(RelativeLayout.CENTER_VERTICAL);
+                params.rightMargin = 0;
+                mTvTitle.setLayoutParams(params);
             }
         }
     }
 
     public void setTitleIconDrawable(int drawableResId) {
         if (mIvTitleIcon != null) {
+            mIvTitleIcon.setImageResource(drawableResId);
+        } else {
+            addTitleIcon();
             mIvTitleIcon.setImageResource(drawableResId);
         }
     }
