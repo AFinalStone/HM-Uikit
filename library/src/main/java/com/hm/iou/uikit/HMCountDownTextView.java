@@ -126,6 +126,21 @@ public class HMCountDownTextView extends AppCompatTextView {
     }
 
     /**
+     * 恢复到初始状态
+     */
+    public void resume() {
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        } else {
+            initHandler();
+        }
+        mLength = 60 * 1000;
+        mIsStartCountDown = false;
+        setEnabled(true);
+        setText(mStrText);
+    }
+
+    /**
      * 设置倒计时时长
      *
      * @param mLength 默认毫秒
