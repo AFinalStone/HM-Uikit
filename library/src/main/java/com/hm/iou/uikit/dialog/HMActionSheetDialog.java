@@ -4,13 +4,20 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Outline;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hm.iou.uikit.HMGrayDividerItemDecoration;
 import com.hm.iou.uikit.R;
 
 import java.util.List;
@@ -86,10 +94,71 @@ public class HMActionSheetDialog extends Dialog {
         mAdapter.setSelected(mBuilder.mSelectedIndex);
         mRvList.setAdapter(mAdapter);
 
+        mRvList.addItemDecoration(new ActionSheetDivider(mBuilder.mContext));
+
         if (mBuilder.mSelectedIndex >= 0) {
             mRvList.getLayoutManager().scrollToPosition(mBuilder.mSelectedIndex);
         }
     }
+
+    class ActionSheetDivider extends RecyclerView.ItemDecoration {
+
+        private Drawable mDivider;
+
+        private final Rect mBounds = new Rect();
+
+        public ActionSheetDivider(Context context) {
+            mDivider = ContextCompat.getDrawable(context, R.drawable.uikit_comm_divider_gray);
+        }
+
+        @Override
+        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            if (parent.getLayoutManager() == null || mDivider == null) {
+                return;
+            }
+            drawVertical(c, parent);
+        }
+
+        private void drawVertical(Canvas canvas, RecyclerView parent) {
+            canvas.save();
+            final int left;
+            final int right;
+            if (parent.getClipToPadding()) {
+                left = parent.getPaddingLeft();
+                right = parent.getWidth() - parent.getPaddingRight();
+                canvas.clipRect(left, parent.getPaddingTop(), right,
+                        parent.getHeight() - parent.getPaddingBottom());
+            } else {
+                left = 0;
+                right = parent.getWidth();
+            }
+
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                final View child = parent.getChildAt(i);
+                Integer pos = (Integer) child.getTag();
+                if (pos == mBuilder.mDividerPos) {
+                    parent.getDecoratedBoundsWithMargins(child, mBounds);
+                    final int bottom = mBounds.bottom + Math.round(child.getTranslationY());
+                    final int top = bottom - mDivider.getIntrinsicHeight();
+                    mDivider.setBounds(left, top, right, bottom);
+                    mDivider.draw(canvas);
+                }
+            }
+            canvas.restore();
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
+                                   RecyclerView.State state) {
+            if (mDivider == null) {
+                outRect.set(0, 0, 0, 0);
+                return;
+            }
+            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+        }
+    }
+
 
     class SheetListAdapter extends RecyclerView.Adapter<SheetListAdapter.SheetListViewHolder> implements View.OnClickListener {
 
@@ -179,6 +248,7 @@ public class HMActionSheetDialog extends Dialog {
         private int mSelectedIndex = -1;
         private OnItemClickListener mListener;
         private boolean mCanSelected = true;        //选中之后，选中的会有打勾标记，否则没有
+        private int mDividerPos = -1;               //支持在任意位置设置一个分割线，满足某些特殊需求
 
         public Builder(Context context) {
             mContext = context;
@@ -221,6 +291,11 @@ public class HMActionSheetDialog extends Dialog {
 
         public Builder setCanSelected(boolean canSelected) {
             mCanSelected = canSelected;
+            return this;
+        }
+
+        public Builder setDividerPos(int index) {
+            mDividerPos = index;
             return this;
         }
 
