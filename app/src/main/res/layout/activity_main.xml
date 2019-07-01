@@ -17,7 +17,7 @@
         <com.hm.iou.uikit.StatusBarView
             android:layout_width="match_parent"
             android:layout_height="@dimen/uikit_status_bar_height"
-            android:background="@color/uikit_function_exception"/>
+            android:background="@color/uikit_function_exception" />
 
         <Button
             style="@style/UikitHMButton.Small.Bordered"
@@ -186,7 +186,6 @@
             android:id="@+id/btn_circleView"
             style="@style/UikitButton"
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
             android:text="点号导航器控件" />
 
 
