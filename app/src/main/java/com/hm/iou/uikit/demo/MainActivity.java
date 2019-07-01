@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         .setActionSheetList(list)
                         .setTitle("还款方式")
                         .setSelectedIndex(2)
+//                        .setListMaxHeight(0)//可以控制列表的高度，0自适应，其他高度则为最大高度
                         .setCancelable(false)
                         .setOnItemClickListener(new HMActionSheetDialog.OnItemClickListener() {
                             @Override
