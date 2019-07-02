@@ -28,6 +28,11 @@ public class MaxHeightRecyclerView extends RecyclerView {
         arr.recycle();
     }
 
+    public void setMaxHeight(int listMaxHeight) {
+        this.mMaxHeight = listMaxHeight;
+        postInvalidate();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (mMaxHeight > 0) {

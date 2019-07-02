@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -183,6 +184,10 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         }
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
+        //添加阴影
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setElevation(density * 1);
+        }
     }
 
     private void addTitleIcon() {

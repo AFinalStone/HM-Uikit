@@ -1,37 +1,25 @@
 package com.hm.iou.uikit.dialog;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Outline;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewOutlineProvider;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hm.iou.uikit.HMGrayDividerItemDecoration;
+import com.hm.iou.uikit.MaxHeightRecyclerView;
 import com.hm.iou.uikit.R;
 
 import java.util.List;
@@ -49,7 +37,7 @@ public class HMActionSheetDialog extends Dialog {
     private Builder mBuilder;
 
     private TextView mTvTitle;
-    private RecyclerView mRvList;
+    private MaxHeightRecyclerView mRvList;
     private SheetListAdapter mAdapter;
 
     private HMActionSheetDialog(Builder builder, int style) {
@@ -78,6 +66,9 @@ public class HMActionSheetDialog extends Dialog {
     private void initContent() {
         mTvTitle = findViewById(R.id.tv_dialog_title);
         mRvList = findViewById(R.id.rv_dialog_list);
+        if (-1 != mBuilder.getListMaxHeight()) {
+            mRvList.setMaxHeight(mBuilder.getListMaxHeight());
+        }
         if (mBuilder == null) {
             return;
         }
@@ -246,6 +237,7 @@ public class HMActionSheetDialog extends Dialog {
         private CharSequence mTitle;
         private List<String> mDataList;
         private int mSelectedIndex = -1;
+        private int mListMaxHeight = -1;//最大高度
         private OnItemClickListener mListener;
         private boolean mCanSelected = true;        //选中之后，选中的会有打勾标记，否则没有
         private int mDividerPos = -1;               //支持在任意位置设置一个分割线，满足某些特殊需求
@@ -297,6 +289,15 @@ public class HMActionSheetDialog extends Dialog {
         public Builder setDividerPos(int index) {
             mDividerPos = index;
             return this;
+        }
+
+        public Builder setListMaxHeight(int listMaxHeight) {
+            this.mListMaxHeight = listMaxHeight;
+            return this;
+        }
+
+        public int getListMaxHeight() {
+            return mListMaxHeight;
         }
 
         public HMActionSheetDialog create() {
