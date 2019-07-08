@@ -184,10 +184,6 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         }
         setBackgroundColor(Color.WHITE);
         setEnabled(mEnable);
-        //添加阴影
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setElevation(density * 1);
-        }
     }
 
     private void addTitleIcon() {
