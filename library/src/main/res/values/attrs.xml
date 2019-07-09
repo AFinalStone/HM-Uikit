@@ -94,6 +94,7 @@
     <declare-styleable name="HmSmoothCheckBox">
         <attr name="duration" format="integer" />
         <attr name="stroke_width" format="dimension" />
+        <attr name="padding" format="dimension" />
         <attr name="checked" format="boolean" />
         <attr name="color_tick" format="color" />
         <attr name="color_checked" format="color" />

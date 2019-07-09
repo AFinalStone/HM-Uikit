@@ -173,10 +173,16 @@
             android:layout_height="20dp"
             android:layout_marginTop="20dp" />
 
+        <com.hm.iou.uikit.SmoothCheckBox
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:padding="15dp" />
+
         <com.hm.iou.uikit.HMBottomBarView
             android:id="@+id/bottom_navview"
             android:layout_width="match_parent"
             android:layout_height="50dip"
+            android:layout_marginTop="20dp"
             app:bottomBackIcon="@mipmap/ic_launcher"
             app:bottomTitleIcon="@mipmap/ic_clear"
             app:bottomTitleText="这是一个按钮" />
@@ -313,6 +319,7 @@
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:text="开始画下划线，我被加了下划线，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕" />
+
     </LinearLayout>
 
 </ScrollView>
