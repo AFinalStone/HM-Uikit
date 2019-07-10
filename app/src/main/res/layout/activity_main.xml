@@ -12,7 +12,36 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
+<<<<<<< Updated upstream
         android:paddingBottom="50dp">
+=======
+        android:paddingBottom="50dp"
+        android:paddingTop="40dip">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="城市选择弹窗"
+            android:onClick="showCityPicker"
+            />
+
+        <com.hm.iou.uikit.MobileInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="1234566"
+            android:focusable="true"
+            />
+
+        <com.hm.iou.uikit.HMCountDownTextView
+            android:id="@+id/tv_getSmsCheckCode"
+            style="@style/UikitHMButton.CheckCode"
+            android:enabled="true"
+            android:layout_marginRight="35dip"
+            android:layout_marginBottom="20dip"
+            />
+>>>>>>> Stashed changes
 
         <com.hm.iou.uikit.StatusBarView
             android:layout_width="match_parent"
@@ -182,10 +211,17 @@
             android:id="@+id/bottom_navview"
             android:layout_width="match_parent"
             android:layout_height="50dip"
+<<<<<<< Updated upstream
             android:layout_marginTop="20dp"
             app:bottomBackIcon="@mipmap/ic_launcher"
             app:bottomTitleIcon="@mipmap/ic_clear"
             app:bottomTitleText="这是一个按钮" />
+=======
+            app:bottomTitleIcon="@mipmap/uikit_ic_more_black"
+            app:bottomTitleText="这是一个按钮"
+            app:bottomTitleIconWidth="50dp"
+            />
+>>>>>>> Stashed changes
 
 
         <Button
@@ -313,7 +349,7 @@
             android:layout_marginTop="5dp"
             android:text="打开圆角图片demo" />
 
-        <TextView
+        <com.hm.iou.uikit.underline.UnderlineTextView
             android:id="@+id/tv_bottom_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
