@@ -12,41 +12,33 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-<<<<<<< Updated upstream
         android:paddingBottom="50dp">
-=======
-        android:paddingBottom="50dp"
-        android:paddingTop="40dip">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="城市选择弹窗"
-            android:onClick="showCityPicker"
-            />
-
-        <com.hm.iou.uikit.MobileInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="50dip"
-            android:paddingLeft="50dip"
-            android:paddingRight="50dip"
-            android:text="1234566"
-            android:focusable="true"
-            />
-
-        <com.hm.iou.uikit.HMCountDownTextView
-            android:id="@+id/tv_getSmsCheckCode"
-            style="@style/UikitHMButton.CheckCode"
-            android:enabled="true"
-            android:layout_marginRight="35dip"
-            android:layout_marginBottom="20dip"
-            />
->>>>>>> Stashed changes
 
         <com.hm.iou.uikit.StatusBarView
             android:layout_width="match_parent"
             android:layout_height="@dimen/uikit_status_bar_height"
             android:background="@color/uikit_function_exception" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="城市选择弹窗" />
+
+        <com.hm.iou.uikit.MobileInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:focusable="true"
+            android:paddingLeft="50dip"
+            android:paddingRight="50dip"
+            android:text="1234566" />
+
+        <com.hm.iou.uikit.HMCountDownTextView
+            android:id="@+id/tv_getSmsCheckCode"
+            style="@style/UikitHMButton.CheckCode"
+            android:layout_marginBottom="20dip"
+            android:layout_marginRight="35dip"
+            android:enabled="true" />
+
 
         <Button
             style="@style/UikitHMButton.Small.Bordered"
@@ -211,18 +203,10 @@
             android:id="@+id/bottom_navview"
             android:layout_width="match_parent"
             android:layout_height="50dip"
-<<<<<<< Updated upstream
             android:layout_marginTop="20dp"
             app:bottomBackIcon="@mipmap/ic_launcher"
             app:bottomTitleIcon="@mipmap/ic_clear"
             app:bottomTitleText="这是一个按钮" />
-=======
-            app:bottomTitleIcon="@mipmap/uikit_ic_more_black"
-            app:bottomTitleText="这是一个按钮"
-            app:bottomTitleIconWidth="50dp"
-            />
->>>>>>> Stashed changes
-
 
         <Button
             android:id="@+id/btn_circleView"
@@ -336,11 +320,21 @@
             </LinearLayout>
         </com.hm.iou.uikit.sidemenu.SideMenuLayout>
 
-        <com.hm.iou.uikit.ShapedImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/uikit_icon_delete_black"
-            app:shape_mode="circle" />
+        <com.hm.iou.uikit.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@color/uikit_red"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/b" />
+
+        <com.hm.iou.uikit.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@color/black"
+            android:scaleType="centerCrop"
+            android:src="@color/uikit_red" />
 
         <Button
             android:id="@+id/btn_open_shape_activity"
@@ -356,14 +350,6 @@
             android:padding="20dp"
             android:text="开始画下划线，我被加了下划线，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕" />
 
-        <com.shehuan.niv.NiceImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:src="@mipmap/bg_2"
-            app:border_color="#FF7F24"
-            app:border_width="4dp"
-            app:is_circle="true" />
     </LinearLayout>
 
 </ScrollView>

@@ -28,6 +28,7 @@ import java.util.Arrays;
  * @author syl
  * @time 2019/4/23 7:47 PM
  */
+@Deprecated
 public class ShapedImageView extends AppCompatImageView {
 
     private static final int SHAPE_MODE_ROUND_RECT = 1;
