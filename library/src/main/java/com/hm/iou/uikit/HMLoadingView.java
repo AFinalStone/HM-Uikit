@@ -92,6 +92,21 @@ public class HMLoadingView extends RelativeLayout {
         tvExtAction.setOnClickListener(listener);
     }
 
+    public void showDataEmpty(CharSequence tips, int emptyImgResId, CharSequence extAction, int extActionBgResId, OnClickListener listener) {
+        showDataEmpty(tips);
+        if (emptyImgResId > 0) {
+            ImageView ivEmpty = mLayoutEmpty.findViewById(R.id.iv_data_empty);
+            ivEmpty.setImageResource(emptyImgResId);
+        }
+        TextView tvExtAction = mLayoutEmpty.findViewById(R.id.tv_data_empty_extaction);
+        if (extActionBgResId > 0) {
+            tvExtAction.setBackgroundResource(extActionBgResId);
+        }
+        tvExtAction.setText(extAction);
+        tvExtAction.setVisibility(View.VISIBLE);
+        tvExtAction.setOnClickListener(listener);
+    }
+
     /**
      * 显示数据为空
      *

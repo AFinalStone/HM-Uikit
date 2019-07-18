@@ -30,7 +30,6 @@
         android:id="@+id/tv_data_empty_extaction"
         style="@style/UikitTextView.Normal"
         android:layout_height="28dp"
-        android:minWidth="80dp"
         android:text=""
         android:textColor="@color/uikit_text_sub_content"
         android:layout_marginTop="30dp"
