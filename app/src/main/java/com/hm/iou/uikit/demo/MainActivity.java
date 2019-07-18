@@ -302,6 +302,13 @@ public class MainActivity extends AppCompatActivity {
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         );
         tvBottomLine.setText(spanString);
+
+        findViewById(R.id.btn_test_sticky).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), StickyRecyclerActivity.class));
+            }
+        });
     }
 
     private void initWheelView() {

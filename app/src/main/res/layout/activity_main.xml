@@ -350,6 +350,11 @@
             android:padding="20dp"
             android:text="开始画下划线，我被加了下划线，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕，下划线绘制完毕" />
 
+        <Button
+            android:id="@+id/btn_test_sticky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="测试悬浮RecyclerView控件" />
     </LinearLayout>
 
 </ScrollView>
