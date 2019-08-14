@@ -33,9 +33,9 @@ public class StickyRecyclerActivity extends AppCompatActivity {
         mRvSticky = findViewById(R.id.stickyRecyclerView);
         mRvSticky.setLayoutManager(new LinearLayoutManager(this));
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            list.add("悬浮条目测试" + i);
-        }
+//        for (int i = 0; i < 20; i++) {
+//            list.add("悬浮条目测试" + i);
+//        }
         mAdapter = new BaseQuickAdapter<String, BaseViewHolder>(R.layout.activity_sticky_recycler_list_item, list) {
 
             @Override
@@ -56,7 +56,7 @@ public class StickyRecyclerActivity extends AppCompatActivity {
             public String getGroupName(int position) {
                 return "";
             }
-        }).setHeaderCount(1).build();
+        }).setHeaderCount(mAdapter.getHeaderLayoutCount()).build();
         mRvSticky.addItemDecoration(pfd);
         mRvSticky.setAdapter(mAdapter);
     }
