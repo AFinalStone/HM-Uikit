@@ -24,7 +24,7 @@ import com.hm.iou.uikit.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Deprecated
 public class ChooseDialog extends Dialog {
 
     private ChooseDialog(@NonNull Context context) {

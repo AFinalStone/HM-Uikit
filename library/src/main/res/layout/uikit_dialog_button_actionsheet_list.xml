@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_dialog_content"
     android:layout_width="match_parent"
@@ -13,15 +14,19 @@
         android:layout_height="50dip"
         android:gravity="center"
         android:textColor="@color/uikit_text_main_content"
-        android:textSize="@dimen/uikit_sub_title_text_size"
+        android:textSize="@dimen/uikit_main_content_text_size"
         tools:text="还款方式" />
 
-    <View style="@style/UikitDivider.Horizontal"
+    <View
         android:id="@+id/view_dialog_divider"
-        />
+        style="@style/UikitDivider.Horizontal" />
 
-    <FrameLayout
-        android:id="@+id/fl_bottom_view"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_dialog_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" />
+
 </LinearLayout>

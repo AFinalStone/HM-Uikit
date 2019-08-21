@@ -22,6 +22,7 @@ import com.hm.iou.uikit.R;
  * @author syl
  * @time 2018/5/22 下午5:57
  */
+@Deprecated
 public class DialogCommonKnow extends Dialog {
 
     private DialogCommonKnow(@NonNull Context context, @StyleRes int themeResId) {

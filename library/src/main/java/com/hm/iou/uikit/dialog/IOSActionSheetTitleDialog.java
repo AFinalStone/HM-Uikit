@@ -30,6 +30,7 @@ import java.util.List;
  * @author syl
  * @time 2018/6/11 下午7:50
  */
+@Deprecated
 public class IOSActionSheetTitleDialog extends Dialog {
 
     private IOSActionSheetTitleDialog(@NonNull Context context) {

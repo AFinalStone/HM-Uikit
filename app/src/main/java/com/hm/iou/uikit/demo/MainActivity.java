@@ -16,12 +16,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.HMBottomBarView;
 import com.hm.iou.uikit.HMCountDownTextView;
 import com.hm.iou.uikit.HMDotTextView;
 import com.hm.iou.uikit.HMLoadingView;
 import com.hm.iou.uikit.HMTopBarView;
 import com.hm.iou.uikit.PullDownRefreshImageView;
+import com.hm.iou.uikit.datepicker.CityPickerDialog;
 import com.hm.iou.uikit.datepicker.TimePickerDialog;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerHorizontalActivity;
 import com.hm.iou.uikit.demo.layoutmanager.viewpager.ViewPagerVerticalActivity;
@@ -29,6 +31,7 @@ import com.hm.iou.uikit.demo.tabview.BottomTabViewActivity;
 import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.dialog.HMBottomDialog;
+import com.hm.iou.uikit.dialog.HMButtonActionSheetDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
@@ -37,6 +40,8 @@ import com.hm.iou.uikit.underline.UnderlineSpan;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kotlin.Pair;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -195,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                         .setSelectedIndex(2)
 //                        .setListMaxHeight(0)//可以控制列表的高度，0自适应，其他高度则为最大高度
                         .setCancelable(false)
+                        .setDividerPos(0)
                         .setOnItemClickListener(new HMActionSheetDialog.OnItemClickListener() {
                             @Override
                             public void onItemClick(int index, String value) {
@@ -295,20 +301,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         TextView tvBottomLine = findViewById(R.id.tv_bottom_line);
-        String content = tvBottomLine.getText().toString();
-        SpannableStringBuilder spanString = new SpannableStringBuilder(content);
-        spanString.setSpan(new UnderlineSpan(tvBottomLine.getLineHeight(), tvBottomLine.getPaint(),
-                        content.substring(7, 30), Color.RED), 7, 30,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
-        tvBottomLine.setText(spanString);
-
-        findViewById(R.id.btn_test_sticky).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), StickyRecyclerActivity.class));
-            }
-        });
     }
 
     private void initWheelView() {
@@ -339,4 +331,32 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void showCityPicker(View view) {
+        new CityPickerDialog.Builder(this)
+                .setTitle("城市选择")
+                .setOnCityConfirmListener(new CityPickerDialog.OnCityConfirmListener() {
+                    @Override
+                    public void onConfirm(String province, String city, String district) {
+                        System.out.println(province + ", " + city + ", " + district);
+                    }
+                })
+                .create().show();
+    }
+
+    public void showButtonActionSheet(View v) {
+        new HMButtonActionSheetDialog.Builder(this)
+                .addAction(new Pair("事实属实，签署欠条", HMButtonActionSheetDialog.ButtonStyle.Yellow),
+                        new Pair("事实属实，签署欠条", HMButtonActionSheetDialog.ButtonStyle.BlackBordered),
+                        new Pair("事实属实，签署欠条", HMButtonActionSheetDialog.ButtonStyle.BlackBordered))
+                .setOnItemClickListener(new HMButtonActionSheetDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        ToastUtil.showMessage(MainActivity.this, "click pos: " + position);
+                    }
+                })
+                .setTitle("测试")
+                .create().show();
+    }
+
 }

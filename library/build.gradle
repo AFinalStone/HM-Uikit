@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 26
@@ -40,5 +42,8 @@ dependencies {
     //轮播图组件
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.google.code.gson:gson:2.7'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 }
 apply from: './maven_local.gradle'

@@ -5,7 +5,7 @@ import android.widget.CheckBox;
 
 import com.hm.iou.uikit.SmoothCheckBox;
 
-
+@Deprecated
 public class IOSActionSheetItem {
 
     String name;
