@@ -37,6 +37,13 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     }
 
     /**
+     * 左侧键点击监听事件
+     */
+    public static interface OnTopBarLeftClickListener {
+        void onClickLeft();
+    }
+
+    /**
      * 右边操作按钮点击监听事件
      */
     public static interface OnTopBarMenuClickListener {
@@ -51,6 +58,9 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     private int mTitleTextSize;
     private int mTitleTextColor;
     private Drawable mBackDrawable;
+    private String mLeftText;
+    private int mLeftTextSize;
+    private ColorStateList mLeftTextColor;
     private String mRightText;
     private int mRightTextSize;
     private ColorStateList mRightTextColor;
@@ -61,7 +71,8 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     private TextView mTvTitle;
     private ImageView mIvBack;
     private boolean mIvBackIsShow;
-    private TextView mTvRight;
+    private TextView mTvLeft;//左侧标题
+    private TextView mTvRight;//右侧标题
     private ImageView mIvRight;
     private LinearLayout mLayoutRightContainer;
     private View mViewDivider;
@@ -76,6 +87,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     private int mBarHeight;
 
     private OnTopBarBackClickListener mBackListener;
+    private OnTopBarLeftClickListener mLeftListener;
     private OnTopBarMenuClickListener mMenuListener;
 
     public HMTopBarView(Context context) {
@@ -97,6 +109,14 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mTitleTextColor = ta.getColor(R.styleable.HmTopBar_titleColor, getResources().getColor(R.color.uikit_title_center_text));
         mBackDrawable = ta.getDrawable(R.styleable.HmTopBar_backIcon);
         mIvBackIsShow = ta.getBoolean(R.styleable.HmTopBar_backIconIsShow, true);
+
+        mLeftText = ta.getString(R.styleable.HmTopBar_leftText);
+        mLeftTextSize = ta.getDimensionPixelSize(R.styleable.HmTopBar_leftTextSize,
+                (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, getResources().getDisplayMetrics())));
+        mLeftTextColor = ta.getColorStateList(R.styleable.HmTopBar_leftTextColor);
+        if (mLeftTextColor == null) {
+            mLeftTextColor = ContextCompat.getColorStateList(context, R.color.uikit_title_left_text);
+        }
 
         mRightText = ta.getString(R.styleable.HmTopBar_rightText);
         mRightTextSize = ta.getDimensionPixelSize(R.styleable.HmTopBar_rightTextSize,
@@ -129,6 +149,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         mTvTitle = mLayout.findViewById(R.id.tv_topbar_title);
         mIvBack = mLayout.findViewById(R.id.iv_topbar_back);
         mLayoutRightContainer = mLayout.findViewById(R.id.ll_topbar_rightcontianer);
+        mTvLeft = mLayout.findViewById(R.id.tv_topbar_left);
         mTvRight = mLayout.findViewById(R.id.tv_topbar_right);
         mIvRight = mLayout.findViewById(R.id.iv_topbar_right);
         mViewDivider = mLayout.findViewById(R.id.view_topbar_divider);
@@ -152,11 +173,23 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
             mTvTitle.setText(mTitleTextStr);
         mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
         mTvTitle.setTextColor(mTitleTextColor);
-        if (mIvBackIsShow) {
-            if (mBackDrawable != null)
-                mIvBack.setImageDrawable(mBackDrawable);
+
+        if (mLeftText == null || mLeftText.isEmpty()) {
+            if (mIvBackIsShow) {
+                if (mBackDrawable != null)
+                    mIvBack.setImageDrawable(mBackDrawable);
+            } else {
+                mIvBack.setVisibility(INVISIBLE);
+            }
         } else {
-            mIvBack.setVisibility(INVISIBLE);
+            showLeftText(mLeftText, new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mLeftListener != null) {
+                        mLeftListener.onClickLeft();
+                    }
+                }
+            });
         }
 
 
@@ -206,7 +239,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         } else {
             h = mBarHeight + (mStatusBarHeight > 0 ? mStatusBarHeight : mDefaultStatusBarHeight);
         }
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(h , MeasureSpec.AT_MOST);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(h, MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -340,13 +373,14 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
     }
 
     public void showLeftText(CharSequence text, OnClickListener listener) {
-        hideBackIcon();
-        TextView tvLeft = findViewById(R.id.tv_topbar_left);
-        tvLeft.setText(text);
-        tvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
-        tvLeft.setTextColor(mRightTextColor);
-        tvLeft.setVisibility(View.VISIBLE);
-        tvLeft.setOnClickListener(listener);
+        if (mTvLeft != null) {
+            hideBackIcon();
+            mTvLeft.setText(text);
+            mTvLeft.setTextSize(TypedValue.COMPLEX_UNIT_PX, mLeftTextSize);
+            mTvLeft.setTextColor(mLeftTextColor);
+            mTvLeft.setVisibility(View.VISIBLE);
+            mTvLeft.setOnClickListener(listener);
+        }
     }
 
     public void hideLeftText() {
@@ -360,6 +394,10 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
 
     public void setOnBackClickListener(OnTopBarBackClickListener listener) {
         mBackListener = listener;
+    } 
+    
+    public void setOnLeftClickListener(OnTopBarLeftClickListener listener) {
+        mLeftListener = listener;
     }
 
     public void setOnMenuClickListener(OnTopBarMenuClickListener listener) {
@@ -395,7 +433,7 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         return h;
     }
 
-    public static int getStatusBar1(Context context){
+    public static int getStatusBar1(Context context) {
         int result = 0;
         try {
             int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -421,7 +459,6 @@ public class HMTopBarView extends RelativeLayout implements View.OnClickListener
         }
         return 0;
     }
-
 
 
 }

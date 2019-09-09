@@ -15,6 +15,9 @@
         <attr name="backIcon" format="reference" />
         <attr name="backIconIsShow" format="boolean" />
         <attr name="rightIcon" format="reference" />
+        <attr name="leftText" format="string|reference" />
+        <attr name="leftTextSize" format="dimension|reference" />
+        <attr name="leftTextColor" format="color|reference" />
         <attr name="rightText" format="string|reference" />
         <attr name="rightTextSize" format="dimension|reference" />
         <attr name="rightTextColor" format="color|reference" />
