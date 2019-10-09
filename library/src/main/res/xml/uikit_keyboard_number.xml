@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:horizontalGap="0px"
-    android:keyHeight="9%p"
+    android:keyHeight="50dp"
     android:keyWidth="25%p"
     android:verticalGap="0px">
            
@@ -23,7 +23,7 @@
             android:codes="-5"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
-            android:keyHeight="18%p"
+            android:keyHeight="100dp"
             android:keyIcon="@drawable/uikit_ic_keyboard_delete_32dp" />
                
     </Row>
@@ -62,7 +62,7 @@
         <Key
             android:codes="-4"
             android:keyEdgeFlags="right"
-            android:keyHeight="18%p"
+            android:keyHeight="100dp"
             android:keyLabel="确定" />
                
     </Row>
