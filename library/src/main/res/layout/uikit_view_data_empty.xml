@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:maxLines="1"
+        android:lineSpacingMultiplier="1.3"
         android:text="您当前无任何数据"
         android:textColor="@color/uikit_text_sub_content"
         android:textSize="@dimen/uikit_main_content_text_size" />
@@ -30,15 +30,14 @@
         android:id="@+id/tv_data_empty_extaction"
         style="@style/UikitTextView.Normal"
         android:layout_height="28dp"
-        android:text=""
-        android:textColor="@color/uikit_text_sub_content"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:background="@drawable/uikit_bg_round_border_gray"
+        android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:gravity="center"
-        android:visibility="gone"
-        />
+        android:text=""
+        android:textColor="@color/uikit_text_sub_content"
+        android:visibility="gone" />
 
 </LinearLayout>
