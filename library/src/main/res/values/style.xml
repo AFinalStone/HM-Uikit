@@ -51,12 +51,21 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="UikitAlertDialogStyle.FromTop">
+        <item name="android:windowAnimationStyle">@style/UikitDialogFromTopAnimation</item>
+    </style>
+
     <style name="UikitAlertDialogStyle.FromBottom">
         <item name="android:windowAnimationStyle">@style/UikitDialogFromBottomAnimation</item>
     </style>
 
     <style name="UikitAlertDialogStyle.FromRight">
         <item name="android:windowAnimationStyle">@style/UikitDialogFromRightAnimation</item>
+    </style>
+
+    <style name="UikitDialogFromTopAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/uikit_dialog_from_top</item>
+        <item name="android:windowExitAnimation">@anim/uikit_dialog_out_to_top</item>
     </style>
 
     <style name="UikitDialogFromBottomAnimation" parent="@android:style/Animation.Dialog">

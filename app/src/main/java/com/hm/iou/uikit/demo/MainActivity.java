@@ -2,12 +2,9 @@ package com.hm.iou.uikit.demo;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.inputmethodservice.Keyboard;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,11 +29,11 @@ import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.dialog.HMBottomDialog;
 import com.hm.iou.uikit.dialog.HMButtonActionSheetDialog;
+import com.hm.iou.uikit.dialog.HMTopDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
 import com.hm.iou.uikit.loading.LoadingDialogUtil;
-import com.hm.iou.uikit.underline.UnderlineSpan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +92,17 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .create().show();
+            }
+        });
+        findViewById(R.id.btn_dialogTop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View bottomView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_layout_bottom_view, null, false);
+                new HMTopDialog.Builder(MainActivity.this)
+                        .setTitle("顶部对话框")
+                        .setBottomView(bottomView)
+                        .create()
+                        .show();
             }
         });
         findViewById(R.id.btn_dialogBottom).setOnClickListener(new View.OnClickListener() {
