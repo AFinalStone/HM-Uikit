@@ -3,22 +3,15 @@ package com.hm.iou.uikit.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hm.iou.uikit.R;
-
-import java.util.List;
 
 /**
  * Created by hjy on 2019/1/14.
@@ -50,7 +43,7 @@ public class HMBottomDialog extends Dialog {
         WindowManager.LayoutParams attrs = window.getAttributes();
         attrs.width = WindowManager.LayoutParams.MATCH_PARENT;
         attrs.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setGravity(Gravity.BOTTOM);
+        window.setGravity(mBuilder.mDialogGravity);
         window.setAttributes(attrs);
     }
 
@@ -81,6 +74,8 @@ public class HMBottomDialog extends Dialog {
         private boolean mCanceledOnTouchOutside = true;
         private CharSequence mTitle;
         private View mBottomView;
+        private int mStyle = R.style.UikitAlertDialogStyle_FromBottom;
+        private int mDialogGravity = Gravity.BOTTOM;
 
         public Builder(Context context) {
             mContext = context;
@@ -111,8 +106,18 @@ public class HMBottomDialog extends Dialog {
             return this;
         }
 
+        public Builder setStyle(int style) {
+            mStyle = style;
+            return this;
+        }
+
+        public Builder setDialogGravity(int dialogGravity) {
+            mDialogGravity = dialogGravity;
+            return this;
+        }
+
         public HMBottomDialog create() {
-            final HMBottomDialog dialog = new HMBottomDialog(this, R.style.UikitAlertDialogStyle_FromBottom);
+            final HMBottomDialog dialog = new HMBottomDialog(this, mStyle);
             dialog.setCancelable(mCancelable);
             dialog.setCanceledOnTouchOutside(mCanceledOnTouchOutside);
             return dialog;

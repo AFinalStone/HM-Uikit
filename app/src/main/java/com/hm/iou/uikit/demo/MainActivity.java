@@ -29,7 +29,6 @@ import com.hm.iou.uikit.dialog.HMActionSheetDialog;
 import com.hm.iou.uikit.dialog.HMAlertDialog;
 import com.hm.iou.uikit.dialog.HMBottomDialog;
 import com.hm.iou.uikit.dialog.HMButtonActionSheetDialog;
-import com.hm.iou.uikit.dialog.HMTopDialog;
 import com.hm.iou.uikit.keyboard.input.HMKeyboardEditText;
 import com.hm.iou.uikit.keyboard.key.ABCKey;
 import com.hm.iou.uikit.keyboard.key.NumberKey;
@@ -98,9 +97,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 View bottomView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_layout_bottom_view, null, false);
-                new HMTopDialog.Builder(MainActivity.this)
+                new HMBottomDialog.Builder(MainActivity.this)
                         .setTitle("顶部对话框")
                         .setBottomView(bottomView)
+                        .setDialogGravity(Gravity.TOP)
+                        .setStyle(R.style.UikitAlertDialogStyle_FromTop)
                         .create()
                         .show();
             }

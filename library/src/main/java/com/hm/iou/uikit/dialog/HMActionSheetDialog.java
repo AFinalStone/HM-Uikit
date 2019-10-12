@@ -59,7 +59,7 @@ public class HMActionSheetDialog extends Dialog {
         WindowManager.LayoutParams attrs = window.getAttributes();
         attrs.width = WindowManager.LayoutParams.MATCH_PARENT;
         attrs.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setGravity(Gravity.BOTTOM);
+        window.setGravity(mBuilder.mDialogGravity);
         window.setAttributes(attrs);
     }
 
@@ -241,6 +241,8 @@ public class HMActionSheetDialog extends Dialog {
         private OnItemClickListener mListener;
         private boolean mCanSelected = true;        //选中之后，选中的会有打勾标记，否则没有
         private int mDividerPos = -1;               //支持在任意位置设置一个分割线，满足某些特殊需求
+        private int mStyle = R.style.UikitAlertDialogStyle_FromBottom;
+        private int mDialogGravity = Gravity.BOTTOM;
 
         public Builder(Context context) {
             mContext = context;
@@ -296,12 +298,23 @@ public class HMActionSheetDialog extends Dialog {
             return this;
         }
 
+
+        public Builder setStyle(int style) {
+            mStyle = style;
+            return this;
+        }
+
+        public Builder setDialogGravity(int dialogGravity) {
+            mDialogGravity = dialogGravity;
+            return this;
+        }
+
         public int getListMaxHeight() {
             return mListMaxHeight;
         }
 
         public HMActionSheetDialog create() {
-            final HMActionSheetDialog dialog = new HMActionSheetDialog(this, R.style.UikitAlertDialogStyle_FromBottom);
+            final HMActionSheetDialog dialog = new HMActionSheetDialog(this, mStyle);
             dialog.setCancelable(mCancelable);
             dialog.setCanceledOnTouchOutside(mCanceledOnTouchOutside);
             return dialog;
