@@ -128,12 +128,11 @@ public class InputCodeViewHelper {
 
         @Override
         public void onKey(int primaryCode, int[] keyCodes) {
-            if (primaryCode == Keyboard.KEYCODE_CANCEL || primaryCode == Keyboard.KEYCODE_DONE) {
-                hideSoftKeyboard();
-                return;
-            }
             if (mKeyClickListener != null) {
                 mKeyClickListener.onKey(primaryCode, keyCodes);
+            }
+            if (primaryCode == Keyboard.KEYCODE_CANCEL || primaryCode == Keyboard.KEYCODE_DONE) {
+                hideSoftKeyboard();
             }
         }
 

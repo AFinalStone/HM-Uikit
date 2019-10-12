@@ -1,6 +1,7 @@
 package com.hm.iou.uikit.keyboard.input;
 
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -117,7 +118,7 @@ public class HMInputCodeView extends FrameLayout {
         mInputCodeViewHelper.setKeyClickListener(new InputCodeViewHelper.KeyClickListener() {
             @Override
             public void onKey(int primaryCode, int[] keyCodes) {
-                if (primaryCode == getResources().getInteger(R.integer.uikit_keyboard_delete)) {
+                if (primaryCode == Keyboard.KEYCODE_DELETE) {
                     if (mCurrentIndex >= 1 && mCurrentIndex <= mTvList.length) {
                         //判断是否删除完毕————要小心数组越界
                         mCurrentIndex--;
@@ -136,6 +137,22 @@ public class HMInputCodeView extends FrameLayout {
                     }
                 } else if (primaryCode == getResources().getInteger(R.integer.uikit_keyboard_point)) {
 
+                } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
+
+                } else if (primaryCode == Keyboard.KEYCODE_DONE) {
+                    //如果点击的是确定，重新
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < 6; i++) {
+                        sb.append(mTvList[i].getText().toString().trim());
+                    }
+                    String str = sb.toString();
+                    if (str.length() == 6) {
+                        if (mOnInputCodeListener != null) {
+                            mOnInputCodeListener.onInputCodeFinish(str);
+                        } else {
+                            //6个框没有输入完成
+                        }
+                    }
                 } else {
                     if (mCurrentIndex >= 0 && mCurrentIndex < mTvList.length) {
                         //判断输入位置————要小心数组越界
