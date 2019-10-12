@@ -33,16 +33,20 @@
 
     </RelativeLayout>
 
-    <View
-        style="@style/UikitDivider.Horizontal"
-        />
+    <View style="@style/UikitDivider.Horizontal" />
+
+    <FrameLayout
+        android:id="@+id/fl_header_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View style="@style/UikitDivider.Horizontal" />
 
     <LinearLayout
         android:id="@+id/ll_dialog_picker_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <com.hm.iou.uikit.datepicker.PickerView
             android:id="@+id/pv_dialog_year"
@@ -67,16 +71,14 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <com.hm.iou.uikit.datepicker.PickerView
             android:id="@+id/pv_dialog_minute"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

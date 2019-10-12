@@ -6,15 +6,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.hm.iou.uikit.R;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,9 +39,9 @@ public class TimePickerDialog extends Dialog {
     public interface OnTimeConfirmListener {
         /**
          * @param year
-         * @param month [0, 11]
-         * @param day   [1, 31]
-         * @param hour 无小时选择时，为0
+         * @param month  [0, 11]
+         * @param day    [1, 31]
+         * @param hour   无小时选择时，为0
          * @param minute 无分钟选择时，为0
          */
         void onConfirm(int year, int month, int day, int hour, int minute);
@@ -52,6 +50,7 @@ public class TimePickerDialog extends Dialog {
     private Builder mBuilder;
 
     private TextView mTvTitle;
+    private FrameLayout mFlHeaderView;
     private PickerView[] mPickers;
 
     private SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -92,6 +91,7 @@ public class TimePickerDialog extends Dialog {
 
     private void initContent() {
         mTvTitle = findViewById(R.id.tv_dialog_title);
+        mFlHeaderView = findViewById(R.id.fl_header_view);
         findViewById(R.id.tv_dialog_confirm).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +111,10 @@ public class TimePickerDialog extends Dialog {
         } else {
             mTvTitle.setVisibility(View.VISIBLE);
             mTvTitle.setText(mBuilder.mTitle);
+        }
+
+        if (mBuilder.mHeaderView != null) {
+            mFlHeaderView.addView(mBuilder.mHeaderView);
         }
 
         PickerView pickerYear = findViewById(R.id.pv_dialog_year);
@@ -235,7 +239,7 @@ public class TimePickerDialog extends Dialog {
                 });
             }
 
-            for (int i=0; i<60; i++) {
+            for (int i = 0; i < 60; i++) {
                 final int m = i;
                 mMinuteList.add(new PickerView.IPickerItem() {
                     @Override
@@ -276,7 +280,7 @@ public class TimePickerDialog extends Dialog {
         //设置默认选中项
         int sy = mSelectedCalendar.get(Calendar.YEAR);
         int defIndex = 0;
-        for (int i=0; i<mYearList.size(); i++) {
+        for (int i = 0; i < mYearList.size(); i++) {
             if (sy == (Integer) mYearList.get(i).getItemValue()) {
                 defIndex = i;
                 break;
@@ -401,6 +405,7 @@ public class TimePickerDialog extends Dialog {
         private String mStartTime;
         private String mEndTime;
         private String mSelectedTime;
+        private View mHeaderView;
 
         private OnTimeConfirmListener mListener;
 
@@ -425,6 +430,11 @@ public class TimePickerDialog extends Dialog {
 
         public Builder setTitle(int titleResId) {
             mTitle = mContext.getString(titleResId);
+            return this;
+        }
+
+        public Builder setHeaderView(View headerView) {
+            mHeaderView = headerView;
             return this;
         }
 

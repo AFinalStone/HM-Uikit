@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -163,22 +166,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_showDatePick).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*                List<String> list = new ArrayList<>();
-                for (int i=0; i<40; i++) {
-                    list.add(i + "");
-                }
-                new PickerDialog.Builder(MainActivity.this)
-                        .setTitle("最近还款日")
-                        .setPickerListWithString(list)
-                        .setOnPickerConfirmListener(new PickerDialog.OnPickerConfirmListener() {
-                            @Override
-                            public void onConfirm(int index, Object value) {
-                                System.out.println("index = " + index + ", value = " + value);
-                            }
-                        })
-                        .create().show();*/
+                ImageView iv = new ImageView(MainActivity.this);
+                iv.setImageResource(R.mipmap.ic_launcher);
+                iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 new TimePickerDialog.Builder(MainActivity.this)
                         .setTitle("还款时间选择")
+                        .setHeaderView(iv)
                         .setScrollType(TimePickerDialog.SCROLL_TYPE.MINUTE)
                         .setTimeRange("1978-05-12 12:00:00", "2042-01-18 16:23:39")
 //                        .setSelectedTime("2012-11-04 12:23:34")
