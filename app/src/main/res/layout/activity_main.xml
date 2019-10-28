@@ -25,6 +25,7 @@
             android:text="城市选择弹窗" />
 
         <com.hm.iou.uikit.MobileInputEditText
+            android:id="@+id/et_inputMobile"
             android:layout_width="match_parent"
             android:layout_height="50dip"
             android:focusable="true"
@@ -35,8 +36,8 @@
         <com.hm.iou.uikit.HMCountDownTextView
             android:id="@+id/tv_getSmsCheckCode"
             style="@style/UikitHMButton.CheckCode"
-            android:layout_marginBottom="20dip"
             android:layout_marginRight="35dip"
+            android:layout_marginBottom="20dip"
             android:enabled="true" />
 
 

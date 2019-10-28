@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         initStatusBarDarkFont(true);
         setContentView(R.layout.activity_main);
 
+        EditText etInputMobile = findViewById(R.id.et_inputMobile);
+        etInputMobile.setSelection(etInputMobile.length());
+        etInputMobile.requestFocus();
+
         mEtClear = findViewById(R.id.et_clear);
         mEtTestInputNum = findViewById(R.id.edit_testInputNum);
         mEtTestInputNum.bindKeyBoardView(getWindow(), new NumberKey(this));
