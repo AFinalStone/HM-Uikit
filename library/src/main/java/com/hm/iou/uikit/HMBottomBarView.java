@@ -22,7 +22,7 @@ import android.widget.TextView;
  * Created by hjy on 2018/10/10.
  */
 
-public class HMBottomBarView extends RelativeLayout implements View.OnClickListener {
+public class HMBottomBarView extends RelativeLayout implements View.OnClickListener, View.OnLongClickListener {
 
     public interface OnBackClickListener {
         void onClickBack();
@@ -30,6 +30,10 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
 
     public interface OnTitleClickListener {
         void onClickTitle();
+    }
+
+    public interface OnTitleLongClickListener {
+        boolean onLongClick();
     }
 
     public interface OnTitleIconClickListener {
@@ -62,6 +66,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
     private OnBackClickListener mListener;
     private OnTitleClickListener mTitleClickListener;
     private OnTitleIconClickListener mOnTitleIconClickListener;
+    private OnTitleLongClickListener mOnTitleLongClickListener;
 
     public HMBottomBarView(Context context) {
         this(context, null);
@@ -170,6 +175,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mTvTitle.setPadding(pad, 0, pad, 0);
         mTvTitle.setId(R.id.hm_bottom_bar_title);
         mTvTitle.setOnClickListener(this);
+        mTvTitle.setOnLongClickListener(this);
         addView(mTvTitle, params);
         //右侧按钮的文字
         if (TextUtils.isEmpty(mTitleTextStr)) {
@@ -291,6 +297,10 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         mOnTitleIconClickListener = listener;
     }
 
+    public void setOnTitleLongClickListener(OnTitleLongClickListener longClickListener) {
+        mOnTitleLongClickListener = longClickListener;
+    }
+
     public void setOnBackClickListener(OnBackClickListener listener) {
         mListener = listener;
     }
@@ -375,5 +385,15 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
                 ((Activity) mContext).onBackPressed();
             }
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v == mTvTitle) {
+            if (mOnTitleLongClickListener != null) {
+                return mOnTitleLongClickListener.onLongClick();
+            }
+        }
+        return false;
     }
 }
