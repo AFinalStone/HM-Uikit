@@ -333,9 +333,10 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
-            android:background="@color/uikit_red"
             android:scaleType="centerCrop"
-            android:src="@mipmap/b" />
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="@color/uikti_header_border_color"
+            app:civ_border_width="@dimen/uikti_header_border_width" />
 
         <com.hm.iou.uikit.CircleImageView
             android:layout_width="80dp"

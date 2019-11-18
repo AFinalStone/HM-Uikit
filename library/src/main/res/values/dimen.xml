@@ -46,4 +46,6 @@
     <!-- 用于辅助性文字、提示说明等：如次要的辅助信息 -->
     <dimen name="uikti_sub_content_text_size">12dip</dimen>
 
+    <dimen name="uikti_header_border_width">2px</dimen>
+
 </resources>

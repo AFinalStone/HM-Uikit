@@ -56,7 +56,6 @@
     <color name="uikit_wheel_center_divider_color">#C7C7C7</color>
 
 
-
     <!-- 2.0颜色样式 -->
     <!-- 主色 -->
     <color name="uikit_main_color">#FFFFDE45</color>
@@ -88,5 +87,7 @@
 
     <!--背景色-->
     <color name="uikit_background">#FFF8F8F9</color>
+
+    <color name="uikti_header_border_color">@color/uikit_divider</color>
 
 </resources>
