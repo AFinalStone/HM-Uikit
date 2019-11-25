@@ -238,6 +238,16 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    public void setTitleGone(boolean isGone) {
+        if (mTvTitle != null) {
+            if (isGone) {
+                mTvTitle.setVisibility(VISIBLE);
+            } else {
+                mTvTitle.setVisibility(GONE);
+            }
+        }
+    }
+
     public void setTitleIconVisible(boolean isShow) {
         mTitleIconIsShow = isShow;
         if (mIvTitleIcon != null) {
@@ -314,6 +324,7 @@ public class HMBottomBarView extends RelativeLayout implements View.OnClickListe
             params.addRule(RelativeLayout.CENTER_VERTICAL);
             params.addRule(RelativeLayout.LEFT_OF, R.id.hm_bottom_bar_title);
             params.rightMargin = (int) (density * 12);
+            params.alignWithParent = true;
             mSecondTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleTextSize);
             mSecondTitle.setTextColor(getResources().getColor(R.color.uikit_text_sub_content));
             mSecondTitle.setBackgroundResource(R.drawable.uikit_selector_btn_bordered_small);
