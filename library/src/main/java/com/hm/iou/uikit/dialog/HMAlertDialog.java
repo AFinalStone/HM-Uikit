@@ -3,7 +3,6 @@ package com.hm.iou.uikit.dialog;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Outline;
 import android.graphics.Rect;
 import android.os.Build;
@@ -46,6 +45,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
     private FrameLayout mFlCustomView;
     private Button mBtnNeg;
     private Button mBtnPos;
+    private View mBtnDivider;
 
     private HMAlertDialog(Builder builder, int style) {
         super(builder.mContext, style);
@@ -96,6 +96,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
         mFlCustomView = findViewById(R.id.fl_dialog_custom);
         mBtnPos = findViewById(R.id.btn_dialog_pos);
         mBtnNeg = findViewById(R.id.btn_dialog_neg);
+        mBtnDivider = findViewById(R.id.vew_vertical_divider);
 
         mBtnPos.setOnClickListener(this);
         mBtnNeg.setOnClickListener(this);
@@ -157,6 +158,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
         if (TextUtils.isEmpty(mBuilder.mBtnPosText)) {
             mBtnPos.setVisibility(View.GONE);
+            mBtnDivider.setVisibility(View.GONE);
         } else {
             mBtnPos.setVisibility(View.VISIBLE);
             mBtnPos.setText(mBuilder.mBtnPosText);
@@ -164,7 +166,7 @@ public class HMAlertDialog extends Dialog implements View.OnClickListener {
 
         if (TextUtils.isEmpty(mBuilder.mBtnNegText)) {
             mBtnNeg.setVisibility(View.GONE);
-
+            mBtnDivider.setVisibility(View.GONE);
         } else {
             mBtnNeg.setVisibility(View.VISIBLE);
             mBtnNeg.setText(mBuilder.mBtnNegText);

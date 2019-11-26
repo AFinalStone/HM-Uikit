@@ -65,6 +65,11 @@
             android:layout_width="0px"
             android:layout_weight="1" />
 
+        <View
+            android:id="@+id/vew_vertical_divider"
+            style="@style/UikitDivider.Vertical"
+            />
+
         <Button
             android:id="@+id/btn_dialog_pos"
             style="@style/UikitHMDialogButton"
