@@ -30,9 +30,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    compile 'com.heima.iou:hmtoolslocal:1.0.0'
+    implementation 'com.heima.iou:hmtoolslocal:1.0.0'
 
-    compile project(':library')
+    implementation project(':library')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
